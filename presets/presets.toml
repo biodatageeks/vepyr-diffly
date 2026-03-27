@@ -1,0 +1,45 @@
+version = 1
+
+[presets.ensembl_everything]
+enabled = true
+description = "Active v1 preset for Ensembl cache plus --everything semantics."
+species = "homo_sapiens"
+assembly = "GRCh38"
+cache_flavor = "ensembl"
+normalization_policy = "csq_semantic_v1"
+supports_full_run = true
+supports_sampling = true
+vep_args = [
+  "--everything",
+  "--cache",
+  "--offline",
+  "--vcf",
+]
+vepyr_args = [
+  "--everything",
+]
+
+[presets.merged_everything]
+enabled = false
+description = "Staged future preset for merged cache support."
+species = "homo_sapiens"
+assembly = "GRCh38"
+cache_flavor = "merged"
+normalization_policy = "csq_semantic_v1"
+supports_full_run = true
+supports_sampling = true
+vep_args = []
+vepyr_args = []
+
+[presets.refseq_everything]
+enabled = false
+description = "Staged future preset for refseq cache support."
+species = "homo_sapiens"
+assembly = "GRCh38"
+cache_flavor = "refseq"
+normalization_policy = "csq_semantic_v1"
+supports_full_run = true
+supports_sampling = true
+vep_args = []
+vepyr_args = []
+

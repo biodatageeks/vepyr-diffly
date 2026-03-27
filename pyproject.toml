@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "vepyr-diffly"
+version = "0.1.0"
+description = "Semantic DataFrame-based comparison between Ensembl VEP and vepyr outputs."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "dataframely",
+  "diffly",
+  "polars>=1.37.1",
+  "polars-bio>=0.26.0",
+  "python-dotenv>=1.0.1",
+  "rich>=13.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.11.0",
+]
+
+[project.scripts]
+vepyr-diff = "vepyr_diffly.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/vepyr_diffly"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

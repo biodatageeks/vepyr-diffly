@@ -1,0 +1,4 @@
+FROM ensemblorg/ensembl-vep:release_114.1
+
+WORKDIR /work
+

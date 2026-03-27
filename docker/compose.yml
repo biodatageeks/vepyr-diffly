@@ -1,0 +1,19 @@
+services:
+  orchestrator:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.orchestrator
+    image: vepyr-diffly-orchestrator:local
+    working_dir: /work
+    volumes:
+      - ..:/work
+  vep:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.vep
+    image: vepyr-diffly-vep:local
+  vepyr:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.vepyr
+    image: vepyr-diffly-vepyr:local
