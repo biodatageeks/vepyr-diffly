@@ -112,6 +112,17 @@ def prepare_input(config: RuntimeConfig, artifacts: RunArtifacts) -> Path:
     return prepared
 
 
+def remove_stale_runtime_outputs(artifacts: RunArtifacts) -> None:
+    stale_paths = [
+        artifacts.runtime_dir / "prepared_input.vcf",
+        artifacts.runtime_dir / "vep.annotated.vcf",
+        artifacts.runtime_dir / "vepyr.annotated.vcf",
+    ]
+    for path in stale_paths:
+        if path.exists():
+            path.unlink()
+
+
 def write_effective_config(config: RuntimeConfig, artifacts: RunArtifacts) -> None:
     target = artifacts.runtime_dir / "effective_config.json"
     target.write_text(json.dumps(config.to_dict(), indent=2) + "\n", encoding="utf-8")
@@ -205,6 +216,7 @@ def _ensure_vepyr_local_ready(config: RuntimeConfig, artifacts: RunArtifacts) ->
 
 
 def _execute_local(config: RuntimeConfig, artifacts: RunArtifacts) -> AnnotatedOutputs:
+    remove_stale_runtime_outputs(artifacts)
     input_vcf = prepare_input(config, artifacts)
     left_vcf = artifacts.runtime_dir / "vep.annotated.vcf"
     right_vcf = artifacts.runtime_dir / "vepyr.annotated.vcf"

@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from vepyr_diffly.presets import get_preset
-from vepyr_diffly.runtime import resolve_runtime_config
+from vepyr_diffly.runtime import prepare_artifacts, remove_stale_runtime_outputs, resolve_runtime_config
 
 
 def test_resolve_runtime_config_preserves_vepyr_python_symlink(tmp_path: Path) -> None:
@@ -31,3 +31,19 @@ def test_resolve_runtime_config_preserves_vepyr_python_symlink(tmp_path: Path) -
     )
 
     assert config.vepyr_python == symlink_python
+
+
+def test_remove_stale_runtime_outputs_removes_old_vcfs(tmp_path: Path) -> None:
+    artifacts = prepare_artifacts(tmp_path / "run")
+    prepared = artifacts.runtime_dir / "prepared_input.vcf"
+    left = artifacts.runtime_dir / "vep.annotated.vcf"
+    right = artifacts.runtime_dir / "vepyr.annotated.vcf"
+
+    for path in (prepared, left, right):
+        path.write_text("stale", encoding="utf-8")
+
+    remove_stale_runtime_outputs(artifacts)
+
+    assert not prepared.exists()
+    assert not left.exists()
+    assert not right.exists()

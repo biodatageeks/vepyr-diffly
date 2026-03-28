@@ -34,6 +34,7 @@
 - 2026-03-28T13:44:00+01:00 [CODE] Added unit coverage for multi-allelic input decomposition and documented the prepared-input artifacts in `README.md`.
 - 2026-03-28T14:54:00+01:00 [CODE] Improved consequence compare progress logging for future runs: shard workers now log per-bucket completion immediately as `worker: completed bucket XXXX (n/N in shard)`, while the parent process continues to log global `consequence: completed bucket XXXX (n/total)` milestones.
 - 2026-03-28T16:20:00+01:00 [CODE] Reworked `README.md` so it starts with a local operator quickstart, then the comparison model, then a results chapter split into `A. Smoke Tests` and `B. Golden Test`.
+- 2026-03-28T16:35:00+01:00 [CODE] Hardened `run` against stale runtime artifacts by deleting previous `runtime/prepared_input.vcf`, `runtime/vep.annotated.vcf`, and `runtime/vepyr.annotated.vcf` before starting a new local annotation into an existing run directory.
 
 [DISCOVERIES]
 - 2026-03-27T21:40:00+01:00 [TOOL] Existing `annotator_testing` runner compares VCF `INFO.CSQ` semantically and already contains `vepyr` adapter logic worth mirroring conceptually.
@@ -92,3 +93,4 @@
 - 2026-03-28T15:20:00+01:00 [TOOL] Verified the completed compare-only golden run in `runs/full-golden-compare-current`: variant tier was fully equal (`4048342` joined equal, `0` left-only/right-only/unequal), while consequence tier reported `871239` left-only and `172810` right-only rows with `0` unequal rows. Follow-up analysis showed the sampled mismatch artifacts are dominated by malformed old multi-allelic `vepyr` `CSQ` rows rather than confirmed semantic disagreements in shared normalized consequence rows.
 - 2026-03-28T16:20:00+01:00 [TOOL] Verified a fresh end-to-end smoke matrix for sample sizes `10, 100, 1000, 5000, 10000, 25000, 50000, 100000` under `runs/smoke-matrix-full`. Every run was fully equal on both variant and consequence tiers after canonical single-alt input preparation. The generated matrix was saved in `runs/smoke-matrix-full/results.tsv` and summarized in `README.md`.
 - 2026-03-28T16:20:00+01:00 [TOOL] Verified `PYTHONPATH=src .venv/bin/pytest -q` with `15 passed` after documenting the smoke matrix in `README.md`.
+- 2026-03-28T16:35:00+01:00 [TOOL] Verified `PYTHONPATH=src .venv/bin/pytest -q tests/test_runtime.py` with `2 passed` after adding regression coverage for stale runtime output cleanup.
