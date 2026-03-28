@@ -35,6 +35,8 @@
 - 2026-03-28T14:54:00+01:00 [CODE] Improved consequence compare progress logging for future runs: shard workers now log per-bucket completion immediately as `worker: completed bucket XXXX (n/N in shard)`, while the parent process continues to log global `consequence: completed bucket XXXX (n/total)` milestones.
 - 2026-03-28T16:20:00+01:00 [CODE] Reworked `README.md` so it starts with a local operator quickstart, then the comparison model, then a results chapter split into `A. Smoke Tests` and `B. Golden Test`.
 - 2026-03-28T16:35:00+01:00 [CODE] Hardened `run` against stale runtime artifacts by deleting previous `runtime/prepared_input.vcf`, `runtime/vep.annotated.vcf`, and `runtime/vepyr.annotated.vcf` before starting a new local annotation into an existing run directory.
+- 2026-03-28T16:40:00+01:00 [CODE] Expanded `README.md` with a short technical summary of the compare architecture: canonical input preparation, annotated VCF normalization, `diffly`-based tiered comparison, and bucketized full-scale consequence diffs.
+- 2026-03-28T16:42:00+01:00 [CODE] Added an ASCII pipeline diagram to `README.md` covering input preparation, VEP/`vepyr` annotation, normalization, `diffly` comparison, and output artifacts.
 
 [DISCOVERIES]
 - 2026-03-27T21:40:00+01:00 [TOOL] Existing `annotator_testing` runner compares VCF `INFO.CSQ` semantically and already contains `vepyr` adapter logic worth mirroring conceptually.

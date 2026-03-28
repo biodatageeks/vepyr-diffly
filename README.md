@@ -122,6 +122,56 @@ The output directory then contains:
 
 The comparison is semantic, not byte-for-byte.
 
+### Short Technical Summary
+
+In short, the repo does this:
+
+1. prepares one canonical input VCF for both annotators,
+2. runs VEP and `vepyr` on exactly that same prepared input,
+3. reads both annotated VCFs into tabular form,
+4. normalizes `INFO/CSQ` into stable variant and consequence tables,
+5. compares those tables with `diffly`,
+6. writes a compact console summary plus detailed diff artifacts.
+
+The main libraries used by the compare path are:
+
+- `polars-bio` to scan annotated VCF files,
+- `polars` to normalize and aggregate rows,
+- `diffly` to compare normalized DataFrames by primary key,
+- `dataframely` to validate the normalized schema,
+- `rich` to print readable summaries and progress.
+
+```text
+input VCF
+   |
+   v
+sample first N (optional)
+   |
+   v
+split multi-allelic -> runtime/prepared_input.vcf
+   |
+   +--------------------+
+   |                    |
+   v                    v
+ VEP                vepyr
+   |                    |
+   v                    v
+vep.annotated.vcf   vepyr.annotated.vcf
+   |                    |
+   +----------+---------+
+              |
+              v
+   normalize to variant tier + consequence tier
+              |
+              v
+      diffly compare by primary key
+              |
+              v
+ summary.json / summary.md / parquet diffs / mismatch TSV / progress logs
+```
+
+For small files the consequence compare can run directly on normalized tables. For large files it switches to a bucketized path: consequence rows are partitioned into hash buckets, each bucket is compared independently with `diffly`, and the bucket results are merged at the end. This keeps memory bounded and lets the compare use multiple CPU cores.
+
 The pipeline is:
 
 1. prepare the input VCF
