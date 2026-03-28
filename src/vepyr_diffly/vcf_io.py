@@ -9,6 +9,10 @@ import polars as pl
 CSQ_DESCRIPTION_RE = re.compile(r'Format: ([^"]+)')
 
 
+def _is_list_dtype(dtype: Any) -> bool:
+    return getattr(dtype, "base_type", lambda: dtype)() == pl.List
+
+
 def parse_csq_header(vcf_path: Path) -> list[str]:
     with vcf_path.open(encoding="utf-8") as handle:
         for line in handle:
@@ -71,6 +75,9 @@ def _normalize_scan_columns(frame: pl.LazyFrame) -> pl.LazyFrame:
 
 def _extract_csq_expr(schema: dict[str, Any]) -> pl.Expr:
     if "CSQ" in schema:
+        dtype = schema["CSQ"]
+        if _is_list_dtype(dtype):
+            return pl.col("CSQ").list.join(",").alias("csq")
         return pl.col("CSQ").cast(pl.String)
     if "INFO" in schema:
         return (
@@ -81,7 +88,11 @@ def _extract_csq_expr(schema: dict[str, Any]) -> pl.Expr:
         )
     info_csq_candidates = [name for name in schema if name.lower() in {"info.csq", "info_csq"}]
     if info_csq_candidates:
-        return pl.col(info_csq_candidates[0]).cast(pl.String).alias("csq")
+        candidate = info_csq_candidates[0]
+        dtype = schema[candidate]
+        if _is_list_dtype(dtype):
+            return pl.col(candidate).list.join(",").alias("csq")
+        return pl.col(candidate).cast(pl.String).alias("csq")
     raise ValueError("could not find CSQ or INFO column in VCF scan")
 
 

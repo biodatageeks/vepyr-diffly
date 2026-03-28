@@ -26,6 +26,8 @@ class RuntimeConfig:
     input_vcf: Path
     output_dir: Path
     sample_first_n: int | None
+    annotated_left_vcf: Path | None = None
+    annotated_right_vcf: Path | None = None
     vepyr_path: Path | None = None
     vep_cache_dir: Path | None = None
     vepyr_cache_output_dir: Path | None = None
@@ -43,6 +45,12 @@ class RuntimeConfig:
         payload["input_vcf"] = str(self.input_vcf)
         payload["output_dir"] = str(self.output_dir)
         payload["vepyr_path"] = None if self.vepyr_path is None else str(self.vepyr_path)
+        payload["annotated_left_vcf"] = (
+            None if self.annotated_left_vcf is None else str(self.annotated_left_vcf)
+        )
+        payload["annotated_right_vcf"] = (
+            None if self.annotated_right_vcf is None else str(self.annotated_right_vcf)
+        )
         payload["vep_cache_dir"] = (
             None if self.vep_cache_dir is None else str(self.vep_cache_dir)
         )
@@ -81,10 +89,18 @@ class TierResult:
 @dataclass
 class RunArtifacts:
     runtime_dir: Path
+    normalized_dir: Path
     summary_json_path: Path
     summary_md_path: Path
     variant_diff_path: Path
     consequence_diff_path: Path
     variant_mismatches_tsv_path: Path
     consequence_mismatches_tsv_path: Path
+    left_variant_path: Path
+    right_variant_path: Path
+    left_consequence_path: Path
+    right_consequence_path: Path
+    left_consequence_bucket_dir: Path
+    right_consequence_bucket_dir: Path
+    progress_log_path: Path
     logs: dict[str, Path] = field(default_factory=dict)

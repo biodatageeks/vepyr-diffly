@@ -41,10 +41,16 @@ def print_run_summary(
     config: RuntimeConfig,
     variant: TierResult,
     consequence: TierResult,
+    left_vcf: str | Any,
+    right_vcf: str | Any,
+    progress_log_path: str | Any,
 ) -> None:
     console.print(f"Preset: [bold]{config.preset.name}[/bold]")
     console.print(f"Input: {config.input_vcf}")
+    console.print(f"Left annotated VCF: {left_vcf}")
+    console.print(f"Right annotated VCF: {right_vcf}")
     console.print(f"Sample first N: {config.sample_first_n if config.sample_first_n is not None else 'full'}")
+    console.print(f"Progress log: {progress_log_path}")
     console.print("")
 
     table = Table(title="Comparison Summary")
@@ -72,11 +78,16 @@ def write_run_summary(
     artifacts: RunArtifacts,
     variant: TierResult,
     consequence: TierResult,
+    left_vcf: str | Any,
+    right_vcf: str | Any,
 ) -> None:
     payload: dict[str, Any] = {
         "preset": config.preset.name,
         "input_vcf": str(config.input_vcf),
+        "annotated_left_vcf": str(left_vcf),
+        "annotated_right_vcf": str(right_vcf),
         "sample_first_n": config.sample_first_n,
+        "progress_log_path": str(artifacts.progress_log_path),
         "tiers": {
             "variant": {
                 "equal": variant.equal,
@@ -104,7 +115,10 @@ def write_run_summary(
         "",
         f"- Preset: `{config.preset.name}`",
         f"- Input VCF: `{config.input_vcf}`",
+        f"- Left annotated VCF: `{left_vcf}`",
+        f"- Right annotated VCF: `{right_vcf}`",
         f"- Sample first N: `{config.sample_first_n if config.sample_first_n is not None else 'full'}`",
+        f"- Progress log: `{artifacts.progress_log_path}`",
         "",
         "## Variant Tier",
         "",

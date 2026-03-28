@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 from .models import AnnotatedOutputs, Preset, RunArtifacts, RuntimeConfig
-from .sampling import sample_vcf_first_n
+from .sampling import prepare_vcf_for_annotation
 
 
 def _expand_path(value: Path | None) -> Path | None:
@@ -16,15 +16,25 @@ def _expand_path(value: Path | None) -> Path | None:
 
 def prepare_artifacts(output_dir: Path) -> RunArtifacts:
     runtime_dir = output_dir / "runtime"
+    normalized_dir = output_dir / "normalized"
     runtime_dir.mkdir(parents=True, exist_ok=True)
+    normalized_dir.mkdir(parents=True, exist_ok=True)
     return RunArtifacts(
         runtime_dir=runtime_dir,
+        normalized_dir=normalized_dir,
         summary_json_path=output_dir / "summary.json",
         summary_md_path=output_dir / "summary.md",
         variant_diff_path=output_dir / "variant_diff.parquet",
         consequence_diff_path=output_dir / "consequence_diff.parquet",
         variant_mismatches_tsv_path=output_dir / "variant_mismatches.tsv",
         consequence_mismatches_tsv_path=output_dir / "consequence_mismatches.tsv",
+        left_variant_path=normalized_dir / "left.variant.parquet",
+        right_variant_path=normalized_dir / "right.variant.parquet",
+        left_consequence_path=normalized_dir / "left.consequence.parquet",
+        right_consequence_path=normalized_dir / "right.consequence.parquet",
+        left_consequence_bucket_dir=normalized_dir / "left.consequence_buckets",
+        right_consequence_bucket_dir=normalized_dir / "right.consequence_buckets",
+        progress_log_path=runtime_dir / "compare.progress.log",
         logs={
             "vep": runtime_dir / "vep.log",
             "vepyr": runtime_dir / "vepyr.log",
@@ -47,6 +57,8 @@ def resolve_runtime_config(
     vep_bin: Path | None,
     vep_cache_version: str | None,
     vep_perl5lib: str | None,
+    annotated_left_vcf: Path | None = None,
+    annotated_right_vcf: Path | None = None,
 ) -> RuntimeConfig:
     if sample_first_n is not None and not preset.supports_sampling:
         raise ValueError(f"preset {preset.name} does not support sampling")
@@ -55,6 +67,8 @@ def resolve_runtime_config(
         input_vcf=input_vcf.expanduser().resolve(),
         output_dir=output_dir.resolve(),
         sample_first_n=sample_first_n,
+        annotated_left_vcf=_expand_path(annotated_left_vcf),
+        annotated_right_vcf=_expand_path(annotated_right_vcf),
         execution_mode=execution_mode,
         vepyr_path=None if vepyr_path is None else vepyr_path.expanduser().resolve(),
         vepyr_python=_expand_path(vepyr_python),
@@ -74,11 +88,28 @@ def resolve_runtime_config(
 
 
 def prepare_input(config: RuntimeConfig, artifacts: RunArtifacts) -> Path:
-    if config.sample_first_n is None:
-        return config.input_vcf
-    sampled = artifacts.runtime_dir / "sampled_input.vcf"
-    sample_vcf_first_n(config.input_vcf, sampled, config.sample_first_n)
-    return sampled
+    prepared = artifacts.runtime_dir / "prepared_input.vcf"
+    stats = prepare_vcf_for_annotation(
+        config.input_vcf,
+        prepared,
+        first_n=config.sample_first_n,
+    )
+    (artifacts.runtime_dir / "input_preparation.json").write_text(
+        json.dumps(
+            {
+                "source_input_vcf": str(config.input_vcf),
+                "requested_sample_first_n": config.sample_first_n,
+                "sampled_records": stats.sampled_records,
+                "prepared_output_records": stats.output_records,
+                "split_source_records": stats.split_source_records,
+                "prepared_input_vcf": str(prepared),
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return prepared
 
 
 def write_effective_config(config: RuntimeConfig, artifacts: RunArtifacts) -> None:

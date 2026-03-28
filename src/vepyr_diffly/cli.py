@@ -1,8 +1,12 @@
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor
 import json
+import os
 from pathlib import Path
+import subprocess
+import sys
 
 from .presets import get_preset, load_presets
 from .settings import env_int, env_path, env_str, load_repo_env
@@ -56,6 +60,12 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser.add_argument("--vep-cache-version", default=env_str("VEPYR_DIFFLY_VEP_CACHE_VERSION"))
     run_parser.add_argument("--vep-perl5lib", default=env_str("VEPYR_DIFFLY_VEP_PERL5LIB"))
 
+    compare_parser = subparsers.add_parser("compare-existing")
+    compare_parser.add_argument("--preset", default=env_str("VEPYR_DIFFLY_PRESET"))
+    compare_parser.add_argument("--left-vcf", required=True, type=Path)
+    compare_parser.add_argument("--right-vcf", required=True, type=Path)
+    compare_parser.add_argument("--output-dir", required=True, type=Path)
+
     subparsers.add_parser("list-presets")
 
     inspect_parser = subparsers.add_parser("inspect-run")
@@ -81,17 +91,216 @@ def _cmd_list_presets(console: Console) -> int:
     return 0
 
 
-def _cmd_run(args: argparse.Namespace, console: Console) -> int:
-    from .compare import compare_tier
-    from .normalize import VARIANT_KEY, normalize_annotated_vcf
+def _run_comparison_pipeline(
+    *,
+    console: Console,
+    config: object,
+    artifacts: object,
+    left_vcf: Path,
+    right_vcf: Path,
+    left_name: str,
+    right_name: str,
+) -> int:
+    from .compare import compare_bucketed_consequence_tier, compare_tier
+    from .normalize import (
+        STREAMING_CONSEQUENCE_THRESHOLD_BYTES,
+        VARIANT_KEY,
+        materialize_consequence_summary,
+        materialize_variant_summary,
+        recommend_consequence_bucket_count,
+    )
+    from .progress import ProgressReporter
     from .report import print_run_summary, write_run_summary
+    from .schema import validate_variant_schema
+    import polars as pl
+
+    reporter = ProgressReporter(log_path=artifacts.progress_log_path, console=console)
+    reporter.start()
+    try:
+        reporter.stage("comparison: starting normalization")
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            left_future = executor.submit(
+                materialize_variant_summary,
+                vcf_path=left_vcf,
+                variant_path=artifacts.left_variant_path,
+                reporter=reporter,
+                side_label=left_name,
+            )
+            right_future = executor.submit(
+                materialize_variant_summary,
+                vcf_path=right_vcf,
+                variant_path=artifacts.right_variant_path,
+                reporter=reporter,
+                side_label=right_name,
+            )
+            left_csq_fields = left_future.result()
+            right_csq_fields = right_future.result()
+        if left_csq_fields != right_csq_fields:
+            raise ValueError("left/right CSQ headers differ and cannot be compared semantically")
+
+        use_bucketed_consequence = (
+            max(left_vcf.stat().st_size, right_vcf.stat().st_size)
+            >= STREAMING_CONSEQUENCE_THRESHOLD_BYTES
+        )
+        if use_bucketed_consequence:
+            bucket_count = recommend_consequence_bucket_count(left_vcf, right_vcf)
+            reporter.stage("comparison: bucketizing consequence rows")
+            reporter.log(f"comparison: using {bucket_count} consequence buckets")
+            env = os.environ.copy()
+            env["PYTHONPATH"] = str(Path(__file__).resolve().parents[1]) + (
+                os.pathsep + env["PYTHONPATH"] if "PYTHONPATH" in env else ""
+            )
+            left_proc = subprocess.Popen(
+                [
+                    sys.executable,
+                    "-m",
+                    "vepyr_diffly.worker",
+                    "bucketize-side",
+                    "--vcf",
+                    str(left_vcf),
+                    "--bucket-root",
+                    str(artifacts.left_consequence_bucket_dir),
+                    "--side-label",
+                    left_name,
+                    "--csq-fields-json",
+                    json.dumps(left_csq_fields),
+                    "--bucket-count",
+                    str(bucket_count),
+                    "--progress-log",
+                    str(artifacts.progress_log_path),
+                ],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.PIPE,
+                text=True,
+                env=env,
+            )
+            right_proc = subprocess.Popen(
+                [
+                    sys.executable,
+                    "-m",
+                    "vepyr_diffly.worker",
+                    "bucketize-side",
+                    "--vcf",
+                    str(right_vcf),
+                    "--bucket-root",
+                    str(artifacts.right_consequence_bucket_dir),
+                    "--side-label",
+                    right_name,
+                    "--csq-fields-json",
+                    json.dumps(right_csq_fields),
+                    "--bucket-count",
+                    str(bucket_count),
+                    "--progress-log",
+                    str(artifacts.progress_log_path),
+                ],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.PIPE,
+                text=True,
+                env=env,
+            )
+            left_stderr = left_proc.communicate()[1]
+            right_stderr = right_proc.communicate()[1]
+            if left_proc.returncode != 0:
+                raise RuntimeError(
+                    f"left consequence bucketization failed with exit code {left_proc.returncode}: {left_stderr}"
+                )
+            if right_proc.returncode != 0:
+                raise RuntimeError(
+                    f"right consequence bucketization failed with exit code {right_proc.returncode}: {right_stderr}"
+                )
+        else:
+            materialize_consequence_summary(
+                vcf_path=left_vcf,
+                consequence_path=artifacts.left_consequence_path,
+                csq_fields=left_csq_fields,
+                reporter=reporter,
+                side_label=left_name,
+            )
+            materialize_consequence_summary(
+                vcf_path=right_vcf,
+                consequence_path=artifacts.right_consequence_path,
+                csq_fields=right_csq_fields,
+                reporter=reporter,
+                side_label=right_name,
+            )
+
+        reporter.stage("comparison: validating normalized variant schemas")
+        left_variant = pl.scan_parquet(artifacts.left_variant_path).head(1000).collect()
+        right_variant = pl.scan_parquet(artifacts.right_variant_path).head(1000).collect()
+        validate_variant_schema(left_variant)
+        validate_variant_schema(right_variant)
+
+        reporter.stage("comparison: running variant tier diff")
+        variant = compare_tier(
+            name="variant",
+            left=pl.scan_parquet(artifacts.left_variant_path),
+            right=pl.scan_parquet(artifacts.right_variant_path),
+            primary_key=VARIANT_KEY,
+            left_name=left_name,
+            right_name=right_name,
+            diff_frame_path=artifacts.variant_diff_path,
+            mismatches_tsv_path=artifacts.variant_mismatches_tsv_path,
+            reporter=reporter,
+        ).tier
+
+        reporter.stage("comparison: running consequence tier diff")
+        if use_bucketed_consequence:
+            consequence = compare_bucketed_consequence_tier(
+                left_bucket_dir=artifacts.left_consequence_bucket_dir,
+                right_bucket_dir=artifacts.right_consequence_bucket_dir,
+                csq_fields=left_csq_fields,
+                left_name=left_name,
+                right_name=right_name,
+                diff_frame_path=artifacts.consequence_diff_path,
+                mismatches_tsv_path=artifacts.consequence_mismatches_tsv_path,
+                reporter=reporter,
+                bucket_count=bucket_count,
+            ).tier
+        else:
+            consequence_key = VARIANT_KEY + left_csq_fields
+            consequence = compare_tier(
+                name="consequence",
+                left=pl.scan_parquet(artifacts.left_consequence_path),
+                right=pl.scan_parquet(artifacts.right_consequence_path),
+                primary_key=consequence_key,
+                left_name=left_name,
+                right_name=right_name,
+                diff_frame_path=artifacts.consequence_diff_path,
+                mismatches_tsv_path=artifacts.consequence_mismatches_tsv_path,
+                reporter=reporter,
+            ).tier
+
+        reporter.stage("comparison: writing summaries")
+        print_run_summary(
+            console=console,
+            config=config,
+            variant=variant,
+            consequence=consequence,
+            left_vcf=left_vcf,
+            right_vcf=right_vcf,
+            progress_log_path=artifacts.progress_log_path,
+        )
+        write_run_summary(
+            config=config,
+            artifacts=artifacts,
+            variant=variant,
+            consequence=consequence,
+            left_vcf=left_vcf,
+            right_vcf=right_vcf,
+        )
+        reporter.log("comparison: completed successfully")
+        return 0
+    finally:
+        reporter.stop()
+
+
+def _cmd_run(args: argparse.Namespace, console: Console) -> int:
     from .runtime import (
         execute_engines,
         prepare_artifacts,
         resolve_runtime_config,
         write_effective_config,
     )
-    from .schema import validate_variant_schema
 
     if args.preset is None:
         raise ValueError("--preset is required or set VEPYR_DIFFLY_PRESET in .env")
@@ -121,38 +330,53 @@ def _cmd_run(args: argparse.Namespace, console: Console) -> int:
     artifacts = prepare_artifacts(config.output_dir)
     write_effective_config(config, artifacts)
     outputs = execute_engines(config, artifacts)
-
-    left = normalize_annotated_vcf(outputs.left_vcf)
-    right = normalize_annotated_vcf(outputs.right_vcf)
-    validate_variant_schema(left.variant)
-    validate_variant_schema(right.variant)
-
-    variant = compare_tier(
-        name="variant",
-        left=left.variant,
-        right=right.variant,
-        primary_key=VARIANT_KEY,
+    return _run_comparison_pipeline(
+        console=console,
+        config=config,
+        artifacts=artifacts,
+        left_vcf=outputs.left_vcf,
+        right_vcf=outputs.right_vcf,
         left_name=outputs.left_name,
         right_name=outputs.right_name,
-        diff_frame_path=artifacts.variant_diff_path,
-        mismatches_tsv_path=artifacts.variant_mismatches_tsv_path,
-    ).tier
+    )
 
-    consequence_key = VARIANT_KEY + left.csq_fields
-    consequence = compare_tier(
-        name="consequence",
-        left=left.consequence,
-        right=right.consequence,
-        primary_key=consequence_key,
-        left_name=outputs.left_name,
-        right_name=outputs.right_name,
-        diff_frame_path=artifacts.consequence_diff_path,
-        mismatches_tsv_path=artifacts.consequence_mismatches_tsv_path,
-    ).tier
+def _cmd_compare_existing(args: argparse.Namespace, console: Console) -> int:
+    from .runtime import prepare_artifacts, resolve_runtime_config, write_effective_config
 
-    print_run_summary(console=console, config=config, variant=variant, consequence=consequence)
-    write_run_summary(config=config, artifacts=artifacts, variant=variant, consequence=consequence)
-    return 0
+    if args.preset is None:
+        raise ValueError("--preset is required or set VEPYR_DIFFLY_PRESET in .env")
+
+    preset = get_preset(args.preset)
+    if not preset.enabled:
+        raise ValueError(f"preset {preset.name} is disabled")
+    config = resolve_runtime_config(
+        preset=preset,
+        input_vcf=args.left_vcf,
+        output_dir=args.output_dir,
+        sample_first_n=None,
+        execution_mode="compare-only",
+        vepyr_path=None,
+        vepyr_python=None,
+        vep_cache_dir=None,
+        vepyr_cache_output_dir=None,
+        reference_fasta=None,
+        vep_bin=None,
+        vep_cache_version=None,
+        vep_perl5lib=None,
+        annotated_left_vcf=args.left_vcf,
+        annotated_right_vcf=args.right_vcf,
+    )
+    artifacts = prepare_artifacts(config.output_dir)
+    write_effective_config(config, artifacts)
+    return _run_comparison_pipeline(
+        console=console,
+        config=config,
+        artifacts=artifacts,
+        left_vcf=args.left_vcf,
+        right_vcf=args.right_vcf,
+        left_name="VEP",
+        right_name="vepyr",
+    )
 
 
 def _cmd_inspect_run(args: argparse.Namespace, console: Console) -> int:
@@ -173,6 +397,8 @@ def main(argv: list[str] | None = None) -> int:
         return _cmd_list_presets(console)
     if args.command == "run":
         return _cmd_run(args, console)
+    if args.command == "compare-existing":
+        return _cmd_compare_existing(args, console)
     if args.command == "inspect-run":
         return _cmd_inspect_run(args, console)
     raise AssertionError(f"unhandled command {args.command}")

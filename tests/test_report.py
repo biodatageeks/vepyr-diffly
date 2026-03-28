@@ -29,12 +29,20 @@ def test_write_run_summary_creates_json_and_markdown(tmp_path: Path) -> None:
     )
     artifacts = RunArtifacts(
         runtime_dir=tmp_path / "runtime",
+        normalized_dir=tmp_path / "normalized",
         summary_json_path=tmp_path / "summary.json",
         summary_md_path=tmp_path / "summary.md",
         variant_diff_path=tmp_path / "variant.parquet",
         consequence_diff_path=tmp_path / "consequence.parquet",
         variant_mismatches_tsv_path=tmp_path / "variant.tsv",
         consequence_mismatches_tsv_path=tmp_path / "consequence.tsv",
+        left_variant_path=tmp_path / "normalized" / "left.variant.parquet",
+        right_variant_path=tmp_path / "normalized" / "right.variant.parquet",
+        left_consequence_path=tmp_path / "normalized" / "left.consequence.parquet",
+        right_consequence_path=tmp_path / "normalized" / "right.consequence.parquet",
+        left_consequence_bucket_dir=tmp_path / "normalized" / "left.consequence_buckets",
+        right_consequence_bucket_dir=tmp_path / "normalized" / "right.consequence_buckets",
+        progress_log_path=tmp_path / "runtime" / "compare.progress.log",
     )
     tier = TierResult(
         name="variant",
@@ -48,9 +56,15 @@ def test_write_run_summary_creates_json_and_markdown(tmp_path: Path) -> None:
         mismatches_tsv_path=artifacts.variant_mismatches_tsv_path,
     )
 
-    write_run_summary(config=config, artifacts=artifacts, variant=tier, consequence=tier)
+    write_run_summary(
+        config=config,
+        artifacts=artifacts,
+        variant=tier,
+        consequence=tier,
+        left_vcf=tmp_path / "left.vcf",
+        right_vcf=tmp_path / "right.vcf",
+    )
 
     assert artifacts.summary_json_path.exists()
     assert artifacts.summary_md_path.exists()
     assert "ensembl_everything" in artifacts.summary_md_path.read_text(encoding="utf-8")
-

@@ -9,6 +9,218 @@ It does four things:
 - compare them semantically with Polars DataFrames,
 - print a clear console summary and write detailed diff artifacts for fixing `vepyr`.
 
+## Local Quickstart
+
+This is the shortest practical path to test VEP vs `vepyr` locally on this machine.
+
+### 1. Create the Python environment
+
+```bash
+cd /Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+### 2. Create `.env`
+
+```bash
+cp .env.example .env
+```
+
+The CLI loads `.env` automatically. The minimum important variables are:
+
+- `VEPYR_DIFFLY_EXECUTION_MODE=local`
+- `VEPYR_DIFFLY_INPUT_VCF`
+- `VEPYR_DIFFLY_OUTPUT_DIR`
+- `VEPYR_DIFFLY_VEP_CACHE_DIR`
+- `VEPYR_DIFFLY_VEP_CACHE_VERSION`
+- `VEPYR_DIFFLY_REFERENCE_FASTA`
+- `VEPYR_DIFFLY_VEP_BIN`
+- `VEPYR_DIFFLY_VEPYR_PYTHON`
+- `VEPYR_DIFFLY_VEPYR_CACHE_OUTPUT_DIR`
+
+The current [.env.example](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/.env.example) already points at the local paths that were verified in this workspace:
+
+- input VCF: `/Users/lukaszjezapkowicz/Downloads/HG002_GRCh38_1_22_v4.2.1_benchmark.vcf`
+- VEP cache: `/Users/lukaszjezapkowicz/.vep`
+- FASTA: `/Users/lukaszjezapkowicz/.vep/homo_sapiens/115_GRCh38/Homo_sapiens.GRCh38.dna.toplevel.fa`
+- VEP binary: `/Users/lukaszjezapkowicz/VepAnnotations/ensembl/ensembl-vep/vep`
+- `vepyr` Python env: `/Users/lukaszjezapkowicz/Desktop/magisterka/praca/gdl-annotations-infra/modules/python/annotator_testing/runner/.vepyr/bin/python`
+- `vepyr` cache root: `/Users/lukaszjezapkowicz/Desktop/magisterka/praca/gdl-annotations-infra/modules/python/annotator_testing/.cache/cache_testing/vepyr_cache`
+
+### 3. Sanity-check the repo
+
+```bash
+source .venv/bin/activate
+PYTHONPATH=src python -m vepyr_diffly.cli list-presets
+PYTHONPATH=src pytest -q
+```
+
+### 4. Run a local smoke test
+
+For a full end-to-end smoke test, including annotation by both engines:
+
+```bash
+source .venv/bin/activate
+PYTHONPATH=src python -m vepyr_diffly.cli run \
+  --output-dir runs/local-smoke-1000 \
+  --sample-first-n 1000
+```
+
+To change how many input variants are used in the smoke test, change `--sample-first-n`:
+
+```bash
+source .venv/bin/activate
+PYTHONPATH=src python -m vepyr_diffly.cli run \
+  --output-dir runs/local-smoke-5000 \
+  --sample-first-n 5000
+```
+
+### 5. Reuse existing annotated VCFs without re-annotating
+
+This is the faster iteration path when VEP output already exists and you only want to compare:
+
+```bash
+source .venv/bin/activate
+PYTHONPATH=src python -m vepyr_diffly.cli compare-existing \
+  --preset ensembl_everything \
+  --left-vcf runs/local-smoke-fix2/runtime/vep.annotated.vcf \
+  --right-vcf runs/local-smoke-fix2/runtime/vepyr.annotated.vcf \
+  --output-dir runs/compare-only
+```
+
+### 6. What to expect on stdout
+
+`run` has two expensive phases:
+
+- annotation
+- comparison
+
+The compare phase prints explicit progress and ends with a summary table like:
+
+```text
+Comparison Summary
+variant      yes   0   0   0   1000
+consequence  yes   0   0   0   34741
+```
+
+The output directory then contains:
+
+- `summary.json`
+- `summary.md`
+- `variant_diff.parquet`
+- `consequence_diff.parquet`
+- `variant_mismatches.tsv`
+- `consequence_mismatches.tsv`
+- `runtime/compare.progress.log`
+- `runtime/vep.log`
+- `runtime/vepyr.log`
+
+## How The Comparison Works
+
+The comparison is semantic, not byte-for-byte.
+
+The pipeline is:
+
+1. prepare the input VCF
+2. annotate the same prepared input with VEP and `vepyr`
+3. normalize both annotated VCFs into comparable tables
+4. compare those tables with `diffly`
+5. write console summary plus file artifacts
+
+### Input preparation
+
+Before annotation, `run` prepares a canonical input:
+
+- if sampling is enabled, it writes `runtime/sampled_input.vcf`
+- it then decomposes multi-allelic rows into single-alt rows
+- it writes the final annotation input to `runtime/prepared_input.vcf`
+- it records preparation stats in `runtime/input_preparation.json`
+
+This step is required because multi-allelic input created misleading consequence-level diffs, especially for indels. After splitting to single-alt before annotation, the smoke `5000` run became fully equal again.
+
+### Two comparison tiers
+
+The repo compares two normalized tables.
+
+Variant tier:
+
+- primary key: `chrom`, `pos`, `ref`, `alt`
+- tracks counts and basic summary columns per variant/allele
+- useful to detect gross record-level divergence
+
+Consequence tier:
+
+- one normalized row per semantic `CSQ` consequence
+- compared after parsing and normalizing `INFO/CSQ`
+- this is the tier used to diagnose real annotation drift
+
+### Why `diffly`
+
+`diffly` is the final diff engine. We do not compare raw VCF text directly. Instead:
+
+- VCF is normalized into tabular rows
+- rows get stable primary keys
+- duplicates are counted explicitly
+- then `diffly` compares the normalized DataFrames
+
+### Why bucketization exists
+
+The full golden annotated VCFs are too large for a naive eager compare.
+
+For large runs, consequence comparison works in buckets:
+
+- normalize consequence rows into hash buckets
+- compare bucket-by-bucket with `diffly`
+- merge bucket diff artifacts at the end
+
+This keeps memory bounded and gives progress reporting for large compares.
+
+## Results
+
+### A. Smoke Tests
+
+The following smoke matrix was executed locally on `2026-03-28` with fresh per-size runs under [runs/smoke-matrix-full](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/smoke-matrix-full).
+
+Each row means:
+
+- sample `N` source variants from the golden VCF,
+- split multi-allelic rows to canonical single-alt prepared input,
+- annotate that prepared input with VEP and `vepyr`,
+- compare the two annotated outputs with `compare-existing`.
+
+| Sample size | Prepared rows | Split source rows | VEP s | `vepyr` s | Compare s | Variant equal | Consequence equal | Consequence joined equal | Run dir |
+| --- | ---: | ---: | ---: | ---: | ---: | --- | --- | ---: | --- |
+| `10` | `10` | `0` | `0` | `47` | `0` | `true` | `true` | `432` | [run-10](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/smoke-matrix-full/run-10) |
+| `100` | `100` | `0` | `3` | `46` | `1` | `true` | `true` | `8448` | [run-100](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/smoke-matrix-full/run-100) |
+| `1000` | `1000` | `0` | `17` | `41` | `3` | `true` | `true` | `34741` | [run-1000](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/smoke-matrix-full/run-1000) |
+| `5000` | `5021` | `21` | `50` | `49` | `6` | `true` | `true` | `93694` | [run-5000](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/smoke-matrix-full/run-5000) |
+| `10000` | `10066` | `66` | `73` | `53` | `7` | `true` | `true` | `125755` | [run-10000](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/smoke-matrix-full/run-10000) |
+| `25000` | `25235` | `235` | `163` | `56` | `14` | `true` | `true` | `257509` | [run-25000](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/smoke-matrix-full/run-25000) |
+| `50000` | `50616` | `616` | `351` | `68` | `28` | `true` | `true` | `543416` | [run-50000](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/smoke-matrix-full/run-50000) |
+| `100000` | `101350` | `1350` | `720` | `86` | `60` | `true` | `true` | `1099319` | [run-100000](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/smoke-matrix-full/run-100000) |
+
+Observations:
+
+- all smoke runs are fully equal at both tiers
+- for larger samples, VEP dominates runtime
+- `vepyr` stays materially faster than VEP on every verified smoke point
+- multi-allelic decomposition becomes visible from `5000+` and grows with sample size
+
+The raw matrix is also saved as [results.tsv](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/smoke-matrix-full/results.tsv).
+
+### B. Golden Test
+
+This section is intentionally not filled with a final trusted outcome yet.
+
+Current status:
+
+- the old full golden compare-only run proved that the full pipeline scales
+- the old full golden consequence result is not yet a trustworthy biological verdict, because those older annotated VCFs were generated before the canonical single-alt preparation flow and the old `vepyr` output showed malformed multi-allelic `CSQ` rows
+- the next trustworthy golden result should come from a fresh full run using the same canonical prepared-input path as the smoke matrix above
+
 ## Current Scope
 
 The current implementation is no longer only scaffolded. It has been verified locally in `execution_mode=local` on the first `1000` variants from the golden HG002 VCF.
@@ -126,11 +338,59 @@ Verified result on `2026-03-27T22:49:00+01:00`:
 - variant tier: `1000` joined equal, `0` mismatches
 - consequence tier: `34741` joined equal, `0` mismatches
 
+## Full Golden Run
+
+Full golden execution was attempted on `2026-03-27/2026-03-28` with:
+
+```bash
+source .venv/bin/activate
+VEPYR_DIFFLY_SAMPLE_FIRST_N= PYTHONPATH=src python -m vepyr_diffly.cli run \
+  --output-dir runs/full-golden-20260327
+```
+
+Observed outcome:
+
+- input VCF: `HG002_GRCh38_1_22_v4.2.1_benchmark.vcf`
+- output directory: `runs/full-golden-20260327`
+- `vep.annotated.vcf`: about `16G`
+- `vepyr.annotated.vcf`: about `15G`
+- VEP annotated record count: `4048342`
+- `vepyr` annotated record count: `4048342`
+
+What succeeded:
+
+- full Ensembl VEP annotation completed successfully
+- full `vepyr` annotation completed successfully
+- runtime logs and annotated outputs were preserved
+
+What did not complete:
+
+- the Python comparison stage did not produce `summary.json`, `summary.md`, parquet diff files, or mismatch TSVs for the full golden run
+- the visible terminal ending was:
+
+```text
+/opt/homebrew/Cellar/python@3.14/3.14.2/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/resource_tracker.py:396: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/mp-g_hezd24'}
+```
+
+Interpretation at that point:
+
+- the bottleneck was no longer annotation
+- the old implementation still had a global consequence merge / compare bottleneck
+- the most likely failure point was the previous full-frame consequence normalization strategy
+
+What changed since then:
+
+- `compare-existing` was refactored to use bucketized streaming consequence comparison
+- consequence rows are now partitioned into hash buckets and compared bucket-by-bucket with `diffly`
+- the smoke workflow for this new path is verified locally
+- the exact full golden compare should now be re-run with the new implementation rather than relying on the old failed run
+
 ## CLI
 
 ```bash
 python -m vepyr_diffly.cli list-presets
 python -m vepyr_diffly.cli run --preset ensembl_everything --input-vcf /path/to/input.vcf --output-dir runs/demo --sample-first-n 1000 --vepyr-path /path/to/vepyr --vep-cache-dir /path/to/vep/cache
+python -m vepyr_diffly.cli compare-existing --preset ensembl_everything --left-vcf /path/to/vep.annotated.vcf --right-vcf /path/to/vepyr.annotated.vcf --output-dir runs/compare-only
 python -m vepyr_diffly.cli inspect-run --run-dir runs/demo
 ```
 
@@ -181,6 +441,36 @@ PYTHONPATH=src python -m vepyr_diffly.cli run \
   --sample-first-n 500
 ```
 
+`run` now prepares a canonical annotation input before invoking VEP and `vepyr`:
+
+- if sampling is enabled, it first writes `runtime/sampled_input.vcf`,
+- then it decomposes multi-allelic rows into single-alt rows and writes `runtime/prepared_input.vcf`,
+- it also records the preparation stats in `runtime/input_preparation.json`.
+
+This matches the earlier `annotator_testing` behavior for meaningful VEP vs `vepyr` comparison on multi-allelic input.
+
+- compare only on already existing annotated VCFs:
+
+```bash
+source .venv/bin/activate
+PYTHONPATH=src python -m vepyr_diffly.cli compare-existing \
+  --preset ensembl_everything \
+  --left-vcf runs/local-smoke-fix2/runtime/vep.annotated.vcf \
+  --right-vcf runs/local-smoke-fix2/runtime/vepyr.annotated.vcf \
+  --output-dir runs/compare-only
+```
+
+- compare only on the full golden annotated outputs without re-annotating:
+
+```bash
+source .venv/bin/activate
+PYTHONPATH=src python -m vepyr_diffly.cli compare-existing \
+  --preset ensembl_everything \
+  --left-vcf runs/full-golden-20260327/runtime/vep.annotated.vcf \
+  --right-vcf runs/full-golden-20260327/runtime/vepyr.annotated.vcf \
+  --output-dir runs/full-golden-compare
+```
+
 - run against another VCF:
 
 ```bash
@@ -216,6 +506,9 @@ The console output is intentionally short and should be readable during iterativ
 During a real run you should expect:
 
 - a progress bar for VCF row ingestion,
+- prepared-input metadata under `runtime/input_preparation.json`,
+- timestamped stage logs for normalization and comparison,
+- for larger annotated VCFs: explicit consequence bucketization logs and per-bucket compare completion logs,
 - a short run header with preset, input path, and sample size,
 - one summary table with one row for `variant` and one for `consequence`.
 
@@ -256,12 +549,29 @@ What to expect in the run directory:
   - practical file to inspect variant-level mismatches
 - `consequence_mismatches.tsv`
   - practical file to inspect consequence-level mismatches
+- mismatch TSV files are intentionally sampled on large runs
+  - the parquet diff remains complete
+  - the TSV is capped to the first `2000` mismatch rows to avoid heavy extra I/O
+
+## Performance Notes
+
+The current compare pipeline is optimized for large annotated VCFs more aggressively than the first implementation:
+
+- left and right consequence bucketization run in parallel,
+- left and right variant summaries are materialized in parallel,
+- consequence comparison uses dedicated subprocess workers instead of a thread fallback path in the main process,
+- consequence rows are hash-partitioned into buckets and compared bucket-by-bucket with `diffly`,
+- full mismatch parquet artifacts are preserved, while mismatch TSV output is sampled to reduce avoidable write cost.
+
+For smoke-sized inputs this mainly reduces overhead. For large annotated VCFs the main expected gains are bounded memory use and much better CPU utilization.
 - `variant_diff.parquet`
   - diff rows in columnar form for further analysis
 - `consequence_diff.parquet`
   - consequence diff rows in columnar form
 - `runtime/effective_config.json`
   - exact resolved configuration used for the run
+- `runtime/compare.progress.log`
+  - timestamped stage log showing how far normalization and diffing have progressed
 - `runtime/vep.log`
   - full VEP invocation and stderr/stdout
 - `runtime/vepyr.log`
@@ -323,6 +633,28 @@ For fix work, the most important files are:
 - `summary.md`
 - `variant_mismatches.tsv`
 - `consequence_mismatches.tsv`
+- `runtime/compare.progress.log`
+
+If you want to know how far a long compare-only or full compare has already gone:
+
+- read `runtime/compare.progress.log`
+- the most important milestones are:
+  - `parsed CSQ header`
+  - `materializing variant summary`
+  - `variant summary rows=...`
+  - `bucketizing consequence rows`
+  - `consequence progress ... variants (...%), chunk_parts=..., buckets=...`
+  - `comparing ... buckets with diffly`
+  - `completed bucket 00xx (x/y)`
+  - `merging bucket diff artifacts`
+  - `running variant tier diff`
+  - `writing summaries`
+  - `completed successfully`
+
+For small inputs:
+
+- the compare path chooses fewer buckets automatically to reduce overhead
+- the verified smoke compare on `1000` variants currently uses `8` buckets
 
 If you want to rerun cleanly:
 
@@ -360,6 +692,14 @@ The canonical comparison is semantic:
 - CSQ entry order does not matter after normalization,
 - the comparison is based on parsed fields, not raw VCF line equality.
 
+For larger annotated VCFs, consequence comparison now works like this:
+
+- stream base VCF records in chunks,
+- vectorize CSQ explode and normalization in Polars,
+- hash-partition normalized consequence rows into bucket parquet directories,
+- compare corresponding buckets with `diffly`,
+- merge per-bucket diff artifacts into final parquet and TSV outputs.
+
 ## Outputs
 
 Each run directory contains:
@@ -370,6 +710,8 @@ Each run directory contains:
 - `consequence_diff.parquet`
 - `variant_mismatches.tsv`
 - `consequence_mismatches.tsv`
+- `normalized/left.consequence_buckets/`
+- `normalized/right.consequence_buckets/`
 - `runtime/effective_config.json`
 - `runtime/*.log`
 
@@ -383,3 +725,14 @@ Each run directory contains:
 - The default golden input is expected at `~/Downloads/HG002_GRCh38_1_22_v4.2.1_benchmark.vcf`.
 - The local smoke run now works end-to-end with the checked-in code and external assets already present on this machine.
 - Docker/container adapters remain in the repo, but they are not the currently verified execution path.
+
+## Known Limitations
+
+- Only the `ensembl_everything` preset is currently verified end-to-end.
+- `merged` and `refseq` cache flavors are part of the intended architecture, but are not implemented and verified yet.
+- Docker/container execution is scaffolded in the repo, but local execution is the only verified runtime path today.
+- The verified smoke result is based on the first `1000` variants from the golden HG002 VCF.
+- A full unsampled golden annotation run completed, and compare-only mode now exists for reusing those annotated VCFs without repeating annotation.
+- The new bucketized compare path is verified on smoke data, but the full golden compare should still be re-run and recorded with this refactored implementation.
+- The repo currently compares semantic normalized outputs, not byte-for-byte annotated VCF files.
+- The current documentation and examples assume the local external assets already exist on this machine: VEP binary, VEP cache, FASTA, `vepyr` Python environment, and `vepyr` parquet cache.
