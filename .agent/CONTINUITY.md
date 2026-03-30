@@ -1,6 +1,7 @@
 [PLANS]
 - 2026-03-27T21:40:00+01:00 [USER] Create a new repository to compare Ensembl VEP results against biodatageeks/vepyr using Python DataFrame-based diffs, with container-first execution and staged support for cache/flag combinations.
 - 2026-03-30T07:41:04Z [USER] Rework compare into a RAM-safe bounded-memory algorithm that can process very large annotated VCFs without relying on full in-memory materialization.
+- 2026-03-30T19:29:33+0200 [USER] Add chromosome-scoped execution for `run` and `compare-existing`, including alias-aware filtering (`1`/`chr1`) and overall plus per-chromosome reporting in summaries/logs.
 
 [DECISIONS]
 - 2026-03-27T21:40:00+01:00 [USER] Initialize a new git repository, but perform no other git mutations.
@@ -177,3 +178,15 @@
 - 2026-03-30T14:12:00+02:00 [TOOL] Current local state after raw-CSQ extraction: `PYTHONPATH=src pytest -q tests/test_mismatch_analysis.py tests/integration/test_cli_inspect.py` passes (`5 passed`), the extractor works against the retained full-golden annotated VCFs, and `README.md` documents both the summary-level mismatch profiler and the raw-CSQ enrichment command.
 - 2026-03-30T14:06:00+02:00 [TOOL] Current local state while waiting for fresh golden rerun results: `README.md` is aligned with the current codebase and retained benchmarks, and a new compare-only rerun is in progress under `runs/full-golden-compare-fast-rerun-20260330`; once that run finishes, the README should be updated one more time with the fresh measured timings/results instead of the older retained baseline.
 - 2026-03-30T14:16:00+02:00 [TOOL] Current local state after the fresh rerun: `README.md` now points at the newest retained golden run, includes the newer timings, and documents the added diagnostics chain `compare.progress.log` -> `consequence_mismatch_analysis.json` -> `raw-csq-examples.json` for explaining the remaining `392` transcript-level mismatches.
+- 2026-03-30T19:29:33+0200 [CODE] Added a chromosome-selection layer shared by `run` and `compare-existing`: CLI flag `--chromosomes`, runtime config propagation, input filtering before annotation, streaming filtering during normalization, and canonical chromosome normalization so `1` and `chr1` compare as the same key.
+- 2026-03-30T19:29:33+0200 [CODE] Extended compare/report output with `TierResult.per_chromosome`, top-level `chromosomes` summary payloads, per-chrom console/JSON/Markdown reporting, and progress-log lines that include the active chromosome filter plus final per-chrom equality summaries.
+- 2026-03-30T19:29:33+0200 [CODE] Added regression coverage for chromosome filtering and alias handling with new multi-chrom fixture VCFs, report serialization checks, runtime-config parsing checks, and CLI integration coverage for `compare-existing --chromosomes 1`.
+
+[DISCOVERIES]
+- 2026-03-30T19:29:33+0200 [CODE] Alias-aware filtering alone was insufficient because `chr1` on one side and `1` on the other still produced different primary keys in the compare stage. The fix required canonicalizing the `chrom` column during normalization itself, not just filtering input rows.
+
+[OUTCOMES]
+- 2026-03-30T19:29:33+0200 [TOOL] Chromosome-scoped compare is now implemented end-to-end for both `run` and `compare-existing`. Validation passed with `.venv/bin/ruff check src/vepyr_diffly tests` and `.venv/bin/pytest -q` (`30 passed`). README and continuity are updated to reflect the new CLI and reporting contract.
+- 2026-03-30T19:42:27+0200 [TOOL] Verified `run --chromosomes 1` end-to-end on the real benchmark input for `sample_first_n=10`, `100`, and `1000`. Input preparation now correctly means “first N variants from chr1” rather than “first N variants then filter”. All three smoke runs ended with `variant.equal=true` and `consequence.equal=true`, and the temporary `/tmp/vepyr-diffly-chr1-smoke-*` directories were removed afterward.
+- 2026-03-30T20:23:23+0200 [TOOL] Completed a fresh retained full-golden `compare-existing --compare-mode fast` run under `runs/full-golden-compare-fast-per-chrom-20260330`. Result: `variant.equal=true`, `consequence.equal=false`, `left_only=392`, `right_only=392`, `unequal=0`, total compare-only `2012.789s` (`33m33s`). New per-chromosome reporting confirms that chromosome `1` is fully equal on the consequence tier, while all other chromosomes retain at least one paired `left_only/right_only` consequence drift.
+- 2026-03-30T20:23:23+0200 [CODE] Updated `README.md` to point at the fresh retained run and added a formatted per-chromosome golden table with attributed timings plus per-chrom consequence results.

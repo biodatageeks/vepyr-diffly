@@ -8,6 +8,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+from .chromosomes import parse_chromosome_selection
 from .models import AnnotatedOutputs, Preset, RunArtifacts, RuntimeConfig
 from .sampling import prepare_vcf_for_annotation
 
@@ -69,14 +70,19 @@ def resolve_runtime_config(
     fingerprint_only: bool = False,
     annotated_left_vcf: Path | None = None,
     annotated_right_vcf: Path | None = None,
+    chromosome_filter_raw: str | None = None,
 ) -> RuntimeConfig:
     if sample_first_n is not None and not preset.supports_sampling:
         raise ValueError(f"preset {preset.name} does not support sampling")
+    selected_chromosomes, chromosome_aliases = parse_chromosome_selection(chromosome_filter_raw)
     return RuntimeConfig(
         preset=preset,
         input_vcf=input_vcf.expanduser().resolve(),
         output_dir=output_dir.resolve(),
         sample_first_n=sample_first_n,
+        chromosome_filter_raw=chromosome_filter_raw,
+        selected_chromosomes=selected_chromosomes,
+        selected_chromosome_aliases=sorted(chromosome_aliases),
         annotated_left_vcf=_expand_path(annotated_left_vcf),
         annotated_right_vcf=_expand_path(annotated_right_vcf),
         execution_mode=execution_mode,
@@ -109,15 +115,23 @@ def prepare_input(config: RuntimeConfig, artifacts: RunArtifacts) -> Path:
         config.input_vcf,
         prepared,
         first_n=config.sample_first_n,
+        chromosome_aliases=set(config.selected_chromosome_aliases),
     )
     (artifacts.runtime_dir / "input_preparation.json").write_text(
         json.dumps(
             {
                 "source_input_vcf": str(config.input_vcf),
                 "requested_sample_first_n": config.sample_first_n,
+                "requested_chromosomes": config.chromosome_filter_raw,
+                "effective_chromosomes": config.selected_chromosomes,
                 "sampled_records": stats.sampled_records,
+                "filtered_records": stats.filtered_records,
                 "prepared_output_records": stats.output_records,
                 "split_source_records": stats.split_source_records,
+                "source_records_per_chromosome": stats.source_records_per_chromosome,
+                "sampled_records_per_chromosome": stats.sampled_records_per_chromosome,
+                "filtered_records_per_chromosome": stats.filtered_records_per_chromosome,
+                "prepared_output_records_per_chromosome": stats.output_records_per_chromosome,
                 "prepared_input_vcf": str(prepared),
             },
             indent=2,
@@ -141,6 +155,7 @@ def remove_stale_runtime_outputs(artifacts: RunArtifacts) -> None:
         artifacts.logs["vepyr"],
         artifacts.runtime_dir / "prepared_input.vcf",
         artifacts.runtime_dir / "sampled_input.vcf",
+        artifacts.runtime_dir / "filtered_input.vcf",
         artifacts.runtime_dir / "input_preparation.json",
         artifacts.runtime_dir / "vep.annotated.vcf",
         artifacts.runtime_dir / "vepyr.annotated.vcf",

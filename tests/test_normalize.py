@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from vepyr_diffly.chromosomes import parse_chromosome_selection
 from vepyr_diffly.normalize import (
     materialize_consequence_buckets,
     materialize_variant_summary,
@@ -96,3 +97,14 @@ def test_normalize_annotated_vcf_matches_csq_to_the_correct_multiallelic_alt() -
     assert (200, "C", "-") in consequence_rows
     assert (100, "GGTTT", "TTTT") not in consequence_rows
     assert (200, "C", "AAAACA") not in consequence_rows
+
+
+def test_normalize_annotated_vcf_can_filter_standard_chromosome_aliases() -> None:
+    fixture = Path(__file__).parent / "fixtures" / "annotated_multi_chrom_left.vcf"
+    _, aliases = parse_chromosome_selection("1")
+
+    result = normalize_annotated_vcf(fixture, chromosome_aliases=aliases)
+
+    assert result.variant.height == 1
+    assert result.variant.item(0, "chrom") == "1"
+    assert result.consequence.height == 1

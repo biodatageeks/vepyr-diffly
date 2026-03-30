@@ -34,6 +34,7 @@ def test_resolve_runtime_config_preserves_vepyr_python_symlink(tmp_path: Path) -
         vep_perl5lib=None,
         vepyr_use_fjall=True,
         memory_budget_mb=768,
+        chromosome_filter_raw="1,chr2",
     )
 
     assert config.vepyr_python == symlink_python
@@ -41,6 +42,8 @@ def test_resolve_runtime_config_preserves_vepyr_python_symlink(tmp_path: Path) -
     assert config.compare_mode == "fast"
     assert config.memory_budget_mb == 768
     assert config.fingerprint_only is False
+    assert config.selected_chromosomes == ["1", "2"]
+    assert "chr1" in config.selected_chromosome_aliases
 
 
 def test_remove_stale_runtime_outputs_removes_old_vcfs(tmp_path: Path) -> None:

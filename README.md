@@ -109,12 +109,14 @@ PYTHONPATH=src python -m vepyr_diffly.cli compare-existing \
   --left-vcf runs/local-smoke-1000/runtime/vep.annotated.vcf \
   --right-vcf runs/local-smoke-1000/runtime/vepyr.annotated.vcf \
   --output-dir runs/compare-only \
+  --chromosomes 1,2,3 \
   --compare-mode fast \
   --memory-budget-mb 1024
 ```
 
 Useful compare tuning flags:
 
+- `--chromosomes 1` or `--chromosomes 1,2,3`: process only the selected chromosomes; standard aliases like `1` and `chr1` are treated as the same chromosome
 - `--compare-mode fast`: exact precheck per bucket, then `diffly` only on buckets that differ
 - `--compare-mode debug`: force `diffly` for every bucket and keep full debug artifacts
 - `--bucket-count <N>`: override automatic consequence bucket count
@@ -236,6 +238,8 @@ vep.annotated.vcf   vepyr.annotated.vcf
 
 For small files the compare can still run directly on normalized tables. For larger files the pipeline now uses a bounded-memory path for both tiers: variant rows and consequence rows are streamed in chunks, spilled into hash buckets on disk, compacted per bucket, and then compared bucket-by-bucket. A resource planner derives chunk sizes, bucket count, worker count, and side parallelism from `--memory-budget-mb`, so working memory scales with the configured budget instead of full input size.
 
+The pipeline can now also be scoped to selected chromosomes. The filter is available on both `run` and `compare-existing`, is applied before annotation in `run`, and during streaming normalization in `compare-existing`. Standard naming aliases are normalized, so `1` matches both `1` and `chr1`, and `MT` matches `MT`, `M`, `chrMT`, and `chrM`.
+
 The pipeline is:
 
 1. prepare the input VCF
@@ -249,9 +253,10 @@ The pipeline is:
 Before annotation, `run` prepares a canonical input:
 
 - if sampling is enabled, it writes `runtime/sampled_input.vcf`
+- if chromosome filtering is enabled, it writes `runtime/filtered_input.vcf`
 - it then decomposes multi-allelic rows into single-alt rows
 - it writes the final annotation input to `runtime/prepared_input.vcf`
-- it records preparation stats in `runtime/input_preparation.json`
+- it records overall and per-chromosome preparation stats in `runtime/input_preparation.json`
 
 This step is required because multi-allelic input created misleading consequence-level diffs, especially for indels. After splitting to single-alt before annotation, the smoke `5000` run became fully equal again.
 
@@ -337,12 +342,12 @@ Observations:
 
 ### B. Golden Test
 
-The newest retained full compare-only result is [runs/full-golden-compare-fast-rerun-20260330](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-rerun-20260330), run in `fast` mode against:
+The newest retained full compare-only result is [runs/full-golden-compare-fast-per-chrom-20260330](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-per-chrom-20260330), run in `fast` mode against:
 
 - [vep.annotated.vcf](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-fresh/runtime/vep.annotated.vcf)
 - [vepyr.annotated.vcf](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-fresh/runtime/vepyr.annotated.vcf)
 
-Effective plan from [summary.json](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-rerun-20260330/summary.json):
+Effective plan from [summary.json](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-per-chrom-20260330/summary.json):
 
 - `memory_budget_mb=1024`
 - `bucket_count=256`
@@ -355,12 +360,12 @@ Observed compare-only timings:
 
 | Stage | Seconds | Approx. |
 | --- | ---: | ---: |
-| Variant summary | `509.396` | `8m 29s` |
-| Consequence bucketization | `949.188` | `15m 49s` |
-| Schema validation | `0.021` | `<1s` |
-| Variant diff | `2.234` | `2s` |
-| Consequence diff | `506.843` | `8m 27s` |
-| Total compare-only | `1967.682` | `32m 48s` |
+| Variant summary | `518.632` | `8m 39s` |
+| Consequence bucketization | `999.975` | `16m 40s` |
+| Schema validation | `0.031` | `<1s` |
+| Variant diff | `4.081` | `4s` |
+| Consequence diff | `490.070` | `8m 10s` |
+| Total compare-only | `2012.789` | `33m 33s` |
 
 Observed result:
 
@@ -381,10 +386,42 @@ What this means:
 Why this run still takes a long time:
 
 - the dominant cost is not the final diff itself, but preprocessing the annotated VCFs into bounded-memory bucket artifacts
-- `consequence_bucketization` alone is still about `16` minutes
-- even in `fast` mode, only `9/256` consequence buckets were proven equal by precheck, so `247/256` buckets still needed exact diff
+- `consequence_bucketization` alone is still about `16m 40s`
+- even in `fast` mode, only a tiny minority of consequence buckets are proven equal by precheck, so the final diff still has to run exact compare for most buckets
 - the inputs are very large annotated VCFs, so parsing `CSQ`, normalizing transcript consequences, spilling to disk, and compacting buckets dominate wall-clock time
 - the run deliberately used a conservative `1024 MB` memory budget, which reduces RAM pressure but also reduces concurrency
+
+Per-chromosome view from the same summary:
+
+- all chromosomes are `variant.equal=true`
+- only chromosome `1` is fully equal on the consequence tier
+- the largest consequence mismatch counts are on chromosomes `2` (`88/88`), `9` (`54/54`), `6` (`44/44`), `3` (`39/39`), and `14` (`37/37`)
+- the per-chromosome timings below are attributed timings from the summary, not independent wall-clock slices, so they are best used for relative weight and hotspot analysis
+
+| Chr | Variant | Consequence | Left/Right only | Attributed total | Variant summary | Consequence bucketization | Consequence diff |
+| --- | --- | --- | ---: | ---: | ---: | ---: | ---: |
+| 1 | `yes` | `yes` | `0 / 0` | `161.248s` | `40.951s` | `80.516s` | `39.459s` |
+| 2 | `yes` | `no` | `88 / 88` | `166.191s` | `41.951s` | `83.156s` | `40.754s` |
+| 3 | `yes` | `no` | `39 / 39` | `158.916s` | `36.532s` | `81.940s` | `40.157s` |
+| 4 | `yes` | `no` | `10 / 10` | `135.640s` | `38.908s` | `64.712s` | `31.714s` |
+| 5 | `yes` | `no` | `8 / 8` | `110.990s` | `33.478s` | `51.842s` | `25.407s` |
+| 6 | `yes` | `no` | `44 / 44` | `129.702s` | `34.435s` | `63.752s` | `31.244s` |
+| 7 | `yes` | `no` | `9 / 9` | `114.174s` | `29.694s` | `56.538s` | `27.708s` |
+| 8 | `yes` | `no` | `26 / 26` | `107.026s` | `28.519s` | `52.536s` | `25.747s` |
+| 9 | `yes` | `no` | `54 / 54` | `83.531s` | `22.298s` | `40.976s` | `20.082s` |
+| 10 | `yes` | `no` | `8 / 8` | `105.041s` | `27.028s` | `52.212s` | `25.588s` |
+| 11 | `yes` | `no` | `12 / 12` | `100.479s` | `26.187s` | `49.719s` | `24.367s` |
+| 12 | `yes` | `no` | `8 / 8` | `95.336s` | `25.046s` | `47.040s` | `23.053s` |
+| 13 | `yes` | `no` | `7 / 7` | `61.341s` | `20.438s` | `27.342s` | `13.400s` |
+| 14 | `yes` | `no` | `37 / 37` | `68.388s` | `16.865s` | `34.488s` | `16.902s` |
+| 15 | `yes` | `no` | `6 / 6` | `68.004s` | `15.850s` | `34.917s` | `17.112s` |
+| 16 | `yes` | `no` | `13 / 13` | `62.537s` | `15.619s` | `31.404s` | `15.391s` |
+| 17 | `yes` | `no` | `3 / 3` | `65.283s` | `13.722s` | `34.530s` | `16.923s` |
+| 18 | `yes` | `no` | `1 / 1` | `56.589s` | `15.116s` | `27.753s` | `13.601s` |
+| 19 | `yes` | `no` | `5 / 5` | `55.707s` | `11.484s` | `29.618s` | `14.515s` |
+| 20 | `yes` | `no` | `11 / 11` | `41.981s` | `11.003s` | `20.731s` | `10.160s` |
+| 21 | `yes` | `no` | `2 / 2` | `29.526s` | `7.067s` | `15.035s` | `7.368s` |
+| 22 | `yes` | `no` | `1 / 1` | `35.130s` | `6.440s` | `19.220s` | `9.419s` |
 
 What the `392 / 392 / 0` mismatches actually are:
 
@@ -433,12 +470,12 @@ Representative raw `CSQ` examples confirm that these are already present in the 
 Follow-up optimization note:
 
 - after the older retained full run, the consequence compare path was tightened further so bucketed compare no longer writes unused per-bucket TSV files, can use cheap bucket metadata to skip the expensive eager precheck for buckets that are already provably different, and now uses in-process worker threads instead of spawning separate compare subprocesses
-- the fresh full rerun above confirms those changes on the full pipeline: `consequence_diff` is now `506.843s` instead of the older retained `761.191s`, which is about `33.4%` faster
+- the fresh full rerun above confirms those changes on the full pipeline: `consequence_diff` is now `490.070s` instead of the older retained `761.191s`, which is about `35.6%` faster
 - on the same machine and with the same full-golden `vepyr.annotated.vcf`, a one-side `materialize_consequence_buckets(...)` benchmark at `bucket_count=256` and `chunk_variants=8192` first dropped from `708.518s` to `654.883s` after switching temporary bucket part writes to lighter parquet settings (`lz4`, no statistics), and then to `447.560s` after buffering several reduced chunks before each flush
 - that latest bucketization benchmark is about `36.8%` faster than the original one-side baseline, and it also cuts temporary file churn dramatically because bucket parts are flushed around every `65536` input variants instead of every `8192`
 - the fresh full rerun also reflects that in end-to-end compare wall-clock:
   - older retained compare-only baseline: `49m 00s`
-  - fresh rerun on current code: `32m 48s`
+  - fresh rerun on current code: `33m 33s`
 
 Latest retained mismatch diagnosis:
 
@@ -456,11 +493,11 @@ Latest retained mismatch diagnosis:
 
 Most useful artifacts for debugging the golden mismatch:
 
-- [summary.json](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-rerun-20260330/summary.json)
-- [summary.md](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-rerun-20260330/summary.md)
-- [consequence_mismatches.tsv](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-rerun-20260330/consequence_mismatches.tsv)
-- [consequence_diff.parquet](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-rerun-20260330/consequence_diff.parquet)
-- [runtime/compare.progress.log](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-rerun-20260330/runtime/compare.progress.log)
+- [summary.json](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-per-chrom-20260330/summary.json)
+- [summary.md](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-per-chrom-20260330/summary.md)
+- [consequence_mismatches.tsv](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-per-chrom-20260330/consequence_mismatches.tsv)
+- [consequence_diff.parquet](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-per-chrom-20260330/consequence_diff.parquet)
+- [runtime/compare.progress.log](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-per-chrom-20260330/runtime/compare.progress.log)
 - `/tmp/vepyr-diffly-golden-mismatch-analysis.json`
 - `/tmp/vepyr-diffly-golden-raw-csq.json`
 
@@ -539,8 +576,8 @@ Main commands:
 
 ```bash
 python -m vepyr_diffly.cli list-presets
-python -m vepyr_diffly.cli run --preset ensembl_everything --input-vcf /path/to/input.vcf --output-dir runs/demo --sample-first-n 1000
-python -m vepyr_diffly.cli compare-existing --preset ensembl_everything --left-vcf /path/to/vep.annotated.vcf --right-vcf /path/to/vepyr.annotated.vcf --output-dir runs/compare-only --compare-mode fast --memory-budget-mb 1024
+python -m vepyr_diffly.cli run --preset ensembl_everything --input-vcf /path/to/input.vcf --output-dir runs/demo --sample-first-n 1000 --chromosomes 1,2
+python -m vepyr_diffly.cli compare-existing --preset ensembl_everything --left-vcf /path/to/vep.annotated.vcf --right-vcf /path/to/vepyr.annotated.vcf --output-dir runs/compare-only --chromosomes 1,2 --compare-mode fast --memory-budget-mb 1024
 python -m vepyr_diffly.cli annotate-vepyr --input-vcf /path/to/prepared_input.vcf --output-vcf /path/to/vepyr.annotated.vcf
 python -m vepyr_diffly.cli benchmark-compare --left-vcf /path/to/vep.annotated.vcf --right-vcf /path/to/vepyr.annotated.vcf --output-json /tmp/benchmark.json
 python -m vepyr_diffly.cli inspect-run --run-dir runs/demo
@@ -582,6 +619,12 @@ Main run artifacts:
 - `runtime/vepyr.log`
 
 On large runs the TSV mismatch files are intentionally sampled, while the parquet diff artifacts remain complete.
+
+`summary.json` and `summary.md` now include both:
+
+- overall results for the processed subset as a whole
+- per-chromosome variant/consequence equality and counts
+- attributed per-chromosome stage timings for normalization and diff
 
 ## Troubleshooting
 

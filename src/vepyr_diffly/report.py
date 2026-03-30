@@ -48,6 +48,7 @@ def print_run_summary(
     progress_log_path: str | Any,
     resource_plan: dict[str, Any] | None = None,
     timings: dict[str, float] | None = None,
+    chromosome_summary: dict[str, Any] | None = None,
 ) -> None:
     console.print(f"Preset: [bold]{config.preset.name}[/bold]")
     console.print(f"Input: {config.input_vcf}")
@@ -55,6 +56,14 @@ def print_run_summary(
     console.print(f"Right annotated VCF: {right_vcf}")
     console.print(
         f"Sample first N: {config.sample_first_n if config.sample_first_n is not None else 'full'}"
+    )
+    console.print(
+        "Chromosomes: "
+        + (
+            ",".join(config.selected_chromosomes)
+            if config.selected_chromosomes
+            else "all"
+        )
     )
     console.print(f"Progress log: {progress_log_path}")
     if resource_plan:
@@ -85,6 +94,31 @@ def print_run_summary(
             str(tier.joined_equal_rows),
         )
     console.print(table)
+    if chromosome_summary and chromosome_summary.get("per_chromosome"):
+        console.print("")
+        chrom_table = Table(title="Per-Chromosome Summary")
+        chrom_table.add_column("Chrom")
+        chrom_table.add_column("Variant equal")
+        chrom_table.add_column("Variant left/right/uneq")
+        chrom_table.add_column("Consequence equal")
+        chrom_table.add_column("Consequence left/right/uneq")
+        chrom_table.add_column("Attributed timings (s)")
+        for chrom, payload in chromosome_summary["per_chromosome"].items():
+            variant_payload = payload["variant"]
+            consequence_payload = payload["consequence"]
+            timing_payload = payload.get("timings", {})
+            chrom_table.add_row(
+                chrom,
+                "yes" if variant_payload["equal"] else "no",
+                f"{variant_payload['left_only_rows']}/{variant_payload['right_only_rows']}/{variant_payload['unequal_rows']}",
+                "yes" if consequence_payload["equal"] else "no",
+                f"{consequence_payload['left_only_rows']}/{consequence_payload['right_only_rows']}/{consequence_payload['unequal_rows']}",
+                ", ".join(
+                    f"{name}={value:.3f}" for name, value in timing_payload.items() if value > 0
+                )
+                or "n/a",
+            )
+        console.print(chrom_table)
 
 
 def write_run_summary(
@@ -97,6 +131,7 @@ def write_run_summary(
     right_vcf: str | Any,
     resource_plan: dict[str, Any] | None = None,
     timings: dict[str, float] | None = None,
+    chromosome_summary: dict[str, Any] | None = None,
 ) -> None:
     payload: dict[str, Any] = {
         "preset": config.preset.name,
@@ -104,6 +139,8 @@ def write_run_summary(
         "annotated_left_vcf": str(left_vcf),
         "annotated_right_vcf": str(right_vcf),
         "sample_first_n": config.sample_first_n,
+        "requested_chromosomes": config.chromosome_filter_raw,
+        "effective_chromosomes": config.selected_chromosomes,
         "progress_log_path": str(artifacts.progress_log_path),
         "compare_mode": config.compare_mode,
         "bucket_count": config.compare_bucket_count,
@@ -122,6 +159,7 @@ def write_run_summary(
                 "diff_frame_path": str(variant.diff_frame_path),
                 "mismatches_tsv_path": str(variant.mismatches_tsv_path),
                 "details": variant.details,
+                "per_chromosome": variant.per_chromosome,
             },
             "consequence": {
                 "equal": consequence.equal,
@@ -132,8 +170,10 @@ def write_run_summary(
                 "diff_frame_path": str(consequence.diff_frame_path),
                 "mismatches_tsv_path": str(consequence.mismatches_tsv_path),
                 "details": consequence.details,
+                "per_chromosome": consequence.per_chromosome,
             },
         },
+        "chromosomes": chromosome_summary or {},
     }
     artifacts.summary_json_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     lines = [
@@ -144,6 +184,8 @@ def write_run_summary(
         f"- Left annotated VCF: `{left_vcf}`",
         f"- Right annotated VCF: `{right_vcf}`",
         f"- Sample first N: `{config.sample_first_n if config.sample_first_n is not None else 'full'}`",
+        f"- Requested chromosomes: `{config.chromosome_filter_raw or 'all'}`",
+        f"- Effective chromosomes: `{','.join(config.selected_chromosomes) if config.selected_chromosomes else 'all'}`",
         f"- Progress log: `{artifacts.progress_log_path}`",
         f"- Compare mode: `{config.compare_mode}`",
         f"- Memory budget MB: `{config.memory_budget_mb if config.memory_budget_mb is not None else 'auto'}`",
@@ -188,4 +230,15 @@ def write_run_summary(
             "",
         ]
     )
+    if chromosome_summary and chromosome_summary.get("per_chromosome"):
+        lines.extend(
+            [
+                "## Per Chromosome",
+                "",
+                "```json",
+                json.dumps(chromosome_summary, indent=2),
+                "```",
+                "",
+            ]
+        )
     artifacts.summary_md_path.write_text("\n".join(lines), encoding="utf-8")

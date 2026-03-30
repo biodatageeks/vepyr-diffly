@@ -40,6 +40,79 @@ class BucketCompareResult:
     mismatches_tsv_path: Path
     exact_diff_run: bool = True
     precheck_equal: bool = False
+    per_chromosome: dict[str, dict[str, int]] | None = None
+
+
+def _merge_per_chromosome(
+    aggregate: dict[str, dict[str, int]],
+    incoming: dict[str, dict[str, int]] | None,
+) -> None:
+    if not incoming:
+        return
+    for chrom, counts in incoming.items():
+        bucket = aggregate.setdefault(
+            chrom,
+            {
+                "left_rows": 0,
+                "right_rows": 0,
+                "joined_equal_rows": 0,
+                "left_only_rows": 0,
+                "right_only_rows": 0,
+                "unequal_rows": 0,
+            },
+        )
+        for key, value in counts.items():
+            bucket[key] = bucket.get(key, 0) + int(value)
+
+
+def _group_counts_by_chrom(frame: pl.DataFrame) -> dict[str, int]:
+    if frame.is_empty():
+        return {}
+    grouped = frame.group_by("chrom").agg(pl.len().alias("rows"))
+    return {str(row["chrom"]): int(row["rows"]) for row in grouped.to_dicts()}
+
+
+def _build_per_chromosome_counts(
+    *,
+    left_frame: pl.DataFrame,
+    right_frame: pl.DataFrame,
+    key: list[str],
+) -> dict[str, dict[str, int]]:
+    value_columns = [column for column in left_frame.columns if column not in key]
+    chroms = set(left_frame.get_column("chrom").to_list()) | set(right_frame.get_column("chrom").to_list())
+    if not chroms:
+        return {}
+
+    left_only = left_frame.join(right_frame.select(key), on=key, how="anti")
+    right_only = right_frame.join(left_frame.select(key), on=key, how="anti")
+    joined = left_frame.join(right_frame, on=key, how="inner", suffix="_right")
+    if value_columns:
+        equal_expr = pl.all_horizontal(
+            *(pl.col(column) == pl.col(f"{column}_right") for column in value_columns)
+        )
+        joined_equal = joined.filter(equal_expr)
+        joined_unequal = joined.filter(~equal_expr)
+    else:
+        joined_equal = joined
+        joined_unequal = joined.head(0)
+
+    left_counts = _group_counts_by_chrom(left_frame)
+    right_counts = _group_counts_by_chrom(right_frame)
+    joined_equal_counts = _group_counts_by_chrom(joined_equal)
+    left_only_counts = _group_counts_by_chrom(left_only)
+    right_only_counts = _group_counts_by_chrom(right_only)
+    unequal_counts = _group_counts_by_chrom(joined_unequal)
+    output: dict[str, dict[str, int]] = {}
+    for chrom in sorted(str(value) for value in chroms):
+        output[chrom] = {
+            "left_rows": left_counts.get(chrom, 0),
+            "right_rows": right_counts.get(chrom, 0),
+            "joined_equal_rows": joined_equal_counts.get(chrom, 0),
+            "left_only_rows": left_only_counts.get(chrom, 0),
+            "right_only_rows": right_only_counts.get(chrom, 0),
+            "unequal_rows": unequal_counts.get(chrom, 0),
+        }
+    return output
 
 
 def _sink_lazy_frame(frame: pl.LazyFrame, path: Path, *, as_csv: bool) -> None:
@@ -88,9 +161,11 @@ def compare_tier(
     mismatches_tsv_path: Path,
     reporter: ProgressReporter | None = None,
 ) -> ComparisonArtifacts:
+    left_eager = left.collect() if isinstance(left, pl.LazyFrame) else left
+    right_eager = right.collect() if isinstance(right, pl.LazyFrame) else right
     if reporter is not None:
         reporter.stage(f"{name}: initializing diffly comparison")
-    comparison = compare_frames(left, right, primary_key=primary_key)
+    comparison = compare_frames(left_eager.lazy(), right_eager.lazy(), primary_key=primary_key)
 
     if reporter is not None:
         reporter.stage(f"{name}: counting left rows")
@@ -157,6 +232,11 @@ def compare_tier(
         joined_equal_rows=joined_equal_rows,
         diff_frame_path=diff_frame_path,
         mismatches_tsv_path=mismatches_tsv_path,
+        per_chromosome=_build_per_chromosome_counts(
+            left_frame=left_eager,
+            right_frame=right_eager,
+            key=primary_key,
+        ),
     )
     return ComparisonArtifacts(
         diff_frame_path=diff_frame_path,
@@ -255,6 +335,11 @@ def _precheck_bucket_frames(
         mismatches_tsv_path=Path(),
         exact_diff_run=False,
         precheck_equal=precheck_equal,
+        per_chromosome=_build_per_chromosome_counts(
+            left_frame=left_eager,
+            right_frame=right_eager,
+            key=key,
+        ),
     )
 
 
@@ -268,9 +353,11 @@ def _compare_direct_bucket(
     diff_frame_path: Path,
     mismatches_tsv_path: Path | None = None,
 ) -> BucketCompareResult:
+    left_eager = _scan_single_bucket(left_paths, schema).collect()
+    right_eager = _scan_single_bucket(right_paths, schema).collect()
     comparison = compare_frames(
-        _scan_single_bucket(left_paths, schema),
-        _scan_single_bucket(right_paths, schema),
+        left_eager.lazy(),
+        right_eager.lazy(),
         primary_key=key,
     )
     left_rows = comparison.num_rows_left()
@@ -302,6 +389,11 @@ def _compare_direct_bucket(
         mismatches_tsv_path=mismatches_tsv_path or Path(),
         exact_diff_run=True,
         precheck_equal=(left_only_rows == 0 and right_only_rows == 0 and unequal_rows == 0),
+        per_chromosome=_build_per_chromosome_counts(
+            left_frame=left_eager,
+            right_frame=right_eager,
+            key=key,
+        ),
     )
 
 
@@ -416,6 +508,11 @@ def precheck_single_bucket(
         mismatches_tsv_path=Path(),
         exact_diff_run=False,
         precheck_equal=precheck_equal,
+        per_chromosome=_build_per_chromosome_counts(
+            left_frame=left_eager,
+            right_frame=right_eager,
+            key=key,
+        ),
     )
 
 
@@ -429,9 +526,11 @@ def compare_single_bucket(
     mismatches_tsv_path: Path | None = None,
 ) -> BucketCompareResult:
     key = ["chrom", "pos", "ref", "alt", *csq_fields]
+    left_eager = _aggregate_bucket_frame(left_paths, csq_fields).collect()
+    right_eager = _aggregate_bucket_frame(right_paths, csq_fields).collect()
     comparison = compare_frames(
-        _aggregate_bucket_frame(left_paths, csq_fields),
-        _aggregate_bucket_frame(right_paths, csq_fields),
+        left_eager.lazy(),
+        right_eager.lazy(),
         primary_key=key,
     )
     left_rows = comparison.num_rows_left()
@@ -464,6 +563,11 @@ def compare_single_bucket(
         mismatches_tsv_path=mismatches_tsv_path or Path(),
         exact_diff_run=True,
         precheck_equal=(left_only_rows == 0 and right_only_rows == 0 and unequal_rows == 0),
+        per_chromosome=_build_per_chromosome_counts(
+            left_frame=left_eager,
+            right_frame=right_eager,
+            key=key,
+        ),
     )
 
 
@@ -551,6 +655,7 @@ def compare_bucketed_variant_tier(
         "right_only_rows": 0,
         "unequal_rows": 0,
     }
+    per_chromosome: dict[str, dict[str, int]] = {}
     diff_paths: list[Path] = []
     precheck_equal_buckets = 0
     exact_diff_run_buckets = 0
@@ -593,6 +698,7 @@ def compare_bucketed_variant_tier(
         aggregate["left_only_rows"] += result.left_only_rows
         aggregate["right_only_rows"] += result.right_only_rows
         aggregate["unequal_rows"] += result.unequal_rows
+        _merge_per_chromosome(per_chromosome, result.per_chromosome)
         if result.precheck_equal:
             precheck_equal_buckets += 1
         if result.exact_diff_run and result.diff_frame_path.exists():
@@ -664,6 +770,7 @@ def compare_bucketed_variant_tier(
             "buckets_compared": len(jobs),
             "workers": 1,
         },
+        per_chromosome=per_chromosome,
     )
     shutil.rmtree(temp_root, ignore_errors=True)
     return ComparisonArtifacts(
@@ -750,6 +857,7 @@ def compare_bucketed_consequence_tier(
         "right_only_rows": 0,
         "unequal_rows": 0,
     }
+    per_chromosome: dict[str, dict[str, int]] = {}
     diff_paths: list[Path] = []
     completed = 0
     exact_diff_run_buckets = 0
@@ -802,6 +910,7 @@ def compare_bucketed_consequence_tier(
                 aggregate["left_only_rows"] += result.left_only_rows
                 aggregate["right_only_rows"] += result.right_only_rows
                 aggregate["unequal_rows"] += result.unequal_rows
+                _merge_per_chromosome(per_chromosome, result.per_chromosome)
                 if result.exact_diff_run and result.diff_frame_path.exists():
                     diff_paths.append(result.diff_frame_path)
                     exact_diff_run_buckets += 1
@@ -878,6 +987,7 @@ def compare_bucketed_consequence_tier(
             "buckets_compared": len(jobs),
             "workers": len(shards),
         },
+        per_chromosome=per_chromosome,
     )
     shutil.rmtree(temp_root, ignore_errors=True)
     return ComparisonArtifacts(

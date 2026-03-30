@@ -58,6 +58,7 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser.add_argument(
         "--sample-first-n", type=int, default=env_int("VEPYR_DIFFLY_SAMPLE_FIRST_N")
     )
+    run_parser.add_argument("--chromosomes", default=env_str("VEPYR_DIFFLY_CHROMOSOMES"))
     run_parser.add_argument("--vepyr-path", type=Path, default=env_path("VEPYR_DIFFLY_VEPYR_PATH"))
     run_parser.add_argument(
         "--vepyr-python", type=Path, default=env_path("VEPYR_DIFFLY_VEPYR_PYTHON")
@@ -127,6 +128,7 @@ def build_parser() -> argparse.ArgumentParser:
     compare_parser.add_argument("--left-vcf", required=True, type=Path)
     compare_parser.add_argument("--right-vcf", required=True, type=Path)
     compare_parser.add_argument("--output-dir", required=True, type=Path)
+    compare_parser.add_argument("--chromosomes", default=env_str("VEPYR_DIFFLY_CHROMOSOMES"))
     compare_parser.add_argument(
         "--compare-mode",
         choices=("fast", "debug"),
@@ -180,6 +182,134 @@ def build_parser() -> argparse.ArgumentParser:
     raw_csq_parser.add_argument("--output-json", required=True, type=Path)
     raw_csq_parser.add_argument("--per-category-limit", type=int, default=3)
     return parser
+
+
+def _chromosome_equal(payload: dict[str, int]) -> bool:
+    return (
+        int(payload.get("left_only_rows", 0)) == 0
+        and int(payload.get("right_only_rows", 0)) == 0
+        and int(payload.get("unequal_rows", 0)) == 0
+    )
+
+
+def _attribute_stage_timings(
+    *,
+    timings: dict[str, float],
+    variant: object,
+    consequence: object,
+) -> dict[str, object]:
+    from .models import TierResult
+
+    assert isinstance(variant, TierResult)
+    assert isinstance(consequence, TierResult)
+    chroms = sorted(set(variant.per_chromosome) | set(consequence.per_chromosome))
+    if not chroms:
+        return {
+            "requested": [],
+            "effective": [],
+            "per_chromosome": {},
+        }
+
+    variant_total = sum(
+        int(payload.get("left_rows", 0)) + int(payload.get("right_rows", 0))
+        for payload in variant.per_chromosome.values()
+    )
+    consequence_total = sum(
+        int(payload.get("left_rows", 0)) + int(payload.get("right_rows", 0))
+        for payload in consequence.per_chromosome.values()
+    )
+    diff_variant_total = sum(
+        int(payload.get("joined_equal_rows", 0))
+        + int(payload.get("left_only_rows", 0))
+        + int(payload.get("right_only_rows", 0))
+        + int(payload.get("unequal_rows", 0))
+        for payload in variant.per_chromosome.values()
+    )
+    diff_consequence_total = sum(
+        int(payload.get("joined_equal_rows", 0))
+        + int(payload.get("left_only_rows", 0))
+        + int(payload.get("right_only_rows", 0))
+        + int(payload.get("unequal_rows", 0))
+        for payload in consequence.per_chromosome.values()
+    )
+
+    per_chromosome: dict[str, object] = {}
+    for chrom in chroms:
+        variant_payload = variant.per_chromosome.get(
+            chrom,
+            {
+                "left_rows": 0,
+                "right_rows": 0,
+                "joined_equal_rows": 0,
+                "left_only_rows": 0,
+                "right_only_rows": 0,
+                "unequal_rows": 0,
+            },
+        )
+        consequence_payload = consequence.per_chromosome.get(
+            chrom,
+            {
+                "left_rows": 0,
+                "right_rows": 0,
+                "joined_equal_rows": 0,
+                "left_only_rows": 0,
+                "right_only_rows": 0,
+                "unequal_rows": 0,
+            },
+        )
+        variant_weight = (
+            int(variant_payload["left_rows"]) + int(variant_payload["right_rows"])
+        ) / variant_total if variant_total else 0.0
+        consequence_weight = (
+            int(consequence_payload["left_rows"]) + int(consequence_payload["right_rows"])
+        ) / consequence_total if consequence_total else 0.0
+        variant_diff_weight = (
+            int(variant_payload["joined_equal_rows"])
+            + int(variant_payload["left_only_rows"])
+            + int(variant_payload["right_only_rows"])
+            + int(variant_payload["unequal_rows"])
+        ) / diff_variant_total if diff_variant_total else 0.0
+        consequence_diff_weight = (
+            int(consequence_payload["joined_equal_rows"])
+            + int(consequence_payload["left_only_rows"])
+            + int(consequence_payload["right_only_rows"])
+            + int(consequence_payload["unequal_rows"])
+        ) / diff_consequence_total if diff_consequence_total else 0.0
+        per_chromosome[chrom] = {
+            "variant": {
+                **variant_payload,
+                "equal": _chromosome_equal(variant_payload),
+            },
+            "consequence": {
+                **consequence_payload,
+                "equal": _chromosome_equal(consequence_payload),
+            },
+            "timings": {
+                "variant_summary_seconds": round(
+                    timings.get("variant_summary_seconds", 0.0) * variant_weight,
+                    3,
+                ),
+                "consequence_bucketization_seconds": round(
+                    timings.get("consequence_bucketization_seconds", 0.0) * consequence_weight,
+                    3,
+                ),
+                "consequence_summary_seconds": round(
+                    timings.get("consequence_summary_seconds", 0.0) * consequence_weight,
+                    3,
+                ),
+                "variant_diff_seconds": round(
+                    timings.get("variant_diff_seconds", 0.0) * variant_diff_weight,
+                    3,
+                ),
+                "consequence_diff_seconds": round(
+                    timings.get("consequence_diff_seconds", 0.0) * consequence_diff_weight,
+                    3,
+                ),
+            },
+        }
+    return {
+        "per_chromosome": per_chromosome,
+    }
 
 
 def _cmd_list_presets(console: Console) -> int:
@@ -326,6 +456,14 @@ def _run_comparison_pipeline(
             "comparison: resource plan "
             + ", ".join(f"{key}={value}" for key, value in resource_plan.to_dict().items())
         )
+        reporter.log(
+            "comparison: chromosome filter "
+            + (
+                ",".join(config.selected_chromosomes)
+                if config.selected_chromosomes
+                else "all"
+            )
+        )
         reporter.stage("comparison: starting normalization")
         stage_start = perf_counter()
         variant_kwargs = [
@@ -339,6 +477,7 @@ def _run_comparison_pipeline(
                 side_label=left_name,
                 bucket_count=resource_plan.bucket_count,
                 chunk_variants=resource_plan.variant_chunk_rows,
+                chromosome_aliases=set(config.selected_chromosome_aliases),
             ),
             dict(
                 vcf_path=right_vcf,
@@ -350,6 +489,7 @@ def _run_comparison_pipeline(
                 side_label=right_name,
                 bucket_count=resource_plan.bucket_count,
                 chunk_variants=resource_plan.variant_chunk_rows,
+                chromosome_aliases=set(config.selected_chromosome_aliases),
             ),
         ]
         if resource_plan.parallelize_sides:
@@ -386,6 +526,7 @@ def _run_comparison_pipeline(
                     bucket_count=resource_plan.bucket_count,
                     chunk_variants=resource_plan.consequence_chunk_rows,
                     total_variants=left_variant_rows,
+                    chromosome_aliases=set(config.selected_chromosome_aliases),
                 ),
                 dict(
                     vcf_path=right_vcf,
@@ -396,6 +537,7 @@ def _run_comparison_pipeline(
                     bucket_count=resource_plan.bucket_count,
                     chunk_variants=resource_plan.consequence_chunk_rows,
                     total_variants=right_variant_rows,
+                    chromosome_aliases=set(config.selected_chromosome_aliases),
                 ),
             ]
             from .normalize import materialize_consequence_buckets
@@ -423,6 +565,7 @@ def _run_comparison_pipeline(
                     csq_fields=left_csq_fields,
                     reporter=reporter,
                     side_label=left_name,
+                    chromosome_aliases=set(config.selected_chromosome_aliases),
                 ),
                 dict(
                     vcf_path=right_vcf,
@@ -430,6 +573,7 @@ def _run_comparison_pipeline(
                     csq_fields=right_csq_fields,
                     reporter=reporter,
                     side_label=right_name,
+                    chromosome_aliases=set(config.selected_chromosome_aliases),
                 ),
             ]
             if resource_plan.parallelize_sides:
@@ -519,6 +663,15 @@ def _run_comparison_pipeline(
             timings["consequence_diff_seconds"] = round(perf_counter() - stage_start, 3)
 
         reporter.stage("comparison: writing summaries")
+        chromosome_summary = _attribute_stage_timings(
+            timings=timings,
+            variant=variant,
+            consequence=consequence,
+        )
+        chromosome_summary["requested"] = (
+            config.chromosome_filter_raw.split(",") if config.chromosome_filter_raw else []
+        )
+        chromosome_summary["effective"] = config.selected_chromosomes
         print_run_summary(
             console=console,
             config=config,
@@ -529,6 +682,7 @@ def _run_comparison_pipeline(
             progress_log_path=artifacts.progress_log_path,
             resource_plan=resource_plan.to_dict(),
             timings=timings,
+            chromosome_summary=chromosome_summary,
         )
         write_run_summary(
             config=config,
@@ -539,7 +693,13 @@ def _run_comparison_pipeline(
             right_vcf=right_vcf,
             resource_plan=resource_plan.to_dict(),
             timings=timings,
+            chromosome_summary=chromosome_summary,
         )
+        for chrom, payload in chromosome_summary.get("per_chromosome", {}).items():
+            reporter.log(
+                f"comparison: chromosome {chrom} variant_equal={'yes' if payload['variant']['equal'] else 'no'} "
+                f"consequence_equal={'yes' if payload['consequence']['equal'] else 'no'}"
+            )
         reporter.log("comparison: completed successfully")
         return 0
     finally:
@@ -584,6 +744,7 @@ def _cmd_run(args: argparse.Namespace, console: Console) -> int:
         compare_workers=args.compare_workers,
         memory_budget_mb=args.memory_budget_mb,
         fingerprint_only=args.fingerprint_only,
+        chromosome_filter_raw=args.chromosomes,
     )
     artifacts = prepare_artifacts(config.output_dir)
     write_effective_config(config, artifacts)
@@ -630,6 +791,7 @@ def _cmd_compare_existing(args: argparse.Namespace, console: Console) -> int:
         fingerprint_only=args.fingerprint_only,
         annotated_left_vcf=args.left_vcf,
         annotated_right_vcf=args.right_vcf,
+        chromosome_filter_raw=args.chromosomes,
     )
     artifacts = prepare_artifacts(config.output_dir)
     write_effective_config(config, artifacts)

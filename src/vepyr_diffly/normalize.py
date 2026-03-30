@@ -9,6 +9,7 @@ from typing import Iterator
 
 import polars as pl
 
+from .chromosomes import normalize_chromosome_name
 from .progress import ProgressReporter
 from .vcf_io import _scan_annotated_vcf_text, parse_csq_header, scan_annotated_vcf
 
@@ -59,6 +60,15 @@ CONSEQUENCE_CHUNK_SCHEMA = {
 }
 
 
+def _canonicalize_chrom_expr() -> pl.Expr:
+    return (
+        pl.col("chrom")
+        .cast(pl.String)
+        .map_elements(normalize_chromosome_name, return_dtype=pl.String)
+        .alias("chrom")
+    )
+
+
 def _invalid_string_expr(column: str) -> pl.Expr:
     value = pl.col(column).cast(pl.String)
     return pl.col(column).is_null() | value.is_in(["", "None"])
@@ -81,7 +91,7 @@ def _invalid_csq_expr() -> pl.Expr:
 def _base_variant_rows(source: pl.LazyFrame) -> pl.LazyFrame:
     return (
         source.with_columns(
-            pl.col("chrom").cast(pl.String).alias("chrom"),
+            _canonicalize_chrom_expr(),
             pl.col("pos").cast(pl.Int64).alias("pos"),
             pl.col("ref").cast(pl.String).alias("ref"),
             pl.col("alt").cast(pl.String).str.split(",").alias("alt"),
@@ -94,6 +104,15 @@ def _base_variant_rows(source: pl.LazyFrame) -> pl.LazyFrame:
         .with_columns(_clean_string_expr("alt"))
         .filter(~pl.col("alt").is_in([".", ""]))
     )
+
+
+def _filter_source_by_chromosomes(
+    source: pl.LazyFrame,
+    chromosome_aliases: set[str] | None,
+) -> pl.LazyFrame:
+    if not chromosome_aliases:
+        return source
+    return source.filter(pl.col("chrom").cast(pl.String).is_in(sorted(chromosome_aliases)))
 
 
 def _normalized_allele_expr() -> pl.Expr:
@@ -123,7 +142,12 @@ def normalize_alt_for_csq_allele(ref: str, alt: str) -> str:
     return alt_trimmed
 
 
-def build_variant_summary_lazy(source: pl.LazyFrame) -> pl.LazyFrame:
+def build_variant_summary_lazy(
+    source: pl.LazyFrame,
+    *,
+    chromosome_aliases: set[str] | None = None,
+) -> pl.LazyFrame:
+    source = _filter_source_by_chromosomes(source, chromosome_aliases)
     consequence_counts = (
         _base_variant_rows(source)
         .with_columns(
@@ -186,7 +210,13 @@ def _csq_field_exprs(csq_fields: list[str]) -> list[pl.Expr]:
     ]
 
 
-def build_consequence_summary_lazy(source: pl.LazyFrame, csq_fields: list[str]) -> pl.LazyFrame:
+def build_consequence_summary_lazy(
+    source: pl.LazyFrame,
+    csq_fields: list[str],
+    *,
+    chromosome_aliases: set[str] | None = None,
+) -> pl.LazyFrame:
+    source = _filter_source_by_chromosomes(source, chromosome_aliases)
     consequence_rows = (
         _base_variant_rows(source)
         .with_columns(
@@ -256,12 +286,17 @@ def _extract_csq_entries_from_info_bytes(info: bytes) -> list[str]:
     return [item.decode("utf-8") for item in payload.split(b",") if item]
 
 
-def _count_vcf_records(vcf_path: Path) -> int:
+def _count_vcf_records(vcf_path: Path, *, chromosome_aliases: set[str] | None = None) -> int:
     total = 0
     with vcf_path.open(encoding="utf-8") as handle:
         for line in handle:
-            if not line.startswith("#"):
-                total += 1
+            if line.startswith("#"):
+                continue
+            if chromosome_aliases:
+                chrom = line.split("\t", 1)[0]
+                if chrom not in chromosome_aliases:
+                    continue
+            total += 1
     return total
 
 
@@ -345,6 +380,7 @@ def _iter_vcf_record_chunks(
     vcf_path: Path,
     *,
     chunk_variants: int,
+    chromosome_aliases: set[str] | None = None,
 ) -> Iterator[tuple[int, pl.DataFrame]]:
     chroms: list[str] = []
     positions: list[int] = []
@@ -359,7 +395,10 @@ def _iter_vcf_record_chunks(
             fields = raw_line.rstrip(b"\n").split(b"\t", 8)
             if len(fields) < 8:
                 continue
-            chroms.append(fields[0].decode("utf-8"))
+            chrom = fields[0].decode("utf-8")
+            if chromosome_aliases and chrom not in chromosome_aliases:
+                continue
+            chroms.append(normalize_chromosome_name(chrom))
             positions.append(int(fields[1]))
             refs.append(fields[3].decode("utf-8"))
             alts.append(fields[4].decode("utf-8"))
@@ -404,6 +443,7 @@ def _iter_variant_record_chunks(
     vcf_path: Path,
     *,
     chunk_variants: int,
+    chromosome_aliases: set[str] | None = None,
 ) -> Iterator[tuple[int, pl.DataFrame]]:
     chroms: list[str] = []
     positions: list[int] = []
@@ -420,7 +460,10 @@ def _iter_variant_record_chunks(
             fields = raw_line.rstrip(b"\n").split(b"\t", 8)
             if len(fields) < 8:
                 continue
-            chroms.append(fields[0].decode("utf-8"))
+            chrom = fields[0].decode("utf-8")
+            if chromosome_aliases and chrom not in chromosome_aliases:
+                continue
+            chroms.append(normalize_chromosome_name(chrom))
             positions.append(int(fields[1]))
             refs.append(fields[3].decode("utf-8"))
             alts.append(fields[4].decode("utf-8"))
@@ -763,12 +806,13 @@ def materialize_consequence_buckets(
     bucket_count: int = CONSEQUENCE_BUCKET_COUNT,
     chunk_variants: int = CONSEQUENCE_BUCKET_CHUNK_VARIANTS,
     total_variants: int | None = None,
+    chromosome_aliases: set[str] | None = None,
 ) -> list[int]:
     if bucket_root.exists():
         shutil.rmtree(bucket_root)
     bucket_root.mkdir(parents=True, exist_ok=True)
     if total_variants is None:
-        total_variants = _count_vcf_records(vcf_path)
+        total_variants = _count_vcf_records(vcf_path, chromosome_aliases=chromosome_aliases)
     if reporter is not None:
         reporter.stage(
             f"{side_label}: bucketizing consequence rows → {bucket_root}",
@@ -784,6 +828,7 @@ def materialize_consequence_buckets(
     for processed, chunk in _iter_vcf_record_chunks(
         vcf_path,
         chunk_variants=chunk_variants,
+        chromosome_aliases=chromosome_aliases,
     ):
         chunk_frame = _aggregate_consequence_chunk(
             chunk,
@@ -852,12 +897,13 @@ def materialize_variant_buckets(
     bucket_count: int = CONSEQUENCE_BUCKET_COUNT,
     chunk_variants: int = 10_000,
     total_variants: int | None = None,
+    chromosome_aliases: set[str] | None = None,
 ) -> list[int]:
     if bucket_root.exists():
         shutil.rmtree(bucket_root)
     bucket_root.mkdir(parents=True, exist_ok=True)
     if total_variants is None:
-        total_variants = _count_vcf_records(vcf_path)
+        total_variants = _count_vcf_records(vcf_path, chromosome_aliases=chromosome_aliases)
     if reporter is not None:
         reporter.stage(
             f"{side_label}: bucketizing variant rows → {bucket_root}",
@@ -870,6 +916,7 @@ def materialize_variant_buckets(
     for processed, chunk in _iter_variant_record_chunks(
         vcf_path,
         chunk_variants=chunk_variants,
+        chromosome_aliases=chromosome_aliases,
     ):
         chunk_frame = _aggregate_variant_chunk(
             chunk,
@@ -913,10 +960,22 @@ def materialize_variant_buckets(
     return sorted(non_empty_buckets)
 
 
-def _eager_normalize_fallback(vcf_path: Path, csq_fields: list[str]) -> NormalizedTables:
+def _eager_normalize_fallback(
+    vcf_path: Path,
+    csq_fields: list[str],
+    *,
+    chromosome_aliases: set[str] | None = None,
+) -> NormalizedTables:
     source = _scan_annotated_vcf_text(vcf_path)
-    variant = build_variant_summary_lazy(source.lazy()).collect()
-    consequence = build_consequence_summary_lazy(source.lazy(), csq_fields).collect()
+    variant = build_variant_summary_lazy(
+        source.lazy(),
+        chromosome_aliases=chromosome_aliases,
+    ).collect()
+    consequence = build_consequence_summary_lazy(
+        source.lazy(),
+        csq_fields,
+        chromosome_aliases=chromosome_aliases,
+    ).collect()
     return NormalizedTables(variant=variant, consequence=consequence, csq_fields=csq_fields)
 
 
@@ -930,6 +989,7 @@ def materialize_variant_summary(
     bucket_count: int = CONSEQUENCE_BUCKET_COUNT,
     chunk_variants: int = 10_000,
     total_variants: int | None = None,
+    chromosome_aliases: set[str] | None = None,
 ) -> list[str]:
     csq_fields = parse_csq_header(vcf_path)
     if reporter is not None:
@@ -939,7 +999,11 @@ def materialize_variant_summary(
             reporter.stage(
                 f"{side_label}: using eager text normalization for small file {vcf_path.name}"
             )
-        eager = _eager_normalize_fallback(vcf_path, csq_fields)
+        eager = _eager_normalize_fallback(
+            vcf_path,
+            csq_fields,
+            chromosome_aliases=chromosome_aliases,
+        )
         eager.variant.write_parquet(variant_path)
         if bucket_root is not None:
             if bucket_root.exists():
@@ -973,6 +1037,7 @@ def materialize_variant_summary(
             bucket_count=bucket_count,
             chunk_variants=chunk_variants,
             total_variants=total_variants,
+            chromosome_aliases=chromosome_aliases,
         )
         return csq_fields
 
@@ -983,14 +1048,22 @@ def materialize_variant_summary(
         )
     try:
         _materialize_lazyframe(
-            build_variant_summary_lazy(scan_annotated_vcf(vcf_path)), variant_path
+            build_variant_summary_lazy(
+                scan_annotated_vcf(vcf_path),
+                chromosome_aliases=chromosome_aliases,
+            ),
+            variant_path,
         )
     except Exception as exc:
         if reporter is not None:
             reporter.log(
                 f"{side_label}: lazy variant normalization failed, falling back to eager text parser ({exc})"
             )
-        eager = _eager_normalize_fallback(vcf_path, csq_fields)
+        eager = _eager_normalize_fallback(
+            vcf_path,
+            csq_fields,
+            chromosome_aliases=chromosome_aliases,
+        )
         eager.variant.write_parquet(variant_path)
     if reporter is not None:
         reporter.log(f"{side_label}: variant summary rows={_count_rows(variant_path)}")
@@ -1004,9 +1077,14 @@ def materialize_consequence_summary(
     csq_fields: list[str],
     reporter: ProgressReporter | None = None,
     side_label: str,
+    chromosome_aliases: set[str] | None = None,
 ) -> None:
     if vcf_path.stat().st_size <= SMALL_VCF_TEXT_FALLBACK_BYTES:
-        eager = _eager_normalize_fallback(vcf_path, csq_fields)
+        eager = _eager_normalize_fallback(
+            vcf_path,
+            csq_fields,
+            chromosome_aliases=chromosome_aliases,
+        )
         consequence_path.parent.mkdir(parents=True, exist_ok=True)
         eager.consequence.write_parquet(consequence_path)
         if reporter is not None:
@@ -1020,7 +1098,11 @@ def materialize_consequence_summary(
         )
     try:
         _materialize_lazyframe(
-            build_consequence_summary_lazy(scan_annotated_vcf(vcf_path), csq_fields),
+            build_consequence_summary_lazy(
+                scan_annotated_vcf(vcf_path),
+                csq_fields,
+                chromosome_aliases=chromosome_aliases,
+            ),
             consequence_path,
         )
     except Exception as exc:
@@ -1028,7 +1110,11 @@ def materialize_consequence_summary(
             reporter.log(
                 f"{side_label}: lazy consequence normalization failed, falling back to eager text parser ({exc})"
             )
-        eager = _eager_normalize_fallback(vcf_path, csq_fields)
+        eager = _eager_normalize_fallback(
+            vcf_path,
+            csq_fields,
+            chromosome_aliases=chromosome_aliases,
+        )
         eager.consequence.write_parquet(consequence_path)
     if reporter is not None:
         reporter.log(f"{side_label}: consequence summary rows={_count_rows(consequence_path)}")
@@ -1041,12 +1127,14 @@ def materialize_normalized_tables(
     consequence_path: Path,
     reporter: ProgressReporter | None = None,
     side_label: str,
+    chromosome_aliases: set[str] | None = None,
 ) -> list[str]:
     csq_fields = materialize_variant_summary(
         vcf_path=vcf_path,
         variant_path=variant_path,
         reporter=reporter,
         side_label=side_label,
+        chromosome_aliases=chromosome_aliases,
     )
     if vcf_path.stat().st_size >= STREAMING_CONSEQUENCE_THRESHOLD_BYTES:
         bucket_root = consequence_path.parent / f"{consequence_path.stem}.buckets"
@@ -1056,6 +1144,7 @@ def materialize_normalized_tables(
             bucket_root=bucket_root,
             reporter=reporter,
             side_label=side_label,
+            chromosome_aliases=chromosome_aliases,
         )
         return csq_fields
 
@@ -1065,18 +1154,32 @@ def materialize_normalized_tables(
         csq_fields=csq_fields,
         reporter=reporter,
         side_label=side_label,
+        chromosome_aliases=chromosome_aliases,
     )
     return csq_fields
 
 
-def normalize_annotated_vcf(vcf_path: Path) -> NormalizedTables:
+def normalize_annotated_vcf(
+    vcf_path: Path,
+    *,
+    chromosome_aliases: set[str] | None = None,
+) -> NormalizedTables:
     csq_fields = parse_csq_header(vcf_path)
     if vcf_path.stat().st_size <= SMALL_VCF_TEXT_FALLBACK_BYTES:
-        return _eager_normalize_fallback(vcf_path, csq_fields)
+        return _eager_normalize_fallback(
+            vcf_path,
+            csq_fields,
+            chromosome_aliases=chromosome_aliases,
+        )
     try:
-        variant = build_variant_summary_lazy(scan_annotated_vcf(vcf_path)).collect()
+        variant = build_variant_summary_lazy(
+            scan_annotated_vcf(vcf_path),
+            chromosome_aliases=chromosome_aliases,
+        ).collect()
         consequence = build_consequence_summary_lazy(
-            scan_annotated_vcf(vcf_path), csq_fields
+            scan_annotated_vcf(vcf_path),
+            csq_fields,
+            chromosome_aliases=chromosome_aliases,
         ).collect()
         return NormalizedTables(
             variant=variant,
@@ -1084,4 +1187,8 @@ def normalize_annotated_vcf(vcf_path: Path) -> NormalizedTables:
             csq_fields=csq_fields,
         )
     except Exception:
-        return _eager_normalize_fallback(vcf_path, csq_fields)
+        return _eager_normalize_fallback(
+            vcf_path,
+            csq_fields,
+            chromosome_aliases=chromosome_aliases,
+        )
