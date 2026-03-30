@@ -166,6 +166,19 @@ def build_parser() -> argparse.ArgumentParser:
 
     inspect_parser = subparsers.add_parser("inspect-run")
     inspect_parser.add_argument("--run-dir", required=True, type=Path)
+
+    mismatch_parser = subparsers.add_parser("analyze-consequence-mismatches")
+    mismatch_parser.add_argument("--run-dir", type=Path)
+    mismatch_parser.add_argument("--mismatches-tsv", type=Path)
+    mismatch_parser.add_argument("--output-json", type=Path)
+
+    raw_csq_parser = subparsers.add_parser("extract-mismatch-csq-examples")
+    raw_csq_parser.add_argument("--run-dir", type=Path)
+    raw_csq_parser.add_argument("--analysis-json", type=Path)
+    raw_csq_parser.add_argument("--left-vcf", type=Path)
+    raw_csq_parser.add_argument("--right-vcf", type=Path)
+    raw_csq_parser.add_argument("--output-json", required=True, type=Path)
+    raw_csq_parser.add_argument("--per-category-limit", type=int, default=3)
     return parser
 
 
@@ -640,6 +653,62 @@ def _cmd_inspect_run(args: argparse.Namespace, console: Console) -> int:
     return 0
 
 
+def _cmd_analyze_consequence_mismatches(args: argparse.Namespace, console: Console) -> int:
+    from .mismatch_analysis import analyze_consequence_mismatches, write_mismatch_analysis
+
+    mismatches_tsv = args.mismatches_tsv
+    if mismatches_tsv is None:
+        if args.run_dir is None:
+            raise ValueError("pass either --mismatches-tsv or --run-dir")
+        mismatches_tsv = args.run_dir / "consequence_mismatches.tsv"
+    if not mismatches_tsv.exists():
+        raise FileNotFoundError(f"mismatch file not found: {mismatches_tsv}")
+
+    payload = analyze_consequence_mismatches(mismatches_tsv)
+    if args.output_json is not None:
+        write_mismatch_analysis(args.output_json, payload)
+    console.print(json.dumps(payload, indent=2))
+    return 0
+
+
+def _cmd_extract_mismatch_csq_examples(args: argparse.Namespace, console: Console) -> int:
+    from .mismatch_analysis import (
+        analyze_consequence_mismatches,
+        extract_csq_examples_from_analysis,
+        write_csq_examples,
+    )
+
+    analysis_json = args.analysis_json
+    left_vcf = args.left_vcf
+    right_vcf = args.right_vcf
+    if args.run_dir is not None:
+        if analysis_json is None:
+            analysis_json = args.run_dir / "consequence_mismatch_analysis.json"
+        if left_vcf is None:
+            left_vcf = args.run_dir / "runtime" / "vep.annotated.vcf"
+        if right_vcf is None:
+            right_vcf = args.run_dir / "runtime" / "vepyr.annotated.vcf"
+    if left_vcf is None or right_vcf is None:
+        raise ValueError("left/right annotated VCF paths are required")
+
+    if analysis_json is not None and analysis_json.exists():
+        analysis = json.loads(analysis_json.read_text(encoding="utf-8"))
+    elif args.run_dir is not None:
+        analysis = analyze_consequence_mismatches(args.run_dir / "consequence_mismatches.tsv")
+    else:
+        raise ValueError("pass --run-dir or an existing --analysis-json")
+
+    payload = extract_csq_examples_from_analysis(
+        analysis,
+        left_vcf=left_vcf,
+        right_vcf=right_vcf,
+        per_category_limit=args.per_category_limit,
+    )
+    write_csq_examples(args.output_json, payload)
+    console.print(json.dumps(payload, indent=2))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     load_repo_env()
     parser = build_parser()
@@ -657,6 +726,10 @@ def main(argv: list[str] | None = None) -> int:
         return _cmd_benchmark_compare(args, console)
     if args.command == "inspect-run":
         return _cmd_inspect_run(args, console)
+    if args.command == "analyze-consequence-mismatches":
+        return _cmd_analyze_consequence_mismatches(args, console)
+    if args.command == "extract-mismatch-csq-examples":
+        return _cmd_extract_mismatch_csq_examples(args, console)
     raise AssertionError(f"unhandled command {args.command}")
 
 

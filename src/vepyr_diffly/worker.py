@@ -19,7 +19,7 @@ def build_parser() -> argparse.ArgumentParser:
     compare_parser.add_argument("--bucket-ids", required=True)
     compare_parser.add_argument("--csq-fields-json", required=True)
     compare_parser.add_argument("--temp-diff-dir", required=True, type=Path)
-    compare_parser.add_argument("--temp-tsv-dir", required=True, type=Path)
+    compare_parser.add_argument("--temp-tsv-dir", default="")
     compare_parser.add_argument("--summary-path", required=True, type=Path)
     compare_parser.add_argument("--progress-log", default="")
     compare_parser.add_argument("--compare-mode", choices=("fast", "debug"), default="fast")
@@ -71,7 +71,7 @@ def _cmd_compare_bucket_shard(args: argparse.Namespace) -> int:
             bucket_ids=bucket_ids,
             csq_fields=json.loads(args.csq_fields_json),
             temp_diff_dir=args.temp_diff_dir,
-            temp_tsv_dir=args.temp_tsv_dir,
+            temp_tsv_dir=Path(args.temp_tsv_dir) if args.temp_tsv_dir else None,
             compare_mode=args.compare_mode,
             fingerprint_only=args.fingerprint_only,
             on_bucket_complete=_log_bucket_progress,

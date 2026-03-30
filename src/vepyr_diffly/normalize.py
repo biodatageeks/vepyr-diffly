@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import json
 import os
 from pathlib import Path
 import shutil
@@ -24,6 +25,9 @@ SMALL_VCF_TEXT_FALLBACK_BYTES = 4 * 1024 * 1024
 STREAMING_CONSEQUENCE_THRESHOLD_BYTES = 8 * 1024 * 1024
 CONSEQUENCE_BUCKET_COUNT = 256
 CONSEQUENCE_BUCKET_CHUNK_VARIANTS = 200_000
+CONSEQUENCE_BUFFERED_VARIANTS_TARGET = 65_536
+TEMP_PARQUET_COMPRESSION = "lz4"
+TEMP_PARQUET_STATISTICS = False
 
 BASE_VCF_SCHEMA = {
     "chrom": pl.String,
@@ -604,9 +608,49 @@ def _write_bucket_chunk_parts(
             bucket_value = int(bucket_key)
         bucket_dir = bucket_root / f"bucket-{bucket_value:04d}"
         bucket_dir.mkdir(parents=True, exist_ok=True)
-        bucket_frame.drop("bucket").write_parquet(bucket_dir / f"part-{part_index:05d}.parquet")
+        bucket_frame.drop("bucket").write_parquet(
+            bucket_dir / f"part-{part_index:05d}.parquet",
+            compression=TEMP_PARQUET_COMPRESSION,
+            statistics=TEMP_PARQUET_STATISTICS,
+        )
         written += 1
     return written
+
+
+def _merge_buffered_consequence_frames(
+    frames: list[pl.DataFrame],
+    *,
+    csq_fields: list[str],
+) -> pl.DataFrame:
+    if not frames:
+        return _empty_consequence_frame(csq_fields, include_bucket=True)
+    if len(frames) == 1:
+        return frames[0]
+    group_key = ["bucket", *VARIANT_KEY, *csq_fields]
+    return (
+        pl.concat(frames, how="vertical_relaxed")
+        .group_by(group_key)
+        .agg(pl.col("duplicate_count").sum().cast(pl.Int64).alias("duplicate_count"))
+    )
+
+
+def _flush_consequence_buffer(
+    *,
+    frames: list[pl.DataFrame],
+    csq_fields: list[str],
+    bucket_root: Path,
+    part_index: int,
+) -> tuple[int, set[int]]:
+    merged = _merge_buffered_consequence_frames(frames, csq_fields=csq_fields)
+    _write_bucket_chunk_parts(
+        merged,
+        bucket_root=bucket_root,
+        part_index=part_index,
+    )
+    if merged.is_empty():
+        return 0, set()
+    non_empty_buckets = {int(value) for value in merged.get_column("bucket").unique().to_list()}
+    return 1, non_empty_buckets
 
 
 def _compact_bucket_parts(
@@ -627,6 +671,10 @@ def _compact_bucket_parts(
     )
     for part_path in part_paths:
         part_path.unlink()
+    _write_bucket_metadata(
+        compacted_path=compacted_path,
+        count_column="duplicate_count",
+    )
 
 
 def _compact_variant_bucket_parts(
@@ -655,6 +703,37 @@ def _compact_variant_bucket_parts(
     compacted.write_parquet(compacted_path)
     for part_path in part_paths:
         part_path.unlink()
+    _write_bucket_metadata(
+        compacted_path=compacted_path,
+        count_column="record_count",
+        extra_sum_columns=["consequence_count"],
+    )
+
+
+def _write_bucket_metadata(
+    *,
+    compacted_path: Path,
+    count_column: str,
+    extra_sum_columns: list[str] | None = None,
+) -> None:
+    extra_sum_columns = extra_sum_columns or []
+    frame = pl.scan_parquet(str(compacted_path))
+    select_exprs: list[pl.Expr] = [pl.len().cast(pl.Int64).alias("row_count")]
+    select_exprs.append(pl.col(count_column).sum().cast(pl.Int64).alias(f"{count_column}_sum"))
+    for column in extra_sum_columns:
+        select_exprs.append(pl.col(column).sum().cast(pl.Int64).alias(f"{column}_sum"))
+    stats = frame.select(*select_exprs).collect().row(0, named=True)
+    payload = {
+        "row_count": int(stats["row_count"]),
+        f"{count_column}_sum": int(stats[f"{count_column}_sum"]),
+        "file_size_bytes": int(compacted_path.stat().st_size),
+    }
+    for column in extra_sum_columns:
+        payload[f"{column}_sum"] = int(stats[f"{column}_sum"])
+    (compacted_path.with_suffix(".meta.json")).write_text(
+        json.dumps(payload, indent=2) + "\n",
+        encoding="utf-8",
+    )
 
 
 def _merge_compacted_buckets(
@@ -699,6 +778,9 @@ def materialize_consequence_buckets(
 
     non_empty_buckets: set[int] = set()
     part_index = 0
+    buffered_frames: list[pl.DataFrame] = []
+    buffered_variants = 0
+    flush_target_variants = max(chunk_variants, CONSEQUENCE_BUFFERED_VARIANTS_TARGET)
     for processed, chunk in _iter_vcf_record_chunks(
         vcf_path,
         chunk_variants=chunk_variants,
@@ -708,23 +790,38 @@ def materialize_consequence_buckets(
             csq_fields,
             bucket_count=bucket_count,
         )
-        _write_bucket_chunk_parts(
-            chunk_frame,
-            bucket_root=bucket_root,
-            part_index=part_index,
-        )
         if not chunk_frame.is_empty():
-            non_empty_buckets.update(
-                int(value) for value in chunk_frame.get_column("bucket").unique().to_list()
+            buffered_frames.append(chunk_frame)
+            buffered_variants += chunk.height
+        if buffered_variants >= flush_target_variants and buffered_frames:
+            written_parts, flushed_buckets = _flush_consequence_buffer(
+                frames=buffered_frames,
+                csq_fields=csq_fields,
+                bucket_root=bucket_root,
+                part_index=part_index,
             )
-        part_index += 1
+            non_empty_buckets.update(flushed_buckets)
+            part_index += written_parts
+            buffered_frames = []
+            buffered_variants = 0
         if reporter is not None:
             percentage = (processed / total_variants * 100.0) if total_variants else 0.0
             reporter.log(
                 f"{side_label}: consequence progress {processed}/{total_variants} "
                 f"variants ({percentage:.2f}%), chunk_parts={part_index}, "
-                f"buckets={len(non_empty_buckets)}, chunk_variants={chunk_variants}"
+                f"buckets={len(non_empty_buckets)}, chunk_variants={chunk_variants}, "
+                f"buffered_variants={buffered_variants}"
             )
+
+    if buffered_frames:
+        written_parts, flushed_buckets = _flush_consequence_buffer(
+            frames=buffered_frames,
+            csq_fields=csq_fields,
+            bucket_root=bucket_root,
+            part_index=part_index,
+        )
+        non_empty_buckets.update(flushed_buckets)
+        part_index += written_parts
 
     if non_empty_buckets:
         if reporter is not None:
@@ -855,7 +952,13 @@ def materialize_variant_summary(
                 bucket_value = int(bucket_key[0] if isinstance(bucket_key, tuple) else bucket_key)
                 bucket_dir = bucket_root / f"bucket-{bucket_value:04d}"
                 bucket_dir.mkdir(parents=True, exist_ok=True)
-                bucket_frame.drop("bucket").write_parquet(bucket_dir / "bucket.parquet")
+                compacted_path = bucket_dir / "bucket.parquet"
+                bucket_frame.drop("bucket").write_parquet(compacted_path)
+                _write_bucket_metadata(
+                    compacted_path=compacted_path,
+                    count_column="record_count",
+                    extra_sum_columns=["consequence_count"],
+                )
         if reporter is not None:
             reporter.log(f"{side_label}: variant summary rows={eager.variant.height}")
         return csq_fields

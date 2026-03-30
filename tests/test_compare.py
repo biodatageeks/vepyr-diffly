@@ -1,6 +1,8 @@
 from pathlib import Path
+import json
 
 from vepyr_diffly.compare import (
+    _metadata_proves_mismatch,
     compare_bucketed_consequence_tier,
     compare_bucketed_variant_tier,
     compare_tier,
@@ -164,3 +166,34 @@ def test_compare_bucketed_consequence_tier_fast_mode_skips_exact_diff_for_equal_
     assert artifact.tier.details["exact_diff_run_buckets"] == 0
     assert artifact.tier.diff_frame_path.exists()
     assert artifact.tier.mismatches_tsv_path.exists()
+
+
+def test_bucket_metadata_can_shortcut_obvious_mismatch(tmp_path: Path) -> None:
+    fixture_dir = Path(__file__).parent / "fixtures"
+    left_bucket_dir = tmp_path / "left-buckets"
+    right_bucket_dir = tmp_path / "right-buckets"
+
+    left = normalize_annotated_vcf(fixture_dir / "annotated_left.vcf")
+    materialize_consequence_buckets(
+        vcf_path=fixture_dir / "annotated_left.vcf",
+        csq_fields=left.csq_fields,
+        bucket_root=left_bucket_dir,
+        side_label="VEP",
+        bucket_count=8,
+    )
+    materialize_consequence_buckets(
+        vcf_path=fixture_dir / "annotated_left.vcf",
+        csq_fields=left.csq_fields,
+        bucket_root=right_bucket_dir,
+        side_label="vepyr",
+        bucket_count=8,
+    )
+
+    bucket_path = next(left_bucket_dir.glob("bucket-*/bucket.parquet"))
+    peer_path = right_bucket_dir / bucket_path.parent.name / "bucket.parquet"
+    peer_meta = peer_path.with_suffix(".meta.json")
+    payload = json.loads(peer_meta.read_text(encoding="utf-8"))
+    payload["row_count"] += 1
+    peer_meta.write_text(json.dumps(payload) + "\n", encoding="utf-8")
+
+    assert _metadata_proves_mismatch([bucket_path], [peer_path]) is True

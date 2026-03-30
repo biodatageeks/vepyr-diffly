@@ -46,6 +46,7 @@ def test_materialize_consequence_buckets_writes_bucket_parts(tmp_path: Path) -> 
     assert buckets
     written_parts = sorted(bucket_root.glob("bucket-*/*.parquet"))
     assert written_parts
+    assert sorted(bucket_root.glob("bucket-*/bucket.meta.json"))
 
 
 def test_materialize_variant_summary_writes_bucketed_variant_artifacts(tmp_path: Path) -> None:
@@ -64,6 +65,7 @@ def test_materialize_variant_summary_writes_bucketed_variant_artifacts(tmp_path:
 
     assert variant_path.exists()
     assert sorted(bucket_root.glob("bucket-*/bucket.parquet"))
+    assert sorted(bucket_root.glob("bucket-*/bucket.meta.json"))
 
 
 def test_normalize_alt_for_csq_allele_handles_insertions_and_deletions() -> None:

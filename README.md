@@ -234,7 +234,7 @@ vep.annotated.vcf   vepyr.annotated.vcf
  summary.json / summary.md / parquet diffs / mismatch TSV / progress logs
 ```
 
-For small files the compare can still run directly on normalized tables. For larger files the pipeline now uses a bounded-memory path for both tiers: variant rows and consequence rows are streamed in chunks, spilled into hash buckets on disk, compacted per bucket, and then compared bucket-by-bucket. In `fast` mode each bucket is prechecked first and `diffly` runs only on buckets that actually differ. This keeps working memory tied to the configured memory budget instead of full input size.
+For small files the compare can still run directly on normalized tables. For larger files the pipeline now uses a bounded-memory path for both tiers: variant rows and consequence rows are streamed in chunks, spilled into hash buckets on disk, compacted per bucket, and then compared bucket-by-bucket. A resource planner derives chunk sizes, bucket count, worker count, and side parallelism from `--memory-budget-mb`, so working memory scales with the configured budget instead of full input size.
 
 The pipeline is:
 
@@ -292,6 +292,13 @@ For large runs, consequence comparison works in buckets:
 - in `debug` mode, compare every bucket with `diffly`
 - merge bucket diff artifacts at the end
 
+For large runs, variant comparison now follows the same model:
+
+- stream variant rows into hash buckets on disk
+- compact each bucket into deterministic `bucket.parquet`
+- compare the variant tier bucket-by-bucket instead of one global in-memory diff
+- keep the old eager path only for safely small files
+
 This keeps memory bounded and gives progress reporting for large compares.
 
 ## Results
@@ -330,12 +337,12 @@ Observations:
 
 ### B. Golden Test
 
-The current retained full compare-only result is [runs/full-golden-compare-fast](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast), run in `fast` mode against:
+The newest retained full compare-only result is [runs/full-golden-compare-fast-rerun-20260330](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-rerun-20260330), run in `fast` mode against:
 
 - [vep.annotated.vcf](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-fresh/runtime/vep.annotated.vcf)
 - [vepyr.annotated.vcf](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-fresh/runtime/vepyr.annotated.vcf)
 
-Effective plan from [summary.json](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast/summary.json):
+Effective plan from [summary.json](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-rerun-20260330/summary.json):
 
 - `memory_budget_mb=1024`
 - `bucket_count=256`
@@ -348,12 +355,12 @@ Observed compare-only timings:
 
 | Stage | Seconds | Approx. |
 | --- | ---: | ---: |
-| Variant summary | `511.181` | `8m 31s` |
-| Consequence bucketization | `1665.249` | `27m 45s` |
-| Schema validation | `0.027` | `<1s` |
-| Variant diff | `2.357` | `2s` |
-| Consequence diff | `761.191` | `12m 41s` |
-| Total compare-only | `2940.005` | `49m 00s` |
+| Variant summary | `509.396` | `8m 29s` |
+| Consequence bucketization | `949.188` | `15m 49s` |
+| Schema validation | `0.021` | `<1s` |
+| Variant diff | `2.234` | `2s` |
+| Consequence diff | `506.843` | `8m 27s` |
+| Total compare-only | `1967.682` | `32m 48s` |
 
 Observed result:
 
@@ -367,32 +374,101 @@ Observed result:
 What this means:
 
 - at the variant level VEP and `vepyr` are fully equal
-- at the consequence level there are a small number of rows that exist only on one side
-- there are no cases where the same normalized consequence key exists on both sides with different payload values
+- at the consequence level there are still a small number of rows that exist only on one side
+- those rows are not random noise: the sampled mismatch artifact collapses cleanly into `392` transcript-level `left_only/right_only` pairs
+- there are still no cases where the same normalized consequence key exists on both sides with different payload values inside one joined key
 
 Why this run still takes a long time:
 
 - the dominant cost is not the final diff itself, but preprocessing the annotated VCFs into bounded-memory bucket artifacts
-- `consequence_bucketization` alone is about `28` minutes
+- `consequence_bucketization` alone is still about `16` minutes
 - even in `fast` mode, only `9/256` consequence buckets were proven equal by precheck, so `247/256` buckets still needed exact diff
 - the inputs are very large annotated VCFs, so parsing `CSQ`, normalizing transcript consequences, spilling to disk, and compacting buckets dominate wall-clock time
 - the run deliberately used a conservative `1024 MB` memory budget, which reduces RAM pressure but also reduces concurrency
 
-Current strongest suspicions about the remaining differences:
+What the `392 / 392 / 0` mismatches actually are:
 
-- the mismatch pattern looks like transcript-selection or transcript-membership drift, not a gross variant-level bug
-- the biggest clusters are in `inframe_insertion`, `downstream_gene_variant`, `5_prime_UTR_variant`, and transcript-specific insertion consequences
-- many mismatches are paired `left_only/right_only` rows around the same locus but for different `ENST...` transcripts
-- representative hotspots include `HADHB`, `LINC03025`, `ACIN1`, `CCDC66`, and `ABCF1`
-- this suggests that VEP and `vepyr` often agree on the variant and broad effect family, but disagree on the exact transcript consequence set emitted for some loci
+- they are not missing transcripts versus extra transcripts in the old sense
+- each sampled mismatch row on the VEP side has a matching transcript-level partner on the `vepyr` side with the same `chrom`, `pos`, `ref`, `alt`, and `Feature`
+- the mismatch is therefore usually a payload drift for the same transcript consequence, not a different transcript set
+- the top low-level field signatures are:
+  - only `HGVSp`: `121` pairs
+  - only `Consequence`: `72`
+  - only `HGNC_ID`: `63`
+  - only `HGVSc`: `54`
+  - `Consequence + IMPACT`: `40`
+- the top semantic classes are:
+  - `hgvs_payload_drift`: `114`
+  - `missing_hgvs`: `84`
+  - `consequence_reclassification`: `79`
+  - `missing_hgnc_id`: `63`
+  - `consequence_and_impact_reclassification`: `55`
+
+In practice that means the `392` mismatch pairs are mostly:
+
+- rows where both sides point at the same transcript consequence, but `HGVSp` uses different protein coordinates or wording
+- rows where VEP has `HGVSc` or `HGVSp` filled and `vepyr` leaves it empty
+- rows where VEP and `vepyr` classify the same transcript consequence differently, for example `inframe_insertion` versus `inframe_insertion&start_retained_variant`
+- rows where the same transcript consequence gets a different `IMPACT`, for example `HIGH` versus `LOW`
+- rows where `HGNC_ID` is missing on one side, most often present in `vepyr` and empty in VEP
+
+Representative raw `CSQ` examples confirm that these are already present in the source annotated VCFs:
+
+- `missing_hgvs`:
+  - VEP contains `ENST00000944442.1:c.-111_-110ins...`
+  - `vepyr` emits the same row with an empty `HGVSc`
+- `consequence_and_impact_reclassification`:
+  - VEP: `frameshift_variant&splice_region_variant|HIGH`
+  - `vepyr`: `splice_region_variant|LOW`
+- `consequence_reclassification`:
+  - VEP: `inframe_insertion`
+  - `vepyr`: `inframe_insertion&start_retained_variant`
+- `missing_hgnc_id`:
+  - VEP: empty `HGNC_ID`
+  - `vepyr`: populated `HGNC:...`
+- `hgvs_payload_drift`:
+  - both sides agree on `Consequence`, `IMPACT`, and `HGVSc`
+  - but `HGVSp` refers to different duplicated amino-acid coordinates
+
+Follow-up optimization note:
+
+- after the older retained full run, the consequence compare path was tightened further so bucketed compare no longer writes unused per-bucket TSV files, can use cheap bucket metadata to skip the expensive eager precheck for buckets that are already provably different, and now uses in-process worker threads instead of spawning separate compare subprocesses
+- the fresh full rerun above confirms those changes on the full pipeline: `consequence_diff` is now `506.843s` instead of the older retained `761.191s`, which is about `33.4%` faster
+- on the same machine and with the same full-golden `vepyr.annotated.vcf`, a one-side `materialize_consequence_buckets(...)` benchmark at `bucket_count=256` and `chunk_variants=8192` first dropped from `708.518s` to `654.883s` after switching temporary bucket part writes to lighter parquet settings (`lz4`, no statistics), and then to `447.560s` after buffering several reduced chunks before each flush
+- that latest bucketization benchmark is about `36.8%` faster than the original one-side baseline, and it also cuts temporary file churn dramatically because bucket parts are flushed around every `65536` input variants instead of every `8192`
+- the fresh full rerun also reflects that in end-to-end compare wall-clock:
+  - older retained compare-only baseline: `49m 00s`
+  - fresh rerun on current code: `32m 48s`
+
+Latest retained mismatch diagnosis:
+
+- all `784` sampled consequence mismatch rows collapse cleanly into `392` transcript-level `left_only/right_only` pairs
+- there are `0` unpaired rows in that sampled mismatch artifact
+- the top differing fields are still `HGVSp`, `Consequence`, `HGNC_ID`, `IMPACT`, and `HGVSc`
+- the top semantic drift classes are:
+  - `hgvs_payload_drift`: `114`
+  - `missing_hgvs`: `84`
+  - `consequence_reclassification`: `79`
+  - `missing_hgnc_id`: `63`
+  - `consequence_and_impact_reclassification`: `55`
+- raw `CSQ` extraction on representative cases confirms that these differences already exist in the source annotated VCF payloads, not just in downstream normalization
+- the current debug tooling can now go from mismatch TSV -> semantic category summary -> raw left/right `CSQ` examples without rescanning the whole mismatch space manually
 
 Most useful artifacts for debugging the golden mismatch:
 
-- [summary.json](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast/summary.json)
-- [summary.md](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast/summary.md)
-- [consequence_mismatches.tsv](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast/consequence_mismatches.tsv)
-- [consequence_diff.parquet](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast/consequence_diff.parquet)
-- [runtime/compare.progress.log](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast/runtime/compare.progress.log)
+- [summary.json](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-rerun-20260330/summary.json)
+- [summary.md](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-rerun-20260330/summary.md)
+- [consequence_mismatches.tsv](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-rerun-20260330/consequence_mismatches.tsv)
+- [consequence_diff.parquet](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-rerun-20260330/consequence_diff.parquet)
+- [runtime/compare.progress.log](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/runs/full-golden-compare-fast-rerun-20260330/runtime/compare.progress.log)
+- `/tmp/vepyr-diffly-golden-mismatch-analysis.json`
+- `/tmp/vepyr-diffly-golden-raw-csq.json`
+
+Logs and structured diagnostics added for this:
+
+- `runtime/compare.progress.log`: live stage and per-bucket compare progress for the full run
+- `consequence_mismatch_analysis.json`: grouped transcript-level mismatch summary, field counts, semantic categories, and representative examples
+- `raw-csq-examples.json`: raw left/right `CSQ` payloads for representative cases in each semantic category
 
 ## Current Scope
 
@@ -468,7 +544,13 @@ python -m vepyr_diffly.cli compare-existing --preset ensembl_everything --left-v
 python -m vepyr_diffly.cli annotate-vepyr --input-vcf /path/to/prepared_input.vcf --output-vcf /path/to/vepyr.annotated.vcf
 python -m vepyr_diffly.cli benchmark-compare --left-vcf /path/to/vep.annotated.vcf --right-vcf /path/to/vepyr.annotated.vcf --output-json /tmp/benchmark.json
 python -m vepyr_diffly.cli inspect-run --run-dir runs/demo
+python -m vepyr_diffly.cli analyze-consequence-mismatches --run-dir runs/full-golden-compare-fast --output-json /tmp/mismatch-analysis.json
+python -m vepyr_diffly.cli extract-mismatch-csq-examples --run-dir runs/full-golden-fresh --analysis-json /tmp/mismatch-analysis.json --output-json /tmp/raw-csq-examples.json
 ```
+
+`analyze-consequence-mismatches` reads `consequence_mismatches.tsv`, groups `left_only/right_only` rows back into transcript-level pairs, counts the fields that drift most often, and emits representative examples. It is the fastest way to turn a retained run into a concrete CSQ drift report.
+
+`extract-mismatch-csq-examples` takes that analysis and enriches a few representative cases per semantic category with the original raw `CSQ=` entries from both annotated VCFs. This is the shortest path from "which categories drift?" to "what exactly did VEP and vepyr emit for the same transcript consequence?".
 
 ## Expected Output
 
