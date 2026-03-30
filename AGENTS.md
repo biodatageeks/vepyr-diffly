@@ -59,3 +59,7 @@ uv run python -m vepyr_diffly.cli list-presets
 - File outputs must include machine-readable summary plus inspectable mismatch tables.
 - When introducing a new comparison rule, add fixture coverage that demonstrates the failure mode it prevents.
 
+## Run Artifact Hygiene
+
+- After every smoke test or benchmark-style non-golden run, clean its artifacts from `runs/` once the result has been captured.
+- Keep long-lived artifacts in `runs/` only for golden tests or explicitly requested retained runs.

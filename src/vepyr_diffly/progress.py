@@ -9,6 +9,7 @@ from typing import Iterable
 try:
     from rich.console import Console
 except ModuleNotFoundError:  # pragma: no cover
+
     class Console:  # type: ignore[override]
         def print(self, value: object = "") -> None:
             print(value)
@@ -71,9 +72,7 @@ class ProgressReporter:
             if path.exists():
                 if path.is_dir():
                     file_count, total_size = self._directory_status(path)
-                    parts.append(
-                        f"{path.name}={_format_size(total_size)}/{file_count} files"
-                    )
+                    parts.append(f"{path.name}={_format_size(total_size)}/{file_count} files")
                 else:
                     parts.append(f"{path.name}={_format_size(path.stat().st_size)}")
             else:

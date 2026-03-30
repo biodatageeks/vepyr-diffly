@@ -21,4 +21,3 @@ class VariantSchema(dy.Schema):
 
 def validate_variant_schema(frame: pl.DataFrame) -> pl.DataFrame:
     return VariantSchema.validate(frame, cast=False)
-

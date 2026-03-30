@@ -24,6 +24,8 @@ def test_compare_existing_command_reuses_annotated_vcfs(tmp_path: Path) -> None:
             str(fixture_dir / "annotated_right.vcf"),
             "--output-dir",
             str(run_dir),
+            "--memory-budget-mb",
+            "256",
         ],
         check=False,
         capture_output=True,
@@ -40,4 +42,5 @@ def test_compare_existing_command_reuses_annotated_vcfs(tmp_path: Path) -> None:
     payload = json.loads(summary_path.read_text(encoding="utf-8"))
     assert payload["annotated_left_vcf"].endswith("annotated_left.vcf")
     assert payload["annotated_right_vcf"].endswith("annotated_right.vcf")
+    assert payload["resource_plan"]["memory_budget_mb"] == 256
     assert (run_dir / "runtime" / "compare.progress.log").exists()

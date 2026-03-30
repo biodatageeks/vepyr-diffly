@@ -36,6 +36,24 @@ BASE_VCF_SCHEMA = {
     "csq": pl.String,
 }
 
+VARIANT_CHUNK_SCHEMA = {
+    "chrom": pl.String,
+    "pos": pl.Int64,
+    "ref": pl.String,
+    "alt": pl.String,
+    "id": pl.String,
+    "filter": pl.String,
+    "csq_entries": pl.List(pl.String),
+}
+
+CONSEQUENCE_CHUNK_SCHEMA = {
+    "chrom": pl.String,
+    "pos": pl.Int64,
+    "ref": pl.String,
+    "alt": pl.String,
+    "csq_entries": pl.List(pl.String),
+}
+
 
 def _invalid_string_expr(column: str) -> pl.Expr:
     value = pl.col(column).cast(pl.String)
@@ -75,17 +93,18 @@ def _base_variant_rows(source: pl.LazyFrame) -> pl.LazyFrame:
 
 
 def _normalized_allele_expr() -> pl.Expr:
-    return (
-        pl.struct(["ref", "alt"])
-        .map_elements(
-            lambda value: normalize_alt_for_csq_allele(
-                value["ref"],
-                value["alt"],
-            ),
-            return_dtype=pl.String,
+    ref = pl.col("ref").cast(pl.String)
+    alt = pl.col("alt").cast(pl.String)
+    trimmed = (
+        pl.when(
+            (ref.str.len_chars() > 0)
+            & (alt.str.len_chars() > 0)
+            & (ref.str.slice(0, 1) == alt.str.slice(0, 1))
         )
-        .alias("normalized_allele")
+        .then(alt.str.slice(1))
+        .otherwise(alt)
     )
+    return pl.when(trimmed == "").then(pl.lit("-")).otherwise(trimmed).alias("normalized_allele")
 
 
 def normalize_alt_for_csq_allele(ref: str, alt: str) -> str:
@@ -108,13 +127,18 @@ def build_variant_summary_lazy(source: pl.LazyFrame) -> pl.LazyFrame:
             pl.when(_invalid_csq_expr())
             .then(pl.lit([], dtype=pl.List(pl.String)))
             .otherwise(pl.col("csq").str.split(","))
-            .alias("csq_entry")
+            .alias("csq_entry"),
         )
         .explode("csq_entry")
         .filter(pl.col("csq_entry").is_not_null())
         .with_columns(
             pl.col("csq_entry").cast(pl.String).str.split("|").alias("_csq_parts"),
-            pl.col("csq_entry").cast(pl.String).str.split("|").list.get(0, null_on_oob=True).cast(pl.String).alias("csq_allele"),
+            pl.col("csq_entry")
+            .cast(pl.String)
+            .str.split("|")
+            .list.get(0, null_on_oob=True)
+            .cast(pl.String)
+            .alias("csq_allele"),
         )
         .filter(pl.col("csq_allele") == pl.col("normalized_allele"))
         .group_by(VARIANT_KEY)
@@ -151,18 +175,14 @@ def _csq_field_exprs(csq_fields: list[str]) -> list[pl.Expr]:
                 )
             )
             .then(pl.lit("."))
-            .otherwise(
-                pl.col("_csq_parts").list.get(index, null_on_oob=True).cast(pl.String)
-            )
+            .otherwise(pl.col("_csq_parts").list.get(index, null_on_oob=True).cast(pl.String))
             .alias(field_name)
         )
         for index, field_name in enumerate(csq_fields)
     ]
 
 
-def build_consequence_summary_lazy(
-    source: pl.LazyFrame, csq_fields: list[str]
-) -> pl.LazyFrame:
+def build_consequence_summary_lazy(source: pl.LazyFrame, csq_fields: list[str]) -> pl.LazyFrame:
     consequence_rows = (
         _base_variant_rows(source)
         .with_columns(
@@ -217,6 +237,21 @@ def _extract_csq_from_info_bytes(info: bytes) -> str:
     return info[start:end].decode("utf-8")
 
 
+def _extract_csq_entries_from_info_bytes(info: bytes) -> list[str]:
+    marker = b"CSQ="
+    start = info.find(marker)
+    if start == -1:
+        return []
+    start += len(marker)
+    end = info.find(b";", start)
+    if end == -1:
+        end = len(info)
+    payload = info[start:end]
+    if not payload:
+        return []
+    return [item.decode("utf-8") for item in payload.split(b",") if item]
+
+
 def _count_vcf_records(vcf_path: Path) -> int:
     total = 0
     with vcf_path.open(encoding="utf-8") as handle:
@@ -238,6 +273,45 @@ def recommend_consequence_bucket_count(*vcf_paths: Path) -> int:
     if max_size < 8 * 1024 * 1024 * 1024:
         return min(256, max(64, cpu_count * 8))
     return min(512, max(CONSEQUENCE_BUCKET_COUNT, cpu_count * 16))
+
+
+def recommend_consequence_chunk_variants(*vcf_paths: Path) -> int:
+    max_size = max(path.stat().st_size for path in vcf_paths)
+    if max_size < 256 * 1024 * 1024:
+        return CONSEQUENCE_BUCKET_CHUNK_VARIANTS
+    if max_size < 2 * 1024 * 1024 * 1024:
+        return 300_000
+    if max_size < 8 * 1024 * 1024 * 1024:
+        return 400_000
+    return 500_000
+
+
+def _empty_variant_schema(
+    *, include_bucket: bool = False, compacted: bool = False
+) -> dict[str, pl.DataType]:
+    schema: dict[str, pl.DataType] = {
+        "chrom": pl.String,
+        "pos": pl.Int64,
+        "ref": pl.String,
+        "alt": pl.String,
+    }
+    if include_bucket:
+        schema["bucket"] = pl.Int64
+    schema["record_count"] = pl.Int64
+    schema["consequence_count"] = pl.Int64
+    if compacted:
+        schema["ids"] = pl.String
+        schema["filters"] = pl.String
+    else:
+        schema["id_values"] = pl.List(pl.String)
+        schema["filter_values"] = pl.List(pl.String)
+    return schema
+
+
+def _empty_variant_frame(*, include_bucket: bool = False, compacted: bool = False) -> pl.DataFrame:
+    return pl.DataFrame(
+        schema=_empty_variant_schema(include_bucket=include_bucket, compacted=compacted)
+    )
 
 
 def _empty_consequence_schema(
@@ -268,7 +342,11 @@ def _iter_vcf_record_chunks(
     *,
     chunk_variants: int,
 ) -> Iterator[tuple[int, pl.DataFrame]]:
-    rows: list[dict[str, object]] = []
+    chroms: list[str] = []
+    positions: list[int] = []
+    refs: list[str] = []
+    alts: list[str] = []
+    csq_entries: list[list[str]] = []
     processed = 0
     with vcf_path.open("rb", buffering=8 * 1024 * 1024) as handle:
         for raw_line in handle:
@@ -277,30 +355,118 @@ def _iter_vcf_record_chunks(
             fields = raw_line.rstrip(b"\n").split(b"\t", 8)
             if len(fields) < 8:
                 continue
-            rows.append(
-                {
-                    "chrom": fields[0].decode("utf-8"),
-                    "pos": int(fields[1]),
-                    "id": fields[2].decode("utf-8"),
-                    "ref": fields[3].decode("utf-8"),
-                    "alt": fields[4].decode("utf-8"),
-                    "qual": fields[5].decode("utf-8"),
-                    "filter": fields[6].decode("utf-8"),
-                    "csq": _extract_csq_from_info_bytes(fields[7]),
-                }
-            )
+            chroms.append(fields[0].decode("utf-8"))
+            positions.append(int(fields[1]))
+            refs.append(fields[3].decode("utf-8"))
+            alts.append(fields[4].decode("utf-8"))
+            csq_entries.append(_extract_csq_entries_from_info_bytes(fields[7]))
             processed += 1
-            if len(rows) >= chunk_variants:
-                yield processed, pl.DataFrame(rows, schema=BASE_VCF_SCHEMA)
-                rows = []
-    if rows:
-        yield processed, pl.DataFrame(rows, schema=BASE_VCF_SCHEMA)
+            if len(chroms) >= chunk_variants:
+                yield (
+                    processed,
+                    pl.DataFrame(
+                        {
+                            "chrom": chroms,
+                            "pos": positions,
+                            "ref": refs,
+                            "alt": alts,
+                            "csq_entries": csq_entries,
+                        },
+                        schema=CONSEQUENCE_CHUNK_SCHEMA,
+                    ),
+                )
+                chroms = []
+                positions = []
+                refs = []
+                alts = []
+                csq_entries = []
+    if chroms:
+        yield (
+            processed,
+            pl.DataFrame(
+                {
+                    "chrom": chroms,
+                    "pos": positions,
+                    "ref": refs,
+                    "alt": alts,
+                    "csq_entries": csq_entries,
+                },
+                schema=CONSEQUENCE_CHUNK_SCHEMA,
+            ),
+        )
+
+
+def _iter_variant_record_chunks(
+    vcf_path: Path,
+    *,
+    chunk_variants: int,
+) -> Iterator[tuple[int, pl.DataFrame]]:
+    chroms: list[str] = []
+    positions: list[int] = []
+    refs: list[str] = []
+    alts: list[str] = []
+    ids: list[str] = []
+    filters: list[str] = []
+    csq_entries: list[list[str]] = []
+    processed = 0
+    with vcf_path.open("rb", buffering=8 * 1024 * 1024) as handle:
+        for raw_line in handle:
+            if raw_line.startswith(b"#"):
+                continue
+            fields = raw_line.rstrip(b"\n").split(b"\t", 8)
+            if len(fields) < 8:
+                continue
+            chroms.append(fields[0].decode("utf-8"))
+            positions.append(int(fields[1]))
+            refs.append(fields[3].decode("utf-8"))
+            alts.append(fields[4].decode("utf-8"))
+            ids.append(fields[2].decode("utf-8"))
+            filters.append(fields[6].decode("utf-8"))
+            csq_entries.append(_extract_csq_entries_from_info_bytes(fields[7]))
+            processed += 1
+            if len(chroms) >= chunk_variants:
+                yield (
+                    processed,
+                    pl.DataFrame(
+                        {
+                            "chrom": chroms,
+                            "pos": positions,
+                            "ref": refs,
+                            "alt": alts,
+                            "id": ids,
+                            "filter": filters,
+                            "csq_entries": csq_entries,
+                        },
+                        schema=VARIANT_CHUNK_SCHEMA,
+                    ),
+                )
+                chroms = []
+                positions = []
+                refs = []
+                alts = []
+                ids = []
+                filters = []
+                csq_entries = []
+    if chroms:
+        yield (
+            processed,
+            pl.DataFrame(
+                {
+                    "chrom": chroms,
+                    "pos": positions,
+                    "ref": refs,
+                    "alt": alts,
+                    "id": ids,
+                    "filter": filters,
+                    "csq_entries": csq_entries,
+                },
+                schema=VARIANT_CHUNK_SCHEMA,
+            ),
+        )
 
 
 def _bucket_expr(group_key: list[str], bucket_count: int) -> pl.Expr:
-    return (pl.struct(group_key).hash(seed=0) % pl.lit(bucket_count)).cast(pl.Int64).alias(
-        "bucket"
-    )
+    return (pl.struct(group_key).hash(seed=0) % pl.lit(bucket_count)).cast(pl.Int64).alias("bucket")
 
 
 def _aggregate_consequence_chunk(
@@ -317,24 +483,101 @@ def _aggregate_consequence_chunk(
         chunk.lazy()
         .with_columns(
             pl.col("alt").cast(pl.String).str.split(",").alias("alt"),
-            pl.when(_invalid_csq_expr())
-            .then(pl.lit([], dtype=pl.List(pl.String)))
-            .otherwise(pl.col("csq").cast(pl.String).str.split(","))
-            .alias("csq_entry"),
         )
         .explode("alt")
         .with_columns(_clean_string_expr("alt"))
         .filter(~pl.col("alt").is_in([".", ""]))
-        .explode("csq_entry")
+        .explode("csq_entries")
+        .rename({"csq_entries": "csq_entry"})
         .filter(pl.col("csq_entry").is_not_null())
-        .with_columns(pl.col("csq_entry").cast(pl.String).str.split("|").alias("_csq_parts"))
+        .with_columns(
+            pl.col("csq_entry").cast(pl.String).str.split("|").alias("_csq_parts"),
+            _normalized_allele_expr(),
+            pl.col("csq_entry")
+            .cast(pl.String)
+            .str.split("|")
+            .list.get(0, null_on_oob=True)
+            .cast(pl.String)
+            .alias("_csq_allele"),
+        )
+        .filter(pl.col("_csq_allele") == pl.col("normalized_allele"))
         .select(*VARIANT_KEY, *_csq_field_exprs(csq_fields))
-        .with_columns(_normalized_allele_expr())
-        .filter(pl.col("Allele") == pl.col("normalized_allele"))
-        .drop("normalized_allele")
         .with_columns(_bucket_expr(group_key, bucket_count))
         .group_by(["bucket", *group_key])
         .agg(pl.len().cast(pl.Int64).alias("duplicate_count"))
+        .collect()
+    )
+
+
+def _aggregate_variant_chunk(
+    chunk: pl.DataFrame,
+    *,
+    bucket_count: int,
+) -> pl.DataFrame:
+    if chunk.is_empty():
+        return _empty_variant_frame(include_bucket=True)
+
+    consequence_counts = (
+        chunk.lazy()
+        .with_columns(
+            pl.col("alt").cast(pl.String).str.split(",").alias("alt"),
+        )
+        .explode("alt")
+        .with_columns(
+            _clean_string_expr("alt"),
+            _clean_string_expr("id"),
+            _clean_string_expr("filter"),
+        )
+        .filter(~pl.col("alt").is_in([".", ""]))
+        .explode("csq_entries")
+        .rename({"csq_entries": "csq_entry"})
+        .filter(pl.col("csq_entry").is_not_null())
+        .with_columns(
+            _normalized_allele_expr(),
+            pl.col("csq_entry")
+            .cast(pl.String)
+            .str.split("|")
+            .list.get(0, null_on_oob=True)
+            .cast(pl.String)
+            .alias("_csq_allele"),
+        )
+        .filter(pl.col("_csq_allele") == pl.col("normalized_allele"))
+        .group_by(VARIANT_KEY)
+        .agg(pl.len().cast(pl.Int64).alias("consequence_count"))
+    )
+    variant_base = (
+        chunk.lazy()
+        .with_columns(
+            pl.col("alt").cast(pl.String).str.split(",").alias("alt"),
+        )
+        .explode("alt")
+        .with_columns(
+            _clean_string_expr("alt"),
+            _clean_string_expr("id"),
+            _clean_string_expr("filter"),
+        )
+        .filter(~pl.col("alt").is_in([".", ""]))
+        .group_by(VARIANT_KEY)
+        .agg(
+            pl.len().cast(pl.Int64).alias("record_count"),
+            pl.col("id").sort().alias("id_values"),
+            pl.col("filter").sort().alias("filter_values"),
+        )
+    )
+    return (
+        variant_base.join(consequence_counts, on=VARIANT_KEY, how="left")
+        .with_columns(
+            pl.col("consequence_count").fill_null(0).cast(pl.Int64).alias("consequence_count"),
+            _bucket_expr(VARIANT_KEY, bucket_count),
+        )
+        .select(
+            "bucket",
+            *VARIANT_KEY,
+            "record_count",
+            "consequence_count",
+            "id_values",
+            "filter_values",
+        )
         .collect()
     )
 
@@ -366,6 +609,71 @@ def _write_bucket_chunk_parts(
     return written
 
 
+def _compact_bucket_parts(
+    *,
+    bucket_dir: Path,
+    csq_fields: list[str],
+) -> None:
+    part_paths = sorted(bucket_dir.glob("part-*.parquet"))
+    if not part_paths:
+        return
+    group_key = VARIANT_KEY + csq_fields
+    compacted_path = bucket_dir / "bucket.parquet"
+    (
+        pl.scan_parquet([str(path) for path in part_paths])
+        .group_by(group_key)
+        .agg(pl.col("duplicate_count").sum().cast(pl.Int64).alias("duplicate_count"))
+        .sink_parquet(str(compacted_path))
+    )
+    for part_path in part_paths:
+        part_path.unlink()
+
+
+def _compact_variant_bucket_parts(
+    *,
+    bucket_dir: Path,
+) -> None:
+    part_paths = sorted(bucket_dir.glob("part-*.parquet"))
+    if not part_paths:
+        return
+    compacted_path = bucket_dir / "bucket.parquet"
+    compacted = (
+        pl.read_parquet([str(path) for path in part_paths])
+        .group_by(VARIANT_KEY)
+        .agg(
+            pl.col("record_count").sum().cast(pl.Int64).alias("record_count"),
+            pl.col("consequence_count").sum().cast(pl.Int64).alias("consequence_count"),
+            pl.col("id_values").flatten().sort().alias("id_values"),
+            pl.col("filter_values").flatten().sort().alias("filter_values"),
+        )
+        .with_columns(
+            pl.col("id_values").list.join("|").alias("ids"),
+            pl.col("filter_values").list.join("|").alias("filters"),
+        )
+        .select(*VARIANT_KEY, "record_count", "consequence_count", "ids", "filters")
+    )
+    compacted.write_parquet(compacted_path)
+    for part_path in part_paths:
+        part_path.unlink()
+
+
+def _merge_compacted_buckets(
+    *,
+    bucket_root: Path,
+    target_path: Path,
+    empty_schema: dict[str, pl.DataType],
+) -> None:
+    bucket_paths = sorted(bucket_root.glob("bucket-*/bucket.parquet"))
+    target_path.parent.mkdir(parents=True, exist_ok=True)
+    if not bucket_paths:
+        pl.DataFrame(schema=empty_schema).write_parquet(target_path)
+        return
+    if hasattr(pl.LazyFrame, "sink_parquet"):
+        pl.scan_parquet([str(path) for path in bucket_paths]).sink_parquet(str(target_path))
+        return
+    pl.read_parquet([str(path) for path in bucket_paths]).write_parquet(target_path)
+
+
 def materialize_consequence_buckets(
     *,
     vcf_path: Path,
@@ -374,11 +682,14 @@ def materialize_consequence_buckets(
     reporter: ProgressReporter | None = None,
     side_label: str,
     bucket_count: int = CONSEQUENCE_BUCKET_COUNT,
+    chunk_variants: int = CONSEQUENCE_BUCKET_CHUNK_VARIANTS,
+    total_variants: int | None = None,
 ) -> list[int]:
     if bucket_root.exists():
         shutil.rmtree(bucket_root)
     bucket_root.mkdir(parents=True, exist_ok=True)
-    total_variants = _count_vcf_records(vcf_path)
+    if total_variants is None:
+        total_variants = _count_vcf_records(vcf_path)
     if reporter is not None:
         reporter.stage(
             f"{side_label}: bucketizing consequence rows → {bucket_root}",
@@ -390,7 +701,7 @@ def materialize_consequence_buckets(
     part_index = 0
     for processed, chunk in _iter_vcf_record_chunks(
         vcf_path,
-        chunk_variants=CONSEQUENCE_BUCKET_CHUNK_VARIANTS,
+        chunk_variants=chunk_variants,
     ):
         chunk_frame = _aggregate_consequence_chunk(
             chunk,
@@ -412,13 +723,96 @@ def materialize_consequence_buckets(
             reporter.log(
                 f"{side_label}: consequence progress {processed}/{total_variants} "
                 f"variants ({percentage:.2f}%), chunk_parts={part_index}, "
-                f"buckets={len(non_empty_buckets)}"
+                f"buckets={len(non_empty_buckets)}, chunk_variants={chunk_variants}"
+            )
+
+    if non_empty_buckets:
+        if reporter is not None:
+            reporter.stage(
+                f"{side_label}: compacting consequence bucket parts",
+                tracked_paths=[bucket_root],
+            )
+        for bucket_id in sorted(non_empty_buckets):
+            _compact_bucket_parts(
+                bucket_dir=bucket_root / f"bucket-{bucket_id:04d}",
+                csq_fields=csq_fields,
             )
 
     if reporter is not None:
         reporter.log(
             f"{side_label}: bucketized consequence rows into {len(non_empty_buckets)} buckets"
         )
+    return sorted(non_empty_buckets)
+
+
+def materialize_variant_buckets(
+    *,
+    vcf_path: Path,
+    bucket_root: Path,
+    variant_path: Path,
+    reporter: ProgressReporter | None = None,
+    side_label: str,
+    bucket_count: int = CONSEQUENCE_BUCKET_COUNT,
+    chunk_variants: int = 10_000,
+    total_variants: int | None = None,
+) -> list[int]:
+    if bucket_root.exists():
+        shutil.rmtree(bucket_root)
+    bucket_root.mkdir(parents=True, exist_ok=True)
+    if total_variants is None:
+        total_variants = _count_vcf_records(vcf_path)
+    if reporter is not None:
+        reporter.stage(
+            f"{side_label}: bucketizing variant rows → {bucket_root}",
+            tracked_paths=[bucket_root],
+        )
+        reporter.log(f"{side_label}: variant total input variants={total_variants}")
+
+    non_empty_buckets: set[int] = set()
+    part_index = 0
+    for processed, chunk in _iter_variant_record_chunks(
+        vcf_path,
+        chunk_variants=chunk_variants,
+    ):
+        chunk_frame = _aggregate_variant_chunk(
+            chunk,
+            bucket_count=bucket_count,
+        )
+        _write_bucket_chunk_parts(
+            chunk_frame,
+            bucket_root=bucket_root,
+            part_index=part_index,
+        )
+        if not chunk_frame.is_empty():
+            non_empty_buckets.update(
+                int(value) for value in chunk_frame.get_column("bucket").unique().to_list()
+            )
+        part_index += 1
+        if reporter is not None:
+            percentage = (processed / total_variants * 100.0) if total_variants else 0.0
+            reporter.log(
+                f"{side_label}: variant progress {processed}/{total_variants} "
+                f"variants ({percentage:.2f}%), chunk_parts={part_index}, "
+                f"buckets={len(non_empty_buckets)}, chunk_variants={chunk_variants}"
+            )
+
+    if non_empty_buckets:
+        if reporter is not None:
+            reporter.stage(
+                f"{side_label}: compacting variant bucket parts",
+                tracked_paths=[bucket_root],
+            )
+        for bucket_id in sorted(non_empty_buckets):
+            _compact_variant_bucket_parts(bucket_dir=bucket_root / f"bucket-{bucket_id:04d}")
+
+    _merge_compacted_buckets(
+        bucket_root=bucket_root,
+        target_path=variant_path,
+        empty_schema=_empty_variant_schema(compacted=True),
+    )
+    if reporter is not None:
+        reporter.log(f"{side_label}: variant summary rows={_count_rows(variant_path)}")
+        reporter.log(f"{side_label}: bucketized variant rows into {len(non_empty_buckets)} buckets")
     return sorted(non_empty_buckets)
 
 
@@ -433,8 +827,12 @@ def materialize_variant_summary(
     *,
     vcf_path: Path,
     variant_path: Path,
+    bucket_root: Path | None = None,
     reporter: ProgressReporter | None = None,
     side_label: str,
+    bucket_count: int = CONSEQUENCE_BUCKET_COUNT,
+    chunk_variants: int = 10_000,
+    total_variants: int | None = None,
 ) -> list[str]:
     csq_fields = parse_csq_header(vcf_path)
     if reporter is not None:
@@ -446,8 +844,33 @@ def materialize_variant_summary(
             )
         eager = _eager_normalize_fallback(vcf_path, csq_fields)
         eager.variant.write_parquet(variant_path)
+        if bucket_root is not None:
+            if bucket_root.exists():
+                shutil.rmtree(bucket_root)
+            bucket_root.mkdir(parents=True, exist_ok=True)
+            partitioned = eager.variant.with_columns(
+                _bucket_expr(VARIANT_KEY, bucket_count)
+            ).partition_by("bucket", as_dict=True, include_key=True, maintain_order=False)
+            for bucket_key, bucket_frame in partitioned.items():
+                bucket_value = int(bucket_key[0] if isinstance(bucket_key, tuple) else bucket_key)
+                bucket_dir = bucket_root / f"bucket-{bucket_value:04d}"
+                bucket_dir.mkdir(parents=True, exist_ok=True)
+                bucket_frame.drop("bucket").write_parquet(bucket_dir / "bucket.parquet")
         if reporter is not None:
             reporter.log(f"{side_label}: variant summary rows={eager.variant.height}")
+        return csq_fields
+
+    if bucket_root is not None:
+        materialize_variant_buckets(
+            vcf_path=vcf_path,
+            bucket_root=bucket_root,
+            variant_path=variant_path,
+            reporter=reporter,
+            side_label=side_label,
+            bucket_count=bucket_count,
+            chunk_variants=chunk_variants,
+            total_variants=total_variants,
+        )
         return csq_fields
 
     if reporter is not None:
@@ -456,7 +879,9 @@ def materialize_variant_summary(
             tracked_paths=[variant_path],
         )
     try:
-        _materialize_lazyframe(build_variant_summary_lazy(scan_annotated_vcf(vcf_path)), variant_path)
+        _materialize_lazyframe(
+            build_variant_summary_lazy(scan_annotated_vcf(vcf_path)), variant_path
+        )
     except Exception as exc:
         if reporter is not None:
             reporter.log(

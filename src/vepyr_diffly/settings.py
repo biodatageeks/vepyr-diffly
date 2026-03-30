@@ -31,3 +31,19 @@ def env_int(name: str) -> int | None:
     value = env_str(name)
     return None if value is None else int(value)
 
+
+def env_int_or(name: str, default: int) -> int:
+    value = env_int(name)
+    return default if value is None else value
+
+
+def env_bool(name: str) -> bool | None:
+    value = env_str(name)
+    if value is None:
+        return None
+    normalized = value.lower()
+    if normalized in {"1", "true", "yes", "on"}:
+        return True
+    if normalized in {"0", "false", "no", "off"}:
+        return False
+    raise ValueError(f"invalid boolean value for {name}: {value}")

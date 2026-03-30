@@ -26,6 +26,7 @@ def test_write_run_summary_creates_json_and_markdown(tmp_path: Path) -> None:
         vepyr_path=tmp_path / "vepyr",
         vep_cache_dir=tmp_path / "cache",
         reference_fasta=None,
+        memory_budget_mb=512,
     )
     artifacts = RunArtifacts(
         runtime_dir=tmp_path / "runtime",
@@ -38,6 +39,8 @@ def test_write_run_summary_creates_json_and_markdown(tmp_path: Path) -> None:
         consequence_mismatches_tsv_path=tmp_path / "consequence.tsv",
         left_variant_path=tmp_path / "normalized" / "left.variant.parquet",
         right_variant_path=tmp_path / "normalized" / "right.variant.parquet",
+        left_variant_bucket_dir=tmp_path / "normalized" / "left.variant_buckets",
+        right_variant_bucket_dir=tmp_path / "normalized" / "right.variant_buckets",
         left_consequence_path=tmp_path / "normalized" / "left.consequence.parquet",
         right_consequence_path=tmp_path / "normalized" / "right.consequence.parquet",
         left_consequence_bucket_dir=tmp_path / "normalized" / "left.consequence_buckets",
@@ -63,8 +66,14 @@ def test_write_run_summary_creates_json_and_markdown(tmp_path: Path) -> None:
         consequence=tier,
         left_vcf=tmp_path / "left.vcf",
         right_vcf=tmp_path / "right.vcf",
+        resource_plan={"memory_budget_mb": 512, "bucket_count": 8},
+        timings={"variant_diff_seconds": 1.25},
     )
 
     assert artifacts.summary_json_path.exists()
     assert artifacts.summary_md_path.exists()
     assert "ensembl_everything" in artifacts.summary_md_path.read_text(encoding="utf-8")
+    payload = artifacts.summary_json_path.read_text(encoding="utf-8")
+    assert '"compare_mode": "fast"' in payload
+    assert '"memory_budget_mb": 512' in payload
+    assert '"variant_diff_seconds": 1.25' in payload

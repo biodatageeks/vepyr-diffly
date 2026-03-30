@@ -10,4 +10,3 @@ def test_load_presets_contains_active_v1_preset() -> None:
 def test_get_preset_returns_expected_cache_flavor() -> None:
     preset = get_preset("ensembl_everything")
     assert preset.cache_flavor == "ensembl"
-

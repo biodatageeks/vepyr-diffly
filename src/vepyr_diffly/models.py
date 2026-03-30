@@ -36,6 +36,12 @@ class RuntimeConfig:
     vep_bin: Path | None = None
     vep_perl5lib: str | None = None
     vep_cache_version: str | None = None
+    vepyr_use_fjall: bool = False
+    compare_mode: str = "fast"
+    compare_bucket_count: int | None = None
+    compare_workers: int | None = None
+    memory_budget_mb: int | None = None
+    fingerprint_only: bool = False
     execution_mode: str = "docker"
     vep_container_image: str = "vepyr-diffly-vep:local"
     vepyr_container_image: str = "vepyr-diffly-vepyr:local"
@@ -51,9 +57,7 @@ class RuntimeConfig:
         payload["annotated_right_vcf"] = (
             None if self.annotated_right_vcf is None else str(self.annotated_right_vcf)
         )
-        payload["vep_cache_dir"] = (
-            None if self.vep_cache_dir is None else str(self.vep_cache_dir)
-        )
+        payload["vep_cache_dir"] = None if self.vep_cache_dir is None else str(self.vep_cache_dir)
         payload["vepyr_cache_output_dir"] = (
             None if self.vepyr_cache_output_dir is None else str(self.vepyr_cache_output_dir)
         )
@@ -84,6 +88,22 @@ class TierResult:
     joined_equal_rows: int
     diff_frame_path: Path
     mismatches_tsv_path: Path
+    details: dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass(frozen=True)
+class CompareResourcePlan:
+    memory_budget_mb: int
+    bucket_count: int
+    variant_chunk_rows: int
+    consequence_chunk_rows: int
+    compare_workers: int
+    parallelize_sides: bool
+    use_bucketed_variant: bool
+    use_bucketed_consequence: bool
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
 
 
 @dataclass
@@ -98,6 +118,8 @@ class RunArtifacts:
     consequence_mismatches_tsv_path: Path
     left_variant_path: Path
     right_variant_path: Path
+    left_variant_bucket_dir: Path
+    right_variant_bucket_dir: Path
     left_consequence_path: Path
     right_consequence_path: Path
     left_consequence_bucket_dir: Path

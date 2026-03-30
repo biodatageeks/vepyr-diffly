@@ -3,7 +3,11 @@ from __future__ import annotations
 from pathlib import Path
 
 from vepyr_diffly.presets import get_preset
-from vepyr_diffly.runtime import prepare_artifacts, remove_stale_runtime_outputs, resolve_runtime_config
+from vepyr_diffly.runtime import (
+    prepare_artifacts,
+    remove_stale_runtime_outputs,
+    resolve_runtime_config,
+)
 
 
 def test_resolve_runtime_config_preserves_vepyr_python_symlink(tmp_path: Path) -> None:
@@ -28,22 +32,40 @@ def test_resolve_runtime_config_preserves_vepyr_python_symlink(tmp_path: Path) -
         vep_bin=tmp_path / "vep",
         vep_cache_version="115",
         vep_perl5lib=None,
+        vepyr_use_fjall=True,
+        memory_budget_mb=768,
     )
 
     assert config.vepyr_python == symlink_python
+    assert config.vepyr_use_fjall is True
+    assert config.compare_mode == "fast"
+    assert config.memory_budget_mb == 768
+    assert config.fingerprint_only is False
 
 
 def test_remove_stale_runtime_outputs_removes_old_vcfs(tmp_path: Path) -> None:
     artifacts = prepare_artifacts(tmp_path / "run")
     prepared = artifacts.runtime_dir / "prepared_input.vcf"
+    sampled = artifacts.runtime_dir / "sampled_input.vcf"
     left = artifacts.runtime_dir / "vep.annotated.vcf"
     right = artifacts.runtime_dir / "vepyr.annotated.vcf"
+    summary = artifacts.summary_json_path
+    diff = artifacts.variant_diff_path
+    progress = artifacts.progress_log_path
+    normalized = artifacts.left_variant_path
 
-    for path in (prepared, left, right):
+    for path in (prepared, sampled, left, right, summary, diff, progress, normalized):
+        path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text("stale", encoding="utf-8")
 
     remove_stale_runtime_outputs(artifacts)
 
     assert not prepared.exists()
+    assert not sampled.exists()
     assert not left.exists()
     assert not right.exists()
+    assert not summary.exists()
+    assert not diff.exists()
+    assert not progress.exists()
+    assert not normalized.exists()
+    assert artifacts.normalized_dir.exists()

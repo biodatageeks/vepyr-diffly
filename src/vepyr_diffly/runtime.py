@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import subprocess
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 from .models import AnnotatedOutputs, Preset, RunArtifacts, RuntimeConfig
@@ -30,6 +32,8 @@ def prepare_artifacts(output_dir: Path) -> RunArtifacts:
         consequence_mismatches_tsv_path=output_dir / "consequence_mismatches.tsv",
         left_variant_path=normalized_dir / "left.variant.parquet",
         right_variant_path=normalized_dir / "right.variant.parquet",
+        left_variant_bucket_dir=normalized_dir / "left.variant_buckets",
+        right_variant_bucket_dir=normalized_dir / "right.variant_buckets",
         left_consequence_path=normalized_dir / "left.consequence.parquet",
         right_consequence_path=normalized_dir / "right.consequence.parquet",
         left_consequence_bucket_dir=normalized_dir / "left.consequence_buckets",
@@ -57,6 +61,12 @@ def resolve_runtime_config(
     vep_bin: Path | None,
     vep_cache_version: str | None,
     vep_perl5lib: str | None,
+    vepyr_use_fjall: bool = False,
+    compare_mode: str = "fast",
+    compare_bucket_count: int | None = None,
+    compare_workers: int | None = None,
+    memory_budget_mb: int | None = None,
+    fingerprint_only: bool = False,
     annotated_left_vcf: Path | None = None,
     annotated_right_vcf: Path | None = None,
 ) -> RuntimeConfig:
@@ -84,6 +94,12 @@ def resolve_runtime_config(
         vep_bin=None if vep_bin is None else vep_bin.expanduser().resolve(),
         vep_cache_version=vep_cache_version,
         vep_perl5lib=vep_perl5lib,
+        vepyr_use_fjall=vepyr_use_fjall,
+        compare_mode=compare_mode,
+        compare_bucket_count=compare_bucket_count,
+        compare_workers=compare_workers,
+        memory_budget_mb=memory_budget_mb,
+        fingerprint_only=fingerprint_only,
     )
 
 
@@ -114,10 +130,32 @@ def prepare_input(config: RuntimeConfig, artifacts: RunArtifacts) -> Path:
 
 def remove_stale_runtime_outputs(artifacts: RunArtifacts) -> None:
     stale_paths = [
+        artifacts.summary_json_path,
+        artifacts.summary_md_path,
+        artifacts.variant_diff_path,
+        artifacts.consequence_diff_path,
+        artifacts.variant_mismatches_tsv_path,
+        artifacts.consequence_mismatches_tsv_path,
+        artifacts.progress_log_path,
+        artifacts.logs["vep"],
+        artifacts.logs["vepyr"],
         artifacts.runtime_dir / "prepared_input.vcf",
+        artifacts.runtime_dir / "sampled_input.vcf",
+        artifacts.runtime_dir / "input_preparation.json",
         artifacts.runtime_dir / "vep.annotated.vcf",
         artifacts.runtime_dir / "vepyr.annotated.vcf",
     ]
+    stale_dirs = [
+        artifacts.normalized_dir,
+        artifacts.left_variant_bucket_dir,
+        artifacts.right_variant_bucket_dir,
+        artifacts.left_consequence_bucket_dir,
+        artifacts.right_consequence_bucket_dir,
+    ]
+    for path in stale_dirs:
+        if path.exists():
+            shutil.rmtree(path)
+    artifacts.normalized_dir.mkdir(parents=True, exist_ok=True)
     for path in stale_paths:
         if path.exists():
             path.unlink()
@@ -132,23 +170,83 @@ def _run_command(command: list[str], log_path: Path) -> None:
     env = os.environ.copy()
     local_bin = Path(sys.executable).resolve().parent
     env["PATH"] = f"{local_bin}:{env.get('PATH', '')}"
-    completed = subprocess.run(command, capture_output=True, text=True, check=False, env=env)
-    log_path.write_text(
-        f"$ {' '.join(command)}\n\nSTDOUT\n{completed.stdout}\n\nSTDERR\n{completed.stderr}\n",
-        encoding="utf-8",
-    )
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    with log_path.open("w", encoding="utf-8") as handle:
+        started_at = datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
+        handle.write(f"$ {' '.join(command)}\n\n")
+        handle.write(f"STARTED {started_at}\n")
+        handle.write("STREAMED OUTPUT\n")
+        handle.flush()
+        completed = subprocess.run(
+            command,
+            stdout=handle,
+            stderr=subprocess.STDOUT,
+            text=True,
+            check=False,
+            env=env,
+        )
+        ended_at = datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
+        handle.write(f"\nENDED {ended_at}\n")
+        handle.write(f"EXIT {completed.returncode}\n")
     if completed.returncode != 0:
-        raise RuntimeError(f"command failed with exit code {completed.returncode}: {' '.join(command)}")
+        raise RuntimeError(
+            f"command failed with exit code {completed.returncode}: {' '.join(command)}"
+        )
 
 
 def _run_command_env(command: list[str], log_path: Path, env: dict[str, str]) -> None:
-    completed = subprocess.run(command, capture_output=True, text=True, check=False, env=env)
-    log_path.write_text(
-        f"$ {' '.join(command)}\n\nSTDOUT\n{completed.stdout}\n\nSTDERR\n{completed.stderr}\n",
-        encoding="utf-8",
-    )
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    with log_path.open("w", encoding="utf-8") as handle:
+        started_at = datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
+        handle.write(f"$ {' '.join(command)}\n\n")
+        handle.write(f"STARTED {started_at}\n")
+        handle.write("STREAMED OUTPUT\n")
+        handle.flush()
+        completed = subprocess.run(
+            command,
+            stdout=handle,
+            stderr=subprocess.STDOUT,
+            text=True,
+            check=False,
+            env=env,
+        )
+        ended_at = datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
+        handle.write(f"\nENDED {ended_at}\n")
+        handle.write(f"EXIT {completed.returncode}\n")
     if completed.returncode != 0:
-        raise RuntimeError(f"command failed with exit code {completed.returncode}: {' '.join(command)}")
+        raise RuntimeError(
+            f"command failed with exit code {completed.returncode}: {' '.join(command)}"
+        )
+
+
+def run_vepyr_annotation(
+    *,
+    input_vcf: Path,
+    output_vcf: Path,
+    cache_dir: Path,
+    log_path: Path,
+    reference_fasta: Path | None = None,
+    vepyr_python: Path | None = None,
+    use_fjall: bool = False,
+) -> None:
+    env = os.environ.copy()
+    if vepyr_python is not None:
+        env["VEPYR_DIFFLY_VEPYR_PYTHON"] = str(vepyr_python)
+    command = [
+        str(vepyr_python or sys.executable),
+        str(Path(__file__).with_name("vepyr_runner.py")),
+        "--input-vcf",
+        str(input_vcf),
+        "--output-vcf",
+        str(output_vcf),
+        "--cache-dir",
+        str(cache_dir),
+        "--reference-fasta",
+        "" if reference_fasta is None else str(reference_fasta),
+    ]
+    if use_fjall:
+        command.append("--use-fjall")
+    _run_command_env(command, log_path, env)
 
 
 def _cache_method(preset: Preset) -> str:
@@ -161,7 +259,11 @@ def _resolve_local_cache_source(config: RuntimeConfig) -> Path:
     if config.vep_cache_dir is None or config.vep_cache_version is None:
         raise ValueError("vep cache dir and cache version are required")
     suffix = "" if _cache_method(config.preset) == "vep" else f"_{_cache_method(config.preset)}"
-    return config.vep_cache_dir / config.preset.species / f"{config.vep_cache_version}_{config.preset.assembly}{suffix}"
+    return (
+        config.vep_cache_dir
+        / config.preset.species
+        / f"{config.vep_cache_version}_{config.preset.assembly}{suffix}"
+    )
 
 
 def _resolve_vepyr_feature_root(config: RuntimeConfig) -> Path:
@@ -178,7 +280,9 @@ def _ensure_vepyr_local_ready(config: RuntimeConfig, artifacts: RunArtifacts) ->
     if config.vepyr_python is not None:
         feature_root = _resolve_vepyr_feature_root(config)
         if not feature_root.exists():
-            raise RuntimeError(f"configured vepyr cache feature root does not exist: {feature_root}")
+            raise RuntimeError(
+                f"configured vepyr cache feature root does not exist: {feature_root}"
+            )
         return feature_root
     if config.vepyr_path is None:
         raise ValueError("--vepyr-path is required for local execution")
@@ -187,7 +291,15 @@ def _ensure_vepyr_local_ready(config: RuntimeConfig, artifacts: RunArtifacts) ->
 
     install_log = artifacts.runtime_dir / "vepyr_install.log"
     _run_command(
-        [sys.executable, "-m", "pip", "install", "--no-build-isolation", "-e", str(config.vepyr_path)],
+        [
+            sys.executable,
+            "-m",
+            "pip",
+            "install",
+            "--no-build-isolation",
+            "-e",
+            str(config.vepyr_path),
+        ],
         install_log,
     )
     feature_root = _resolve_vepyr_feature_root(config)
@@ -250,20 +362,17 @@ def _execute_local(config: RuntimeConfig, artifacts: RunArtifacts) -> AnnotatedO
     if config.reference_fasta is not None:
         vep_command.extend(["--fasta", str(config.reference_fasta)])
 
-    vepyr_command = [
-        str(config.vepyr_python or sys.executable),
-        str(Path(__file__).with_name("vepyr_runner.py")),
-        "--input-vcf",
-        str(input_vcf),
-        "--output-vcf",
-        str(right_vcf),
-        "--cache-dir",
-        str(feature_root),
-        "--reference-fasta",
-        "" if config.reference_fasta is None else str(config.reference_fasta),
-    ]
+    right_vcf.parent.mkdir(parents=True, exist_ok=True)
     _run_command_env(vep_command, artifacts.logs["vep"], vep_env)
-    _run_command(vepyr_command, artifacts.logs["vepyr"])
+    run_vepyr_annotation(
+        input_vcf=input_vcf,
+        output_vcf=right_vcf,
+        cache_dir=feature_root,
+        log_path=artifacts.logs["vepyr"],
+        reference_fasta=config.reference_fasta,
+        vepyr_python=config.vepyr_python,
+        use_fjall=config.vepyr_use_fjall,
+    )
     return AnnotatedOutputs(
         left_name="VEP",
         right_name="vepyr",

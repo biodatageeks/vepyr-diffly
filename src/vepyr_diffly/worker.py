@@ -22,6 +22,8 @@ def build_parser() -> argparse.ArgumentParser:
     compare_parser.add_argument("--temp-tsv-dir", required=True, type=Path)
     compare_parser.add_argument("--summary-path", required=True, type=Path)
     compare_parser.add_argument("--progress-log", default="")
+    compare_parser.add_argument("--compare-mode", choices=("fast", "debug"), default="fast")
+    compare_parser.add_argument("--fingerprint-only", action="store_true")
 
     bucketize_parser = subparsers.add_parser("bucketize-side")
     bucketize_parser.add_argument("--vcf", required=True, type=Path)
@@ -29,6 +31,8 @@ def build_parser() -> argparse.ArgumentParser:
     bucketize_parser.add_argument("--side-label", required=True)
     bucketize_parser.add_argument("--csq-fields-json", required=True)
     bucketize_parser.add_argument("--bucket-count", required=True, type=int)
+    bucketize_parser.add_argument("--chunk-variants", required=True, type=int)
+    bucketize_parser.add_argument("--total-variants", required=True, type=int)
     bucketize_parser.add_argument("--progress-log", default="")
     return parser
 
@@ -68,6 +72,8 @@ def _cmd_compare_bucket_shard(args: argparse.Namespace) -> int:
             csq_fields=json.loads(args.csq_fields_json),
             temp_diff_dir=args.temp_diff_dir,
             temp_tsv_dir=args.temp_tsv_dir,
+            compare_mode=args.compare_mode,
+            fingerprint_only=args.fingerprint_only,
             on_bucket_complete=_log_bucket_progress,
         )
         dump_bucket_shard_summary(results, args.summary_path)
@@ -87,6 +93,8 @@ def _cmd_bucketize_side(args: argparse.Namespace) -> int:
             reporter=reporter,
             side_label=args.side_label,
             bucket_count=args.bucket_count,
+            chunk_variants=args.chunk_variants,
+            total_variants=args.total_variants,
         )
         return 0
     finally:

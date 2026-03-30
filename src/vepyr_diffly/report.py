@@ -7,6 +7,7 @@ try:
     from rich.console import Console
     from rich.table import Table
 except ModuleNotFoundError:  # pragma: no cover
+
     class Console:  # type: ignore[override]
         def print(self, value: object = "") -> None:
             print(value)
@@ -32,6 +33,7 @@ except ModuleNotFoundError:  # pragma: no cover
             lines.extend("\t".join(row) for row in self.rows)
             return "\n".join(lines)
 
+
 from .models import RunArtifacts, RuntimeConfig, TierResult
 
 
@@ -44,13 +46,26 @@ def print_run_summary(
     left_vcf: str | Any,
     right_vcf: str | Any,
     progress_log_path: str | Any,
+    resource_plan: dict[str, Any] | None = None,
+    timings: dict[str, float] | None = None,
 ) -> None:
     console.print(f"Preset: [bold]{config.preset.name}[/bold]")
     console.print(f"Input: {config.input_vcf}")
     console.print(f"Left annotated VCF: {left_vcf}")
     console.print(f"Right annotated VCF: {right_vcf}")
-    console.print(f"Sample first N: {config.sample_first_n if config.sample_first_n is not None else 'full'}")
+    console.print(
+        f"Sample first N: {config.sample_first_n if config.sample_first_n is not None else 'full'}"
+    )
     console.print(f"Progress log: {progress_log_path}")
+    if resource_plan:
+        console.print(
+            "Resource plan: "
+            + ", ".join(f"{name}={value}" for name, value in resource_plan.items())
+        )
+    if timings:
+        console.print(
+            "Timings (s): " + ", ".join(f"{name}={value:.3f}" for name, value in timings.items())
+        )
     console.print("")
 
     table = Table(title="Comparison Summary")
@@ -80,6 +95,8 @@ def write_run_summary(
     consequence: TierResult,
     left_vcf: str | Any,
     right_vcf: str | Any,
+    resource_plan: dict[str, Any] | None = None,
+    timings: dict[str, float] | None = None,
 ) -> None:
     payload: dict[str, Any] = {
         "preset": config.preset.name,
@@ -88,6 +105,13 @@ def write_run_summary(
         "annotated_right_vcf": str(right_vcf),
         "sample_first_n": config.sample_first_n,
         "progress_log_path": str(artifacts.progress_log_path),
+        "compare_mode": config.compare_mode,
+        "bucket_count": config.compare_bucket_count,
+        "compare_workers": config.compare_workers,
+        "memory_budget_mb": config.memory_budget_mb,
+        "resource_plan": resource_plan or {},
+        "fingerprint_only": config.fingerprint_only,
+        "timings": timings or {},
         "tiers": {
             "variant": {
                 "equal": variant.equal,
@@ -97,6 +121,7 @@ def write_run_summary(
                 "joined_equal_rows": variant.joined_equal_rows,
                 "diff_frame_path": str(variant.diff_frame_path),
                 "mismatches_tsv_path": str(variant.mismatches_tsv_path),
+                "details": variant.details,
             },
             "consequence": {
                 "equal": consequence.equal,
@@ -106,12 +131,13 @@ def write_run_summary(
                 "joined_equal_rows": consequence.joined_equal_rows,
                 "diff_frame_path": str(consequence.diff_frame_path),
                 "mismatches_tsv_path": str(consequence.mismatches_tsv_path),
+                "details": consequence.details,
             },
         },
     }
     artifacts.summary_json_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     lines = [
-        f"# Run Summary",
+        "# Run Summary",
         "",
         f"- Preset: `{config.preset.name}`",
         f"- Input VCF: `{config.input_vcf}`",
@@ -119,18 +145,47 @@ def write_run_summary(
         f"- Right annotated VCF: `{right_vcf}`",
         f"- Sample first N: `{config.sample_first_n if config.sample_first_n is not None else 'full'}`",
         f"- Progress log: `{artifacts.progress_log_path}`",
-        "",
-        "## Variant Tier",
-        "",
-        "```text",
-        variant.summary.rstrip(),
-        "```",
-        "",
-        "## Consequence Tier",
-        "",
-        "```text",
-        consequence.summary.rstrip(),
-        "```",
+        f"- Compare mode: `{config.compare_mode}`",
+        f"- Memory budget MB: `{config.memory_budget_mb if config.memory_budget_mb is not None else 'auto'}`",
+        f"- Fingerprint only: `{config.fingerprint_only}`",
         "",
     ]
+    if resource_plan:
+        lines.extend(
+            [
+                "## Resource Plan",
+                "",
+                "```json",
+                json.dumps(resource_plan, indent=2),
+                "```",
+                "",
+            ]
+        )
+    if timings:
+        lines.extend(
+            [
+                "## Timings",
+                "",
+                "```text",
+                *(f"{name}={value:.3f}s" for name, value in timings.items()),
+                "```",
+                "",
+            ]
+        )
+    lines.extend(
+        [
+            "## Variant Tier",
+            "",
+            "```text",
+            variant.summary.rstrip(),
+            "```",
+            "",
+            "## Consequence Tier",
+            "",
+            "```text",
+            consequence.summary.rstrip(),
+            "```",
+            "",
+        ]
+    )
     artifacts.summary_md_path.write_text("\n".join(lines), encoding="utf-8")

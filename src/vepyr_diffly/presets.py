@@ -35,4 +35,3 @@ def get_preset(name: str, presets_path: Path | None = None) -> Preset:
     except KeyError as exc:
         available = ", ".join(sorted(presets))
         raise KeyError(f"unknown preset '{name}'. Available presets: {available}") from exc
-

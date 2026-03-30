@@ -112,15 +112,9 @@ def scan_annotated_vcf(vcf_path: Path) -> pl.LazyFrame:
         pos_expr.alias("pos"),
         pl.col("ref").cast(pl.String).alias("ref"),
         pl.col("alt").cast(pl.String).alias("alt"),
-        (
-            pl.col("id").cast(pl.String) if "id" in schema else pl.lit(".")
-        ).alias("id"),
-        (
-            pl.col("qual").cast(pl.String) if "qual" in schema else pl.lit(".")
-        ).alias("qual"),
-        (
-            pl.col("filter").cast(pl.String) if "filter" in schema else pl.lit(".")
-        ).alias("filter"),
+        (pl.col("id").cast(pl.String) if "id" in schema else pl.lit(".")).alias("id"),
+        (pl.col("qual").cast(pl.String) if "qual" in schema else pl.lit(".")).alias("qual"),
+        (pl.col("filter").cast(pl.String) if "filter" in schema else pl.lit(".")).alias("filter"),
         csq_expr.alias("csq"),
     ).select("chrom", "pos", "id", "ref", "alt", "qual", "filter", "csq")
 
