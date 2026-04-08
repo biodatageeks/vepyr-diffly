@@ -3,6 +3,8 @@
 vepyr/
 datafusion-bio-formats/
 datafusion-bio-functions/
+clinvar.vcf.gz.tbi
+downloads/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
