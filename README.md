@@ -56,6 +56,15 @@ The current [.env.example](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vep
 - `vepyr` Python env: `/Users/lukaszjezapkowicz/Desktop/magisterka/praca/gdl-annotations-infra/modules/python/annotator_testing/runner/.vepyr/bin/python`
 - `vepyr` cache root: `/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/.cache/vepyr_cache`
 
+For local plugin cache builds, configure plugin source files in `.env` as needed:
+
+- `VEPYR_DIFFLY_PLUGIN_CLINVAR_SOURCE`
+- `VEPYR_DIFFLY_PLUGIN_SPLICEAI_SOURCE`
+- `VEPYR_DIFFLY_PLUGIN_CADD_SNV_SOURCE`
+- `VEPYR_DIFFLY_PLUGIN_CADD_INDEL_SOURCE`
+- `VEPYR_DIFFLY_PLUGIN_ALPHAMISSENSE_SOURCE`
+- `VEPYR_DIFFLY_PLUGIN_DBNSFP_SOURCE`
+
 If the cache directory also contains `*.fjall` stores, you can enable the faster `vepyr` backend with:
 
 - `VEPYR_DIFFLY_VEPYR_USE_FJALL=true`
@@ -153,6 +162,60 @@ PYTHONPATH=src python -m vepyr_diffly.cli benchmark-compare \
 ```
 
 This command runs `compare-existing` in temporary directories, writes only the compact benchmark summary JSON, and cleans the heavy temp artifacts automatically.
+
+### 5c. Build a local `vepyr` cache for selected chromosomes
+
+Use the helper script in `scripts/` when you want to materialize the local cache outside a compare run.
+
+Build only chromosome `Y` plus the default plugin set:
+
+```bash
+source .venv/bin/activate
+python scripts/build_chr_cache.py Y
+```
+
+Build chromosomes `1` and `Y`:
+
+```bash
+source .venv/bin/activate
+python scripts/build_chr_cache.py 1 Y
+```
+
+Build the full cache:
+
+```bash
+source .venv/bin/activate
+python scripts/build_chr_cache.py
+```
+
+By default the script:
+
+- installs the local checkout from `VEPYR_DIFFLY_VEPYR_PATH` with `pip install -e --no-build-isolation`
+- builds the core cache under `VEPYR_DIFFLY_VEPYR_CACHE_OUTPUT_DIR`
+- builds core `variation.fjall` and `translation_sift.fjall` from the generated parquet cache
+- derives the Ensembl source cache from `VEPYR_DIFFLY_VEP_CACHE_DIR`
+- builds plugin caches for `clinvar`, `spliceai`, `cadd`, `alphamissense`, and `dbnsfp`
+- requires each requested plugin to be provided as a local source file via `.env` or CLI
+- does not download plugin sources from the Internet in the standard build path
+- materializes `cadd` from two local source files into one shared cache root layout: `cadd/` and `cadd.fjall/`
+
+Example local plugin source configuration:
+
+```bash
+export VEPYR_DIFFLY_PLUGIN_CLINVAR_SOURCE=/data/plugins/clinvar.vcf.gz
+export VEPYR_DIFFLY_PLUGIN_CADD_SNV_SOURCE=/data/plugins/whole_genome_SNVs.tsv.gz
+export VEPYR_DIFFLY_PLUGIN_CADD_INDEL_SOURCE=/data/plugins/gnomad.genomes.r4.0.indel.tsv.gz
+export VEPYR_DIFFLY_PLUGIN_DBNSFP_SOURCE=/data/plugins/dbNSFP4.9c_grch38.gz
+```
+
+Useful flags:
+
+- `--no-plugins` to skip plugin cache generation
+- `--no-core-fjall` to skip `variation.fjall` / `translation_sift.fjall`
+- `--plugins clinvar,spliceai` to limit the plugin set
+- `--clinvar-source`, `--spliceai-source`, `--cadd-snv-source`, `--cadd-indel-source`, `--alphamissense-source`, `--dbnsfp-source` to override `.env` per run
+- `--force-plugin-source` is retained for CLI compatibility but ignored for local-source builds
+- `--skip-install` if `vepyr` is already installed in the active interpreter
 
 ### 6. What to expect on stdout
 
