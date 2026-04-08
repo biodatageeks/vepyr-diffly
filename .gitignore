@@ -1,6 +1,8 @@
 .venv/
 .env
 vepyr/
+datafusion-bio-formats/
+datafusion-bio-functions/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
@@ -19,6 +21,7 @@ pip-wheel-metadata/
 htmlcov/
 .DS_Store
 .cache/
+plugins/
 .artifacts/
 runs/
 .ipynb_checkpoints/
