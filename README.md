@@ -212,10 +212,54 @@ Useful flags:
 
 - `--no-plugins` to skip plugin cache generation
 - `--no-core-fjall` to skip `variation.fjall` / `translation_sift.fjall`
+- `--only-plugins` to skip the core cache and build only plugin caches
 - `--plugins clinvar,spliceai` to limit the plugin set
+- `--preview-rows 1000` to build plugins only from the first `1000` non-header input rows of each source, which is useful for fast local sanity checks on very large files
 - `--clinvar-source`, `--spliceai-source`, `--cadd-snv-source`, `--cadd-indel-source`, `--alphamissense-source`, `--dbnsfp-source` to override `.env` per run
 - `--force-plugin-source` is retained for CLI compatibility but ignored for local-source builds
 - `--skip-install` if `vepyr` is already installed in the active interpreter
+
+Build only plugin caches without the core cache:
+
+```bash
+source .venv/bin/activate
+python scripts/build_chr_cache.py --only-plugins --plugins clinvar,spliceai,cadd,alphamissense
+```
+
+Build only plugin preview caches from the first `1000` source rows:
+
+```bash
+source .venv/bin/activate
+python scripts/build_chr_cache.py --only-plugins --plugins clinvar,spliceai,cadd,alphamissense --preview-rows 1000
+```
+
+### 5d. Run a plugin round-trip validation check
+
+Use the dedicated helper when you want an explicit `convert -> read back -> verify row counts and schema` check for plugin caches.
+
+Example:
+
+```bash
+source .venv/bin/activate
+python scripts/plugin_round_trip_test.py --plugins clinvar,spliceai,cadd,alphamissense --preview-rows 1000
+```
+
+What this script does for each plugin:
+
+- creates a preview source if `--preview-rows` is set
+- runs plugin conversion through the local `vepyr` build path
+- reads back the generated parquet files
+- verifies row counts: expected rows from the preview source vs actual parquet rows
+- verifies schema: expected plugin columns and Arrow types vs the written parquet schema
+- prints explicit per-plugin stages: `convert`, `read-back`, `verify rows`, `verify schema`, and final `round-trip`
+
+Useful flags:
+
+- `--plugins clinvar,spliceai` to limit the plugin set
+- `--preview-rows 1000` to keep the check fast on very large sources
+- `--skip-install` if the active environment already has the correct editable `vepyr`
+- `--cache-dir /path/to/output` to keep outputs in a known location
+- `--keep-cache` to keep the generated parquet files instead of deleting the temporary cache directory after the check
 
 ### 6. What to expect on stdout
 
