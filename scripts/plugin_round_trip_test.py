@@ -122,6 +122,13 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         type=Path,
         help="Optional output cache directory. Defaults to a temporary directory.",
     )
+    parser.add_argument("--release", type=int, default=115)
+    parser.add_argument("--assembly", default="GRCh38")
+    parser.add_argument(
+        "--cache-flavor",
+        choices=("vep", "merged", "refseq"),
+        default="vep",
+    )
     parser.add_argument(
         "--keep-cache",
         action="store_true",
@@ -203,11 +210,18 @@ def _validate_schema(plugin_name: str, parquet_files: Iterable[Path]) -> list[st
             continue
         for name, expected_type in expected:
             actual_type = schema.field(name).type
-            if actual_type != expected_type:
+            if not _types_match(expected_type, actual_type):
                 errors.append(
                     f"{path.name}:{name} expected {expected_type} got {actual_type}"
                 )
     return errors
+
+
+def _types_match(expected: pa.DataType, actual: pa.DataType) -> bool:
+    if expected == actual:
+        return True
+    string_like = {pa.string(), pa.string_view()}
+    return expected in string_like and actual in string_like
 
 
 def _count_data_rows(path: Path) -> int:
@@ -269,12 +283,14 @@ def _materialize_plugin(
             "cadd_snv",
             source["snv"],
             preview_rows,
+            None,
             temp_paths,
         )
         indel_preview, _ = build_script._prepare_preview_source(
             "cadd_indel",
             source["indel"],
             preview_rows,
+            None,
             temp_paths,
         )
         expected_rows = _expected_source_rows(
@@ -299,6 +315,7 @@ def _materialize_plugin(
         plugin_name,
         source,
         preview_rows,
+        None,
         temp_paths,
     )
     expected_rows = _expected_source_rows(plugin_name, preview_source)
@@ -324,6 +341,13 @@ def main(argv: list[str] | None = None) -> int:
     else:
         cache_dir = args.cache_dir.resolve()
         cache_dir.mkdir(parents=True, exist_ok=True)
+    partitioned_cache_dir = build_script.resolve_partitioned_cache_dir(
+        cache_dir=cache_dir,
+        release=args.release,
+        assembly=args.assembly,
+        cache_flavor=args.cache_flavor,
+    )
+    partitioned_cache_dir.mkdir(parents=True, exist_ok=True)
 
     if not args.skip_install:
         if args.vepyr_path is None:
@@ -343,7 +367,7 @@ def main(argv: list[str] | None = None) -> int:
                 plugin_name=plugin_name,
                 source=plugin_sources[plugin_name],
                 preview_rows=args.preview_rows,
-                cache_dir=cache_dir,
+                cache_dir=partitioned_cache_dir,
                 partitions=args.partitions,
                 vepyr_module=vepyr,
                 temp_paths=temp_paths,
