@@ -6,7 +6,10 @@ import subprocess
 import sys
 from pathlib import Path
 import gzip
+import shutil
 import tempfile
+import re
+import time
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,13 +37,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         description="Build a vepyr cache, optionally restricted to selected chromosomes."
     )
     parser.add_argument(
-        "chromosomes",
-        nargs="*",
-        help="Optional chromosome list, e.g. `1 Y` or `chr1 chrY`. Omit for the full cache.",
-    )
-    parser.add_argument(
         "--chromosomes",
-        dest="chromosomes_csv",
         help="Optional comma-separated chromosome list, e.g. `1,Y`.",
     )
     parser.add_argument(
@@ -159,15 +156,39 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         "--preview-rows",
         type=int,
         default=preview_rows_default,
-        help="Limit plugin conversion to the first N data rows from each source (headers still preserved).",
+        help="Limit core/plugin conversion to preview-sized source slices (headers still preserved).",
+    )
+    parser.add_argument(
+        "--remove-old-layout-cache",
+        action="store_true",
+        help=(
+            "Remove recognized stale cache artifacts from the previous layout before building "
+            "(old parquet/<version>, root-level *.fjall, and root-level plugin directories)."
+        ),
+    )
+    parser.add_argument(
+        "--assume-sorted-plugin-input",
+        action="store_true",
+        help=(
+            "Opt-in: skip SQL ORDER BY for single-source plugin builds when the raw plugin input "
+            "is already sorted by chrom,pos,ref,alt. This is not applied to CADD."
+        ),
+    )
+    parser.add_argument(
+        "--clean-plugin-output",
+        action="store_true",
+        help=(
+            "Remove output directories for the requested plugins in the current cache layout "
+            "before building them (e.g. <cache>/<version>/<plugin> and <plugin>.fjall)."
+        ),
     )
     return parser.parse_args(argv)
 
 
-def resolve_requested_chromosomes(positional: list[str], csv_value: str | None) -> list[str]:
+def resolve_requested_chromosomes(csv_value: str | None) -> list[str]:
     from vepyr_diffly.chromosomes import parse_chromosome_selection
 
-    tokens = list(positional)
+    tokens: list[str] = []
     if csv_value:
         tokens.extend(part.strip() for part in csv_value.split(","))
     if not tokens:
@@ -186,6 +207,26 @@ def resolve_local_cache_source(
 ) -> Path:
     suffix = "" if cache_flavor == "vep" else f"_{cache_flavor}"
     return vep_cache_dir / species / f"{release}_{assembly}{suffix}"
+
+
+def resolve_partitioned_cache_dir(
+    *,
+    cache_dir: Path,
+    release: int,
+    assembly: str,
+    cache_flavor: str,
+) -> Path:
+    return cache_dir / f"{release}_{assembly}_{cache_flavor}"
+
+
+def resolve_legacy_partitioned_cache_dir(
+    *,
+    cache_dir: Path,
+    release: int,
+    assembly: str,
+    cache_flavor: str,
+) -> Path:
+    return cache_dir / "parquet" / f"{release}_{assembly}_{cache_flavor}"
 
 
 def parse_plugins(raw_value: str) -> list[str]:
@@ -245,6 +286,67 @@ def _open_text_writer(path: Path, suffixes: list[str]):
     return open(path, "wt", encoding="utf-8")
 
 
+def _natural_file_key(path: Path) -> tuple[int, int, str]:
+    name = path.name
+    if name == "all_vars.gz":
+        return (2, 0, name)
+    if name.endswith(".csi"):
+        return (3, 0, name)
+    match = re.match(r"(\d+)-(\d+)(_reg)?\.gz$", name)
+    if match:
+        start = int(match.group(1))
+        kind = 1 if match.group(3) else 0
+        return (kind, start, name)
+    return (4, 0, name)
+
+
+def _copy_core_preview_dir(source_dir: Path, destination_dir: Path, preview_rows: int) -> None:
+    destination_dir.mkdir(parents=True, exist_ok=True)
+    shard_budget = max(1, (preview_rows + 1_000_000 - 1) // 1_000_000)
+    copied_main = 0
+    copied_reg = 0
+    for path in sorted(source_dir.iterdir(), key=_natural_file_key):
+        if path.is_dir():
+            continue
+        if path.suffix == ".csi":
+            continue
+        if path.name == "all_vars.gz":
+            shutil.copy2(path, destination_dir / path.name)
+            continue
+        if path.name.endswith("_reg.gz"):
+            if copied_reg < shard_budget:
+                shutil.copy2(path, destination_dir / path.name)
+                copied_reg += 1
+            continue
+        if path.name.endswith(".gz"):
+            if copied_main < shard_budget:
+                shutil.copy2(path, destination_dir / path.name)
+                copied_main += 1
+
+
+def create_core_preview_cache(
+    local_cache: Path,
+    preview_rows: int,
+    chromosomes: list[str] | None,
+) -> Path:
+    preview_root = Path(tempfile.mkdtemp(prefix="vep-core-preview-"))
+    for metadata_name in ("info.txt", "chr_synonyms.txt"):
+        source = local_cache / metadata_name
+        if source.exists():
+            shutil.copy2(source, preview_root / metadata_name)
+
+    requested = {chrom.removeprefix("chr") for chrom in chromosomes or []}
+    source_dirs = sorted(
+        [path for path in local_cache.iterdir() if path.is_dir()],
+        key=lambda path: path.name,
+    )
+    for source_dir in source_dirs:
+        if requested and source_dir.name not in requested:
+            continue
+        _copy_core_preview_dir(source_dir, preview_root / source_dir.name, preview_rows)
+    return preview_root
+
+
 def _format_bytes(value: int) -> str:
     for unit in ["B", "KB", "MB", "GB", "TB"]:
         if value < 1024:
@@ -280,24 +382,144 @@ def _rewrite_chrom_line(line: str, plugin_name: str) -> str:
     return line
 
 
-def _create_preview_source(original: Path, plugin_name: str, preview_rows: int) -> tuple[Path, int]:
+def _normalize_preview_chrom(value: str) -> str:
+    return value.strip().removeprefix("chr").upper()
+
+
+def _requested_chromosome_set(chromosomes: list[str] | None) -> set[str]:
+    return {_normalize_preview_chrom(chrom) for chrom in chromosomes or [] if chrom.strip()}
+
+
+def _plugin_tabix_kind(plugin_name: str) -> str | None:
+    plugin_key = plugin_name.split("_")[0]
+    if plugin_key in {"clinvar", "spliceai"}:
+        return "vcf"
+    if plugin_key in {"cadd", "dbnsfp"}:
+        return "tsv"
+    return None
+
+
+def _tabix_path_for(source_path: Path) -> Path:
+    return source_path.with_suffix(source_path.suffix + ".tbi")
+
+
+def _tabix_regions(chromosomes: list[str]) -> list[str]:
+    regions: list[str] = []
+    seen: set[str] = set()
+    for chrom in chromosomes:
+        normalized = chrom.removeprefix("chr")
+        for value in (normalized, f"chr{normalized}"):
+            if value not in seen:
+                regions.append(value)
+                seen.add(value)
+    return regions
+
+
+def _read_tsv_header_line(original: Path) -> str:
+    with _open_text_reader(original) as reader:
+        for line in reader:
+            if line.strip() and "\t" in line and not line.startswith("##"):
+                return line
+    raise RuntimeError(f"failed to read TSV header from {original}")
+
+
+def _extract_tabix_preview_source(
+    original: Path,
+    plugin_name: str,
+    preview_rows: int | None,
+    chromosomes: list[str],
+) -> tuple[Path, int]:
+    tabix_bin = shutil.which("tabix")
+    if tabix_bin is None:
+        raise RuntimeError("tabix not found on PATH")
+    if not _tabix_path_for(original).exists():
+        raise RuntimeError(f"tabix index not found for {original}")
+
+    suffix = "".join(original.suffixes) or original.suffix
+    temp = tempfile.NamedTemporaryFile(prefix=f"{plugin_name}_preview_", suffix=suffix, delete=False)
+    temp_path = Path(temp.name)
+    temp.close()
+
+    raw_bytes = 0
+    rows_written = 0
+    requested = _requested_chromosome_set(chromosomes)
+    command = [tabix_bin]
+    tabix_kind = _plugin_tabix_kind(plugin_name)
+    if tabix_kind == "vcf":
+        command.append("-h")
+    command.append(str(original))
+    command.extend(_tabix_regions(chromosomes))
+
+    with _open_text_writer(temp_path, original.suffixes) as writer:
+        if tabix_kind == "tsv":
+            writer.write(_read_tsv_header_line(original))
+        process = subprocess.Popen(
+            command,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        )
+        assert process.stdout is not None
+        try:
+            for line in process.stdout:
+                formatted = line
+                if not line.startswith("#") and not line.isspace():
+                    formatted = _rewrite_chrom_line(line, plugin_name)
+                    chrom = formatted.split("\t", 1)[0]
+                    if requested and _normalize_preview_chrom(chrom) not in requested:
+                        continue
+                writer.write(formatted)
+                if line.startswith("#"):
+                    continue
+                rows_written += 1
+                raw_bytes += len(formatted.encode("utf-8"))
+                if preview_rows is not None and rows_written >= preview_rows:
+                    process.terminate()
+                    break
+        finally:
+            _, stderr = process.communicate()
+        if process.returncode not in (0, -15):
+            raise RuntimeError(f"tabix failed for {original}: {stderr.strip()}")
+    return temp_path, raw_bytes
+
+
+def _create_preview_source(
+    original: Path,
+    plugin_name: str,
+    preview_rows: int | None,
+    chromosomes: list[str] | None = None,
+) -> tuple[Path, int]:
     suffix = "".join(original.suffixes) or original.suffix
     temp = tempfile.NamedTemporaryFile(prefix=f"{plugin_name}_preview_", suffix=suffix, delete=False)
     temp_path = Path(temp.name)
     temp.close()
     rows_written = 0
     raw_bytes = 0
+    requested = _requested_chromosome_set(chromosomes)
+    header_written = False
+    is_tsv = _plugin_tabix_kind(plugin_name) == "tsv"
     with _open_text_reader(original) as reader, _open_text_writer(temp_path, original.suffixes) as writer:
         for line in reader:
+            if is_tsv and not header_written:
+                if line.strip() and "\t" in line and not line.startswith("##"):
+                    writer.write(line)
+                    header_written = True
+                continue
             formatted = line
             if not line.startswith("#") and not line.isspace():
                 formatted = _rewrite_chrom_line(line, plugin_name)
+                if requested:
+                    chrom = formatted.split("\t", 1)[0]
+                    if _normalize_preview_chrom(chrom) not in requested:
+                        continue
             writer.write(formatted)
             if line.startswith("#"):
                 continue
             rows_written += 1
             raw_bytes += len(formatted.encode("utf-8"))
-            if rows_written >= preview_rows:
+            if preview_rows is not None and rows_written >= preview_rows:
                 break
     return temp_path, raw_bytes
 
@@ -306,15 +528,47 @@ def _prepare_preview_source(
     plugin_name: str,
     source_path: Path,
     preview_rows: int | None,
+    chromosomes: list[str] | None,
     temp_paths: list[Path],
 ) -> tuple[Path, dict[str, int]]:
-    if preview_rows is None or preview_rows <= 0:
+    apply_preview_limit = preview_rows is not None and preview_rows > 0
+    if not apply_preview_limit and not chromosomes:
         return source_path, {
             "compressed_bytes": source_path.stat().st_size,
             "uncompressed_bytes": _gzip_uncompressed_size(source_path),
         }
-    preview, raw_bytes = _create_preview_source(source_path, plugin_name, preview_rows)
+    preview_error: RuntimeError | None = None
+    tabix_used = False
+    if chromosomes:
+        try:
+            preview, raw_bytes = _extract_tabix_preview_source(
+                source_path,
+                plugin_name,
+                preview_rows if apply_preview_limit else None,
+                chromosomes,
+            )
+            tabix_used = True
+        except RuntimeError as exc:
+            preview_error = exc
+            preview, raw_bytes = _create_preview_source(
+                source_path,
+                plugin_name,
+                preview_rows if apply_preview_limit else None,
+                chromosomes,
+            )
+    else:
+        preview, raw_bytes = _create_preview_source(
+            source_path,
+            plugin_name,
+            preview_rows if apply_preview_limit else None,
+            chromosomes,
+        )
     temp_paths.append(preview)
+    if tabix_used:
+        mode = "preview" if apply_preview_limit else "full chromosome-sliced source"
+        print(f"tabix source slice for {plugin_name}: using {mode} from {source_path.name}")
+    if preview_error is not None:
+        print(f"preview fallback for {plugin_name}: {preview_error}")
     return preview, {
         "compressed_bytes": preview.stat().st_size,
         "uncompressed_bytes": raw_bytes,
@@ -337,20 +591,85 @@ def _parquet_size(plugin_dir: Path) -> int:
     return total
 
 
+def remove_old_layout_cache(
+    *,
+    cache_dir: Path,
+    release: int,
+    assembly: str,
+    cache_flavor: str,
+    plugins: list[str],
+) -> list[Path]:
+    removed: list[Path] = []
+    targets: list[Path] = [
+        resolve_legacy_partitioned_cache_dir(
+            cache_dir=cache_dir,
+            release=release,
+            assembly=assembly,
+            cache_flavor=cache_flavor,
+        ),
+        cache_dir / "variation.fjall",
+        cache_dir / "translation_sift.fjall",
+    ]
+    for plugin in sorted(set(DEFAULT_PLUGINS) | set(plugins)):
+        targets.append(cache_dir / plugin)
+        targets.append(cache_dir / f"{plugin}.fjall")
+
+    for path in targets:
+        if path.is_symlink() or path.is_file():
+            path.unlink()
+            removed.append(path)
+            continue
+        if path.is_dir():
+            shutil.rmtree(path)
+            removed.append(path)
+    return removed
+
+
+def remove_current_plugin_outputs(
+    *,
+    partitioned_cache_dir: Path,
+    plugins: list[str],
+) -> list[Path]:
+    removed: list[Path] = []
+    for plugin in plugins:
+        for path in (
+            partitioned_cache_dir / plugin,
+            partitioned_cache_dir / f"{plugin}.fjall",
+        ):
+            if path.is_symlink() or path.is_file():
+                path.unlink()
+                removed.append(path)
+                continue
+            if path.is_dir():
+                shutil.rmtree(path)
+                removed.append(path)
+    return removed
+
+
 def _log_plugin_stats(
     plugin_name: str,
-    stats: dict[str, int],
+    stats: dict[str, int] | None,
     cache_dir: Path,
     preview_rows: int | None,
+    preview_prep_seconds: float,
+    convert_seconds: float,
     source_label: str | None = None,
 ) -> None:
     label = source_label or plugin_name
     parquet_dir = cache_dir / plugin_name
     parquet_bytes = _parquet_size(parquet_dir)
     preview_note = f"preview={preview_rows}" if preview_rows else "full"
+    total_seconds = preview_prep_seconds + convert_seconds
+    if stats is not None:
+        print(
+            f"{label} ({preview_note}): .gz={_format_bytes(stats['compressed_bytes'])}, "
+            f"raw={_format_bytes(stats['uncompressed_bytes'])}, parquet={_format_bytes(parquet_bytes)}, "
+            f"preview_prep={preview_prep_seconds:.1f}s, convert={convert_seconds:.1f}s, total={total_seconds:.1f}s"
+        )
+        return
     print(
-        f"{label} ({preview_note}): .gz={_format_bytes(stats['compressed_bytes'])}, "
-        f"raw={_format_bytes(stats['uncompressed_bytes'])}, parquet={_format_bytes(parquet_bytes)}"
+        f"{label} ({preview_note}): parquet={_format_bytes(parquet_bytes)}, "
+        f"preview_prep={preview_prep_seconds:.1f}s, convert={convert_seconds:.1f}s, total={total_seconds:.1f}s"
     )
 
 
@@ -362,6 +681,7 @@ def build_plugin_caches(
     partitions: int,
     chromosomes: list[str] | None,
     preview_rows: int | None,
+    assume_sorted_input: bool,
 ) -> None:
     temp_preview_paths: list[Path] = []
     try:
@@ -369,35 +689,50 @@ def build_plugin_caches(
             if plugin == "cadd":
                 cadd_sources = plugin_sources[plugin]
                 assert isinstance(cadd_sources, dict)
+                direct_builder_limit = None
+                preview_started_at = time.perf_counter()
                 snv_source, snv_stats = _prepare_preview_source(
                     "cadd_snv",
                     cadd_sources["snv"],
                     preview_rows,
+                    chromosomes,
                     temp_preview_paths,
                 )
                 indel_source, indel_stats = _prepare_preview_source(
                     "cadd_indel",
                     cadd_sources["indel"],
                     preview_rows,
+                    chromosomes,
                     temp_preview_paths,
                 )
+                preview_elapsed = time.perf_counter() - preview_started_at
                 print(
                     "building plugin cache for cadd from "
                     f"{snv_source} and {indel_source}"
                 )
+                convert_started_at = time.perf_counter()
                 vepyr_module.build_plugin(
                     "cadd",
                     {"snv": str(snv_source), "indel": str(indel_source)},
                     str(cache_dir),
                     partitions=partitions,
                     chromosomes=chromosomes,
+                    assume_sorted_input=assume_sorted_input,
+                    preview_rows=direct_builder_limit,
                 )
-                combined_stats = _combine_stats(snv_stats, indel_stats)
+                convert_elapsed = time.perf_counter() - convert_started_at
+                combined_stats = (
+                    _combine_stats(snv_stats, indel_stats)
+                    if snv_stats is not None and indel_stats is not None
+                    else None
+                )
                 _log_plugin_stats(
                     "cadd",
                     combined_stats,
                     cache_dir,
                     preview_rows,
+                    preview_elapsed,
+                    convert_elapsed,
                     source_label="cadd (snv+indel)",
                 )
                 _log_plugin_stats(
@@ -405,6 +740,8 @@ def build_plugin_caches(
                     snv_stats,
                     cache_dir,
                     preview_rows,
+                    preview_elapsed,
+                    convert_elapsed,
                     source_label="cadd_snv",
                 )
                 _log_plugin_stats(
@@ -412,6 +749,8 @@ def build_plugin_caches(
                     indel_stats,
                     cache_dir,
                     preview_rows,
+                    preview_elapsed,
+                    convert_elapsed,
                     source_label="cadd_indel",
                 )
                 continue
@@ -419,18 +758,44 @@ def build_plugin_caches(
             source_path = plugin_sources[plugin]
             if not isinstance(source_path, Path):
                 source_path = Path(str(source_path))
-            limited_source, stats = _prepare_preview_source(
-                plugin, source_path, preview_rows, temp_preview_paths
+            direct_builder_limit = (
+                preview_rows
+                if preview_rows and not chromosomes and assume_sorted_input
+                else None
             )
+            if direct_builder_limit is not None:
+                limited_source = source_path
+                stats = None
+                preview_elapsed = 0.0
+                print(
+                    f"builder row limit for {plugin}: preview_rows={preview_rows} (no temp preview file)"
+                )
+            else:
+                preview_started_at = time.perf_counter()
+                limited_source, stats = _prepare_preview_source(
+                    plugin, source_path, preview_rows, chromosomes, temp_preview_paths
+                )
+                preview_elapsed = time.perf_counter() - preview_started_at
             print(f"building plugin cache for {plugin} from {limited_source}")
+            convert_started_at = time.perf_counter()
             vepyr_module.build_plugin(
                 plugin,
                 str(limited_source),
                 str(cache_dir),
                 partitions=partitions,
                 chromosomes=chromosomes,
+                assume_sorted_input=assume_sorted_input,
+                preview_rows=direct_builder_limit,
             )
-            _log_plugin_stats(plugin, stats, cache_dir, preview_rows)
+            convert_elapsed = time.perf_counter() - convert_started_at
+            _log_plugin_stats(
+                plugin,
+                stats,
+                cache_dir,
+                preview_rows,
+                preview_elapsed,
+                convert_elapsed,
+            )
     finally:
         for temp_path in temp_preview_paths:
             try:
@@ -469,10 +834,42 @@ def main(argv: list[str] | None = None) -> int:
     if args.vepyr_path is None and not args.skip_install:
         raise SystemExit("missing --vepyr-path or VEPYR_DIFFLY_VEPYR_PATH")
 
-    requested_chromosomes = resolve_requested_chromosomes(args.chromosomes, args.chromosomes_csv)
+    requested_chromosomes = resolve_requested_chromosomes(args.chromosomes)
     plugins = [] if args.no_plugins else parse_plugins(args.plugins)
     plugin_sources = resolve_plugin_sources(args, plugins)
+    if args.remove_old_layout_cache:
+        removed = remove_old_layout_cache(
+            cache_dir=args.cache_dir,
+            release=args.release,
+            assembly=args.assembly,
+            cache_flavor=args.cache_flavor,
+            plugins=plugins,
+        )
+        if removed:
+            print("removed old-layout cache artifacts:")
+            for path in removed:
+                print(f"  - {path}")
+        else:
+            print("no old-layout cache artifacts found")
+    partitioned_cache_dir = resolve_partitioned_cache_dir(
+        cache_dir=args.cache_dir,
+        release=args.release,
+        assembly=args.assembly,
+        cache_flavor=args.cache_flavor,
+    )
+    if args.clean_plugin_output and plugins:
+        removed = remove_current_plugin_outputs(
+            partitioned_cache_dir=partitioned_cache_dir,
+            plugins=plugins,
+        )
+        if removed:
+            print("removed current plugin outputs:")
+            for path in removed:
+                print(f"  - {path}")
+        else:
+            print("no current plugin outputs found")
     local_cache = None
+    core_preview_cache: Path | None = None
     if not args.only_plugins:
         local_cache = args.local_cache or resolve_local_cache_source(
             vep_cache_dir=args.vep_cache_dir,
@@ -481,6 +878,17 @@ def main(argv: list[str] | None = None) -> int:
             assembly=args.assembly,
             cache_flavor=args.cache_flavor,
         )
+        if args.preview_rows is not None and args.preview_rows > 0:
+            core_preview_cache = create_core_preview_cache(
+                local_cache,
+                args.preview_rows,
+                requested_chromosomes or None,
+            )
+            print(
+                f"using core preview cache from {core_preview_cache} "
+                f"(preview_rows={args.preview_rows}, copied full source shards)"
+            )
+            local_cache = core_preview_cache
 
     if not args.skip_install:
         ensure_vepyr_installed(args.vepyr_path)
@@ -489,53 +897,58 @@ def main(argv: list[str] | None = None) -> int:
 
     import vepyr
 
-    if not args.only_plugins:
-        print(
-            f"building core cache into {args.cache_dir} for "
-            f"{requested_chromosomes or ['all chromosomes']}"
-        )
-        vepyr.build_cache(
-            release=args.release,
-            cache_dir=str(args.cache_dir),
-            species=args.species,
-            assembly=args.assembly,
-            method=args.cache_flavor,
-            local_cache=str(local_cache),
-            partitions=args.partitions,
-            memory_limit_gb=args.memory_limit_gb,
-            chromosomes=requested_chromosomes or None,
-        )
-
-        if not args.no_core_fjall:
-            print("building core fjall caches")
-            vepyr.build_cache_fjall(
-                str(local_cache),
-                str(args.cache_dir),
+    try:
+        if not args.only_plugins:
+            print(
+                f"building core cache into {args.cache_dir} for "
+                f"{requested_chromosomes or ['all chromosomes']}"
+            )
+            vepyr.build_cache(
                 release=args.release,
+                cache_dir=str(args.cache_dir),
+                species=args.species,
                 assembly=args.assembly,
                 method=args.cache_flavor,
+                local_cache=str(local_cache),
                 partitions=args.partitions,
+                memory_limit_gb=args.memory_limit_gb,
                 chromosomes=requested_chromosomes or None,
             )
-    else:
-        print("skipping core cache; generating plugins only")
 
-    if args.no_plugins:
+            if not args.no_core_fjall:
+                print("building core fjall caches")
+                vepyr.build_cache_fjall(
+                    str(local_cache),
+                    str(args.cache_dir),
+                    release=args.release,
+                    assembly=args.assembly,
+                    method=args.cache_flavor,
+                    partitions=args.partitions,
+                    chromosomes=requested_chromosomes or None,
+                )
+        else:
+            print("skipping core cache; generating plugins only")
+
+        if args.no_plugins:
+            return 0
+
+        if args.force_plugin_source:
+            print("warning: --force-plugin-source is ignored for local-source plugin builds")
+
+        build_plugin_caches(
+            vepyr_module=vepyr,
+            cache_dir=partitioned_cache_dir,
+            plugins=plugins,
+            plugin_sources=plugin_sources,
+            partitions=args.partitions,
+            chromosomes=requested_chromosomes or None,
+            preview_rows=args.preview_rows,
+            assume_sorted_input=args.assume_sorted_plugin_input,
+        )
         return 0
-
-    if args.force_plugin_source:
-        print("warning: --force-plugin-source is ignored for local-source plugin builds")
-
-    build_plugin_caches(
-        vepyr_module=vepyr,
-        cache_dir=args.cache_dir,
-        plugins=plugins,
-        plugin_sources=plugin_sources,
-        partitions=args.partitions,
-        chromosomes=requested_chromosomes or None,
-        preview_rows=args.preview_rows,
-    )
-    return 0
+    finally:
+        if core_preview_cache is not None:
+            shutil.rmtree(core_preview_cache, ignore_errors=True)
 
 
 if __name__ == "__main__":
