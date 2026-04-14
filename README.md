@@ -171,14 +171,14 @@ Build only chromosome `Y` plus the default plugin set:
 
 ```bash
 source .venv/bin/activate
-python scripts/build_chr_cache.py Y
+python scripts/build_chr_cache.py --chromosomes Y
 ```
 
 Build chromosomes `1` and `Y`:
 
 ```bash
 source .venv/bin/activate
-python scripts/build_chr_cache.py 1 Y
+python scripts/build_chr_cache.py --chromosomes 1,Y
 ```
 
 Build the full cache:
@@ -213,8 +213,13 @@ Useful flags:
 - `--no-plugins` to skip plugin cache generation
 - `--no-core-fjall` to skip `variation.fjall` / `translation_sift.fjall`
 - `--only-plugins` to skip the core cache and build only plugin caches
+- `--chromosomes 1,4,10` to restrict both core and plugin generation to the selected chromosomes
 - `--plugins clinvar,spliceai` to limit the plugin set
-- `--preview-rows 1000` to build plugins only from the first `1000` non-header input rows of each source, which is useful for fast local sanity checks on very large files
+- `--preview-rows 1000` to build both core and plugin caches from preview-sized source slices; for plugins this means first `N` data rows, while for the binary Ensembl core cache it means copying only the first preview-sized set of whole source shard files
+- when `--chromosomes` is used for plugins, preview slicing is chromosome-aware and uses `tabix` automatically when a matching `.tbi` index exists
+- `--clean-plugin-output` to delete only the current-layout outputs of the requested plugins before rebuilding (`<version>/<plugin>/` and `<version>/<plugin>.fjall/`), which is useful for repeatable size and timing comparisons
+- `--remove-old-layout-cache` to delete recognized stale artifacts from the previous cache layout before building (`parquet/<version>`, root-level `*.fjall`, and root-level plugin directories)
+- `--assume-sorted-plugin-input` to skip SQL `ORDER BY` for single-source plugin builds when the raw input is already sorted by `chrom,pos,ref,alt`; this is a safe opt-in and is intentionally ignored for `cadd`
 - `--clinvar-source`, `--spliceai-source`, `--cadd-snv-source`, `--cadd-indel-source`, `--alphamissense-source`, `--dbnsfp-source` to override `.env` per run
 - `--force-plugin-source` is retained for CLI compatibility but ignored for local-source builds
 - `--skip-install` if `vepyr` is already installed in the active interpreter
@@ -231,6 +236,19 @@ Build only plugin preview caches from the first `1000` source rows:
 ```bash
 source .venv/bin/activate
 python scripts/build_chr_cache.py --only-plugins --plugins clinvar,spliceai,cadd,alphamissense --preview-rows 1000
+```
+
+Build repeatable chromosome-scoped preview caches and clean only the selected plugin outputs first:
+
+```bash
+source .venv/bin/activate
+python scripts/build_chr_cache.py \
+  --only-plugins \
+  --plugins clinvar,spliceai,cadd,alphamissense,dbnsfp \
+  --chromosomes 1 \
+  --preview-rows 1000 \
+  --clean-plugin-output \
+  --skip-install
 ```
 
 ### 5d. Run a plugin round-trip validation check
@@ -260,6 +278,73 @@ Useful flags:
 - `--skip-install` if the active environment already has the correct editable `vepyr`
 - `--cache-dir /path/to/output` to keep outputs in a known location
 - `--keep-cache` to keep the generated parquet files instead of deleting the temporary cache directory after the check
+
+### 5e. Create `.tbi` indexes for plugin source files
+
+Use the dedicated helper when you want to prepare tabix indexes for plugin
+inputs in `plugins/`.
+
+Dry-run all known plugin sources:
+
+```bash
+source .venv/bin/activate
+python scripts/create_plugin_indexes.py --dry-run
+```
+
+Index only `dbnsfp`, `spliceai`, and `cadd`:
+
+```bash
+source .venv/bin/activate
+python scripts/create_plugin_indexes.py --plugins dbnsfp,spliceai,cadd
+```
+
+For plain gzip inputs such as `clinvar.vcf.gz` and `AlphaMissense_hg38.tsv.gz`,
+create sibling BGZF files first and index those:
+
+```bash
+source .venv/bin/activate
+python scripts/create_plugin_indexes.py --plugins clinvar,alphamissense --recompress-plain-gzip
+```
+
+Notes:
+
+- BGZF inputs are indexed in place.
+- Plain gzip inputs cannot be indexed directly by `tabix`; they must be converted to BGZF first.
+- The recompress mode writes sibling `.bgz` files and leaves the original `.gz` untouched.
+- The helper prints `[i/n]` progress and periodic elapsed-time updates while `bgzip` or `tabix` is still running.
+- These `.tbi` files can help future chromosome-scoped plugin-cache builds; they do not speed up annotation from already-built parquet/fjall caches.
+
+### 5f. Run a plugin annotation smoke test from built cache
+
+Use this helper when you want to verify that `vepyr.annotate()` really picks up
+plugin values from the already-built plugin cache.
+
+It:
+
+- reads one variant from each selected plugin cache parquet directory
+- writes a temporary mini VCF from those cache-backed variants
+- runs `vepyr.annotate()` against the partitioned cache
+- checks that at least one plugin-specific field is populated for each plugin
+
+Example:
+
+```bash
+source .venv/bin/activate
+python scripts/plugin_annotation_smoke_test.py --plugins clinvar,spliceai,cadd,alphamissense,dbnsfp --skip-install
+```
+
+Notes:
+
+- The script uses `use_fjall=False` deliberately, so it exercises the parquet-backed annotation path.
+- It expects plugin caches under `.cache/vepyr_cache/115_GRCh38_vep/<plugin>/`.
+- It expects `VEPYR_DIFFLY_REFERENCE_FASTA` in `.env`, or you can pass `--reference-fasta`.
+- If the existing local core cache contains corrupted parquet files from an interrupted older build, the smoke test can fail before plugin lookup. Rebuild the core cache into a clean cache root in that case.
+
+### 5g. Issue Validation Artifact
+
+For a step-by-step local proof that the current plugin-cache work satisfies the original plugin issue using reduced-scope evidence, see:
+
+- [`github_issue_check.MD`](/Users/lukaszjezapkowicz/Desktop/magisterka/praca/vepyr_diffly/github_issue_check.MD)
 
 ### 6. What to expect on stdout
 
