@@ -39,6 +39,44 @@ def test_compare_tier_detects_variant_differences(tmp_path: Path) -> None:
     assert artifact.tier.mismatches_tsv_path.exists()
 
 
+def test_compare_tier_decodes_percent_escaped_string_values(tmp_path: Path) -> None:
+    import polars as pl
+
+    left = pl.DataFrame(
+        {
+            "chrom": ["1"],
+            "pos": [100],
+            "ref": ["A"],
+            "alt": ["T"],
+            "ClinVar_CLNDN": ["HP:0001252%3B_HP:0001776"],
+        }
+    )
+    right = pl.DataFrame(
+        {
+            "chrom": ["1"],
+            "pos": [100],
+            "ref": ["A"],
+            "alt": ["T"],
+            "ClinVar_CLNDN": ["HP:0001252;_HP:0001776"],
+        }
+    )
+
+    artifact = compare_tier(
+        name="consequence",
+        left=left,
+        right=right,
+        primary_key=["chrom", "pos", "ref", "alt"],
+        left_name="VEP",
+        right_name="vepyr",
+        diff_frame_path=tmp_path / "consequence.parquet",
+        mismatches_tsv_path=tmp_path / "consequence.tsv",
+    )
+
+    assert artifact.tier.equal is True
+    assert artifact.tier.joined_equal_rows == 1
+    assert artifact.tier.unequal_rows == 0
+
+
 def test_compare_bucketed_consequence_tier_detects_consequence_differences(
     tmp_path: Path,
 ) -> None:
@@ -167,6 +205,55 @@ def test_compare_bucketed_consequence_tier_fast_mode_skips_exact_diff_for_equal_
     assert artifact.tier.details["exact_diff_run_buckets"] == 0
     assert artifact.tier.diff_frame_path.exists()
     assert artifact.tier.mismatches_tsv_path.exists()
+
+
+def test_compare_bucketed_consequence_tier_can_ignore_duplicate_count(tmp_path: Path) -> None:
+    left_bucket_dir = tmp_path / "left-buckets"
+    right_bucket_dir = tmp_path / "right-buckets"
+    (left_bucket_dir / "bucket-0000").mkdir(parents=True)
+    (right_bucket_dir / "bucket-0000").mkdir(parents=True)
+
+    left_frame = {
+        "chrom": ["1"],
+        "pos": [100],
+        "ref": ["A"],
+        "alt": ["T"],
+        "ClinVar": ["123"],
+        "ClinVar_CLNSIG": ["Benign"],
+        "duplicate_count": [5],
+    }
+    right_frame = {
+        "chrom": ["1"],
+        "pos": [100],
+        "ref": ["A"],
+        "alt": ["T"],
+        "ClinVar": ["123"],
+        "ClinVar_CLNSIG": ["Benign"],
+        "duplicate_count": [1],
+    }
+
+    import polars as pl
+
+    pl.DataFrame(left_frame).write_parquet(left_bucket_dir / "bucket-0000" / "bucket.parquet")
+    pl.DataFrame(right_frame).write_parquet(right_bucket_dir / "bucket-0000" / "bucket.parquet")
+
+    artifact = compare_bucketed_consequence_tier(
+        left_bucket_dir=left_bucket_dir,
+        right_bucket_dir=right_bucket_dir,
+        csq_fields=["ClinVar", "ClinVar_CLNSIG"],
+        left_name="VEP",
+        right_name="vepyr",
+        diff_frame_path=tmp_path / "consequence.parquet",
+        mismatches_tsv_path=tmp_path / "consequence.tsv",
+        bucket_count=1,
+        compare_mode="fast",
+        compare_duplicate_count=False,
+    )
+
+    assert artifact.tier.equal is True
+    assert artifact.tier.unequal_rows == 0
+    assert artifact.tier.left_only_rows == 0
+    assert artifact.tier.right_only_rows == 0
 
 
 def test_bucket_metadata_can_shortcut_obvious_mismatch(tmp_path: Path) -> None:

@@ -190,30 +190,59 @@ def build_variant_summary_lazy(
     )
 
 
-def _csq_field_exprs(csq_fields: list[str]) -> list[pl.Expr]:
+def _csq_field_exprs(
+    csq_fields: list[str],
+    *,
+    field_indexes: dict[str, int] | None = None,
+) -> list[pl.Expr]:
     return [
         (
             pl.when(
-                pl.col("_csq_parts").list.get(index, null_on_oob=True).is_null()
+                pl.col("_csq_parts")
+                .list.get(
+                    field_indexes.get(field_name, index) if field_indexes is not None else index,
+                    null_on_oob=True,
+                )
+                .is_null()
                 | (
                     pl.col("_csq_parts")
-                    .list.get(index, null_on_oob=True)
+                    .list.get(
+                        field_indexes.get(field_name, index) if field_indexes is not None else index,
+                        null_on_oob=True,
+                    )
                     .cast(pl.String)
                     .is_in(["", "None"])
                 )
             )
             .then(pl.lit("."))
-            .otherwise(pl.col("_csq_parts").list.get(index, null_on_oob=True).cast(pl.String))
+            .otherwise(
+                pl.col("_csq_parts")
+                .list.get(
+                    field_indexes.get(field_name, index) if field_indexes is not None else index,
+                    null_on_oob=True,
+                )
+                .cast(pl.String)
+            )
             .alias(field_name)
         )
         for index, field_name in enumerate(csq_fields)
     ]
 
 
+def _non_empty_csq_payload_expr(csq_fields: list[str]) -> pl.Expr:
+    if not csq_fields:
+        return pl.lit(True)
+    return pl.any_horizontal(
+        [~pl.col(field).cast(pl.String).is_in(["", "."]) for field in csq_fields]
+    )
+
+
 def build_consequence_summary_lazy(
     source: pl.LazyFrame,
     csq_fields: list[str],
     *,
+    field_indexes: dict[str, int] | None = None,
+    drop_empty_csq_rows: bool = False,
     chromosome_aliases: set[str] | None = None,
 ) -> pl.LazyFrame:
     source = _filter_source_by_chromosomes(source, chromosome_aliases)
@@ -230,14 +259,17 @@ def build_consequence_summary_lazy(
         .with_columns(pl.col("csq_entry").cast(pl.String).str.split("|").alias("_csq_parts"))
     )
     group_key = VARIANT_KEY + csq_fields
-    return (
-        consequence_rows.select(*VARIANT_KEY, *_csq_field_exprs(csq_fields))
+    consequence_rows = (
+        consequence_rows.select(
+            *VARIANT_KEY, *_csq_field_exprs(csq_fields, field_indexes=field_indexes)
+        )
         .with_columns(_normalized_allele_expr())
         .filter(pl.col("Allele") == pl.col("normalized_allele"))
         .drop("normalized_allele")
-        .group_by(group_key)
-        .agg(pl.len().cast(pl.Int64).alias("duplicate_count"))
     )
+    if drop_empty_csq_rows:
+        consequence_rows = consequence_rows.filter(_non_empty_csq_payload_expr(csq_fields))
+    return consequence_rows.group_by(group_key).agg(pl.len().cast(pl.Int64).alias("duplicate_count"))
 
 
 def _materialize_lazyframe(frame: pl.LazyFrame, target: Path) -> None:
@@ -253,9 +285,48 @@ def _count_rows(path: Path) -> int:
 
 
 def _extract_csq_from_info(info: str) -> str:
-    for item in info.split(";"):
-        if item.startswith("CSQ="):
-            return item[4:]
+    marker = "CSQ="
+    start = info.find(marker)
+    if start == -1:
+        return "."
+    start += len(marker)
+    end = len(info)
+    cursor = start
+    while True:
+        semicolon = info.find(";", cursor)
+        if semicolon == -1:
+            break
+        next_equals = info.find("=", semicolon + 1)
+        if next_equals == -1:
+            break
+        candidate = info[semicolon + 1 : next_equals]
+        if candidate and all(ch.isalnum() or ch in "._-" for ch in candidate):
+            end = semicolon
+            break
+        cursor = semicolon + 1
+    return info[start:end]
+ 
+ 
+def _find_csq_end_in_info_bytes(info: bytes, start: int) -> int:
+    end = len(info)
+    cursor = start
+    while True:
+        semicolon = info.find(b";", cursor)
+        if semicolon == -1:
+            return end
+        next_equals = info.find(b"=", semicolon + 1)
+        if next_equals == -1:
+            return end
+        candidate = info[semicolon + 1 : next_equals]
+        if candidate and all(
+            (48 <= byte <= 57)
+            or (65 <= byte <= 90)
+            or (97 <= byte <= 122)
+            or byte in b"._-"
+            for byte in candidate
+        ):
+            return semicolon
+        cursor = semicolon + 1
     return "."
 
 
@@ -265,9 +336,7 @@ def _extract_csq_from_info_bytes(info: bytes) -> str:
     if start == -1:
         return "."
     start += len(marker)
-    end = info.find(b";", start)
-    if end == -1:
-        end = len(info)
+    end = _find_csq_end_in_info_bytes(info, start)
     return info[start:end].decode("utf-8")
 
 
@@ -277,9 +346,7 @@ def _extract_csq_entries_from_info_bytes(info: bytes) -> list[str]:
     if start == -1:
         return []
     start += len(marker)
-    end = info.find(b";", start)
-    if end == -1:
-        end = len(info)
+    end = _find_csq_end_in_info_bytes(info, start)
     payload = info[start:end]
     if not payload:
         return []
@@ -520,13 +587,17 @@ def _aggregate_consequence_chunk(
     chunk: pl.DataFrame,
     csq_fields: list[str],
     *,
+    field_indexes: dict[str, int] | None = None,
+    drop_empty_csq_rows: bool = False,
+    bucket_key_fields: list[str] | None = None,
     bucket_count: int,
 ) -> pl.DataFrame:
     if chunk.is_empty():
         return _empty_consequence_frame(csq_fields, include_bucket=True)
 
     group_key = VARIANT_KEY + csq_fields
-    return (
+    bucket_key = bucket_key_fields or group_key
+    aggregated = (
         chunk.lazy()
         .with_columns(
             pl.col("alt").cast(pl.String).str.split(",").alias("alt"),
@@ -548,12 +619,14 @@ def _aggregate_consequence_chunk(
             .alias("_csq_allele"),
         )
         .filter(pl.col("_csq_allele") == pl.col("normalized_allele"))
-        .select(*VARIANT_KEY, *_csq_field_exprs(csq_fields))
-        .with_columns(_bucket_expr(group_key, bucket_count))
+        .select(*VARIANT_KEY, *_csq_field_exprs(csq_fields, field_indexes=field_indexes))
+        .with_columns(_bucket_expr(bucket_key, bucket_count))
         .group_by(["bucket", *group_key])
         .agg(pl.len().cast(pl.Int64).alias("duplicate_count"))
-        .collect()
     )
+    if drop_empty_csq_rows:
+        aggregated = aggregated.filter(_non_empty_csq_payload_expr(csq_fields))
+    return aggregated.collect()
 
 
 def _aggregate_variant_chunk(
@@ -801,6 +874,9 @@ def materialize_consequence_buckets(
     vcf_path: Path,
     csq_fields: list[str],
     bucket_root: Path,
+    field_indexes: dict[str, int] | None = None,
+    drop_empty_csq_rows: bool = False,
+    bucket_key_fields: list[str] | None = None,
     reporter: ProgressReporter | None = None,
     side_label: str,
     bucket_count: int = CONSEQUENCE_BUCKET_COUNT,
@@ -833,6 +909,9 @@ def materialize_consequence_buckets(
         chunk_frame = _aggregate_consequence_chunk(
             chunk,
             csq_fields,
+            field_indexes=field_indexes,
+            drop_empty_csq_rows=drop_empty_csq_rows,
+            bucket_key_fields=bucket_key_fields,
             bucket_count=bucket_count,
         )
         if not chunk_frame.is_empty():
@@ -964,6 +1043,7 @@ def _eager_normalize_fallback(
     vcf_path: Path,
     csq_fields: list[str],
     *,
+    drop_empty_csq_rows: bool = False,
     chromosome_aliases: set[str] | None = None,
 ) -> NormalizedTables:
     source = _scan_annotated_vcf_text(vcf_path)
@@ -974,6 +1054,7 @@ def _eager_normalize_fallback(
     consequence = build_consequence_summary_lazy(
         source.lazy(),
         csq_fields,
+        drop_empty_csq_rows=drop_empty_csq_rows,
         chromosome_aliases=chromosome_aliases,
     ).collect()
     return NormalizedTables(variant=variant, consequence=consequence, csq_fields=csq_fields)
@@ -1075,6 +1156,8 @@ def materialize_consequence_summary(
     vcf_path: Path,
     consequence_path: Path,
     csq_fields: list[str],
+    field_indexes: dict[str, int] | None = None,
+    drop_empty_csq_rows: bool = False,
     reporter: ProgressReporter | None = None,
     side_label: str,
     chromosome_aliases: set[str] | None = None,
@@ -1083,6 +1166,7 @@ def materialize_consequence_summary(
         eager = _eager_normalize_fallback(
             vcf_path,
             csq_fields,
+            drop_empty_csq_rows=drop_empty_csq_rows,
             chromosome_aliases=chromosome_aliases,
         )
         consequence_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1101,6 +1185,8 @@ def materialize_consequence_summary(
             build_consequence_summary_lazy(
                 scan_annotated_vcf(vcf_path),
                 csq_fields,
+                field_indexes=field_indexes,
+                drop_empty_csq_rows=drop_empty_csq_rows,
                 chromosome_aliases=chromosome_aliases,
             ),
             consequence_path,
@@ -1113,6 +1199,7 @@ def materialize_consequence_summary(
         eager = _eager_normalize_fallback(
             vcf_path,
             csq_fields,
+            drop_empty_csq_rows=drop_empty_csq_rows,
             chromosome_aliases=chromosome_aliases,
         )
         eager.consequence.write_parquet(consequence_path)

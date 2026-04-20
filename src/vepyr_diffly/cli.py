@@ -11,6 +11,7 @@ import sys
 import tempfile
 
 from .presets import get_preset, load_presets
+from .plugins import compare_plugin_fields, parse_plugin_list
 from .settings import env_bool, env_int, env_path, env_str, load_repo_env
 
 try:
@@ -59,6 +60,12 @@ def build_parser() -> argparse.ArgumentParser:
         "--sample-first-n", type=int, default=env_int("VEPYR_DIFFLY_SAMPLE_FIRST_N")
     )
     run_parser.add_argument("--chromosomes", default=env_str("VEPYR_DIFFLY_CHROMOSOMES"))
+    run_parser.add_argument("--plugins", default=env_str("VEPYR_DIFFLY_PLUGINS"))
+    run_parser.add_argument(
+        "--compare-only-plugins",
+        action=argparse.BooleanOptionalAction,
+        default=env_bool("VEPYR_DIFFLY_COMPARE_ONLY_PLUGINS") or False,
+    )
     run_parser.add_argument("--vepyr-path", type=Path, default=env_path("VEPYR_DIFFLY_VEPYR_PATH"))
     run_parser.add_argument(
         "--vepyr-python", type=Path, default=env_path("VEPYR_DIFFLY_VEPYR_PYTHON")
@@ -121,6 +128,7 @@ def build_parser() -> argparse.ArgumentParser:
         action=argparse.BooleanOptionalAction,
         default=env_bool("VEPYR_DIFFLY_VEPYR_USE_FJALL") or False,
     )
+    vepyr_only_parser.add_argument("--plugins", default=env_str("VEPYR_DIFFLY_PLUGINS"))
     vepyr_only_parser.add_argument("--log-path", type=Path)
 
     compare_parser = subparsers.add_parser("compare-existing")
@@ -129,6 +137,12 @@ def build_parser() -> argparse.ArgumentParser:
     compare_parser.add_argument("--right-vcf", required=True, type=Path)
     compare_parser.add_argument("--output-dir", required=True, type=Path)
     compare_parser.add_argument("--chromosomes", default=env_str("VEPYR_DIFFLY_CHROMOSOMES"))
+    compare_parser.add_argument("--plugins", default=env_str("VEPYR_DIFFLY_PLUGINS"))
+    compare_parser.add_argument(
+        "--compare-only-plugins",
+        action=argparse.BooleanOptionalAction,
+        default=env_bool("VEPYR_DIFFLY_COMPARE_ONLY_PLUGINS") or False,
+    )
     compare_parser.add_argument(
         "--compare-mode",
         choices=("fast", "debug"),
@@ -190,6 +204,37 @@ def _chromosome_equal(payload: dict[str, int]) -> bool:
         and int(payload.get("right_only_rows", 0)) == 0
         and int(payload.get("unequal_rows", 0)) == 0
     )
+
+
+def _resolve_compare_csq_fields(
+    *,
+    left_csq_fields: list[str],
+    right_csq_fields: list[str],
+    plugins: list[str],
+    compare_only_plugins: bool,
+) -> list[str]:
+    if not compare_only_plugins:
+        if left_csq_fields != right_csq_fields:
+            raise ValueError("left/right CSQ headers differ and cannot be compared semantically")
+        return left_csq_fields
+
+    if not plugins:
+        raise ValueError("--compare-only-plugins requires --plugins with at least one plugin")
+
+    requested_fields = compare_plugin_fields(plugins)
+    left_selected = [field for field in requested_fields if field in left_csq_fields]
+    right_selected = [field for field in requested_fields if field in right_csq_fields]
+    if left_selected != right_selected:
+        raise ValueError(
+            "left/right plugin CSQ fields differ and cannot be compared with --compare-only-plugins"
+        )
+    if not left_selected:
+        requested = ", ".join(requested_fields)
+        raise ValueError(
+            "no requested plugin CSQ fields were found in either header for "
+            f"--compare-only-plugins: {requested}"
+        )
+    return left_selected
 
 
 def _attribute_stage_timings(
@@ -337,8 +382,14 @@ def _cmd_annotate_vepyr(args: argparse.Namespace, console: Console) -> int:
     if cache_dir is None:
         raise ValueError("--cache-dir is required")
     # Allow passing either the root cache dir or the parquet feature root already.
-    if cache_dir.name != "115_GRCh38_vep" and (cache_dir / "parquet").exists():
-        cache_dir = cache_dir / "parquet" / "115_GRCh38_vep"
+    feature_root_name = f"{env_str('VEPYR_DIFFLY_VEP_CACHE_VERSION') or '115'}_GRCh38_vep"
+    if cache_dir.name != feature_root_name:
+        current_feature_root = cache_dir / feature_root_name
+        legacy_feature_root = cache_dir / "parquet" / feature_root_name
+        if current_feature_root.exists():
+            cache_dir = current_feature_root
+        elif legacy_feature_root.exists():
+            cache_dir = legacy_feature_root
     log_path = args.log_path or args.output_vcf.parent / "vepyr.log"
     console.print(f"vepyr: annotating {args.input_vcf} -> {args.output_vcf}")
     run_vepyr_annotation(
@@ -349,6 +400,7 @@ def _cmd_annotate_vepyr(args: argparse.Namespace, console: Console) -> int:
         reference_fasta=args.reference_fasta,
         vepyr_python=args.vepyr_python,
         use_fjall=args.use_fjall,
+        plugins=parse_plugin_list(args.plugins),
     )
     console.print(f"vepyr: completed, log at {log_path}")
     return 0
@@ -504,8 +556,14 @@ def _run_comparison_pipeline(
         timings["variant_summary_seconds"] = round(perf_counter() - stage_start, 3)
         left_variant_rows = _count_rows(artifacts.left_variant_path)
         right_variant_rows = _count_rows(artifacts.right_variant_path)
-        if left_csq_fields != right_csq_fields:
-            raise ValueError("left/right CSQ headers differ and cannot be compared semantically")
+        compare_csq_fields = _resolve_compare_csq_fields(
+            left_csq_fields=left_csq_fields,
+            right_csq_fields=right_csq_fields,
+            plugins=config.plugins,
+            compare_only_plugins=config.compare_only_plugins,
+        )
+        left_field_indexes = {field: index for index, field in enumerate(left_csq_fields)}
+        right_field_indexes = {field: index for index, field in enumerate(right_csq_fields)}
 
         if resource_plan.use_bucketed_consequence:
             reporter.stage("comparison: bucketizing consequence rows")
@@ -519,7 +577,10 @@ def _run_comparison_pipeline(
             consequence_calls = [
                 dict(
                     vcf_path=left_vcf,
-                    csq_fields=left_csq_fields,
+                    csq_fields=compare_csq_fields,
+                    field_indexes=left_field_indexes,
+                    drop_empty_csq_rows=config.compare_only_plugins,
+                    bucket_key_fields=VARIANT_KEY if config.compare_only_plugins else None,
                     bucket_root=artifacts.left_consequence_bucket_dir,
                     reporter=reporter,
                     side_label=left_name,
@@ -530,7 +591,10 @@ def _run_comparison_pipeline(
                 ),
                 dict(
                     vcf_path=right_vcf,
-                    csq_fields=right_csq_fields,
+                    csq_fields=compare_csq_fields,
+                    field_indexes=right_field_indexes,
+                    drop_empty_csq_rows=config.compare_only_plugins,
+                    bucket_key_fields=VARIANT_KEY if config.compare_only_plugins else None,
                     bucket_root=artifacts.right_consequence_bucket_dir,
                     reporter=reporter,
                     side_label=right_name,
@@ -562,7 +626,8 @@ def _run_comparison_pipeline(
                 dict(
                     vcf_path=left_vcf,
                     consequence_path=artifacts.left_consequence_path,
-                    csq_fields=left_csq_fields,
+                    csq_fields=compare_csq_fields,
+                    field_indexes=left_field_indexes,
                     reporter=reporter,
                     side_label=left_name,
                     chromosome_aliases=set(config.selected_chromosome_aliases),
@@ -570,7 +635,8 @@ def _run_comparison_pipeline(
                 dict(
                     vcf_path=right_vcf,
                     consequence_path=artifacts.right_consequence_path,
-                    csq_fields=right_csq_fields,
+                    csq_fields=compare_csq_fields,
+                    field_indexes=right_field_indexes,
                     reporter=reporter,
                     side_label=right_name,
                     chromosome_aliases=set(config.selected_chromosome_aliases),
@@ -634,7 +700,7 @@ def _run_comparison_pipeline(
             consequence = compare_bucketed_consequence_tier(
                 left_bucket_dir=artifacts.left_consequence_bucket_dir,
                 right_bucket_dir=artifacts.right_consequence_bucket_dir,
-                csq_fields=left_csq_fields,
+                csq_fields=compare_csq_fields,
                 left_name=left_name,
                 right_name=right_name,
                 diff_frame_path=artifacts.consequence_diff_path,
@@ -644,15 +710,21 @@ def _run_comparison_pipeline(
                 max_workers=resource_plan.compare_workers,
                 compare_mode=config.compare_mode,
                 fingerprint_only=config.fingerprint_only,
+                compare_duplicate_count=not config.compare_only_plugins,
             ).tier
             timings["consequence_diff_seconds"] = round(perf_counter() - stage_start, 3)
         else:
-            consequence_key = VARIANT_KEY + left_csq_fields
+            consequence_key = VARIANT_KEY + compare_csq_fields
             stage_start = perf_counter()
+            left_consequence = pl.scan_parquet(artifacts.left_consequence_path)
+            right_consequence = pl.scan_parquet(artifacts.right_consequence_path)
+            if config.compare_only_plugins:
+                left_consequence = left_consequence.select(*consequence_key)
+                right_consequence = right_consequence.select(*consequence_key)
             consequence = compare_tier(
                 name="consequence",
-                left=pl.scan_parquet(artifacts.left_consequence_path),
-                right=pl.scan_parquet(artifacts.right_consequence_path),
+                left=left_consequence,
+                right=right_consequence,
                 primary_key=consequence_key,
                 left_name=left_name,
                 right_name=right_name,
@@ -745,6 +817,8 @@ def _cmd_run(args: argparse.Namespace, console: Console) -> int:
         memory_budget_mb=args.memory_budget_mb,
         fingerprint_only=args.fingerprint_only,
         chromosome_filter_raw=args.chromosomes,
+        plugins=parse_plugin_list(args.plugins),
+        compare_only_plugins=args.compare_only_plugins,
     )
     artifacts = prepare_artifacts(config.output_dir)
     write_effective_config(config, artifacts)
@@ -792,6 +866,8 @@ def _cmd_compare_existing(args: argparse.Namespace, console: Console) -> int:
         annotated_left_vcf=args.left_vcf,
         annotated_right_vcf=args.right_vcf,
         chromosome_filter_raw=args.chromosomes,
+        plugins=parse_plugin_list(args.plugins),
+        compare_only_plugins=args.compare_only_plugins,
     )
     artifacts = prepare_artifacts(config.output_dir)
     write_effective_config(config, artifacts)

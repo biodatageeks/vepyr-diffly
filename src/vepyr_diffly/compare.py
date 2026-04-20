@@ -8,6 +8,7 @@ from pathlib import Path
 import shutil
 import threading
 from typing import Callable
+from urllib.parse import unquote
 
 import polars as pl
 from diffly import compare_frames
@@ -115,6 +116,24 @@ def _build_per_chromosome_counts(
     return output
 
 
+def _normalize_compare_eager_frame(frame: pl.DataFrame, key: list[str]) -> pl.DataFrame:
+    preserved_columns = {"chrom", "pos", "ref", "alt"}
+    string_columns = [
+        column
+        for column, dtype in frame.schema.items()
+        if column not in preserved_columns and dtype == pl.String
+    ]
+    if not string_columns:
+        return frame
+    return frame.with_columns(
+        pl.col(column)
+        .cast(pl.String)
+        .map_elements(unquote, return_dtype=pl.String)
+        .alias(column)
+        for column in string_columns
+    )
+
+
 def _sink_lazy_frame(frame: pl.LazyFrame, path: Path, *, as_csv: bool) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     if as_csv and hasattr(frame, "sink_csv"):
@@ -163,6 +182,8 @@ def compare_tier(
 ) -> ComparisonArtifacts:
     left_eager = left.collect() if isinstance(left, pl.LazyFrame) else left
     right_eager = right.collect() if isinstance(right, pl.LazyFrame) else right
+    left_eager = _normalize_compare_eager_frame(left_eager, primary_key)
+    right_eager = _normalize_compare_eager_frame(right_eager, primary_key)
     if reporter is not None:
         reporter.stage(f"{name}: initializing diffly comparison")
     comparison = compare_frames(left_eager.lazy(), right_eager.lazy(), primary_key=primary_key)
@@ -309,8 +330,14 @@ def _precheck_bucket_frames(
             exact_diff_run=False,
             precheck_equal=False,
         )
-    left_eager = _scan_single_bucket(left_paths, schema).sort(key).collect()
-    right_eager = _scan_single_bucket(right_paths, schema).sort(key).collect()
+    left_eager = _normalize_compare_eager_frame(
+        _scan_single_bucket(left_paths, schema).sort(key).collect(),
+        key,
+    )
+    right_eager = _normalize_compare_eager_frame(
+        _scan_single_bucket(right_paths, schema).sort(key).collect(),
+        key,
+    )
     left_rows = left_eager.height
     right_rows = right_eager.height
     precheck_equal = left_eager.equals(right_eager)
@@ -353,8 +380,11 @@ def _compare_direct_bucket(
     diff_frame_path: Path,
     mismatches_tsv_path: Path | None = None,
 ) -> BucketCompareResult:
-    left_eager = _scan_single_bucket(left_paths, schema).collect()
-    right_eager = _scan_single_bucket(right_paths, schema).collect()
+    left_eager = _normalize_compare_eager_frame(_scan_single_bucket(left_paths, schema).collect(), key)
+    right_eager = _normalize_compare_eager_frame(
+        _scan_single_bucket(right_paths, schema).collect(),
+        key,
+    )
     comparison = compare_frames(
         left_eager.lazy(),
         right_eager.lazy(),
@@ -397,7 +427,9 @@ def _compare_direct_bucket(
     )
 
 
-def _consequence_schema(csq_fields: list[str]) -> dict[str, pl.DataType]:
+def _consequence_schema(
+    csq_fields: list[str], *, include_duplicate_count: bool = True
+) -> dict[str, pl.DataType]:
     schema: dict[str, pl.DataType] = {
         "chrom": pl.String,
         "pos": pl.Int64,
@@ -406,21 +438,31 @@ def _consequence_schema(csq_fields: list[str]) -> dict[str, pl.DataType]:
     }
     for field in csq_fields:
         schema[field] = pl.String
-    schema["duplicate_count"] = pl.Int64
+    if include_duplicate_count:
+        schema["duplicate_count"] = pl.Int64
     return schema
 
 
-def _aggregate_bucket_frame(paths: list[Path], csq_fields: list[str]) -> pl.LazyFrame:
+def _aggregate_bucket_frame(
+    paths: list[Path],
+    csq_fields: list[str],
+    *,
+    include_duplicate_count: bool = True,
+) -> pl.LazyFrame:
     if not paths:
-        return pl.DataFrame(schema=_consequence_schema(csq_fields)).lazy()
+        return pl.DataFrame(
+            schema=_consequence_schema(csq_fields, include_duplicate_count=include_duplicate_count)
+        ).lazy()
     if len(paths) == 1 and paths[0].name == "bucket.parquet":
-        return pl.scan_parquet(str(paths[0]))
+        frame = pl.scan_parquet(str(paths[0]))
+        if include_duplicate_count:
+            return frame
+        return frame.select("chrom", "pos", "ref", "alt", *csq_fields)
     group_key = ["chrom", "pos", "ref", "alt", *csq_fields]
-    return (
-        pl.scan_parquet([str(path) for path in paths])
-        .group_by(group_key)
-        .agg(pl.col("duplicate_count").sum().cast(pl.Int64).alias("duplicate_count"))
-    )
+    grouped = pl.scan_parquet([str(path) for path in paths]).group_by(group_key)
+    if include_duplicate_count:
+        return grouped.agg(pl.col("duplicate_count").sum().cast(pl.Int64).alias("duplicate_count"))
+    return grouped.agg()
 
 
 def _count_lazy_rows(frame: pl.LazyFrame) -> int:
@@ -430,9 +472,15 @@ def _count_lazy_rows(frame: pl.LazyFrame) -> int:
 def _collect_sorted_bucket_frame(
     paths: list[Path],
     csq_fields: list[str],
+    *,
+    include_duplicate_count: bool = True,
 ) -> pl.DataFrame:
     key = ["chrom", "pos", "ref", "alt", *csq_fields]
-    return _aggregate_bucket_frame(paths, csq_fields).sort(key).collect()
+    return _aggregate_bucket_frame(
+        paths,
+        csq_fields,
+        include_duplicate_count=include_duplicate_count,
+    ).sort(key).collect()
 
 
 def _count_bucket_left_only(
@@ -464,6 +512,7 @@ def precheck_single_bucket(
     right_paths: list[Path],
     csq_fields: list[str],
     exact_counts_on_mismatch: bool = False,
+    compare_duplicate_count: bool = True,
 ) -> BucketCompareResult:
     key = ["chrom", "pos", "ref", "alt", *csq_fields]
     if _metadata_proves_mismatch(left_paths, right_paths):
@@ -480,8 +529,22 @@ def precheck_single_bucket(
             exact_diff_run=False,
             precheck_equal=False,
         )
-    left_eager = _collect_sorted_bucket_frame(left_paths, csq_fields)
-    right_eager = _collect_sorted_bucket_frame(right_paths, csq_fields)
+    left_eager = _normalize_compare_eager_frame(
+        _collect_sorted_bucket_frame(
+        left_paths,
+        csq_fields,
+        include_duplicate_count=compare_duplicate_count,
+    ),
+        key,
+    )
+    right_eager = _normalize_compare_eager_frame(
+        _collect_sorted_bucket_frame(
+        right_paths,
+        csq_fields,
+        include_duplicate_count=compare_duplicate_count,
+    ),
+        key,
+    )
     left_rows = left_eager.height
     right_rows = right_eager.height
     precheck_equal = left_eager.equals(right_eager)
@@ -494,7 +557,7 @@ def precheck_single_bucket(
         right_frame = right_eager.lazy()
         left_only_rows = _count_bucket_left_only(left_frame, right_frame, key)
         right_only_rows = _count_bucket_left_only(right_frame, left_frame, key)
-        if left_only_rows == 0 and right_only_rows == 0:
+        if compare_duplicate_count and left_only_rows == 0 and right_only_rows == 0:
             unequal_rows = _count_bucket_unequal(left_frame, right_frame, key)
     return BucketCompareResult(
         bucket_id=bucket_id,
@@ -524,10 +587,25 @@ def compare_single_bucket(
     csq_fields: list[str],
     diff_frame_path: Path,
     mismatches_tsv_path: Path | None = None,
+    compare_duplicate_count: bool = True,
 ) -> BucketCompareResult:
     key = ["chrom", "pos", "ref", "alt", *csq_fields]
-    left_eager = _aggregate_bucket_frame(left_paths, csq_fields).collect()
-    right_eager = _aggregate_bucket_frame(right_paths, csq_fields).collect()
+    left_eager = _normalize_compare_eager_frame(
+        _aggregate_bucket_frame(
+        left_paths,
+        csq_fields,
+        include_duplicate_count=compare_duplicate_count,
+    ).collect(),
+        key,
+    )
+    right_eager = _normalize_compare_eager_frame(
+        _aggregate_bucket_frame(
+        right_paths,
+        csq_fields,
+        include_duplicate_count=compare_duplicate_count,
+    ).collect(),
+        key,
+    )
     comparison = compare_frames(
         left_eager.lazy(),
         right_eager.lazy(),
@@ -801,6 +879,7 @@ def compare_bucketed_consequence_tier(
     max_workers: int | None = None,
     compare_mode: str = "fast",
     fingerprint_only: bool = False,
+    compare_duplicate_count: bool = True,
 ) -> ComparisonArtifacts:
     temp_root = diff_frame_path.parent / ".consequence_bucket_compare"
     if temp_root.exists():
@@ -824,7 +903,7 @@ def compare_bucketed_consequence_tier(
         _write_empty_diff_artifacts(
             diff_frame_path=diff_frame_path,
             mismatches_tsv_path=mismatches_tsv_path,
-            schema=_consequence_schema(csq_fields),
+            schema=_consequence_schema(csq_fields, include_duplicate_count=compare_duplicate_count),
         )
         tier = TierResult(
             name="consequence",
@@ -897,6 +976,7 @@ def compare_bucketed_consequence_tier(
                 temp_tsv_dir=None,
                 compare_mode=compare_mode,
                 fingerprint_only=fingerprint_only,
+                compare_duplicate_count=compare_duplicate_count,
                 on_bucket_complete=_log_bucket_progress,
             ): shard
             for shard in shards
@@ -940,7 +1020,7 @@ def compare_bucketed_consequence_tier(
         _write_empty_diff_artifacts(
             diff_frame_path=diff_frame_path,
             mismatches_tsv_path=mismatches_tsv_path,
-            schema=_consequence_schema(csq_fields),
+            schema=_consequence_schema(csq_fields, include_duplicate_count=compare_duplicate_count),
         )
 
     equal = (
@@ -1007,6 +1087,7 @@ def compare_bucket_shard(
     temp_tsv_dir: Path | None,
     compare_mode: str = "fast",
     fingerprint_only: bool = False,
+    compare_duplicate_count: bool = True,
     on_bucket_complete: Callable[[int, int, BucketCompareResult], None] | None = None,
 ) -> list[BucketCompareResult]:
     results: list[BucketCompareResult] = []
@@ -1031,6 +1112,7 @@ def compare_bucket_shard(
                 right_paths=right_paths,
                 csq_fields=csq_fields,
                 exact_counts_on_mismatch=fingerprint_only,
+                compare_duplicate_count=compare_duplicate_count,
             )
             if precheck.precheck_equal or fingerprint_only:
                 result = precheck
@@ -1044,6 +1126,7 @@ def compare_bucket_shard(
                     mismatches_tsv_path=None
                     if temp_tsv_dir is None
                     else temp_tsv_dir / f"bucket-{bucket_id:04d}.tsv",
+                    compare_duplicate_count=compare_duplicate_count,
                 )
         else:
             result = compare_single_bucket(
@@ -1055,6 +1138,7 @@ def compare_bucket_shard(
                 mismatches_tsv_path=None
                 if temp_tsv_dir is None
                 else temp_tsv_dir / f"bucket-{bucket_id:04d}.tsv",
+                compare_duplicate_count=compare_duplicate_count,
             )
         results.append(result)
         if on_bucket_complete is not None:

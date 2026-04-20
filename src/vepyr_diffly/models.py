@@ -29,6 +29,8 @@ class RuntimeConfig:
     chromosome_filter_raw: str | None = None
     selected_chromosomes: list[str] = field(default_factory=list)
     selected_chromosome_aliases: list[str] = field(default_factory=list)
+    plugins: list[str] = field(default_factory=list)
+    compare_only_plugins: bool = False
     annotated_left_vcf: Path | None = None
     annotated_right_vcf: Path | None = None
     vepyr_path: Path | None = None

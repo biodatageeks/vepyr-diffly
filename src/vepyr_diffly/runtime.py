@@ -10,6 +10,7 @@ from pathlib import Path
 
 from .chromosomes import parse_chromosome_selection
 from .models import AnnotatedOutputs, Preset, RunArtifacts, RuntimeConfig
+from .plugins import vep_plugin_args
 from .sampling import prepare_vcf_for_annotation
 
 
@@ -68,9 +69,11 @@ def resolve_runtime_config(
     compare_workers: int | None = None,
     memory_budget_mb: int | None = None,
     fingerprint_only: bool = False,
+    compare_only_plugins: bool = False,
     annotated_left_vcf: Path | None = None,
     annotated_right_vcf: Path | None = None,
     chromosome_filter_raw: str | None = None,
+    plugins: list[str] | None = None,
 ) -> RuntimeConfig:
     if sample_first_n is not None and not preset.supports_sampling:
         raise ValueError(f"preset {preset.name} does not support sampling")
@@ -83,6 +86,8 @@ def resolve_runtime_config(
         chromosome_filter_raw=chromosome_filter_raw,
         selected_chromosomes=selected_chromosomes,
         selected_chromosome_aliases=sorted(chromosome_aliases),
+        plugins=[] if plugins is None else plugins,
+        compare_only_plugins=compare_only_plugins,
         annotated_left_vcf=_expand_path(annotated_left_vcf),
         annotated_right_vcf=_expand_path(annotated_right_vcf),
         execution_mode=execution_mode,
@@ -243,6 +248,7 @@ def run_vepyr_annotation(
     reference_fasta: Path | None = None,
     vepyr_python: Path | None = None,
     use_fjall: bool = False,
+    plugins: list[str] | None = None,
 ) -> None:
     env = os.environ.copy()
     if vepyr_python is not None:
@@ -261,6 +267,8 @@ def run_vepyr_annotation(
     ]
     if use_fjall:
         command.append("--use-fjall")
+    if plugins:
+        command.extend(["--plugins", ",".join(plugins)])
     _run_command_env(command, log_path, env)
 
 
@@ -284,6 +292,12 @@ def _resolve_local_cache_source(config: RuntimeConfig) -> Path:
 def _resolve_vepyr_feature_root(config: RuntimeConfig) -> Path:
     if config.vepyr_cache_output_dir is None or config.vep_cache_version is None:
         raise ValueError("vepyr cache output dir and vep cache version are required")
+    current = (
+        config.vepyr_cache_output_dir
+        / f"{config.vep_cache_version}_{config.preset.assembly}_{_cache_method(config.preset)}"
+    )
+    if current.exists():
+        return current
     return (
         config.vepyr_cache_output_dir
         / "parquet"
@@ -357,7 +371,7 @@ def _execute_local(config: RuntimeConfig, artifacts: RunArtifacts) -> AnnotatedO
         vep_env["PERL5LIB"] = config.vep_perl5lib
 
     vep_command = [
-        str(config.vep_bin),
+        *_vep_command_prefix(config.vep_bin),
         "--input_file",
         str(input_vcf),
         "--output_file",
@@ -373,6 +387,7 @@ def _execute_local(config: RuntimeConfig, artifacts: RunArtifacts) -> AnnotatedO
         "--force_overwrite",
         "--no_stats",
         *config.preset.vep_args,
+        *vep_plugin_args(config.plugins),
     ]
     if config.reference_fasta is not None:
         vep_command.extend(["--fasta", str(config.reference_fasta)])
@@ -387,6 +402,7 @@ def _execute_local(config: RuntimeConfig, artifacts: RunArtifacts) -> AnnotatedO
         reference_fasta=config.reference_fasta,
         vepyr_python=config.vepyr_python,
         use_fjall=config.vepyr_use_fjall,
+        plugins=config.plugins,
     )
     return AnnotatedOutputs(
         left_name="VEP",
@@ -396,9 +412,17 @@ def _execute_local(config: RuntimeConfig, artifacts: RunArtifacts) -> AnnotatedO
     )
 
 
+def _vep_command_prefix(vep_bin: Path) -> list[str]:
+    if vep_bin.name == "vep":
+        return ["perl", "-MBio::DB::HTS::Tabix", str(vep_bin)]
+    return [str(vep_bin)]
+
+
 def execute_engines(config: RuntimeConfig, artifacts: RunArtifacts) -> AnnotatedOutputs:
     if config.execution_mode == "local":
         return _execute_local(config, artifacts)
+    if config.plugins:
+        raise ValueError("plugin execution is currently supported only with --execution-mode local")
     input_vcf = prepare_input(config, artifacts)
     left_vcf = artifacts.runtime_dir / "vep.annotated.vcf"
     right_vcf = artifacts.runtime_dir / "vepyr.annotated.vcf"

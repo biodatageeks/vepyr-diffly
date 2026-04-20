@@ -52,6 +52,7 @@ def main() -> int:
     parser.add_argument("--cache-dir", required=True)
     parser.add_argument("--reference-fasta", default="")
     parser.add_argument("--use-fjall", action="store_true")
+    parser.add_argument("--plugins", default="")
     args = parser.parse_args()
     try:
         vepyr = _import_vepyr()
@@ -71,6 +72,7 @@ def main() -> int:
         output_vcf=args.output_vcf,
         reference_fasta=args.reference_fasta or None,
         use_fjall=args.use_fjall,
+        plugins=[item.strip() for item in args.plugins.split(",") if item.strip()] or None,
     )
     return 0
 
