@@ -401,6 +401,7 @@ def test_build_plugin_caches_uses_builder_limit_for_global_preview_when_sorted_o
             source_path,
             cache_dir_value,
             *,
+            build_fjall=True,
             partitions=8,
             chromosomes=None,
             assume_sorted_input=False,
@@ -411,6 +412,7 @@ def test_build_plugin_caches_uses_builder_limit_for_global_preview_when_sorted_o
                     plugin,
                     source_path,
                     cache_dir_value,
+                    build_fjall,
                     partitions,
                     chromosomes,
                     assume_sorted_input,
@@ -440,6 +442,7 @@ def test_build_plugin_caches_uses_builder_limit_for_global_preview_when_sorted_o
             "dbnsfp",
             str(source),
             str(cache_dir),
+            True,
             8,
             None,
             True,
@@ -468,6 +471,7 @@ def test_build_plugin_caches_falls_back_to_temp_preview_without_sorted_opt_in(
             source_path,
             cache_dir_value,
             *,
+            build_fjall=True,
             partitions=8,
             chromosomes=None,
             assume_sorted_input=False,
@@ -478,6 +482,7 @@ def test_build_plugin_caches_falls_back_to_temp_preview_without_sorted_opt_in(
                     plugin,
                     source_path,
                     cache_dir_value,
+                    build_fjall,
                     partitions,
                     chromosomes,
                     assume_sorted_input,
@@ -508,6 +513,7 @@ def test_build_plugin_caches_falls_back_to_temp_preview_without_sorted_opt_in(
             "dbnsfp",
             str(temp_preview),
             str(cache_dir),
+            True,
             8,
             None,
             False,
@@ -540,6 +546,7 @@ def test_build_plugin_caches_keeps_temp_preview_path_for_cadd(
             source_path,
             cache_dir_value,
             *,
+            build_fjall=True,
             partitions=8,
             chromosomes=None,
             assume_sorted_input=False,
@@ -550,6 +557,7 @@ def test_build_plugin_caches_keeps_temp_preview_path_for_cadd(
                     plugin,
                     source_path,
                     cache_dir_value,
+                    build_fjall,
                     partitions,
                     chromosomes,
                     assume_sorted_input,
@@ -585,9 +593,74 @@ def test_build_plugin_caches_keeps_temp_preview_path_for_cadd(
             "cadd",
             {"snv": str(snv_preview), "indel": str(indel_preview)},
             str(cache_dir),
+            True,
             8,
             None,
             True,
+            None,
+        )
+    ]
+
+
+def test_build_plugin_caches_can_skip_plugin_fjall(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    module = _load_module()
+    source = tmp_path / "AlphaMissense_hg38.tsv.gz"
+    source.write_text("fixture", encoding="utf-8")
+    cache_dir = tmp_path / "cache"
+    cache_dir.mkdir()
+
+    calls: list[tuple] = []
+
+    class FakeVepyr:
+        def build_plugin(
+            self,
+            plugin,
+            source_path,
+            cache_dir_value,
+            *,
+            build_fjall=True,
+            partitions=8,
+            chromosomes=None,
+            assume_sorted_input=False,
+            preview_rows=None,
+        ):
+            calls.append(
+                (
+                    plugin,
+                    source_path,
+                    cache_dir_value,
+                    build_fjall,
+                    partitions,
+                    chromosomes,
+                    assume_sorted_input,
+                    preview_rows,
+                )
+            )
+
+    monkeypatch.setattr(module, "_prepare_preview_source", lambda *args, **kwargs: (source, None))
+    monkeypatch.setattr(module, "_parquet_size", lambda _path: 0)
+
+    module.build_plugin_caches(
+        vepyr_module=FakeVepyr(),
+        cache_dir=cache_dir,
+        plugins=["alphamissense"],
+        plugin_sources={"alphamissense": source},
+        partitions=8,
+        chromosomes=None,
+        preview_rows=None,
+        assume_sorted_input=False,
+        build_fjall=False,
+    )
+
+    assert calls == [
+        (
+            "alphamissense",
+            str(source),
+            str(cache_dir),
+            False,
+            8,
+            None,
+            False,
             None,
         )
     ]

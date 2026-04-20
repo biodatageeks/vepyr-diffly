@@ -105,6 +105,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Skip building core `variation.fjall` and `translation_sift.fjall` from parquet.",
     )
     parser.add_argument(
+        "--no-plugin-fjall",
+        action="store_true",
+        help="Skip building plugin `*.fjall` stores and materialize parquet plugin caches only.",
+    )
+    parser.add_argument(
         "--only-plugins",
         action="store_true",
         help="Skip core cache generation entirely and build only the requested plugins.",
@@ -682,6 +687,7 @@ def build_plugin_caches(
     chromosomes: list[str] | None,
     preview_rows: int | None,
     assume_sorted_input: bool,
+    build_fjall: bool = True,
 ) -> None:
     temp_preview_paths: list[Path] = []
     try:
@@ -715,6 +721,7 @@ def build_plugin_caches(
                     "cadd",
                     {"snv": str(snv_source), "indel": str(indel_source)},
                     str(cache_dir),
+                    build_fjall=build_fjall,
                     partitions=partitions,
                     chromosomes=chromosomes,
                     assume_sorted_input=assume_sorted_input,
@@ -782,6 +789,7 @@ def build_plugin_caches(
                 plugin,
                 str(limited_source),
                 str(cache_dir),
+                build_fjall=build_fjall,
                 partitions=partitions,
                 chromosomes=chromosomes,
                 assume_sorted_input=assume_sorted_input,
@@ -944,6 +952,7 @@ def main(argv: list[str] | None = None) -> int:
             chromosomes=requested_chromosomes or None,
             preview_rows=args.preview_rows,
             assume_sorted_input=args.assume_sorted_plugin_input,
+            build_fjall=not args.no_plugin_fjall,
         )
         return 0
     finally:

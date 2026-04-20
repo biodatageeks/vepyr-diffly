@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 import argparse
-import os
+import gzip
 import shutil
 import struct
 import subprocess
-import sys
 import tempfile
 import time
 from dataclasses import dataclass
@@ -188,13 +187,36 @@ def recompress_to_bgzf(path: Path, dry_run: bool) -> Path:
     ) as temp_handle:
         temp_path = Path(temp_handle.name)
     try:
-        with temp_path.open("wb") as sink:
-            run_with_progress(
-                [bgzip_bin, "-c", str(path)],
-                label=path.name,
-                action=f"bgzip -> {output_path.name}",
-                stdout=sink,
+        started = time.monotonic()
+        sink = temp_path.open("wb")
+        proc = subprocess.Popen(
+            [bgzip_bin, "-c"],
+            stdin=subprocess.PIPE,
+            stdout=sink,
+            stderr=subprocess.PIPE,
+        )
+        assert proc.stdin is not None
+        last_reported = started
+        with gzip.open(path, "rb") as source, sink:
+            while chunk := source.read(1024 * 1024):
+                proc.stdin.write(chunk)
+                now = time.monotonic()
+                if now - last_reported >= 5.0:
+                    elapsed = now - started
+                    print(
+                        f"[{path.name}] bgzip -> {output_path.name}: still running "
+                        f"({elapsed:.1f}s elapsed)"
+                    )
+                    last_reported = now
+        proc.stdin.close()
+        stderr = proc.stderr.read().decode() if proc.stderr is not None else ""
+        returncode = proc.wait()
+        if returncode != 0:
+            raise subprocess.CalledProcessError(
+                returncode, [bgzip_bin, "-c"], stderr=stderr
             )
+        elapsed = time.monotonic() - started
+        print(f"[{path.name}] bgzip -> {output_path.name}: done in {elapsed:.1f}s")
         temp_path.replace(output_path)
     finally:
         try:
