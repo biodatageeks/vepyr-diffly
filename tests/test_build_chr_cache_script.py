@@ -383,6 +383,53 @@ def test_prepare_preview_source_prefers_tabix_for_full_chromosome_scoped_build(
     }
 
 
+def test_gzip_uncompressed_size_treats_zero_size_as_unknown(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module = _load_module()
+    source = tmp_path / "dbNSFP5.3.1a_grch38.gz"
+    source.write_text("fixture", encoding="utf-8")
+
+    class Result:
+        stdout = "compressed uncompressed ratio uncompressed_name\n123 0 0.0% source\n"
+
+    monkeypatch.setattr(module.subprocess, "run", lambda *args, **kwargs: Result())
+
+    assert module._gzip_uncompressed_size(source) is None
+
+
+def test_combine_stats_preserves_unknown_uncompressed_size() -> None:
+    module = _load_module()
+
+    result = module._combine_stats(
+        {"compressed_bytes": 10, "uncompressed_bytes": 20},
+        {"compressed_bytes": 30, "uncompressed_bytes": None},
+    )
+
+    assert result == {"compressed_bytes": 40, "uncompressed_bytes": None}
+
+
+def test_log_plugin_stats_reports_unknown_raw_size(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    module = _load_module()
+    cache_dir = tmp_path / "cache"
+    (cache_dir / "dbnsfp").mkdir(parents=True)
+    monkeypatch.setattr(module, "_parquet_size", lambda _path: 1024)
+
+    module._log_plugin_stats(
+        "dbnsfp",
+        {"compressed_bytes": 2048, "uncompressed_bytes": None},
+        cache_dir,
+        None,
+        0.0,
+        1.0,
+    )
+
+    output = capsys.readouterr().out
+    assert "raw=UNKNOWN" in output
+
+
 def test_build_plugin_caches_uses_builder_limit_for_global_preview_when_sorted_opt_in_enabled(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

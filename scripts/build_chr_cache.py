@@ -360,7 +360,13 @@ def _format_bytes(value: int) -> str:
     return f"{value:.1f}PB"
 
 
-def _gzip_uncompressed_size(path: Path) -> int:
+def _format_optional_bytes(value: int | None) -> str:
+    if value is None:
+        return "UNKNOWN"
+    return _format_bytes(value)
+
+
+def _gzip_uncompressed_size(path: Path) -> int | None:
     if path.suffixes and path.suffixes[-1] == ".gz":
         result = subprocess.run(
             ["gzip", "-l", str(path)],
@@ -373,7 +379,10 @@ def _gzip_uncompressed_size(path: Path) -> int:
             if len(lines) >= 2:
                 parts = lines[1].split()
                 if len(parts) >= 2 and parts[1].isdigit():
-                    return int(parts[1])
+                    size = int(parts[1])
+                    # `gzip -l` is unreliable for large BGZF/multi-member gzip inputs:
+                    # the 32-bit footer size can wrap or report 0 for valid large files.
+                    return size if size > 0 else None
     return path.stat().st_size
 
 
@@ -580,10 +589,14 @@ def _prepare_preview_source(
     }
 
 
-def _combine_stats(*stats: dict[str, int]) -> dict[str, int]:
+def _combine_stats(*stats: dict[str, int | None]) -> dict[str, int | None]:
+    raw_values = [stat.get("uncompressed_bytes") for stat in stats]
+    raw_bytes = None
+    if all(value is not None for value in raw_values):
+        raw_bytes = sum(int(value or 0) for value in raw_values)
     return {
-        "compressed_bytes": sum(stat.get("compressed_bytes", 0) for stat in stats),
-        "uncompressed_bytes": sum(stat.get("uncompressed_bytes", 0) for stat in stats),
+        "compressed_bytes": sum(int(stat.get("compressed_bytes") or 0) for stat in stats),
+        "uncompressed_bytes": raw_bytes,
     }
 
 
@@ -653,7 +666,7 @@ def remove_current_plugin_outputs(
 
 def _log_plugin_stats(
     plugin_name: str,
-    stats: dict[str, int] | None,
+    stats: dict[str, int | None] | None,
     cache_dir: Path,
     preview_rows: int | None,
     preview_prep_seconds: float,
@@ -668,7 +681,7 @@ def _log_plugin_stats(
     if stats is not None:
         print(
             f"{label} ({preview_note}): .gz={_format_bytes(stats['compressed_bytes'])}, "
-            f"raw={_format_bytes(stats['uncompressed_bytes'])}, parquet={_format_bytes(parquet_bytes)}, "
+            f"raw={_format_optional_bytes(stats['uncompressed_bytes'])}, parquet={_format_bytes(parquet_bytes)}, "
             f"preview_prep={preview_prep_seconds:.1f}s, convert={convert_seconds:.1f}s, total={total_seconds:.1f}s"
         )
         return

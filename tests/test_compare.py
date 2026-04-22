@@ -77,6 +77,46 @@ def test_compare_tier_decodes_percent_escaped_string_values(tmp_path: Path) -> N
     assert artifact.tier.unequal_rows == 0
 
 
+def test_compare_tier_canonicalizes_numeric_string_values(tmp_path: Path) -> None:
+    import polars as pl
+
+    left = pl.DataFrame(
+        {
+            "chrom": ["1"],
+            "pos": [100],
+            "ref": ["A"],
+            "alt": ["T"],
+            "phylop100way": ["0.980000"],
+            "cadd_phred": ["14.00"],
+        }
+    )
+    right = pl.DataFrame(
+        {
+            "chrom": ["1"],
+            "pos": [100],
+            "ref": ["A"],
+            "alt": ["T"],
+            "phylop100way": ["0.98"],
+            "cadd_phred": ["14"],
+        }
+    )
+
+    artifact = compare_tier(
+        name="consequence",
+        left=left,
+        right=right,
+        primary_key=["chrom", "pos", "ref", "alt"],
+        left_name="VEP",
+        right_name="vepyr",
+        diff_frame_path=tmp_path / "consequence.parquet",
+        mismatches_tsv_path=tmp_path / "consequence.tsv",
+    )
+
+    assert artifact.tier.equal is True
+    assert artifact.tier.joined_equal_rows == 1
+    assert artifact.tier.unequal_rows == 0
+
+
 def test_compare_bucketed_consequence_tier_detects_consequence_differences(
     tmp_path: Path,
 ) -> None:

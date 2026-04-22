@@ -11,7 +11,7 @@ import sys
 import tempfile
 
 from .presets import get_preset, load_presets
-from .plugins import compare_plugin_fields, parse_plugin_list
+from .plugins import compare_plugin_field_aliases, compare_plugin_fields, parse_plugin_list
 from .settings import env_bool, env_int, env_path, env_str, load_repo_env
 
 try:
@@ -222,8 +222,17 @@ def _resolve_compare_csq_fields(
         raise ValueError("--compare-only-plugins requires --plugins with at least one plugin")
 
     requested_fields = compare_plugin_fields(plugins)
-    left_selected = [field for field in requested_fields if field in left_csq_fields]
-    right_selected = [field for field in requested_fields if field in right_csq_fields]
+    field_aliases = compare_plugin_field_aliases(plugins)
+    left_selected = [
+        field
+        for field in requested_fields
+        if any(alias in left_csq_fields for alias in field_aliases[field])
+    ]
+    right_selected = [
+        field
+        for field in requested_fields
+        if any(alias in right_csq_fields for alias in field_aliases[field])
+    ]
     if left_selected != right_selected:
         raise ValueError(
             "left/right plugin CSQ fields differ and cannot be compared with --compare-only-plugins"
@@ -235,6 +244,27 @@ def _resolve_compare_csq_fields(
             f"--compare-only-plugins: {requested}"
         )
     return left_selected
+
+
+def _resolve_csq_field_indexes(
+    *,
+    selected_fields: list[str],
+    header_fields: list[str],
+    plugins: list[str],
+    compare_only_plugins: bool,
+) -> dict[str, int]:
+    header_indexes = {field: index for index, field in enumerate(header_fields)}
+    if not compare_only_plugins:
+        return header_indexes
+
+    field_aliases = compare_plugin_field_aliases(plugins)
+    selected_indexes: dict[str, int] = {}
+    for field in selected_fields:
+        for alias in field_aliases[field]:
+            if alias in header_indexes:
+                selected_indexes[field] = header_indexes[alias]
+                break
+    return selected_indexes
 
 
 def _attribute_stage_timings(
@@ -562,8 +592,18 @@ def _run_comparison_pipeline(
             plugins=config.plugins,
             compare_only_plugins=config.compare_only_plugins,
         )
-        left_field_indexes = {field: index for index, field in enumerate(left_csq_fields)}
-        right_field_indexes = {field: index for index, field in enumerate(right_csq_fields)}
+        left_field_indexes = _resolve_csq_field_indexes(
+            selected_fields=compare_csq_fields,
+            header_fields=left_csq_fields,
+            plugins=config.plugins,
+            compare_only_plugins=config.compare_only_plugins,
+        )
+        right_field_indexes = _resolve_csq_field_indexes(
+            selected_fields=compare_csq_fields,
+            header_fields=right_csq_fields,
+            plugins=config.plugins,
+            compare_only_plugins=config.compare_only_plugins,
+        )
 
         if resource_plan.use_bucketed_consequence:
             reporter.stage("comparison: bucketizing consequence rows")

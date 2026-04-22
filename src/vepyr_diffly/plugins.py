@@ -33,12 +33,8 @@ PLUGIN_COMPARE_FIELDS: dict[str, tuple[str, ...]] = {
         "sift4g_pred",
         "polyphen2_hdiv_score",
         "polyphen2_hvar_score",
-        "lrt_score",
-        "lrt_pred",
         "mutationtaster_score",
         "mutationtaster_pred",
-        "fathmm_score",
-        "fathmm_pred",
         "provean_score",
         "provean_pred",
         "vest4_score",
@@ -49,13 +45,45 @@ PLUGIN_COMPARE_FIELDS: dict[str, tuple[str, ...]] = {
         "revel_score",
         "gerp_rs",
         "phylop100way",
-        "phylop30way",
         "phastcons100way",
-        "phastcons30way",
-        "siphy_29way",
         "cadd_raw",
         "cadd_phred",
     ),
+}
+
+PLUGIN_COMPARE_FIELD_ALIASES: dict[str, dict[str, tuple[str, ...]]] = {
+    "spliceai": {
+        "symbol": ("symbol", "SpliceAI_pred_SYMBOL"),
+        "ds_ag": ("ds_ag", "SpliceAI_pred_DS_AG"),
+        "ds_al": ("ds_al", "SpliceAI_pred_DS_AL"),
+        "ds_dg": ("ds_dg", "SpliceAI_pred_DS_DG"),
+        "ds_dl": ("ds_dl", "SpliceAI_pred_DS_DL"),
+        "dp_ag": ("dp_ag", "SpliceAI_pred_DP_AG"),
+        "dp_al": ("dp_al", "SpliceAI_pred_DP_AL"),
+        "dp_dg": ("dp_dg", "SpliceAI_pred_DP_DG"),
+        "dp_dl": ("dp_dl", "SpliceAI_pred_DP_DL"),
+    },
+    "dbnsfp": {
+        "sift4g_score": ("sift4g_score", "SIFT4G_score"),
+        "sift4g_pred": ("sift4g_pred", "SIFT4G_pred"),
+        "polyphen2_hdiv_score": ("polyphen2_hdiv_score", "Polyphen2_HDIV_score"),
+        "polyphen2_hvar_score": ("polyphen2_hvar_score", "Polyphen2_HVAR_score"),
+        "mutationtaster_score": ("mutationtaster_score", "MutationTaster_score"),
+        "mutationtaster_pred": ("mutationtaster_pred", "MutationTaster_pred"),
+        "provean_score": ("provean_score", "PROVEAN_score"),
+        "provean_pred": ("provean_pred", "PROVEAN_pred"),
+        "vest4_score": ("vest4_score", "VEST4_score"),
+        "metasvm_score": ("metasvm_score", "MetaSVM_score"),
+        "metasvm_pred": ("metasvm_pred", "MetaSVM_pred"),
+        "metalr_score": ("metalr_score", "MetaLR_score"),
+        "metalr_pred": ("metalr_pred", "MetaLR_pred"),
+        "revel_score": ("revel_score", "REVEL_score"),
+        "gerp_rs": ("gerp_rs", "GERP++_RS"),
+        "phylop100way": ("phylop100way", "phyloP100way_vertebrate"),
+        "phastcons100way": ("phastcons100way", "phastCons100way_vertebrate"),
+        "cadd_raw": ("cadd_raw", "CADD_raw"),
+        "cadd_phred": ("cadd_phred", "CADD_phred"),
+    }
 }
 
 
@@ -82,6 +110,16 @@ def compare_plugin_fields(plugins: list[str]) -> list[str]:
             if field not in fields:
                 fields.append(field)
     return fields
+
+
+def compare_plugin_field_aliases(plugins: list[str]) -> dict[str, tuple[str, ...]]:
+    aliases: dict[str, tuple[str, ...]] = {}
+    for plugin in plugins:
+        plugin_aliases = PLUGIN_COMPARE_FIELD_ALIASES.get(plugin, {})
+        for field in PLUGIN_COMPARE_FIELDS[plugin]:
+            field_aliases = plugin_aliases.get(field, (field,))
+            aliases[field] = tuple(dict.fromkeys((field, *field_aliases)))
+    return aliases
 
 
 def _env_path(name: str) -> Path | None:
@@ -152,10 +190,33 @@ def vep_plugin_args(plugins: list[str]) -> list[str]:
             source = _indexed_path(
                 _required_env_path("VEPYR_DIFFLY_PLUGIN_DBNSFP_SOURCE", plugin), plugin
             )
+            fields = ",".join(
+                [
+                    "SIFT4G_score",
+                    "SIFT4G_pred",
+                    "Polyphen2_HDIV_score",
+                    "Polyphen2_HVAR_score",
+                    "MutationTaster_score",
+                    "MutationTaster_pred",
+                    "PROVEAN_score",
+                    "PROVEAN_pred",
+                    "VEST4_score",
+                    "MetaSVM_score",
+                    "MetaSVM_pred",
+                    "MetaLR_score",
+                    "MetaLR_pred",
+                    "REVEL_score",
+                    "GERP++_RS",
+                    "phyloP100way_vertebrate",
+                    "phastCons100way_vertebrate",
+                    "CADD_raw",
+                    "CADD_phred",
+                ]
+            )
             args.extend(
                 [
                     "--plugin",
-                    f"dbNSFP,{source},SIFT4G_score,Polyphen2_HDIV_score,REVEL_score,CADD_phred",
+                    f"dbNSFP,{source},{fields}",
                 ]
             )
     return args

@@ -2,9 +2,11 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from decimal import Decimal, InvalidOperation
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import threading
 from typing import Callable
@@ -19,6 +21,22 @@ from .progress import ProgressReporter
 
 
 MISMATCH_TSV_ROW_LIMIT = 2000
+_NUMERIC_STRING_RE = re.compile(r"^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$")
+
+
+def _normalize_compare_string(value: str | None) -> str | None:
+    if value is None:
+        return None
+    decoded = unquote(value)
+    if not _NUMERIC_STRING_RE.match(decoded):
+        return decoded
+    try:
+        decimal = Decimal(decoded)
+    except InvalidOperation:
+        return decoded
+    if decimal.is_zero():
+        return "0"
+    return format(decimal.normalize(), "f")
 
 
 @dataclass(frozen=True)
@@ -128,7 +146,7 @@ def _normalize_compare_eager_frame(frame: pl.DataFrame, key: list[str]) -> pl.Da
     return frame.with_columns(
         pl.col(column)
         .cast(pl.String)
-        .map_elements(unquote, return_dtype=pl.String)
+        .map_elements(_normalize_compare_string, return_dtype=pl.String)
         .alias(column)
         for column in string_columns
     )
