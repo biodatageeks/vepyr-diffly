@@ -82,3 +82,28 @@ def test_resolve_csq_field_indexes_maps_spliceai_aliases_to_canonical_fields() -
     )
 
     assert result == {"symbol": 1, "ds_ag": 2, "dp_ag": 3}
+
+
+def test_resolve_compare_csq_fields_accepts_cadd_aliases() -> None:
+    left = ["Allele", "CADD_RAW", "CADD_PHRED"]
+    right = ["Allele", "raw_score", "phred_score"]
+
+    resolved = _resolve_compare_csq_fields(
+        left_csq_fields=left,
+        right_csq_fields=right,
+        plugins=["cadd"],
+        compare_only_plugins=True,
+    )
+
+    assert resolved == ["cadd_raw", "cadd_phred"]
+
+
+def test_resolve_csq_field_indexes_maps_cadd_aliases_to_canonical_fields() -> None:
+    result = _resolve_csq_field_indexes(
+        selected_fields=["cadd_raw", "cadd_phred"],
+        header_fields=["Allele", "CADD_RAW", "CADD_PHRED"],
+        plugins=["cadd"],
+        compare_only_plugins=True,
+    )
+
+    assert result == {"cadd_raw": 1, "cadd_phred": 2}

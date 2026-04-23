@@ -26,7 +26,7 @@ PLUGIN_COMPARE_FIELDS: dict[str, tuple[str, ...]] = {
         "dp_dg",
         "dp_dl",
     ),
-    "cadd": ("raw_score", "phred_score"),
+    "cadd": ("cadd_raw", "cadd_phred"),
     "alphamissense": ("am_pathogenicity", "am_class"),
     "dbnsfp": (
         "sift4g_score",
@@ -52,6 +52,10 @@ PLUGIN_COMPARE_FIELDS: dict[str, tuple[str, ...]] = {
 }
 
 PLUGIN_COMPARE_FIELD_ALIASES: dict[str, dict[str, tuple[str, ...]]] = {
+    "cadd": {
+        "cadd_raw": ("cadd_raw", "CADD_RAW", "raw_score"),
+        "cadd_phred": ("cadd_phred", "CADD_PHRED", "phred_score"),
+    },
     "spliceai": {
         "symbol": ("symbol", "SpliceAI_pred_SYMBOL"),
         "ds_ag": ("ds_ag", "SpliceAI_pred_DS_AG"),
