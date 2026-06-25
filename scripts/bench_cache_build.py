@@ -312,7 +312,15 @@ def orchestrate(args: argparse.Namespace) -> int:
             ]
             if args.fixed_partitions is not None:
                 command += ["--fixed-partitions", str(args.fixed_partitions)]
-            completed = subprocess.run(command, check=True, capture_output=True, text=True)
+            # Capture stdout (the JSON measurement) but let the child's stderr
+            # (Rust logs / panics) stream straight through so build failures are
+            # visible instead of being swallowed.
+            completed = subprocess.run(command, stdout=subprocess.PIPE, text=True)
+            if completed.returncode != 0:
+                raise RuntimeError(
+                    f"build subprocess failed (exit {completed.returncode}) for "
+                    f"{args.knob}={knob_value}; see stderr above"
+                )
             measurement = json.loads(completed.stdout.strip().splitlines()[-1])
             row = {"knob": args.knob, "knob_value": knob_value, "repeat": repeat, **measurement}
             rows.append(row)
