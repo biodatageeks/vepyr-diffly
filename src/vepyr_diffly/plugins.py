@@ -46,8 +46,8 @@ PLUGIN_COMPARE_FIELDS: dict[str, tuple[str, ...]] = {
         "gerp_rs",
         "phylop100way",
         "phastcons100way",
-        "cadd_raw",
-        "cadd_phred",
+        "dbnsfp_cadd_raw",
+        "dbnsfp_cadd_phred",
     ),
 }
 
@@ -85,8 +85,13 @@ PLUGIN_COMPARE_FIELD_ALIASES: dict[str, dict[str, tuple[str, ...]]] = {
         "gerp_rs": ("gerp_rs", "GERP++_RS"),
         "phylop100way": ("phylop100way", "phyloP100way_vertebrate"),
         "phastcons100way": ("phastcons100way", "phastCons100way_vertebrate"),
-        "cadd_raw": ("cadd_raw", "CADD_raw"),
-        "cadd_phred": ("cadd_phred", "CADD_phred"),
+        # dbNSFP bundles its own CADD score copy (distinct provenance/version
+        # from the standalone CADD plugin's CADD_RAW/CADD_PHRED) -- must NOT
+        # share a canonical field name with "cadd"'s cadd_raw/cadd_phred, or
+        # compare_plugin_field_aliases() silently overwrites cadd's alias
+        # with dbnsfp's when both plugins are compared together.
+        "dbnsfp_cadd_raw": ("dbnsfp_cadd_raw", "CADD_raw"),
+        "dbnsfp_cadd_phred": ("dbnsfp_cadd_phred", "CADD_phred"),
     }
 }
 
