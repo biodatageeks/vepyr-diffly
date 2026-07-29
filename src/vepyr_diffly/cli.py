@@ -178,6 +178,82 @@ def build_parser() -> argparse.ArgumentParser:
         "--memory-budget-mb", type=int, default=env_int("VEPYR_DIFFLY_MEMORY_BUDGET_MB")
     )
 
+    benchmark_plugins_parser = subparsers.add_parser("benchmark-plugins")
+    benchmark_plugins_parser.add_argument("--preset", default=env_str("VEPYR_DIFFLY_PRESET"))
+    benchmark_plugins_parser.add_argument("--input-vcf", required=True, type=Path)
+    benchmark_plugins_parser.add_argument(
+        "--reference-vcf",
+        required=True,
+        type=Path,
+        help="Already-annotated VEP output (everything+hgvs+all plugins) to compare every vepyr config against.",
+    )
+    benchmark_plugins_parser.add_argument("--output-dir", required=True, type=Path)
+    benchmark_plugins_parser.add_argument(
+        "--cache-dir", required=True, type=Path, help="Core Ensembl parquet cache for vepyr."
+    )
+    benchmark_plugins_parser.add_argument(
+        "--plugin-cache-root",
+        required=True,
+        type=Path,
+        help="Root already containing plugin/<name>/ for every plugin in --plugins.",
+    )
+    benchmark_plugins_parser.add_argument(
+        "--plugins",
+        default=env_str("VEPYR_DIFFLY_PLUGINS") or "clinvar,spliceai,cadd,alphamissense,dbnsfp",
+        help="Comma-separated plugin names to benchmark one at a time against a 'base' (no-plugin) run.",
+    )
+    benchmark_plugins_parser.add_argument(
+        "--reference-fasta", default=env_str("VEPYR_DIFFLY_REFERENCE_FASTA")
+    )
+    benchmark_plugins_parser.add_argument(
+        "--hgvs", action=argparse.BooleanOptionalAction, default=True
+    )
+    benchmark_plugins_parser.add_argument(
+        "--vepyr-python", default=env_str("VEPYR_DIFFLY_VEPYR_PYTHON")
+    )
+    benchmark_plugins_parser.add_argument(
+        "--rss-poll-interval-s",
+        type=float,
+        default=0.2,
+        help="How often to sample the annotation subprocess's RSS while it runs.",
+    )
+    benchmark_plugins_parser.add_argument(
+        "--compare-mode",
+        choices=("fast", "debug"),
+        default=env_str("VEPYR_DIFFLY_COMPARE_MODE") or "fast",
+    )
+    benchmark_plugins_parser.add_argument(
+        "--bucket-count", type=int, default=env_int("VEPYR_DIFFLY_BUCKET_COUNT")
+    )
+    benchmark_plugins_parser.add_argument(
+        "--compare-workers", type=int, default=env_int("VEPYR_DIFFLY_COMPARE_WORKERS")
+    )
+    benchmark_plugins_parser.add_argument(
+        "--memory-budget-mb", type=int, default=env_int("VEPYR_DIFFLY_MEMORY_BUDGET_MB")
+    )
+    benchmark_plugins_parser.add_argument(
+        "--gdrive-upload",
+        action=argparse.BooleanOptionalAction,
+        default=env_bool("VEPYR_DIFFLY_GDRIVE_UPLOAD") or False,
+        help="Upload each config's annotated VCF to gdrive then delete the local copy "
+        "once it has stopped being needed (disk-constrained full-genome runs).",
+    )
+    benchmark_plugins_parser.add_argument(
+        "--gdrive-folder-id",
+        default=env_str("VEPYR_DIFFLY_GDRIVE_FOLDER_ID") or "1Nkm66F6jStCLrZRZ0SvGQYgdqEr6_CGU",
+    )
+    benchmark_plugins_parser.add_argument(
+        "--gdrive-dest-prefix",
+        default=env_str("VEPYR_DIFFLY_GDRIVE_DEST_PREFIX") or "vepyr_results/116/benchmark-plugins",
+    )
+    benchmark_plugins_parser.add_argument(
+        "--include-base",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Prepend the no-plugin 'base' config. Pass --no-include-base to run just "
+        "the requested --plugins (e.g. one config at a time across separate invocations).",
+    )
+
     subparsers.add_parser("list-presets")
 
     inspect_parser = subparsers.add_parser("inspect-run")
@@ -492,6 +568,574 @@ def _cmd_benchmark_compare(args: argparse.Namespace, console: Console) -> int:
         encoding="utf-8",
     )
     console.print(output_json)
+    return 0
+
+
+def _dir_size(path: Path) -> int:
+    if not path.exists():
+        return 0
+    total = 0
+    for entry in os.walk(path, followlinks=True):
+        dirpath, _dirnames, filenames = entry
+        for filename in filenames:
+            try:
+                total += (Path(dirpath) / filename).stat().st_size
+            except OSError:
+                continue
+    return total
+
+
+def _snv_indel_breakdown(vcf_path: Path) -> dict[str, int]:
+    total = 0
+    snv = 0
+    with vcf_path.open() as handle:
+        for line in handle:
+            if line.startswith("#"):
+                continue
+            fields = line.rstrip("\n").split("\t")
+            if len(fields) < 5:
+                continue
+            total += 1
+            ref, alt = fields[3], fields[4]
+            alts = alt.split(",")
+            if len(ref) == 1 and all(len(a) == 1 for a in alts):
+                snv += 1
+    return {"total": total, "snv": snv, "indel_or_other": total - snv}
+
+
+def _read_csq_format_fields(vcf_path: Path) -> list[str]:
+    with vcf_path.open() as handle:
+        for line in handle:
+            if line.startswith("##INFO=<ID=CSQ"):
+                marker = "Format: "
+                marker_index = line.find(marker)
+                if marker_index == -1:
+                    return []
+                tail = line[marker_index + len(marker) :].split('">')[0]
+                return tail.split("|")
+            if not line.startswith("#"):
+                break
+    return []
+
+
+def _extract_csq_values(
+    vcf_path: Path, field_index: int, *, first_entry_only: bool
+) -> list[str]:
+    values: list[str] = []
+    with vcf_path.open() as handle:
+        for line in handle:
+            if line.startswith("#"):
+                continue
+            csq_start = line.find("CSQ=")
+            if csq_start == -1:
+                continue
+            value_start = csq_start + 4
+            end_semi = line.find(";", value_start)
+            end_tab = line.find("\t", value_start)
+            ends = [e for e in (end_semi, end_tab) if e != -1]
+            csq_value = line[value_start : min(ends)] if ends else line[value_start:]
+            entries = csq_value.split(",")
+            if first_entry_only:
+                entries = entries[:1]
+            for entry in entries:
+                subfields = entry.split("|")
+                if field_index < len(subfields) and subfields[field_index]:
+                    values.append(subfields[field_index])
+    return values
+
+
+def _consequence_type_breakdown(vcf_path: Path) -> dict[str, int]:
+    from collections import Counter
+
+    header_fields = _read_csq_format_fields(vcf_path)
+    if "Consequence" not in header_fields:
+        return {}
+    field_index = header_fields.index("Consequence")
+    counts: Counter[str] = Counter()
+    for value in _extract_csq_values(vcf_path, field_index, first_entry_only=False):
+        for term in value.split("&"):
+            if term:
+                counts[term] += 1
+    return dict(counts.most_common())
+
+
+PRIMARY_PLUGIN_FIELD: dict[str, str] = {
+    "clinvar": "ClinVar_CLNSIG",
+    "spliceai": "ds_ag",
+    "cadd": "cadd_phred",
+    "alphamissense": "am_class",
+    "dbnsfp": "revel_score",
+}
+
+
+def _primary_plugin_field_histogram(vcf_path: Path, plugin: str) -> dict[str, object] | None:
+    from collections import Counter
+
+    canonical_field = PRIMARY_PLUGIN_FIELD.get(plugin)
+    if canonical_field is None:
+        return None
+    aliases = compare_plugin_field_aliases([plugin]).get(canonical_field, (canonical_field,))
+    header_fields = _read_csq_format_fields(vcf_path)
+    field_index = None
+    matched_alias = None
+    for alias in aliases:
+        if alias in header_fields:
+            field_index = header_fields.index(alias)
+            matched_alias = alias
+            break
+    if field_index is None:
+        return None
+
+    values = _extract_csq_values(vcf_path, field_index, first_entry_only=True)
+    if not values:
+        return {"field": matched_alias, "kind": "empty", "non_null_count": 0}
+
+    # dbNSFP fields carry one value per overlapping transcript, joined with "&"
+    # ("." marks a missing per-transcript value) -- flatten those before
+    # judging numeric-ness, otherwise every dbNSFP field falls back to an
+    # unreadable categorical dump of raw joined strings.
+    numeric_values: list[float] = []
+    is_numeric = True
+    for value in values:
+        for token in value.split("&"):
+            if token in ("", "."):
+                continue
+            try:
+                numeric_values.append(float(token))
+            except ValueError:
+                is_numeric = False
+                break
+        if not is_numeric:
+            break
+
+    if is_numeric and numeric_values:
+        lo, hi = min(numeric_values), max(numeric_values)
+        bucket_count = 5
+        buckets = [0] * bucket_count
+        span = hi - lo
+        for value in numeric_values:
+            bucket_index = (
+                0 if span == 0 else min(bucket_count - 1, int((value - lo) / span * bucket_count))
+            )
+            buckets[bucket_index] += 1
+        edges = [round(lo + span * i / bucket_count, 4) for i in range(bucket_count + 1)]
+        return {
+            "field": matched_alias,
+            "kind": "numeric",
+            "non_null_count": len(numeric_values),
+            "min": round(lo, 4),
+            "max": round(hi, 4),
+            "mean": round(sum(numeric_values) / len(numeric_values), 4),
+            "bucket_edges": edges,
+            "bucket_counts": buckets,
+        }
+
+    counts = Counter(values)
+    return {
+        "field": matched_alias,
+        "kind": "categorical",
+        "non_null_count": len(values),
+        "top_values": counts.most_common(10),
+    }
+
+
+def _run_annotation_with_rss(
+    *,
+    vepyr_python: str,
+    input_vcf: Path,
+    output_vcf: Path,
+    cache_dir: Path,
+    reference_fasta: str | None,
+    plugin_cache_root: Path | None,
+    hgvs: bool,
+    poll_interval_s: float,
+) -> dict[str, object]:
+    import psutil
+
+    runner_path = Path(__file__).resolve().parent / "plugin_bench_runner.py"
+    command = [
+        vepyr_python,
+        str(runner_path),
+        "--input-vcf",
+        str(input_vcf),
+        "--output-vcf",
+        str(output_vcf),
+        "--cache-dir",
+        str(cache_dir),
+    ]
+    if reference_fasta:
+        command.extend(["--reference-fasta", reference_fasta])
+    if plugin_cache_root is not None:
+        command.extend(["--plugin-cache-root", str(plugin_cache_root)])
+    if hgvs:
+        command.append("--hgvs")
+    env = os.environ.copy()
+    src_dir = str(Path(__file__).resolve().parents[1])
+    env["PYTHONPATH"] = src_dir + (os.pathsep + env["PYTHONPATH"] if "PYTHONPATH" in env else "")
+
+    peak_rss_bytes = 0
+    cpu_user_seconds = 0.0
+    cpu_system_seconds = 0.0
+    start = perf_counter()
+    process = subprocess.Popen(command, env=env)
+    proc_handle = psutil.Process(process.pid)
+    while process.poll() is None:
+        try:
+            procs = [proc_handle, *proc_handle.children(recursive=True)]
+            rss_total = 0
+            cpu_user_total = 0.0
+            cpu_system_total = 0.0
+            for proc in procs:
+                try:
+                    rss_total += proc.memory_info().rss
+                    cpu_times = proc.cpu_times()
+                    cpu_user_total += cpu_times.user
+                    cpu_system_total += cpu_times.system
+                except psutil.NoSuchProcess:
+                    continue
+            peak_rss_bytes = max(peak_rss_bytes, rss_total)
+            cpu_user_seconds = max(cpu_user_seconds, cpu_user_total)
+            cpu_system_seconds = max(cpu_system_seconds, cpu_system_total)
+        except psutil.NoSuchProcess:
+            pass
+        try:
+            process.wait(timeout=poll_interval_s)
+        except subprocess.TimeoutExpired:
+            continue
+    returncode = process.wait()
+    wall_seconds = perf_counter() - start
+    if returncode != 0:
+        raise RuntimeError(f"annotation subprocess failed (rc={returncode}): {' '.join(command)}")
+    return {
+        "wall_seconds": round(wall_seconds, 3),
+        "peak_rss_mb": round(peak_rss_bytes / (1024 * 1024), 1),
+        "cpu_user_seconds": round(cpu_user_seconds, 3),
+        "cpu_system_seconds": round(cpu_system_seconds, 3),
+        "output_bytes": output_vcf.stat().st_size if output_vcf.exists() else 0,
+    }
+
+
+def _run_compare_subprocess(
+    *,
+    left_vcf: Path,
+    right_vcf: Path,
+    output_dir: Path,
+    preset: str,
+    plugins: list[str],
+    compare_only_plugins: bool,
+) -> dict[str, object]:
+    command = [
+        sys.executable,
+        "-m",
+        "vepyr_diffly.cli",
+        "compare-existing",
+        "--preset",
+        preset,
+        "--left-vcf",
+        str(left_vcf),
+        "--right-vcf",
+        str(right_vcf),
+        "--output-dir",
+        str(output_dir),
+    ]
+    if plugins:
+        command.extend(["--plugins", ",".join(plugins)])
+    if compare_only_plugins:
+        command.append("--compare-only-plugins")
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(Path(__file__).resolve().parents[1]) + (
+        os.pathsep + env["PYTHONPATH"] if "PYTHONPATH" in env else ""
+    )
+    subprocess.run(
+        command, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT, env=env
+    )
+    return json.loads((output_dir / "summary.json").read_text())
+
+
+def _format_bytes_mb(num_bytes: object) -> str:
+    return f"{float(num_bytes) / (1024 * 1024):.1f} MB"
+
+
+def _format_delta_mb(num_bytes: object) -> str:
+    value = float(num_bytes) / (1024 * 1024)
+    if value == 0:
+        return "—"
+    return f"{'+' if value > 0 else ''}{value:.1f} MB"
+
+
+def _histogram_md_lines(histogram: dict[str, object] | None) -> list[str]:
+    if histogram is None:
+        return []
+    field = histogram.get("field", "?")
+    kind = histogram.get("kind")
+    if kind == "empty":
+        return [f"**{field}**: no non-empty values", ""]
+    if kind == "numeric":
+        edges = histogram["bucket_edges"]
+        counts = histogram["bucket_counts"]
+        lines = [
+            f"**{field}** (numeric, n={histogram['non_null_count']}, "
+            f"min={histogram['min']}, max={histogram['max']}, mean={histogram['mean']}):",
+            "",
+            "| bucket | count |",
+            "|---|---|",
+        ]
+        for i, count in enumerate(counts):
+            lines.append(f"| [{edges[i]}, {edges[i + 1]}] | {count} |")
+        lines.append("")
+        return lines
+    lines = [f"**{field}** (categorical, n={histogram['non_null_count']}, top values):", "", "| value | count |", "|---|---|"]
+    for value, count in histogram.get("top_values", []):
+        lines.append(f"| {value} | {count} |")
+    lines.append("")
+    return lines
+
+
+def _consequence_md_lines(breakdown: dict[str, int], top_n: int = 10) -> list[str]:
+    if not breakdown:
+        return []
+    lines = ["**Consequence types (top {}):**".format(top_n), "", "| type | count |", "|---|---|"]
+    for term, count in list(breakdown.items())[:top_n]:
+        lines.append(f"| {term} | {count} |")
+    lines.append("")
+    return lines
+
+
+def _upload_and_remove(
+    local_path: Path, *, folder_id: str, dest_prefix: str, console: Console
+) -> None:
+    remote_dir = f"gdrive:{dest_prefix}"
+    console.print(f"[dim]uploading {local_path.name} -> {remote_dir}[/dim]")
+    subprocess.run(
+        [
+            "rclone",
+            "copy",
+            str(local_path),
+            remote_dir,
+            "--drive-root-folder-id",
+            folder_id,
+            "--low-level-retries",
+            "50",
+        ],
+        check=True,
+    )
+    listing = subprocess.run(
+        [
+            "rclone",
+            "lsjson",
+            remote_dir,
+            "--drive-root-folder-id",
+            folder_id,
+            "--files-only",
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    entries = json.loads(listing.stdout)
+    local_size = local_path.stat().st_size
+    matched = next((e for e in entries if e["Name"] == local_path.name), None)
+    if matched is None or matched["Size"] != local_size:
+        raise RuntimeError(
+            f"upload verification failed for {local_path.name}: "
+            f"remote entry {matched!r}, local size {local_size}"
+        )
+    local_path.unlink()
+    console.print(f"[dim]verified + removed local {local_path.name}[/dim]")
+
+
+def _cmd_benchmark_plugins(args: argparse.Namespace, console: Console) -> int:
+    if args.preset is None:
+        raise ValueError("--preset is required or set VEPYR_DIFFLY_PRESET in .env")
+    vepyr_python = args.vepyr_python or sys.executable
+    plugin_names = parse_plugin_list(args.plugins)
+    output_dir = args.output_dir.resolve()
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    input_breakdown = _snv_indel_breakdown(args.input_vcf)
+    total_variants = input_breakdown["total"]
+
+    configs: list[tuple[str, str | None]] = (
+        [("base", None)] if args.include_base else []
+    ) + [(name, name) for name in plugin_names]
+    results: list[dict[str, object]] = []
+    for config_name, plugin in configs:
+        console.print(f"[bold]benchmark-plugins: running config '{config_name}'[/bold]")
+        config_dir = output_dir / config_name
+        config_dir.mkdir(parents=True, exist_ok=True)
+
+        if plugin is None:
+            plugin_cache_root_for_run: Path | None = None
+            cache_bytes = 0
+        else:
+            farm_root = config_dir / "plugin_cache"
+            farm_plugin_dir = farm_root / "plugin"
+            farm_plugin_dir.mkdir(parents=True, exist_ok=True)
+            link_path = farm_plugin_dir / plugin
+            if not link_path.exists():
+                link_path.symlink_to(
+                    (args.plugin_cache_root / "plugin" / plugin).resolve(), target_is_directory=True
+                )
+            plugin_cache_root_for_run = farm_root
+            cache_bytes = _dir_size(args.plugin_cache_root / "plugin" / plugin)
+
+        annotated_vcf = config_dir / f"vepyr.{config_name}.annotated.vcf"
+        run_stats = _run_annotation_with_rss(
+            vepyr_python=vepyr_python,
+            input_vcf=args.input_vcf,
+            output_vcf=annotated_vcf,
+            cache_dir=args.cache_dir,
+            reference_fasta=args.reference_fasta,
+            plugin_cache_root=plugin_cache_root_for_run,
+            hgvs=args.hgvs,
+            poll_interval_s=args.rss_poll_interval_s,
+        )
+        run_stats["cache_bytes"] = cache_bytes
+        run_stats["variants_per_second"] = (
+            round(total_variants / run_stats["wall_seconds"], 1)
+            if run_stats["wall_seconds"] > 0
+            else None
+        )
+        run_stats["consequence_breakdown"] = _consequence_type_breakdown(annotated_vcf)
+        run_stats["plugin_value_histogram"] = (
+            _primary_plugin_field_histogram(annotated_vcf, plugin) if plugin is not None else None
+        )
+
+        concordance: dict[str, object] | None = None
+        if plugin is not None:
+            compare_summary = _run_compare_subprocess(
+                left_vcf=args.reference_vcf,
+                right_vcf=annotated_vcf,
+                output_dir=config_dir / "compare",
+                preset=args.preset,
+                plugins=[plugin],
+                compare_only_plugins=True,
+            )
+            plugin_tier = compare_summary["tiers"]["consequence"]
+            concordance = {
+                "plugin_fields_equal": plugin_tier["equal"],
+                "joined_equal_rows": plugin_tier["joined_equal_rows"],
+                "left_only_rows": plugin_tier["left_only_rows"],
+                "right_only_rows": plugin_tier["right_only_rows"],
+                "unequal_rows": plugin_tier["unequal_rows"],
+                "per_chromosome": plugin_tier.get("per_chromosome", {}),
+            }
+        else:
+            console.print(
+                "[yellow]benchmark-plugins: skipping concordance for 'base' "
+                "(no no-plugin VEP reference given)[/yellow]"
+            )
+
+        if args.gdrive_upload:
+            _upload_and_remove(
+                annotated_vcf,
+                folder_id=args.gdrive_folder_id,
+                dest_prefix=args.gdrive_dest_prefix,
+                console=console,
+            )
+
+        results.append(
+            {
+                "config": config_name,
+                "plugin": plugin,
+                **run_stats,
+                "concordance": concordance,
+            }
+        )
+
+    base_output_bytes = results[0]["output_bytes"]
+    for row in results:
+        row["output_bytes_delta_vs_base"] = row["output_bytes"] - base_output_bytes
+
+    summary = {
+        "input_vcf": str(args.input_vcf),
+        "reference_vcf": str(args.reference_vcf),
+        "plugins": plugin_names,
+        "input_breakdown": input_breakdown,
+        "results": results,
+    }
+    summary_json = output_dir / "benchmark_plugins_summary.json"
+    summary_json.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+
+    table = Table(title="vepyr plugin benchmark")
+    for column in (
+        "config",
+        "wall (s)",
+        "cpu (s)",
+        "RSS (MB)",
+        "var/s",
+        "cache",
+        "output (Δ base)",
+        "plugin fields equal",
+        "mismatches (L/R/U)",
+    ):
+        table.add_column(column)
+    for row in results:
+        concordance = row["concordance"] or {}
+        mismatches = (
+            f"{concordance['left_only_rows']}/{concordance['right_only_rows']}/{concordance['unequal_rows']}"
+            if concordance
+            else "n/a"
+        )
+        table.add_row(
+            str(row["config"]),
+            f"{row['wall_seconds']:.1f}",
+            f"{row['cpu_user_seconds'] + row['cpu_system_seconds']:.1f}",
+            f"{row['peak_rss_mb']:.0f}",
+            str(row["variants_per_second"]),
+            _format_bytes_mb(row["cache_bytes"]),
+            f"{_format_bytes_mb(row['output_bytes'])} ({_format_delta_mb(row['output_bytes_delta_vs_base'])})",
+            str(concordance.get("plugin_fields_equal", "n/a")),
+            mismatches,
+        )
+    console.print(table)
+
+    summary_md = output_dir / "benchmark_plugins_summary.md"
+    lines = [
+        "# vepyr plugin benchmark",
+        "",
+        f"- input: `{args.input_vcf}`",
+        f"- VEP reference: `{args.reference_vcf}`",
+        f"- variants: {input_breakdown['total']} "
+        f"(SNV: {input_breakdown['snv']}, indel/other: {input_breakdown['indel_or_other']})",
+        "",
+        "## Summary",
+        "",
+        "| config | wall (s) | cpu (s) | peak RSS (MB) | throughput (var/s) | cache size | "
+        "output size (Δ base) | plugin fields equal | mismatches (L/R/U) |",
+        "|---|---|---|---|---|---|---|---|---|",
+    ]
+    for row in results:
+        concordance = row["concordance"] or {}
+        mismatches = (
+            f"{concordance['left_only_rows']}/{concordance['right_only_rows']}/{concordance['unequal_rows']}"
+            if concordance
+            else "n/a"
+        )
+        lines.append(
+            "| {config} | {wall:.1f} | {cpu:.1f} | {rss:.0f} | {vps} | {cache} | {out} | {eq} | {mm} |".format(
+                config=row["config"],
+                wall=row["wall_seconds"],
+                cpu=row["cpu_user_seconds"] + row["cpu_system_seconds"],
+                rss=row["peak_rss_mb"],
+                vps=row["variants_per_second"],
+                cache=_format_bytes_mb(row["cache_bytes"]),
+                out=f"{_format_bytes_mb(row['output_bytes'])} ({_format_delta_mb(row['output_bytes_delta_vs_base'])})",
+                eq=concordance.get("plugin_fields_equal", "n/a"),
+                mm=mismatches,
+            )
+        )
+    lines.extend(["", "## Per-config detail", ""])
+    for row in results:
+        lines.append(f"### {row['config']}")
+        lines.append("")
+        lines.extend(_consequence_md_lines(row["consequence_breakdown"]))
+        if row["plugin_value_histogram"] is not None:
+            lines.extend(_histogram_md_lines(row["plugin_value_histogram"]))
+    summary_md.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    console.print(summary_json)
+    console.print(summary_md)
     return 0
 
 
@@ -1002,6 +1646,8 @@ def main(argv: list[str] | None = None) -> int:
         return _cmd_compare_existing(args, console)
     if args.command == "benchmark-compare":
         return _cmd_benchmark_compare(args, console)
+    if args.command == "benchmark-plugins":
+        return _cmd_benchmark_plugins(args, console)
     if args.command == "inspect-run":
         return _cmd_inspect_run(args, console)
     if args.command == "analyze-consequence-mismatches":
