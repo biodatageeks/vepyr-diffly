@@ -1,0 +1,4 @@
+{"elapsed_seconds": 824.33651, "knob": "partitions", "knob_value": 1, "max_rss_bytes": 23466688512, "num_files": 14, "repeat": 1, "total_parquet_bytes": 3706794268, "total_rows": 188875139}
+{"elapsed_seconds": 914.982247, "knob": "partitions", "knob_value": 2, "max_rss_bytes": 23906222080, "num_files": 14, "repeat": 1, "total_parquet_bytes": 3707038033, "total_rows": 188875139}
+{"elapsed_seconds": 961.94647, "knob": "partitions", "knob_value": 4, "max_rss_bytes": 23662166016, "num_files": 14, "repeat": 1, "total_parquet_bytes": 3707079485, "total_rows": 188875139}
+{"elapsed_seconds": 866.532494, "knob": "partitions", "knob_value": 8, "max_rss_bytes": 24781291520, "num_files": 14, "repeat": 1, "total_parquet_bytes": 3707082668, "total_rows": 188875139}

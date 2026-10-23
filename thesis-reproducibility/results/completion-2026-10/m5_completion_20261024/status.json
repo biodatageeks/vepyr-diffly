@@ -1,0 +1,109 @@
+{
+  "created": "2026-10-23T12:57:34+00:00",
+  "phase": "waiting_for_vep_reruns",
+  "steps": [
+    {
+      "id": "S0",
+      "name": "Odtworzenie wejść chr1 i chr22 (bcftools view -r, jak 24.09)",
+      "eta_min": 3,
+      "deps": [],
+      "state": "pending"
+    },
+    {
+      "id": "S1",
+      "name": "VEP pełny genom -> referencja E2E (bgzip+tabix, kontrola sumy, usunięcie kopii)",
+      "eta_min": 25,
+      "deps": [],
+      "state": "pending"
+    },
+    {
+      "id": "S2",
+      "name": "Odbudowa rdzeniowej pamięci podręcznej VEPYR 0.7.0 (cache/116_GRCh38_merged)",
+      "eta_min": 90,
+      "deps": [],
+      "state": "pending"
+    },
+    {
+      "id": "S3",
+      "name": "Narzut uruchomienia kontenera Docker, 5x",
+      "eta_min": 2,
+      "deps": [],
+      "state": "pending"
+    },
+    {
+      "id": "S4",
+      "name": "Deterministyczność VEPYR workers=1 vs 8 (chr22, chr1)",
+      "eta_min": 6,
+      "deps": [
+        "S0",
+        "S2"
+      ],
+      "state": "pending"
+    },
+    {
+      "id": "S5",
+      "name": "VEPYR pełne wejście, workers 10/8/4/2/1, 5x",
+      "eta_min": 65,
+      "deps": [
+        "S2"
+      ],
+      "state": "pending"
+    },
+    {
+      "id": "S6",
+      "name": "Test niezależnych procesów na M5 (chr22, n=1,2,4,8; bazowy i komplet wtyczek), 5x",
+      "eta_min": 20,
+      "deps": [
+        "S0",
+        "S2"
+      ],
+      "state": "pending"
+    },
+    {
+      "id": "S7",
+      "name": "Nagłówki CSQ VEP dla każdej wtyczki osobno (mały plik wejściowy)",
+      "eta_min": 20,
+      "deps": [
+        "S0"
+      ],
+      "state": "pending"
+    },
+    {
+      "id": "S8",
+      "name": "Rozmiary pamięci podręcznej chr1+chr22 (VEP, Parquet, źródła i Parquet wtyczek)",
+      "eta_min": 35,
+      "deps": [
+        "S2"
+      ],
+      "state": "pending"
+    },
+    {
+      "id": "S10",
+      "name": "Walidacja E2E pełnego genomu (chr1-22), VEPYR 0.7.0 vs referencja z S1 + bramka",
+      "eta_min": 120,
+      "deps": [
+        "S1",
+        "S2"
+      ],
+      "state": "pending"
+    },
+    {
+      "id": "S9",
+      "name": "VEP RSS: scenariusz bazowy chr22 5x i chr1 5x (próbkowanie VmHWM)",
+      "eta_min": 245,
+      "deps": [
+        "S0"
+      ],
+      "state": "pending"
+    },
+    {
+      "id": "S11",
+      "name": "Pełna budowa z encjami translacji (środowisko z 19.10), powtórzenia 2-5",
+      "eta_min": 290,
+      "deps": [],
+      "state": "pending"
+    }
+  ],
+  "pid": 43035,
+  "updated": "2026-10-23T12:57:34+00:00"
+}

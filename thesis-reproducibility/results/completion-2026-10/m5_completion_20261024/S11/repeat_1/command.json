@@ -1,0 +1,17 @@
+{
+  "release": 116,
+  "cache_type": "merged",
+  "partitions": 1,
+  "local_cache": "/Users/lukaszjezapkowicz/workspace/data_vepyr/homo_sapiens_merged/116_GRCh38",
+  "output": "/Users/lukaszjezapkowicz/Desktop/magisterka/praca/magisterska_jezapkowicz/runs/full_e2e_all/cache",
+  "contigs": 1904,
+  "entities": [
+    "variation",
+    "transcript",
+    "exon",
+    "regulatory",
+    "motif",
+    "translation"
+  ],
+  "translation_mode": "one chromosome per call"
+}

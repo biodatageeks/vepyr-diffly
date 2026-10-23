@@ -1,0 +1,15 @@
+{
+  "seconds_wall": 11119.94709777832,
+  "returncode": 0,
+  "disk_guard_kill": false,
+  "variant": "parallel",
+  "repeat": 1,
+  "contigs": 1904,
+  "entities": [
+    "variation",
+    "transcript",
+    "exon",
+    "regulatory",
+    "motif"
+  ]
+}

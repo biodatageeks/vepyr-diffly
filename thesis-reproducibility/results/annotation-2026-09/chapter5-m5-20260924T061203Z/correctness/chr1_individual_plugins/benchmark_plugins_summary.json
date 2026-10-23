@@ -1,0 +1,504 @@
+{
+  "input_vcf": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/chapter5-m5-20260924T061203Z/correctness/input/HG002_normalized_chr1.vcf",
+  "reference_vcf": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/chapter5-m5-20260924T061203Z/correctness/input/HG002_chr1_5plugins_vep116_caddfix.vcf",
+  "plugins": [
+    "clinvar",
+    "spliceai",
+    "cadd",
+    "alphamissense",
+    "dbnsfp"
+  ],
+  "input_breakdown": {
+    "total": 323430,
+    "snv": 271740,
+    "indel_or_other": 51690
+  },
+  "results": [
+    {
+      "config": "base",
+      "plugin": null,
+      "wall_seconds": 19.356,
+      "peak_rss_mb": 3611.3,
+      "cpu_user_seconds": 27.241,
+      "cpu_system_seconds": 1.901,
+      "output_bytes": 2414254832,
+      "cache_bytes": 0,
+      "variants_per_second": 16709.5,
+      "consequence_breakdown": {
+        "intron_variant": 4446360,
+        "non_coding_transcript_variant": 970287,
+        "NMD_transcript_variant": 518556,
+        "upstream_gene_variant": 495927,
+        "downstream_gene_variant": 492922,
+        "3_prime_UTR_variant": 81574,
+        "intergenic_variant": 56088,
+        "non_coding_transcript_exon_variant": 39087,
+        "synonymous_variant": 20254,
+        "5_prime_UTR_variant": 19230,
+        "regulatory_region_variant": 17626,
+        "missense_variant": 17299,
+        "splice_polypyrimidine_tract_variant": 9136,
+        "splice_region_variant": 5828,
+        "TF_binding_site_variant": 1464,
+        "splice_donor_region_variant": 1157,
+        "splice_donor_5th_base_variant": 342,
+        "inframe_deletion": 231,
+        "splice_acceptor_variant": 195,
+        "splice_donor_variant": 168,
+        "frameshift_variant": 145,
+        "inframe_insertion": 145,
+        "stop_gained": 70,
+        "stop_lost": 54,
+        "stop_retained_variant": 46,
+        "start_lost": 14,
+        "TFBS_ablation": 8,
+        "coding_sequence_variant": 5,
+        "start_retained_variant": 3,
+        "mature_miRNA_variant": 2
+      },
+      "plugin_value_histogram": null,
+      "concordance": null,
+      "output_bytes_delta_vs_base": 0
+    },
+    {
+      "config": "clinvar",
+      "plugin": "clinvar",
+      "wall_seconds": 18.996,
+      "peak_rss_mb": 3734.2,
+      "cpu_user_seconds": 28.142,
+      "cpu_system_seconds": 1.678,
+      "output_bytes": 2464846096,
+      "cache_bytes": 81026132,
+      "variants_per_second": 17026.2,
+      "consequence_breakdown": {
+        "intron_variant": 4446360,
+        "non_coding_transcript_variant": 970287,
+        "NMD_transcript_variant": 518556,
+        "upstream_gene_variant": 495927,
+        "downstream_gene_variant": 492922,
+        "3_prime_UTR_variant": 81574,
+        "intergenic_variant": 56088,
+        "non_coding_transcript_exon_variant": 39087,
+        "synonymous_variant": 20254,
+        "5_prime_UTR_variant": 19230,
+        "regulatory_region_variant": 17626,
+        "missense_variant": 17299,
+        "splice_polypyrimidine_tract_variant": 9136,
+        "splice_region_variant": 5828,
+        "TF_binding_site_variant": 1464,
+        "splice_donor_region_variant": 1157,
+        "splice_donor_5th_base_variant": 342,
+        "inframe_deletion": 231,
+        "splice_acceptor_variant": 195,
+        "splice_donor_variant": 168,
+        "frameshift_variant": 145,
+        "inframe_insertion": 145,
+        "stop_gained": 70,
+        "stop_lost": 54,
+        "stop_retained_variant": 46,
+        "start_lost": 14,
+        "TFBS_ablation": 8,
+        "coding_sequence_variant": 5,
+        "start_retained_variant": 3,
+        "mature_miRNA_variant": 2
+      },
+      "plugin_value_histogram": {
+        "field": "ClinVar_CLNSIG",
+        "kind": "categorical",
+        "non_null_count": 3464,
+        "top_values": [
+          [
+            "Benign",
+            3255
+          ],
+          [
+            "Benign/Likely_benign",
+            72
+          ],
+          [
+            "Likely_benign",
+            55
+          ],
+          [
+            "Uncertain_significance",
+            27
+          ],
+          [
+            "Conflicting_classifications_of_pathogenicity",
+            19
+          ],
+          [
+            "association",
+            9
+          ],
+          [
+            "not_provided",
+            8
+          ],
+          [
+            "risk_factor",
+            6
+          ],
+          [
+            "drug_response",
+            4
+          ],
+          [
+            "Benign&association",
+            4
+          ]
+        ]
+      },
+      "concordance": {
+        "plugin_fields_equal": true,
+        "joined_equal_rows": 3878,
+        "left_only_rows": 0,
+        "right_only_rows": 0,
+        "unequal_rows": 0,
+        "per_chromosome": {
+          "1": {
+            "left_rows": 3878,
+            "right_rows": 3878,
+            "joined_equal_rows": 3878,
+            "left_only_rows": 0,
+            "right_only_rows": 0,
+            "unequal_rows": 0
+          }
+        }
+      },
+      "output_bytes_delta_vs_base": 50591264
+    },
+    {
+      "config": "spliceai",
+      "plugin": "spliceai",
+      "wall_seconds": 27.852,
+      "peak_rss_mb": 3657.7,
+      "cpu_user_seconds": 36.206,
+      "cpu_system_seconds": 2.002,
+      "output_bytes": 2553873867,
+      "cache_bytes": 25478657941,
+      "variants_per_second": 11612.5,
+      "consequence_breakdown": {
+        "intron_variant": 4446360,
+        "non_coding_transcript_variant": 970287,
+        "NMD_transcript_variant": 518556,
+        "upstream_gene_variant": 495927,
+        "downstream_gene_variant": 492922,
+        "3_prime_UTR_variant": 81574,
+        "intergenic_variant": 56088,
+        "non_coding_transcript_exon_variant": 39087,
+        "synonymous_variant": 20254,
+        "5_prime_UTR_variant": 19230,
+        "regulatory_region_variant": 17626,
+        "missense_variant": 17299,
+        "splice_polypyrimidine_tract_variant": 9136,
+        "splice_region_variant": 5828,
+        "TF_binding_site_variant": 1464,
+        "splice_donor_region_variant": 1157,
+        "splice_donor_5th_base_variant": 342,
+        "inframe_deletion": 231,
+        "splice_acceptor_variant": 195,
+        "splice_donor_variant": 168,
+        "frameshift_variant": 145,
+        "inframe_insertion": 145,
+        "stop_gained": 70,
+        "stop_lost": 54,
+        "stop_retained_variant": 46,
+        "start_lost": 14,
+        "TFBS_ablation": 8,
+        "coding_sequence_variant": 5,
+        "start_retained_variant": 3,
+        "mature_miRNA_variant": 2
+      },
+      "plugin_value_histogram": {
+        "field": "SpliceAI_pred_DS_AG",
+        "kind": "numeric",
+        "non_null_count": 101440,
+        "min": 0.0,
+        "max": 0.99,
+        "mean": 0.001,
+        "bucket_edges": [
+          0.0,
+          0.198,
+          0.396,
+          0.594,
+          0.792,
+          0.99
+        ],
+        "bucket_counts": [
+          101380,
+          49,
+          7,
+          1,
+          3
+        ]
+      },
+      "concordance": {
+        "plugin_fields_equal": true,
+        "joined_equal_rows": 104331,
+        "left_only_rows": 0,
+        "right_only_rows": 0,
+        "unequal_rows": 0,
+        "per_chromosome": {
+          "1": {
+            "left_rows": 104331,
+            "right_rows": 104331,
+            "joined_equal_rows": 104331,
+            "left_only_rows": 0,
+            "right_only_rows": 0,
+            "unequal_rows": 0
+          }
+        }
+      },
+      "output_bytes_delta_vs_base": 139619035
+    },
+    {
+      "config": "cadd",
+      "plugin": "cadd",
+      "wall_seconds": 30.352,
+      "peak_rss_mb": 3857.3,
+      "cpu_user_seconds": 37.947,
+      "cpu_system_seconds": 2.266,
+      "output_bytes": 2501302141,
+      "cache_bytes": 74282931569,
+      "variants_per_second": 10656.0,
+      "consequence_breakdown": {
+        "intron_variant": 4446360,
+        "non_coding_transcript_variant": 970287,
+        "NMD_transcript_variant": 518556,
+        "upstream_gene_variant": 495927,
+        "downstream_gene_variant": 492922,
+        "3_prime_UTR_variant": 81574,
+        "intergenic_variant": 56088,
+        "non_coding_transcript_exon_variant": 39087,
+        "synonymous_variant": 20254,
+        "5_prime_UTR_variant": 19230,
+        "regulatory_region_variant": 17626,
+        "missense_variant": 17299,
+        "splice_polypyrimidine_tract_variant": 9136,
+        "splice_region_variant": 5828,
+        "TF_binding_site_variant": 1464,
+        "splice_donor_region_variant": 1157,
+        "splice_donor_5th_base_variant": 342,
+        "inframe_deletion": 231,
+        "splice_acceptor_variant": 195,
+        "splice_donor_variant": 168,
+        "frameshift_variant": 145,
+        "inframe_insertion": 145,
+        "stop_gained": 70,
+        "stop_lost": 54,
+        "stop_retained_variant": 46,
+        "start_lost": 14,
+        "TFBS_ablation": 8,
+        "coding_sequence_variant": 5,
+        "start_retained_variant": 3,
+        "mature_miRNA_variant": 2
+      },
+      "plugin_value_histogram": {
+        "field": "CADD_PHRED",
+        "kind": "numeric",
+        "non_null_count": 320746,
+        "min": 0.001,
+        "max": 40.0,
+        "mean": 2.7001,
+        "bucket_edges": [
+          0.001,
+          8.0008,
+          16.0006,
+          24.0004,
+          32.0002,
+          40.0
+        ],
+        "bucket_counts": [
+          297397,
+          20498,
+          2762,
+          82,
+          7
+        ]
+      },
+      "concordance": {
+        "plugin_fields_equal": true,
+        "joined_equal_rows": 320728,
+        "left_only_rows": 0,
+        "right_only_rows": 0,
+        "unequal_rows": 0,
+        "per_chromosome": {
+          "1": {
+            "left_rows": 320728,
+            "right_rows": 320728,
+            "joined_equal_rows": 320728,
+            "left_only_rows": 0,
+            "right_only_rows": 0,
+            "unequal_rows": 0
+          }
+        }
+      },
+      "output_bytes_delta_vs_base": 87047309
+    },
+    {
+      "config": "alphamissense",
+      "plugin": "alphamissense",
+      "wall_seconds": 19.147,
+      "peak_rss_mb": 3719.8,
+      "cpu_user_seconds": 28.16,
+      "cpu_system_seconds": 1.763,
+      "output_bytes": 2425817767,
+      "cache_bytes": 571181721,
+      "variants_per_second": 16891.9,
+      "consequence_breakdown": {
+        "intron_variant": 4446360,
+        "non_coding_transcript_variant": 970287,
+        "NMD_transcript_variant": 518556,
+        "upstream_gene_variant": 495927,
+        "downstream_gene_variant": 492922,
+        "3_prime_UTR_variant": 81574,
+        "intergenic_variant": 56088,
+        "non_coding_transcript_exon_variant": 39087,
+        "synonymous_variant": 20254,
+        "5_prime_UTR_variant": 19230,
+        "regulatory_region_variant": 17626,
+        "missense_variant": 17299,
+        "splice_polypyrimidine_tract_variant": 9136,
+        "splice_region_variant": 5828,
+        "TF_binding_site_variant": 1464,
+        "splice_donor_region_variant": 1157,
+        "splice_donor_5th_base_variant": 342,
+        "inframe_deletion": 231,
+        "splice_acceptor_variant": 195,
+        "splice_donor_variant": 168,
+        "frameshift_variant": 145,
+        "inframe_insertion": 145,
+        "stop_gained": 70,
+        "stop_lost": 54,
+        "stop_retained_variant": 46,
+        "start_lost": 14,
+        "TFBS_ablation": 8,
+        "coding_sequence_variant": 5,
+        "start_retained_variant": 3,
+        "mature_miRNA_variant": 2
+      },
+      "plugin_value_histogram": {
+        "field": "am_class",
+        "kind": "categorical",
+        "non_null_count": 626,
+        "top_values": [
+          [
+            "likely_benign",
+            589
+          ],
+          [
+            "likely_pathogenic",
+            19
+          ],
+          [
+            "ambiguous",
+            18
+          ]
+        ]
+      },
+      "concordance": {
+        "plugin_fields_equal": true,
+        "joined_equal_rows": 907,
+        "left_only_rows": 0,
+        "right_only_rows": 0,
+        "unequal_rows": 0,
+        "per_chromosome": {
+          "1": {
+            "left_rows": 907,
+            "right_rows": 907,
+            "joined_equal_rows": 907,
+            "left_only_rows": 0,
+            "right_only_rows": 0,
+            "unequal_rows": 0
+          }
+        }
+      },
+      "output_bytes_delta_vs_base": 11562935
+    },
+    {
+      "config": "dbnsfp",
+      "plugin": "dbnsfp",
+      "wall_seconds": 20.306,
+      "peak_rss_mb": 3732.5,
+      "cpu_user_seconds": 29.104,
+      "cpu_system_seconds": 1.92,
+      "output_bytes": 2530195819,
+      "cache_bytes": 4030323341,
+      "variants_per_second": 15927.8,
+      "consequence_breakdown": {
+        "intron_variant": 4446360,
+        "non_coding_transcript_variant": 970287,
+        "NMD_transcript_variant": 518556,
+        "upstream_gene_variant": 495927,
+        "downstream_gene_variant": 492922,
+        "3_prime_UTR_variant": 81574,
+        "intergenic_variant": 56088,
+        "non_coding_transcript_exon_variant": 39087,
+        "synonymous_variant": 20254,
+        "5_prime_UTR_variant": 19230,
+        "regulatory_region_variant": 17626,
+        "missense_variant": 17299,
+        "splice_polypyrimidine_tract_variant": 9136,
+        "splice_region_variant": 5828,
+        "TF_binding_site_variant": 1464,
+        "splice_donor_region_variant": 1157,
+        "splice_donor_5th_base_variant": 342,
+        "inframe_deletion": 231,
+        "splice_acceptor_variant": 195,
+        "splice_donor_variant": 168,
+        "frameshift_variant": 145,
+        "inframe_insertion": 145,
+        "stop_gained": 70,
+        "stop_lost": 54,
+        "stop_retained_variant": 46,
+        "start_lost": 14,
+        "TFBS_ablation": 8,
+        "coding_sequence_variant": 5,
+        "start_retained_variant": 3,
+        "mature_miRNA_variant": 2
+      },
+      "plugin_value_histogram": {
+        "field": "REVEL_score",
+        "kind": "numeric",
+        "non_null_count": 1574,
+        "min": 0.001,
+        "max": 0.842,
+        "mean": 0.1123,
+        "bucket_edges": [
+          0.001,
+          0.1692,
+          0.3374,
+          0.5056,
+          0.6738,
+          0.842
+        ],
+        "bucket_counts": [
+          1254,
+          264,
+          34,
+          16,
+          6
+        ]
+      },
+      "concordance": {
+        "plugin_fields_equal": true,
+        "joined_equal_rows": 1140,
+        "left_only_rows": 0,
+        "right_only_rows": 0,
+        "unequal_rows": 0,
+        "per_chromosome": {
+          "1": {
+            "left_rows": 1140,
+            "right_rows": 1140,
+            "joined_equal_rows": 1140,
+            "left_only_rows": 0,
+            "right_only_rows": 0,
+            "unequal_rows": 0
+          }
+        }
+      },
+      "output_bytes_delta_vs_base": 115940987
+    }
+  ]
+}

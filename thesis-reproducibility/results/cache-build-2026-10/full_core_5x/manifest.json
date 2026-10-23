@@ -1,0 +1,14 @@
+{
+  "contigs": 1904,
+  "entities": [
+    "variation",
+    "transcript",
+    "exon",
+    "regulatory",
+    "motif"
+  ],
+  "repeats": 5,
+  "partitions": 1,
+  "cache_type": "merged",
+  "release": 116
+}

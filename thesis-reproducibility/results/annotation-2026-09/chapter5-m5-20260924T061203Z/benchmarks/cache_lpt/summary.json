@@ -1,0 +1,72 @@
+{
+  "created_at": "2026-09-25T02:54:06+0200",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "python": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "git_commit": "unknown",
+  "git_branch": "unknown",
+  "local_cache": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/chapter5-m5-20260924T061203Z/benchmarks/cache_lpt/116_GRCh38_merged",
+  "chromosomes": "20,21,22",
+  "knob": "build_concurrency",
+  "values": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "repeats": 1,
+  "fixed_partitions": 8,
+  "results": [
+    {
+      "knob_value": 1,
+      "runs": 1,
+      "median_seconds": 220.389555,
+      "min_seconds": 220.389555,
+      "max_seconds": 220.389555,
+      "median_max_rss_bytes": 22636789760,
+      "total_rows": [
+        67663043
+      ],
+      "rows_consistent": true,
+      "speedup_vs_1": 1.0
+    },
+    {
+      "knob_value": 2,
+      "runs": 1,
+      "median_seconds": 168.443158,
+      "min_seconds": 168.443158,
+      "max_seconds": 168.443158,
+      "median_max_rss_bytes": 22430859264,
+      "total_rows": [
+        67663043
+      ],
+      "rows_consistent": true,
+      "speedup_vs_1": 1.308
+    },
+    {
+      "knob_value": 4,
+      "runs": 1,
+      "median_seconds": 136.683569,
+      "min_seconds": 136.683569,
+      "max_seconds": 136.683569,
+      "median_max_rss_bytes": 22165897216,
+      "total_rows": [
+        67663043
+      ],
+      "rows_consistent": true,
+      "speedup_vs_1": 1.612
+    },
+    {
+      "knob_value": 8,
+      "runs": 1,
+      "median_seconds": 169.127387,
+      "min_seconds": 169.127387,
+      "max_seconds": 169.127387,
+      "median_max_rss_bytes": 22017687552,
+      "total_rows": [
+        67663043
+      ],
+      "rows_consistent": true,
+      "speedup_vs_1": 1.303
+    }
+  ]
+}

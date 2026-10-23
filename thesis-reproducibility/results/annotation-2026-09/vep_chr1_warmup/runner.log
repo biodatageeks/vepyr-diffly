@@ -1,0 +1,4 @@
+[2026-09-26T13:53:16.007049+00:00] Starting Ensembl VEP 116 baseline on chr1...
+[2026-09-26T14:32:03.088022+00:00] Finished VEP in 2327.08 s (38.78 min) with return code 0
+Generated VCF size: 2302.4 MB
+Cleaned up temporary VCF.

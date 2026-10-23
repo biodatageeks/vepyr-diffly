@@ -1,0 +1,38 @@
+{
+  "repeat": 3,
+  "wall_seconds": 2500.620918832952,
+  "rows": [
+    {
+      "entity": "variation",
+      "seconds": 1387.1425527909305,
+      "files": 463,
+      "rows": 1487415922
+    },
+    {
+      "entity": "transcript",
+      "seconds": 510.9005785828922,
+      "files": 1869,
+      "rows": 903421
+    },
+    {
+      "entity": "exon",
+      "seconds": 352.70249508298,
+      "files": 1869,
+      "rows": 7921787
+    },
+    {
+      "entity": "regulatory",
+      "seconds": 122.90326866693795,
+      "files": 24,
+      "rows": 380956
+    },
+    {
+      "entity": "motif",
+      "seconds": 126.96999270806555,
+      "files": 24,
+      "rows": 999828
+    }
+  ],
+  "output_bytes": 30860156177,
+  "success": true
+}

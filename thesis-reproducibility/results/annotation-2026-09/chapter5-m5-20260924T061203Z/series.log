@@ -1,0 +1,729 @@
+2026-09-24T06:12:03Z\tWAITING_FOR_DOWNLOADS
+2026-09-24T06:12:03Z\tBUILDING_NATIVE_VEPYR
+reusing native VEPYR: /Users/lukaszjezapkowicz/workspace/data_vepyr/manifests/vepyr-native-build.txt
+2026-09-24T06:12:03Z\tVERIFYING_DATA
+verified_at_utc=2026-09-24T06:12:03Z
+verified: 22 chromosomes, 4096123 variants
+Validated 6 plugin source manifests
+2026/09/24 08:14:31 NOTICE: Local file system at /Users/lukaszjezapkowicz/workspace/data_vepyr: 0 differences found
+2026/09/24 08:14:31 NOTICE: Local file system at /Users/lukaszjezapkowicz/workspace/data_vepyr: 144 matching files
+Filesystem      Size    Used   Avail Capacity iused ifree %iused  Mounted on
+/dev/disk3s5   926Gi   670Gi   230Gi    75%    2.5M  2.4G    0%   /System/Vol...
+chapter 5 data verification passed
+2026-09-24T06:14:31Z\tRECORDING_ENVIRONMENT
+environment recorded: /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/chapter5-m5-20260924T061203Z/environment.txt
+2026-09-24T06:14:32Z\tRUNNING_CORRECTNESS
+started_at_utc=2026-09-24T06:14:32Z
+============================================================
+  profile:   merged
+  release:   116
+  cache_dir: /Users/lukaszjezapkowicz/workspace/data_vepyr/cache/116_GRCh38_merged
+  vep_vcf:   /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/HG002_annotated_wgs_everything_hgvs_merged.vcf.gz
+  results:   /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/results/116
+============================================================
+  Using existing /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/results/116/_shared/normalized.vcf.gz
+  contigs:   chr1
+  Quarantined stale evidence: /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/reports/fast_chr1_merged_116_report.json.stale
+  Quarantined stale evidence: /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/reports/fast_chr1_merged_116_mismatches.jsonl.stale
+
+============================================================
+  chr1 (profile=merged, release=116)
+============================================================
+  Created /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/results/116/fast_chr1/input_chr1.vcf.gz
+  Input: 323,430 variants for chr1
+Annotating → vepyr_parquet_chr1_merged.vcf.gz: 0 variants [00:00, ? variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:   5%|▍         | 15000/323430 [00:01<00:37, 8237.35 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:   5%|▍         | 15000/323430 [00:01<00:37, 8237.35 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:   6%|▌         | 20000/323430 [00:02<00:30, 9810.57 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:   6%|▌         | 20000/323430 [00:02<00:30, 9810.57 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  11%|█         | 35000/323430 [00:02<00:15, 18318.67 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  11%|█         | 35000/323430 [00:02<00:15, 18318.67 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  12%|█▏        | 40000/323430 [00:02<00:12, 23376.99 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  12%|█▏        | 40000/323430 [00:02<00:12, 23376.99 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  15%|█▌        | 50000/323430 [00:02<00:10, 26254.29 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  15%|█▌        | 50000/323430 [00:02<00:10, 26254.29 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  19%|█▊        | 60000/323430 [00:03<00:09, 28294.10 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  19%|█▊        | 60000/323430 [00:03<00:09, 28294.10 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  20%|██        | 65000/323430 [00:03<00:07, 35423.37 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  20%|██        | 65000/323430 [00:03<00:07, 35423.37 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  22%|██▏       | 70000/323430 [00:03<00:09, 28124.75 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  22%|██▏       | 70000/323430 [00:03<00:09, 28124.75 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  25%|██▍       | 80000/323430 [00:03<00:05, 46068.43 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  25%|██▍       | 80000/323430 [00:03<00:05, 46068.43 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  29%|██▉       | 95000/323430 [00:03<00:04, 47680.65 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  29%|██▉       | 95000/323430 [00:03<00:04, 47680.65 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  34%|███▍      | 110000/323430 [00:03<00:04, 48247.39 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  34%|███▍      | 110000/323430 [00:03<00:04, 48247.39 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  36%|███▌      | 115000/323430 [00:04<00:05, 36908.54 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  36%|███▌      | 115000/323430 [00:04<00:05, 36908.54 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  40%|████      | 130000/323430 [00:04<00:04, 41034.95 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  40%|████      | 130000/323430 [00:04<00:04, 41034.95 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  43%|████▎     | 140000/323430 [00:04<00:04, 38348.26 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  43%|████▎     | 140000/323430 [00:04<00:04, 38348.26 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  45%|████▍     | 145000/323430 [00:04<00:03, 45947.38 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  45%|████▍     | 145000/323430 [00:04<00:03, 45947.38 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  46%|████▋     | 150000/323430 [00:05<00:05, 34164.52 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  46%|████▋     | 150000/323430 [00:05<00:05, 34164.52 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  49%|████▉     | 160000/323430 [00:05<00:03, 52815.68 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  49%|████▉     | 160000/323430 [00:05<00:03, 52815.68 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  51%|█████     | 165000/323430 [00:05<00:04, 36476.38 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  51%|█████     | 165000/323430 [00:05<00:04, 36476.38 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  53%|█████▎    | 170000/323430 [00:05<00:03, 46962.15 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  53%|█████▎    | 170000/323430 [00:05<00:03, 46962.15 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  56%|█████▌    | 180000/323430 [00:05<00:03, 40183.82 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  56%|█████▌    | 180000/323430 [00:05<00:03, 40183.82 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  57%|█████▋    | 185000/323430 [00:05<00:02, 51351.92 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  57%|█████▋    | 185000/323430 [00:05<00:02, 51351.92 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  59%|█████▊    | 190000/323430 [00:06<00:03, 34093.26 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  59%|█████▊    | 190000/323430 [00:06<00:03, 34093.26 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  62%|██████▏   | 200000/323430 [00:06<00:02, 57185.95 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  62%|██████▏   | 200000/323430 [00:06<00:02, 57185.95 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  65%|██████▍   | 210000/323430 [00:06<00:02, 45064.40 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  65%|██████▍   | 210000/323430 [00:06<00:02, 45064.40 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  68%|██████▊   | 220000/323430 [00:06<00:01, 68598.27 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  68%|██████▊   | 220000/323430 [00:06<00:01, 68598.27 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  70%|██████▉   | 225000/323430 [00:06<00:02, 42152.20 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  70%|██████▉   | 225000/323430 [00:06<00:02, 42152.20 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  73%|███████▎  | 235000/323430 [00:07<00:02, 38208.89 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  73%|███████▎  | 235000/323430 [00:07<00:02, 38208.89 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  76%|███████▌  | 245000/323430 [00:07<00:01, 57841.57 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  76%|███████▌  | 245000/323430 [00:07<00:01, 57841.57 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  82%|████████▏ | 265000/323430 [00:07<00:00, 61397.94 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  82%|████████▏ | 265000/323430 [00:07<00:00, 61397.94 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  83%|████████▎ | 270000/323430 [00:07<00:01, 43644.90 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  83%|████████▎ | 270000/323430 [00:07<00:01, 43644.90 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  87%|████████▋ | 280000/323430 [00:07<00:00, 62283.69 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  87%|████████▋ | 280000/323430 [00:07<00:00, 62283.69 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  88%|████████▊ | 285000/323430 [00:07<00:00, 41705.12 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  88%|████████▊ | 285000/323430 [00:07<00:00, 41705.12 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  91%|█████████ | 295000/323430 [00:07<00:00, 62683.33 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  91%|█████████ | 295000/323430 [00:07<00:00, 62683.33 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  93%|█████████▎| 300000/323430 [00:08<00:00, 40567.80 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  93%|█████████▎| 300000/323430 [00:08<00:00, 40567.80 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  94%|█████████▍| 303430/323430 [00:08<00:00, 28670.51 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  94%|█████████▍| 303430/323430 [00:08<00:00, 28670.51 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  95%|█████████▌| 308430/323430 [00:08<00:00, 24169.05 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  95%|█████████▌| 308430/323430 [00:08<00:00, 24169.05 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  97%|█████████▋| 313430/323430 [00:09<00:00, 21492.33 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  97%|█████████▋| 313430/323430 [00:09<00:00, 21492.33 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  98%|█████████▊| 318430/323430 [00:09<00:00, 19810.23 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz:  98%|█████████▊| 318430/323430 [00:09<00:00, 19810.23 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz: 100%|██████████| 323430/323430 [00:09<00:00, 21263.91 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz: 100%|██████████| 323430/323430 [00:09<00:00, 21263.91 variants/s]Annotating → vepyr_parquet_chr1_merged.vcf.gz: 100%|██████████| 323430/323430 [00:09<00:00, 33578.05 variants/s]
+  bgzf check: output is valid block-gzip (BGZF)
+  Done: 323,430 variants in 9.7s (33,449 variants/s), 138 MB
+  Extracting chr1 from VEP reference via tabix ...
+  Extracted 323,430 VEP records for chr1
+
+============================================================
+Comparing vepyr (parquet) vs VEP — chr1
+============================================================
+  vepyr:  323,430 data lines
+  VEP:    323,430 data lines
+  Building sorted key+CSQ lists ...
+
+  Results:
+    Variants compared:        323,430
+    Only in vepyr:            0
+    Only in VEP:              0
+    CSQ count match:          323,430
+    CSQ count mismatch:       0
+    CSQ order mismatch:       0  (same entries, wrong order — issue #83)
+    Mismatch ledger:          0 rows (e3b0c44298fc…) -> /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/reports/fast_chr1_merged_116_mismatches.jsonl
+
+  Per-field match rates (323,430 variants):
+  Field                            Match%    Matches Mismatches  OrderOnly FormatOnly      Total
+  ------------------------------ -------- ---------- ---------- ---------- ---------- ----------
+  Allele                          100.00%  5,688,867          0          0          0  5,688,867
+  Consequence                     100.00%  5,688,867          0          0          0  5,688,867
+  IMPACT                          100.00%  5,688,867          0          0          0  5,688,867
+  SYMBOL                          100.00%  5,688,867          0          0          0  5,688,867
+  Gene                            100.00%  5,688,867          0          0          0  5,688,867
+  Feature_type                    100.00%  5,688,867          0          0          0  5,688,867
+  Feature                         100.00%  5,688,867          0          0          0  5,688,867
+  BIOTYPE                         100.00%  5,688,867          0          0          0  5,688,867
+  EXON                            100.00%  5,688,867          0          0          0  5,688,867
+  INTRON                          100.00%  5,688,867          0          0          0  5,688,867
+  HGVSc                           100.00%  5,688,867          0          0          0  5,688,867
+  HGVSp                           100.00%  5,688,867          0          0          0  5,688,867
+  cDNA_position                   100.00%  5,688,867          0          0          0  5,688,867
+  CDS_position                    100.00%  5,688,867          0          0          0  5,688,867
+  Protein_position                100.00%  5,688,867          0          0          0  5,688,867
+  Amino_acids                     100.00%  5,688,867          0          0          0  5,688,867
+  Codons                          100.00%  5,688,867          0          0          0  5,688,867
+  Existing_variation              100.00%  5,688,867          0          0          0  5,688,867
+  DISTANCE                        100.00%  5,688,867          0          0          0  5,688,867
+  STRAND                          100.00%  5,688,867          0          0          0  5,688,867
+  FLAGS                           100.00%  5,688,867          0          0          0  5,688,867
+  VARIANT_CLASS                   100.00%  5,688,867          0          0          0  5,688,867
+  SYMBOL_SOURCE                   100.00%  5,688,867          0          0          0  5,688,867
+  HGNC_ID                         100.00%  5,688,867          0          0          0  5,688,867
+  CANONICAL                       100.00%  5,688,867          0          0          0  5,688,867
+  MANE                            100.00%  5,688,867          0          0          0  5,688,867
+  MANE_SELECT                     100.00%  5,688,867          0          0          0  5,688,867
+  MANE_PLUS_CLINICAL              100.00%  5,688,867          0          0          0  5,688,867
+  TSL                             100.00%  5,688,867          0          0          0  5,688,867
+  APPRIS                          100.00%  5,688,867          0          0          0  5,688,867
+  CCDS                            100.00%  5,688,867          0          0          0  5,688,867
+  ENSP                            100.00%  5,688,867          0          0          0  5,688,867
+  SWISSPROT                       100.00%  5,688,867          0          0          0  5,688,867
+  TREMBL                          100.00%  5,688,867          0          0          0  5,688,867
+  UNIPARC                         100.00%  5,688,867          0          0          0  5,688,867
+  UNIPROT_ISOFORM                 100.00%  5,688,867          0          0          0  5,688,867
+  REFSEQ_MATCH                    100.00%  5,688,867          0          0          0  5,688,867
+  SOURCE                          100.00%  5,688,867          0          0          0  5,688,867
+  REFSEQ_OFFSET                   100.00%  5,688,867          0          0          0  5,688,867
+  GIVEN_REF                       100.00%  5,688,867          0          0          0  5,688,867
+  USED_REF                        100.00%  5,688,867          0          0          0  5,688,867
+  BAM_EDIT                        100.00%  5,688,867          0          0          0  5,688,867
+  GENE_PHENO                      100.00%  5,688,867          0          0          0  5,688,867
+  SIFT                            100.00%  5,688,867          0          0          0  5,688,867
+  PolyPhen                        100.00%  5,688,867          0          0          0  5,688,867
+  DOMAINS                         100.00%  5,688,867          0          0          0  5,688,867
+  miRNA                           100.00%  5,688,867          0          0          0  5,688,867
+  HGVS_OFFSET                     100.00%  5,688,867          0          0          0  5,688,867
+  AF                              100.00%  5,688,867          0          0          0  5,688,867
+  AFR_AF                          100.00%  5,688,867          0          0          0  5,688,867
+  AMR_AF                          100.00%  5,688,867          0          0          0  5,688,867
+  EAS_AF                          100.00%  5,688,867          0          0          0  5,688,867
+  EUR_AF                          100.00%  5,688,867          0          0          0  5,688,867
+  SAS_AF                          100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_AF                      100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_AFR_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_AMR_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_ASJ_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_EAS_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_FIN_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_MID_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_NFE_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_REMAINING_AF            100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_SAS_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_AF                      100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_AFR_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_AMI_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_AMR_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_ASJ_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_EAS_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_FIN_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_MID_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_NFE_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_REMAINING_AF            100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_SAS_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  MAX_AF                          100.00%  5,688,867          0          0          0  5,688,867
+  MAX_AF_POPS                     100.00%  5,688,867          0          0          0  5,688,867
+  CLIN_SIG                        100.00%  5,688,867          0          0          0  5,688,867
+  SOMATIC                         100.00%  5,688,867          0          0          0  5,688,867
+  PHENO                           100.00%  5,688,867          0          0          0  5,688,867
+  PUBMED                          100.00%  5,688,867          0          0          0  5,688,867
+  MOTIF_NAME                      100.00%  5,688,867          0          0          0  5,688,867
+  MOTIF_POS                       100.00%  5,688,867          0          0          0  5,688,867
+  HIGH_INF_POS                    100.00%  5,688,867          0          0          0  5,688,867
+  MOTIF_SCORE_CHANGE              100.00%  5,688,867          0          0          0  5,688,867
+  TRANSCRIPTION_FACTORS           100.00%  5,688,867          0          0          0  5,688,867
+
+  ALL 86 shared CSQ fields match at 100%!
+  Report: /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/reports/fast_chr1_merged_116_report.json
+
+============================================================
+  Summary: /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/reports/fast_chr1_merged_116_summary_20260924_0818.md
+  Fields at 100%: 86/86
+  Total mismatches: 0
+============================================================
+============================================================
+  profile:   merged_plugins
+  release:   116
+  cache_dir: /Users/lukaszjezapkowicz/workspace/data_vepyr/cache/116_GRCh38_merged
+  plugins:   /Users/lukaszjezapkowicz/workspace/data_vepyr/cache/plugin_cache_116
+  vep_vcf:   /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr1_5plugins_vep116_caddfix.vcf.gz
+  results:   /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/results/116
+============================================================
+  Using existing /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/results/116/_shared/normalized.vcf.gz
+  contigs:   chr1
+  Quarantined stale evidence: /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/reports/fast_chr1_merged_plugins_116_report.json.stale
+  Quarantined stale evidence: /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/reports/fast_chr1_merged_plugins_116_mismatches.jsonl.stale
+
+============================================================
+  chr1 (profile=merged_plugins, release=116)
+============================================================
+  Created /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/results/116/fast_chr1/input_chr1.vcf.gz
+  Input: 323,430 variants for chr1
+Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz: 0 variants [00:00, ? variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:   2%|▏         | 5000/323430 [00:02<02:35, 2049.37 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:   2%|▏         | 5000/323430 [00:02<02:35, 2049.37 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:   3%|▎         | 10000/323430 [00:02<01:02, 4976.40 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:   3%|▎         | 10000/323430 [00:02<01:02, 4976.40 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:   5%|▍         | 15000/323430 [00:02<00:42, 7307.98 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:   5%|▍         | 15000/323430 [00:02<00:42, 7307.98 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:   6%|▌         | 20000/323430 [00:02<00:25, 12073.28 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:   6%|▌         | 20000/323430 [00:02<00:25, 12073.28 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:   8%|▊         | 25000/323430 [00:03<00:28, 10348.70 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:   8%|▊         | 25000/323430 [00:03<00:28, 10348.70 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  11%|█         | 35000/323430 [00:03<00:13, 21007.47 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  11%|█         | 35000/323430 [00:03<00:13, 21007.47 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  12%|█▏        | 40000/323430 [00:03<00:14, 19541.64 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  12%|█▏        | 40000/323430 [00:03<00:14, 19541.64 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  14%|█▍        | 45000/323430 [00:04<00:19, 14190.68 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  14%|█▍        | 45000/323430 [00:04<00:19, 14190.68 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  15%|█▌        | 50000/323430 [00:04<00:13, 19769.56 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  15%|█▌        | 50000/323430 [00:04<00:13, 19769.56 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  19%|█▊        | 60000/323430 [00:04<00:10, 24026.90 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  19%|█▊        | 60000/323430 [00:04<00:10, 24026.90 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  20%|██        | 65000/323430 [00:04<00:11, 21591.38 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  20%|██        | 65000/323430 [00:04<00:11, 21591.38 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  23%|██▎       | 75000/323430 [00:05<00:12, 19112.17 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  23%|██▎       | 75000/323430 [00:05<00:12, 19112.17 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  25%|██▍       | 80000/323430 [00:05<00:09, 24686.24 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  25%|██▍       | 80000/323430 [00:05<00:09, 24686.24 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  26%|██▋       | 85000/323430 [00:05<00:10, 21976.72 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  26%|██▋       | 85000/323430 [00:05<00:10, 21976.72 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  29%|██▉       | 95000/323430 [00:06<00:11, 19339.78 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  29%|██▉       | 95000/323430 [00:06<00:11, 19339.78 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  31%|███       | 100000/323430 [00:06<00:08, 25010.40 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  31%|███       | 100000/323430 [00:06<00:08, 25010.40 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  32%|███▏      | 105000/323430 [00:06<00:09, 22158.02 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  32%|███▏      | 105000/323430 [00:06<00:09, 22158.02 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  36%|███▌      | 115000/323430 [00:07<00:08, 25563.52 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  36%|███▌      | 115000/323430 [00:07<00:08, 25563.52 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  37%|███▋      | 120000/323430 [00:07<00:08, 22676.89 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  37%|███▋      | 120000/323430 [00:07<00:08, 22676.89 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  39%|███▊      | 125000/323430 [00:07<00:12, 15823.95 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  39%|███▊      | 125000/323430 [00:07<00:12, 15823.95 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  42%|████▏     | 135000/323430 [00:07<00:07, 26896.41 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  42%|████▏     | 135000/323430 [00:07<00:07, 26896.41 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  43%|████▎     | 140000/323430 [00:08<00:07, 23475.34 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  43%|████▎     | 140000/323430 [00:08<00:07, 23475.34 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  49%|████▉     | 160000/323430 [00:08<00:05, 27957.71 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  49%|████▉     | 160000/323430 [00:08<00:05, 27957.71 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  53%|█████▎    | 170000/323430 [00:09<00:07, 19305.33 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  53%|█████▎    | 170000/323430 [00:09<00:07, 19305.33 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  56%|█████▌    | 180000/323430 [00:10<00:06, 21960.35 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  56%|█████▌    | 180000/323430 [00:10<00:06, 21960.35 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  59%|█████▊    | 190000/323430 [00:10<00:06, 19978.65 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  59%|█████▊    | 190000/323430 [00:10<00:06, 19978.65 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  62%|██████▏   | 200000/323430 [00:10<00:05, 22583.70 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  62%|██████▏   | 200000/323430 [00:10<00:05, 22583.70 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  63%|██████▎   | 205000/323430 [00:11<00:06, 17290.21 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  63%|██████▎   | 205000/323430 [00:11<00:06, 17290.21 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  65%|██████▍   | 210000/323430 [00:11<00:05, 21593.62 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  65%|██████▍   | 210000/323430 [00:11<00:05, 21593.62 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  66%|██████▋   | 215000/323430 [00:11<00:05, 20173.49 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  66%|██████▋   | 215000/323430 [00:11<00:05, 20173.49 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  70%|██████▉   | 225000/323430 [00:11<00:02, 32945.23 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  70%|██████▉   | 225000/323430 [00:11<00:02, 32945.23 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  71%|███████   | 230000/323430 [00:12<00:04, 19981.25 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  71%|███████   | 230000/323430 [00:12<00:04, 19981.25 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  74%|███████▍  | 240000/323430 [00:12<00:03, 23487.97 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  74%|███████▍  | 240000/323430 [00:12<00:03, 23487.97 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  76%|███████▌  | 245000/323430 [00:12<00:02, 29902.94 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  76%|███████▌  | 245000/323430 [00:12<00:02, 29902.94 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  77%|███████▋  | 250000/323430 [00:13<00:02, 25055.08 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  77%|███████▋  | 250000/323430 [00:13<00:02, 25055.08 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  79%|███████▉  | 255000/323430 [00:13<00:03, 22117.32 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  79%|███████▉  | 255000/323430 [00:13<00:03, 22117.32 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  80%|████████  | 260000/323430 [00:13<00:03, 20320.22 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  80%|████████  | 260000/323430 [00:13<00:03, 20320.22 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  82%|████████▏ | 265000/323430 [00:13<00:02, 27977.86 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  82%|████████▏ | 265000/323430 [00:13<00:02, 27977.86 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  83%|████████▎ | 270000/323430 [00:14<00:02, 23336.74 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  83%|████████▎ | 270000/323430 [00:14<00:02, 23336.74 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  85%|████████▌ | 275000/323430 [00:14<00:01, 32704.83 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  85%|████████▌ | 275000/323430 [00:14<00:01, 32704.83 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  88%|████████▊ | 285000/323430 [00:14<00:01, 32737.32 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  88%|████████▊ | 285000/323430 [00:14<00:01, 32737.32 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  90%|████████▉ | 290000/323430 [00:14<00:01, 26338.36 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  90%|████████▉ | 290000/323430 [00:14<00:01, 26338.36 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  91%|█████████ | 295000/323430 [00:14<00:01, 22771.52 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  91%|█████████ | 295000/323430 [00:14<00:01, 22771.52 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  94%|█████████▍| 305000/323430 [00:15<00:00, 26158.96 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  94%|█████████▍| 305000/323430 [00:15<00:00, 26158.96 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  95%|█████████▌| 308430/323430 [00:15<00:00, 21295.21 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  95%|█████████▌| 308430/323430 [00:15<00:00, 21295.21 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  97%|█████████▋| 313430/323430 [00:16<00:00, 14977.53 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  97%|█████████▋| 313430/323430 [00:16<00:00, 14977.53 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  98%|█████████▊| 318430/323430 [00:16<00:00, 12210.65 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz:  98%|█████████▊| 318430/323430 [00:16<00:00, 12210.65 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz: 100%|██████████| 323430/323430 [00:17<00:00, 9055.52 variants/s] Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz: 100%|██████████| 323430/323430 [00:17<00:00, 9055.52 variants/s]Annotating → vepyr_parquet_chr1_merged_plugins.vcf.gz: 100%|██████████| 323430/323430 [00:17<00:00, 18301.38 variants/s]
+  bgzf check: output is valid block-gzip (BGZF)
+  Done: 323,430 variants in 17.7s (18,270 variants/s), 156 MB
+  Extracting chr1 from VEP reference via tabix ...
+  Extracted 323,430 VEP records for chr1
+
+============================================================
+Comparing vepyr (parquet) vs VEP — chr1
+============================================================
+  vepyr:  323,430 data lines
+  VEP:    323,430 data lines
+  Building sorted key+CSQ lists ...
+
+  Results:
+    Variants compared:        323,430
+    Only in vepyr:            0
+    Only in VEP:              0
+    CSQ count match:          323,430
+    CSQ count mismatch:       0
+    CSQ order mismatch:       0  (same entries, wrong order — issue #83)
+    Mismatch ledger:          0 rows (e3b0c44298fc…) -> /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/reports/fast_chr1_merged_plugins_116_mismatches.jsonl
+
+  Per-field match rates (323,430 variants):
+  Field                            Match%    Matches Mismatches  OrderOnly FormatOnly      Total
+  ------------------------------ -------- ---------- ---------- ---------- ---------- ----------
+  Allele                          100.00%  5,688,867          0          0          0  5,688,867
+  Consequence                     100.00%  5,688,867          0          0          0  5,688,867
+  IMPACT                          100.00%  5,688,867          0          0          0  5,688,867
+  SYMBOL                          100.00%  5,688,867          0          0          0  5,688,867
+  Gene                            100.00%  5,688,867          0          0          0  5,688,867
+  Feature_type                    100.00%  5,688,867          0          0          0  5,688,867
+  Feature                         100.00%  5,688,867          0          0          0  5,688,867
+  BIOTYPE                         100.00%  5,688,867          0          0          0  5,688,867
+  EXON                            100.00%  5,688,867          0          0          0  5,688,867
+  INTRON                          100.00%  5,688,867          0          0          0  5,688,867
+  HGVSc                           100.00%  5,688,867          0          0          0  5,688,867
+  HGVSp                           100.00%  5,688,867          0          0          0  5,688,867
+  cDNA_position                   100.00%  5,688,867          0          0          0  5,688,867
+  CDS_position                    100.00%  5,688,867          0          0          0  5,688,867
+  Protein_position                100.00%  5,688,867          0          0          0  5,688,867
+  Amino_acids                     100.00%  5,688,867          0          0          0  5,688,867
+  Codons                          100.00%  5,688,867          0          0          0  5,688,867
+  Existing_variation              100.00%  5,688,867          0          0          0  5,688,867
+  DISTANCE                        100.00%  5,688,867          0          0          0  5,688,867
+  STRAND                          100.00%  5,688,867          0          0          0  5,688,867
+  FLAGS                           100.00%  5,688,867          0          0          0  5,688,867
+  VARIANT_CLASS                   100.00%  5,688,867          0          0          0  5,688,867
+  SYMBOL_SOURCE                   100.00%  5,688,867          0          0          0  5,688,867
+  HGNC_ID                         100.00%  5,688,867          0          0          0  5,688,867
+  CANONICAL                       100.00%  5,688,867          0          0          0  5,688,867
+  MANE                            100.00%  5,688,867          0          0          0  5,688,867
+  MANE_SELECT                     100.00%  5,688,867          0          0          0  5,688,867
+  MANE_PLUS_CLINICAL              100.00%  5,688,867          0          0          0  5,688,867
+  TSL                             100.00%  5,688,867          0          0          0  5,688,867
+  APPRIS                          100.00%  5,688,867          0          0          0  5,688,867
+  CCDS                            100.00%  5,688,867          0          0          0  5,688,867
+  ENSP                            100.00%  5,688,867          0          0          0  5,688,867
+  SWISSPROT                       100.00%  5,688,867          0          0          0  5,688,867
+  TREMBL                          100.00%  5,688,867          0          0          0  5,688,867
+  UNIPARC                         100.00%  5,688,867          0          0          0  5,688,867
+  UNIPROT_ISOFORM                 100.00%  5,688,867          0          0          0  5,688,867
+  REFSEQ_MATCH                    100.00%  5,688,867          0          0          0  5,688,867
+  SOURCE                          100.00%  5,688,867          0          0          0  5,688,867
+  REFSEQ_OFFSET                   100.00%  5,688,867          0          0          0  5,688,867
+  GIVEN_REF                       100.00%  5,688,867          0          0          0  5,688,867
+  USED_REF                        100.00%  5,688,867          0          0          0  5,688,867
+  BAM_EDIT                        100.00%  5,688,867          0          0          0  5,688,867
+  GENE_PHENO                      100.00%  5,688,867          0          0          0  5,688,867
+  SIFT                            100.00%  5,688,867          0          0          0  5,688,867
+  PolyPhen                        100.00%  5,688,867          0          0          0  5,688,867
+  DOMAINS                         100.00%  5,688,867          0          0          0  5,688,867
+  miRNA                           100.00%  5,688,867          0          0          0  5,688,867
+  HGVS_OFFSET                     100.00%  5,688,867          0          0          0  5,688,867
+  AF                              100.00%  5,688,867          0          0          0  5,688,867
+  AFR_AF                          100.00%  5,688,867          0          0          0  5,688,867
+  AMR_AF                          100.00%  5,688,867          0          0          0  5,688,867
+  EAS_AF                          100.00%  5,688,867          0          0          0  5,688,867
+  EUR_AF                          100.00%  5,688,867          0          0          0  5,688,867
+  SAS_AF                          100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_AF                      100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_AFR_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_AMR_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_ASJ_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_EAS_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_FIN_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_MID_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_NFE_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_REMAINING_AF            100.00%  5,688,867          0          0          0  5,688,867
+  gnomADe_SAS_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_AF                      100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_AFR_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_AMI_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_AMR_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_ASJ_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_EAS_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_FIN_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_MID_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_NFE_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_REMAINING_AF            100.00%  5,688,867          0          0          0  5,688,867
+  gnomADg_SAS_AF                  100.00%  5,688,867          0          0          0  5,688,867
+  MAX_AF                          100.00%  5,688,867          0          0          0  5,688,867
+  MAX_AF_POPS                     100.00%  5,688,867          0          0          0  5,688,867
+  CLIN_SIG                        100.00%  5,688,867          0          0          0  5,688,867
+  SOMATIC                         100.00%  5,688,867          0          0          0  5,688,867
+  PHENO                           100.00%  5,688,867          0          0          0  5,688,867
+  PUBMED                          100.00%  5,688,867          0          0          0  5,688,867
+  MOTIF_NAME                      100.00%  5,688,867          0          0          0  5,688,867
+  MOTIF_POS                       100.00%  5,688,867          0          0          0  5,688,867
+  HIGH_INF_POS                    100.00%  5,688,867          0          0          0  5,688,867
+  MOTIF_SCORE_CHANGE              100.00%  5,688,867          0          0          0  5,688,867
+  TRANSCRIPTION_FACTORS           100.00%  5,688,867          0          0          0  5,688,867
+  SpliceAI_pred_DP_AG             100.00%  5,688,867          0          0          0  5,688,867
+  SpliceAI_pred_DP_AL             100.00%  5,688,867          0          0          0  5,688,867
+  SpliceAI_pred_DP_DG             100.00%  5,688,867          0          0          0  5,688,867
+  SpliceAI_pred_DP_DL             100.00%  5,688,867          0          0          0  5,688,867
+  SpliceAI_pred_DS_AG             100.00%  5,688,867          0          0          0  5,688,867
+  SpliceAI_pred_DS_AL             100.00%  5,688,867          0          0          0  5,688,867
+  SpliceAI_pred_DS_DG             100.00%  5,688,867          0          0          0  5,688,867
+  SpliceAI_pred_DS_DL             100.00%  5,688,867          0          0          0  5,688,867
+  SpliceAI_pred_SYMBOL            100.00%  5,688,867          0          0          0  5,688,867
+  CADD_PHRED                      100.00%  5,688,867          0          0          0  5,688,867
+  CADD_RAW                        100.00%  5,688,867          0          0          0  5,688,867
+  am_class                        100.00%  5,688,867          0          0          0  5,688,867
+  am_pathogenicity                100.00%  5,688,867          0          0          0  5,688,867
+  CADD_phred                      100.00%  5,688,867          0          0          0  5,688,867
+  CADD_raw                        100.00%  5,688,867          0          0          0  5,688,867
+  GERP++_RS                       100.00%  5,688,867          0          0          0  5,688,867
+  MetaLR_pred                     100.00%  5,688,867          0          0          0  5,688,867
+  MetaLR_score                    100.00%  5,688,867          0          0          0  5,688,867
+  MetaSVM_pred                    100.00%  5,688,867          0          0          0  5,688,867
+  MetaSVM_score                   100.00%  5,688,867          0          0          0  5,688,867
+  MutationTaster_pred             100.00%  5,688,867          0          0          0  5,688,867
+  MutationTaster_score            100.00%  5,688,867          0          0          0  5,688,867
+  PROVEAN_pred                    100.00%  5,688,867          0          0          0  5,688,867
+  PROVEAN_score                   100.00%  5,688,867          0          0          0  5,688,867
+  Polyphen2_HDIV_score            100.00%  5,688,867          0          0          0  5,688,867
+  Polyphen2_HVAR_score            100.00%  5,688,867          0          0          0  5,688,867
+  REVEL_score                     100.00%  5,688,867          0          0          0  5,688,867
+  SIFT4G_pred                     100.00%  5,688,867          0          0          0  5,688,867
+  SIFT4G_score                    100.00%  5,688,867          0          0          0  5,688,867
+  VEST4_score                     100.00%  5,688,867          0          0          0  5,688,867
+  phastCons100way_vertebrate      100.00%  5,688,867          0          0          0  5,688,867
+  phyloP100way_vertebrate         100.00%  5,688,867          0          0          0  5,688,867
+  ClinVar                         100.00%  5,688,867          0          0          0  5,688,867
+  ClinVar_CLNSIG                  100.00%  5,688,867          0          0          0  5,688,867
+  ClinVar_CLNREVSTAT              100.00%  5,688,867          0          0          0  5,688,867
+  ClinVar_CLNDN                   100.00%  5,688,867          0          0          0  5,688,867
+  ClinVar_CLNVC                   100.00%  5,688,867          0          0          0  5,688,867
+  ClinVar_CLNVI                   100.00%  5,688,867          0          0          0  5,688,867
+
+  ALL 124 shared CSQ fields match at 100%!
+  Report: /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/reports/fast_chr1_merged_plugins_116_report.json
+
+============================================================
+  Summary: /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/reports/fast_chr1_merged_plugins_116_summary_20260924_0822.md
+  Fields at 100%: 124/124
+  Total mismatches: 0
+============================================================
+benchmark-plugins: running config 'base'
+benchmark-plugins: skipping concordance for 'base' (no no-plugin VEP reference 
+given)
+benchmark-plugins: running config 'clinvar'
+benchmark-plugins: running config 'spliceai'
+benchmark-plugins: running config 'cadd'
+benchmark-plugins: running config 'alphamissense'
+benchmark-plugins: running config 'dbnsfp'
+                             vepyr plugin benchmark                             
+┏━━━━━━━━┳━━━━━━━━┳━━━━━━━━┳━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━┓
+┃        ┃        ┃        ┃        ┃        ┃       ┃ output ┃ plug… ┃        ┃
+┃        ┃ wall   ┃ cpu    ┃ RSS    ┃        ┃       ┃ (Δ     ┃ fiel… ┃ misma… ┃
+┃ config ┃ (s)    ┃ (s)    ┃ (MB)   ┃ var/s  ┃ cache ┃ base)  ┃ equal ┃ (L/R/… ┃
+┡━━━━━━━━╇━━━━━━━━╇━━━━━━━━╇━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━┩
+│ base   │ 19.4   │ 29.1   │ 3611   │ 16709… │ 0.0   │ 2302.4 │ n/a   │ n/a    │
+│        │        │        │        │        │ MB    │ MB (—) │       │        │
+│ clinv… │ 19.0   │ 29.8   │ 3734   │ 17026… │ 77.3  │ 2350.7 │ True  │ 0/0/0  │
+│        │        │        │        │        │ MB    │ MB     │       │        │
+│        │        │        │        │        │       │ (+48.2 │       │        │
+│        │        │        │        │        │       │ MB)    │       │        │
+│ splic… │ 27.9   │ 38.2   │ 3658   │ 11612… │ 2429… │ 2435.6 │ True  │ 0/0/0  │
+│        │        │        │        │        │ MB    │ MB     │       │        │
+│        │        │        │        │        │       │ (+133… │       │        │
+│        │        │        │        │        │       │ MB)    │       │        │
+│ cadd   │ 30.4   │ 40.2   │ 3857   │ 10656… │ 7084… │ 2385.4 │ True  │ 0/0/0  │
+│        │        │        │        │        │ MB    │ MB     │       │        │
+│        │        │        │        │        │       │ (+83.0 │       │        │
+│        │        │        │        │        │       │ MB)    │       │        │
+│ alpha… │ 19.1   │ 29.9   │ 3720   │ 16891… │ 544.7 │ 2313.4 │ True  │ 0/0/0  │
+│        │        │        │        │        │ MB    │ MB     │       │        │
+│        │        │        │        │        │       │ (+11.0 │       │        │
+│        │        │        │        │        │       │ MB)    │       │        │
+│ dbnsfp │ 20.3   │ 31.0   │ 3732   │ 15927… │ 3843… │ 2413.0 │ True  │ 0/0/0  │
+│        │        │        │        │        │ MB    │ MB     │       │        │
+│        │        │        │        │        │       │ (+110… │       │        │
+│        │        │        │        │        │       │ MB)    │       │        │
+└────────┴────────┴────────┴────────┴────────┴───────┴────────┴───────┴────────┘
+/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/chapter5-m5-20260924T061203Z/
+correctness/chr1_individual_plugins/benchmark_plugins_summary.json
+/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/chapter5-m5-20260924T061203Z/
+correctness/chr1_individual_plugins/benchmark_plugins_summary.md
+============================================================
+  profile:   merged
+  release:   116
+  cache_dir: /Users/lukaszjezapkowicz/workspace/data_vepyr/cache/116_GRCh38_merged
+  vep_vcf:   /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/HG002_annotated_wgs_everything_hgvs_merged.vcf.gz
+  results:   /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/results/116
+============================================================
+  Using existing /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/results/116/_shared/normalized.vcf.gz
+  contigs:   chr22
+
+============================================================
+  chr22 (profile=merged, release=116)
+============================================================
+  Created /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/results/116/fast_chr22/input_chr22.vcf.gz
+  Input: 50,861 variants for chr22
+Annotating → vepyr_parquet_chr22_merged.vcf.gz: 0 variants [00:00, ? variants/s]Annotating → vepyr_parquet_chr22_merged.vcf.gz:  10%|▉         | 5000/50861 [00:00<00:08, 5506.15 variants/s]Annotating → vepyr_parquet_chr22_merged.vcf.gz:  10%|▉         | 5000/50861 [00:00<00:08, 5506.15 variants/s]Annotating → vepyr_parquet_chr22_merged.vcf.gz:  29%|██▉       | 15000/50861 [00:01<00:02, 14348.92 variants/s]Annotating → vepyr_parquet_chr22_merged.vcf.gz:  29%|██▉       | 15000/50861 [00:01<00:02, 14348.92 variants/s]Annotating → vepyr_parquet_chr22_merged.vcf.gz:  39%|███▉      | 20000/50861 [00:01<00:01, 21935.66 variants/s]Annotating → vepyr_parquet_chr22_merged.vcf.gz:  39%|███▉      | 20000/50861 [00:01<00:01, 21935.66 variants/s]Annotating → vepyr_parquet_chr22_merged.vcf.gz:  49%|████▉     | 25000/50861 [00:01<00:01, 19726.72 variants/s]Annotating → vepyr_parquet_chr22_merged.vcf.gz:  49%|████▉     | 25000/50861 [00:01<00:01, 19726.72 variants/s]Annotating → vepyr_parquet_chr22_merged.vcf.gz:  80%|████████  | 40861/50861 [00:01<00:00, 49289.36 variants/s]Annotating → vepyr_parquet_chr22_merged.vcf.gz:  80%|████████  | 40861/50861 [00:01<00:00, 49289.36 variants/s]Annotating → vepyr_parquet_chr22_merged.vcf.gz:  90%|█████████ | 45861/50861 [00:01<00:00, 34542.77 variants/s]Annotating → vepyr_parquet_chr22_merged.vcf.gz:  90%|█████████ | 45861/50861 [00:01<00:00, 34542.77 variants/s]Annotating → vepyr_parquet_chr22_merged.vcf.gz: 100%|██████████| 50861/50861 [00:01<00:00, 40483.91 variants/s]Annotating → vepyr_parquet_chr22_merged.vcf.gz: 100%|██████████| 50861/50861 [00:01<00:00, 40483.91 variants/s]Annotating → vepyr_parquet_chr22_merged.vcf.gz: 100%|██████████| 50861/50861 [00:01<00:00, 27091.48 variants/s]
+  bgzf check: output is valid block-gzip (BGZF)
+  Done: 50,861 variants in 1.9s (26,651 variants/s), 29 MB
+  Extracting chr22 from VEP reference via tabix ...
+  Extracted 50,861 VEP records for chr22
+
+============================================================
+Comparing vepyr (parquet) vs VEP — chr22
+============================================================
+  vepyr:  50,861 data lines
+  VEP:    50,861 data lines
+  Building sorted key+CSQ lists ...
+
+  Results:
+    Variants compared:        50,861
+    Only in vepyr:            0
+    Only in VEP:              0
+    CSQ count match:          50,861
+    CSQ count mismatch:       0
+    CSQ order mismatch:       0  (same entries, wrong order — issue #83)
+    Mismatch ledger:          0 rows (e3b0c44298fc…) -> /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/reports/fast_chr22_merged_116_mismatches.jsonl
+
+  Per-field match rates (50,861 variants):
+  Field                            Match%    Matches Mismatches  OrderOnly FormatOnly      Total
+  ------------------------------ -------- ---------- ---------- ---------- ---------- ----------
+  Allele                          100.00%  1,242,828          0          0          0  1,242,828
+  Consequence                     100.00%  1,242,828          0          0          0  1,242,828
+  IMPACT                          100.00%  1,242,828          0          0          0  1,242,828
+  SYMBOL                          100.00%  1,242,828          0          0          0  1,242,828
+  Gene                            100.00%  1,242,828          0          0          0  1,242,828
+  Feature_type                    100.00%  1,242,828          0          0          0  1,242,828
+  Feature                         100.00%  1,242,828          0          0          0  1,242,828
+  BIOTYPE                         100.00%  1,242,828          0          0          0  1,242,828
+  EXON                            100.00%  1,242,828          0          0          0  1,242,828
+  INTRON                          100.00%  1,242,828          0          0          0  1,242,828
+  HGVSc                           100.00%  1,242,828          0          0          0  1,242,828
+  HGVSp                           100.00%  1,242,828          0          0          0  1,242,828
+  cDNA_position                   100.00%  1,242,828          0          0          0  1,242,828
+  CDS_position                    100.00%  1,242,828          0          0          0  1,242,828
+  Protein_position                100.00%  1,242,828          0          0          0  1,242,828
+  Amino_acids                     100.00%  1,242,828          0          0          0  1,242,828
+  Codons                          100.00%  1,242,828          0          0          0  1,242,828
+  Existing_variation              100.00%  1,242,828          0          0          0  1,242,828
+  DISTANCE                        100.00%  1,242,828          0          0          0  1,242,828
+  STRAND                          100.00%  1,242,828          0          0          0  1,242,828
+  FLAGS                           100.00%  1,242,828          0          0          0  1,242,828
+  VARIANT_CLASS                   100.00%  1,242,828          0          0          0  1,242,828
+  SYMBOL_SOURCE                   100.00%  1,242,828          0          0          0  1,242,828
+  HGNC_ID                         100.00%  1,242,828          0          0          0  1,242,828
+  CANONICAL                       100.00%  1,242,828          0          0          0  1,242,828
+  MANE                            100.00%  1,242,828          0          0          0  1,242,828
+  MANE_SELECT                     100.00%  1,242,828          0          0          0  1,242,828
+  MANE_PLUS_CLINICAL              100.00%  1,242,828          0          0          0  1,242,828
+  TSL                             100.00%  1,242,828          0          0          0  1,242,828
+  APPRIS                          100.00%  1,242,828          0          0          0  1,242,828
+  CCDS                            100.00%  1,242,828          0          0          0  1,242,828
+  ENSP                            100.00%  1,242,828          0          0          0  1,242,828
+  SWISSPROT                       100.00%  1,242,828          0          0          0  1,242,828
+  TREMBL                          100.00%  1,242,828          0          0          0  1,242,828
+  UNIPARC                         100.00%  1,242,828          0          0          0  1,242,828
+  UNIPROT_ISOFORM                 100.00%  1,242,828          0          0          0  1,242,828
+  REFSEQ_MATCH                    100.00%  1,242,828          0          0          0  1,242,828
+  SOURCE                          100.00%  1,242,828          0          0          0  1,242,828
+  REFSEQ_OFFSET                   100.00%  1,242,828          0          0          0  1,242,828
+  GIVEN_REF                       100.00%  1,242,828          0          0          0  1,242,828
+  USED_REF                        100.00%  1,242,828          0          0          0  1,242,828
+  BAM_EDIT                        100.00%  1,242,828          0          0          0  1,242,828
+  GENE_PHENO                      100.00%  1,242,828          0          0          0  1,242,828
+  SIFT                            100.00%  1,242,828          0          0          0  1,242,828
+  PolyPhen                        100.00%  1,242,828          0          0          0  1,242,828
+  DOMAINS                         100.00%  1,242,828          0          0          0  1,242,828
+  miRNA                           100.00%  1,242,828          0          0          0  1,242,828
+  HGVS_OFFSET                     100.00%  1,242,828          0          0          0  1,242,828
+  AF                              100.00%  1,242,828          0          0          0  1,242,828
+  AFR_AF                          100.00%  1,242,828          0          0          0  1,242,828
+  AMR_AF                          100.00%  1,242,828          0          0          0  1,242,828
+  EAS_AF                          100.00%  1,242,828          0          0          0  1,242,828
+  EUR_AF                          100.00%  1,242,828          0          0          0  1,242,828
+  SAS_AF                          100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_AF                      100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_AFR_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_AMR_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_ASJ_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_EAS_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_FIN_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_MID_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_NFE_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_REMAINING_AF            100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_SAS_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_AF                      100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_AFR_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_AMI_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_AMR_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_ASJ_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_EAS_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_FIN_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_MID_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_NFE_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_REMAINING_AF            100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_SAS_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  MAX_AF                          100.00%  1,242,828          0          0          0  1,242,828
+  MAX_AF_POPS                     100.00%  1,242,828          0          0          0  1,242,828
+  CLIN_SIG                        100.00%  1,242,828          0          0          0  1,242,828
+  SOMATIC                         100.00%  1,242,828          0          0          0  1,242,828
+  PHENO                           100.00%  1,242,828          0          0          0  1,242,828
+  PUBMED                          100.00%  1,242,828          0          0          0  1,242,828
+  MOTIF_NAME                      100.00%  1,242,828          0          0          0  1,242,828
+  MOTIF_POS                       100.00%  1,242,828          0          0          0  1,242,828
+  HIGH_INF_POS                    100.00%  1,242,828          0          0          0  1,242,828
+  MOTIF_SCORE_CHANGE              100.00%  1,242,828          0          0          0  1,242,828
+  TRANSCRIPTION_FACTORS           100.00%  1,242,828          0          0          0  1,242,828
+
+  ALL 86 shared CSQ fields match at 100%!
+  Report: /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/reports/fast_chr22_merged_116_report.json
+
+============================================================
+  Summary: /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/reports/fast_chr22_merged_116_summary_20260924_0830.md
+  Fields at 100%: 86/86
+  Total mismatches: 0
+============================================================
+============================================================
+  profile:   merged_plugins
+  release:   116
+  cache_dir: /Users/lukaszjezapkowicz/workspace/data_vepyr/cache/116_GRCh38_merged
+  plugins:   /Users/lukaszjezapkowicz/workspace/data_vepyr/cache/plugin_cache_116
+  vep_vcf:   /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr22_5plugins_vep116_caddfix.vcf.gz
+  results:   /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/results/116
+============================================================
+  Using existing /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/results/116/_shared/normalized.vcf.gz
+  contigs:   chr22
+
+============================================================
+  chr22 (profile=merged_plugins, release=116)
+============================================================
+  Created /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/results/116/fast_chr22/input_chr22.vcf.gz
+  Input: 50,861 variants for chr22
+Annotating → vepyr_parquet_chr22_merged_plugins.vcf.gz: 0 variants [00:00, ? variants/s]Annotating → vepyr_parquet_chr22_merged_plugins.vcf.gz:  20%|█▉        | 10000/50861 [00:01<00:06, 6579.84 variants/s]Annotating → vepyr_parquet_chr22_merged_plugins.vcf.gz:  20%|█▉        | 10000/50861 [00:01<00:06, 6579.84 variants/s]Annotating → vepyr_parquet_chr22_merged_plugins.vcf.gz:  29%|██▉       | 15000/50861 [00:01<00:03, 11277.89 variants/s]Annotating → vepyr_parquet_chr22_merged_plugins.vcf.gz:  29%|██▉       | 15000/50861 [00:01<00:03, 11277.89 variants/s]Annotating → vepyr_parquet_chr22_merged_plugins.vcf.gz:  39%|███▉      | 20000/50861 [00:01<00:02, 12763.17 variants/s]Annotating → vepyr_parquet_chr22_merged_plugins.vcf.gz:  39%|███▉      | 20000/50861 [00:01<00:02, 12763.17 variants/s]Annotating → vepyr_parquet_chr22_merged_plugins.vcf.gz:  49%|████▉     | 25000/50861 [00:02<00:01, 13824.24 variants/s]Annotating → vepyr_parquet_chr22_merged_plugins.vcf.gz:  49%|████▉     | 25000/50861 [00:02<00:01, 13824.24 variants/s]Annotating → vepyr_parquet_chr22_merged_plugins.vcf.gz:  80%|████████  | 40861/50861 [00:02<00:00, 25090.38 variants/s]Annotating → vepyr_parquet_chr22_merged_plugins.vcf.gz:  80%|████████  | 40861/50861 [00:02<00:00, 25090.38 variants/s]Annotating → vepyr_parquet_chr22_merged_plugins.vcf.gz:  90%|█████████ | 45861/50861 [00:03<00:00, 17359.74 variants/s]Annotating → vepyr_parquet_chr22_merged_plugins.vcf.gz:  90%|█████████ | 45861/50861 [00:03<00:00, 17359.74 variants/s]Annotating → vepyr_parquet_chr22_merged_plugins.vcf.gz: 100%|██████████| 50861/50861 [00:03<00:00, 18371.88 variants/s]Annotating → vepyr_parquet_chr22_merged_plugins.vcf.gz: 100%|██████████| 50861/50861 [00:03<00:00, 18371.88 variants/s]Annotating → vepyr_parquet_chr22_merged_plugins.vcf.gz: 100%|██████████| 50861/50861 [00:03<00:00, 15570.36 variants/s]
+  bgzf check: output is valid block-gzip (BGZF)
+  Done: 50,861 variants in 3.3s (15,479 variants/s), 33 MB
+  Extracting chr22 from VEP reference via tabix ...
+  Extracted 50,861 VEP records for chr22
+
+============================================================
+Comparing vepyr (parquet) vs VEP — chr22
+============================================================
+  vepyr:  50,861 data lines
+  VEP:    50,861 data lines
+  Building sorted key+CSQ lists ...
+
+  Results:
+    Variants compared:        50,861
+    Only in vepyr:            0
+    Only in VEP:              0
+    CSQ count match:          50,861
+    CSQ count mismatch:       0
+    CSQ order mismatch:       0  (same entries, wrong order — issue #83)
+    Mismatch ledger:          0 rows (e3b0c44298fc…) -> /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/reports/fast_chr22_merged_plugins_116_mismatches.jsonl
+
+  Per-field match rates (50,861 variants):
+  Field                            Match%    Matches Mismatches  OrderOnly FormatOnly      Total
+  ------------------------------ -------- ---------- ---------- ---------- ---------- ----------
+  Allele                          100.00%  1,242,828          0          0          0  1,242,828
+  Consequence                     100.00%  1,242,828          0          0          0  1,242,828
+  IMPACT                          100.00%  1,242,828          0          0          0  1,242,828
+  SYMBOL                          100.00%  1,242,828          0          0          0  1,242,828
+  Gene                            100.00%  1,242,828          0          0          0  1,242,828
+  Feature_type                    100.00%  1,242,828          0          0          0  1,242,828
+  Feature                         100.00%  1,242,828          0          0          0  1,242,828
+  BIOTYPE                         100.00%  1,242,828          0          0          0  1,242,828
+  EXON                            100.00%  1,242,828          0          0          0  1,242,828
+  INTRON                          100.00%  1,242,828          0          0          0  1,242,828
+  HGVSc                           100.00%  1,242,828          0          0          0  1,242,828
+  HGVSp                           100.00%  1,242,828          0          0          0  1,242,828
+  cDNA_position                   100.00%  1,242,828          0          0          0  1,242,828
+  CDS_position                    100.00%  1,242,828          0          0          0  1,242,828
+  Protein_position                100.00%  1,242,828          0          0          0  1,242,828
+  Amino_acids                     100.00%  1,242,828          0          0          0  1,242,828
+  Codons                          100.00%  1,242,828          0          0          0  1,242,828
+  Existing_variation              100.00%  1,242,828          0          0          0  1,242,828
+  DISTANCE                        100.00%  1,242,828          0          0          0  1,242,828
+  STRAND                          100.00%  1,242,828          0          0          0  1,242,828
+  FLAGS                           100.00%  1,242,828          0          0          0  1,242,828
+  VARIANT_CLASS                   100.00%  1,242,828          0          0          0  1,242,828
+  SYMBOL_SOURCE                   100.00%  1,242,828          0          0          0  1,242,828
+  HGNC_ID                         100.00%  1,242,828          0          0          0  1,242,828
+  CANONICAL                       100.00%  1,242,828          0          0          0  1,242,828
+  MANE                            100.00%  1,242,828          0          0          0  1,242,828
+  MANE_SELECT                     100.00%  1,242,828          0          0          0  1,242,828
+  MANE_PLUS_CLINICAL              100.00%  1,242,828          0          0          0  1,242,828
+  TSL                             100.00%  1,242,828          0          0          0  1,242,828
+  APPRIS                          100.00%  1,242,828          0          0          0  1,242,828
+  CCDS                            100.00%  1,242,828          0          0          0  1,242,828
+  ENSP                            100.00%  1,242,828          0          0          0  1,242,828
+  SWISSPROT                       100.00%  1,242,828          0          0          0  1,242,828
+  TREMBL                          100.00%  1,242,828          0          0          0  1,242,828
+  UNIPARC                         100.00%  1,242,828          0          0          0  1,242,828
+  UNIPROT_ISOFORM                 100.00%  1,242,828          0          0          0  1,242,828
+  REFSEQ_MATCH                    100.00%  1,242,828          0          0          0  1,242,828
+  SOURCE                          100.00%  1,242,828          0          0          0  1,242,828
+  REFSEQ_OFFSET                   100.00%  1,242,828          0          0          0  1,242,828
+  GIVEN_REF                       100.00%  1,242,828          0          0          0  1,242,828
+  USED_REF                        100.00%  1,242,828          0          0          0  1,242,828
+  BAM_EDIT                        100.00%  1,242,828          0          0          0  1,242,828
+  GENE_PHENO                      100.00%  1,242,828          0          0          0  1,242,828
+  SIFT                            100.00%  1,242,828          0          0          0  1,242,828
+  PolyPhen                        100.00%  1,242,828          0          0          0  1,242,828
+  DOMAINS                         100.00%  1,242,828          0          0          0  1,242,828
+  miRNA                           100.00%  1,242,828          0          0          0  1,242,828
+  HGVS_OFFSET                     100.00%  1,242,828          0          0          0  1,242,828
+  AF                              100.00%  1,242,828          0          0          0  1,242,828
+  AFR_AF                          100.00%  1,242,828          0          0          0  1,242,828
+  AMR_AF                          100.00%  1,242,828          0          0          0  1,242,828
+  EAS_AF                          100.00%  1,242,828          0          0          0  1,242,828
+  EUR_AF                          100.00%  1,242,828          0          0          0  1,242,828
+  SAS_AF                          100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_AF                      100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_AFR_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_AMR_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_ASJ_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_EAS_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_FIN_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_MID_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_NFE_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_REMAINING_AF            100.00%  1,242,828          0          0          0  1,242,828
+  gnomADe_SAS_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_AF                      100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_AFR_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_AMI_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_AMR_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_ASJ_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_EAS_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_FIN_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_MID_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_NFE_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_REMAINING_AF            100.00%  1,242,828          0          0          0  1,242,828
+  gnomADg_SAS_AF                  100.00%  1,242,828          0          0          0  1,242,828
+  MAX_AF                          100.00%  1,242,828          0          0          0  1,242,828
+  MAX_AF_POPS                     100.00%  1,242,828          0          0          0  1,242,828
+  CLIN_SIG                        100.00%  1,242,828          0          0          0  1,242,828
+  SOMATIC                         100.00%  1,242,828          0          0          0  1,242,828
+  PHENO                           100.00%  1,242,828          0          0          0  1,242,828
+  PUBMED                          100.00%  1,242,828          0          0          0  1,242,828
+  MOTIF_NAME                      100.00%  1,242,828          0          0          0  1,242,828
+  MOTIF_POS                       100.00%  1,242,828          0          0          0  1,242,828
+  HIGH_INF_POS                    100.00%  1,242,828          0          0          0  1,242,828
+  MOTIF_SCORE_CHANGE              100.00%  1,242,828          0          0          0  1,242,828
+  TRANSCRIPTION_FACTORS           100.00%  1,242,828          0          0          0  1,242,828
+  SpliceAI_pred_DP_AG             100.00%  1,242,828          0          0          0  1,242,828
+  SpliceAI_pred_DP_AL             100.00%  1,242,828          0          0          0  1,242,828
+  SpliceAI_pred_DP_DG             100.00%  1,242,828          0          0          0  1,242,828
+  SpliceAI_pred_DP_DL             100.00%  1,242,828          0          0          0  1,242,828
+  SpliceAI_pred_DS_AG             100.00%  1,242,828          0          0          0  1,242,828
+  SpliceAI_pred_DS_AL             100.00%  1,242,828          0          0          0  1,242,828
+  SpliceAI_pred_DS_DG             100.00%  1,242,828          0          0          0  1,242,828
+  SpliceAI_pred_DS_DL             100.00%  1,242,828          0          0          0  1,242,828
+  SpliceAI_pred_SYMBOL            100.00%  1,242,828          0          0          0  1,242,828
+  CADD_PHRED                      100.00%  1,242,828          0          0          0  1,242,828
+  CADD_RAW                        100.00%  1,242,828          0          0          0  1,242,828
+  am_class                        100.00%  1,242,828          0          0          0  1,242,828
+  am_pathogenicity                100.00%  1,242,828          0          0          0  1,242,828
+  CADD_phred                      100.00%  1,242,828          0          0          0  1,242,828
+  CADD_raw                        100.00%  1,242,828          0          0          0  1,242,828
+  GERP++_RS                       100.00%  1,242,828          0          0          0  1,242,828
+  MetaLR_pred                     100.00%  1,242,828          0          0          0  1,242,828
+  MetaLR_score                    100.00%  1,242,828          0          0          0  1,242,828
+  MetaSVM_pred                    100.00%  1,242,828          0          0          0  1,242,828
+  MetaSVM_score                   100.00%  1,242,828          0          0          0  1,242,828
+  MutationTaster_pred             100.00%  1,242,828          0          0          0  1,242,828
+  MutationTaster_score            100.00%  1,242,828          0          0          0  1,242,828
+  PROVEAN_pred                    100.00%  1,242,828          0          0          0  1,242,828
+  PROVEAN_score                   100.00%  1,242,828          0          0          0  1,242,828
+  Polyphen2_HDIV_score            100.00%  1,242,828          0          0          0  1,242,828
+  Polyphen2_HVAR_score            100.00%  1,242,828          0          0          0  1,242,828
+  REVEL_score                     100.00%  1,242,828          0          0          0  1,242,828
+  SIFT4G_pred                     100.00%  1,242,828          0          0          0  1,242,828
+  SIFT4G_score                    100.00%  1,242,828          0          0          0  1,242,828
+  VEST4_score                     100.00%  1,242,828          0          0          0  1,242,828
+  phastCons100way_vertebrate      100.00%  1,242,828          0          0          0  1,242,828
+  phyloP100way_vertebrate         100.00%  1,242,828          0          0          0  1,242,828
+  ClinVar                         100.00%  1,242,828          0          0          0  1,242,828
+  ClinVar_CLNSIG                  100.00%  1,242,828          0          0          0  1,242,828
+  ClinVar_CLNREVSTAT              100.00%  1,242,828          0          0          0  1,242,828
+  ClinVar_CLNDN                   100.00%  1,242,828          0          0          0  1,242,828
+  ClinVar_CLNVC                   100.00%  1,242,828          0          0          0  1,242,828
+  ClinVar_CLNVI                   100.00%  1,242,828          0          0          0  1,242,828
+
+  ALL 124 shared CSQ fields match at 100%!
+  Report: /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/reports/fast_chr22_merged_plugins_116_report.json
+
+============================================================
+  Summary: /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/reports/fast_chr22_merged_plugins_116_summary_20260924_0831.md
+  Fields at 100%: 124/124
+  Total mismatches: 0
+============================================================
+benchmark-plugins: running config 'base'
+benchmark-plugins: skipping concordance for 'base' (no no-plugin VEP reference 
+given)
+benchmark-plugins: running config 'clinvar'
+benchmark-plugins: running config 'spliceai'
+benchmark-plugins: running config 'cadd'
+benchmark-plugins: running config 'alphamissense'
+benchmark-plugins: running config 'dbnsfp'
+                             vepyr plugin benchmark                             
+┏━━━━━━━━┳━━━━━━━━┳━━━━━━━━┳━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━┓
+┃        ┃        ┃        ┃        ┃        ┃       ┃ output ┃ plug… ┃        ┃
+┃        ┃ wall   ┃ cpu    ┃ RSS    ┃        ┃       ┃ (Δ     ┃ fiel… ┃ misma… ┃
+┃ config ┃ (s)    ┃ (s)    ┃ (MB)   ┃ var/s  ┃ cache ┃ base)  ┃ equal ┃ (L/R/… ┃
+┡━━━━━━━━╇━━━━━━━━╇━━━━━━━━╇━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━┩
+│ base   │ 3.1    │ 4.2    │ 1198   │ 16518… │ 0.0   │ 494.7  │ n/a   │ n/a    │
+│        │        │        │        │        │ MB    │ MB (—) │       │        │
+│ clinv… │ 3.2    │ 4.4    │ 1122   │ 15693… │ 77.3  │ 507.4  │ True  │ 0/0/0  │
+│        │        │        │        │        │ MB    │ MB     │       │        │
+│        │        │        │        │        │       │ (+12.7 │       │        │
+│        │        │        │        │        │       │ MB)    │       │        │
+│ splic… │ 4.8    │ 5.8    │ 1232   │ 10541… │ 2429… │ 523.8  │ True  │ 0/0/0  │
+│        │        │        │        │        │ MB    │ MB     │       │        │
+│        │        │        │        │        │       │ (+29.1 │       │        │
+│        │        │        │        │        │       │ MB)    │       │        │
+│ cadd   │ 4.8    │ 5.8    │ 1256   │ 10558… │ 7084… │ 512.9  │ True  │ 0/0/0  │
+│        │        │        │        │        │ MB    │ MB     │       │        │
+│        │        │        │        │        │       │ (+18.2 │       │        │
+│        │        │        │        │        │       │ MB)    │       │        │
+│ alpha… │ 3.2    │ 4.4    │ 1251   │ 15702… │ 544.7 │ 497.1  │ True  │ 0/0/0  │
+│        │        │        │        │        │ MB    │ MB     │       │        │
+│        │        │        │        │        │       │ (+2.4  │       │        │
+│        │        │        │        │        │       │ MB)    │       │        │
+│ dbnsfp │ 3.5    │ 4.6    │ 1177   │ 14738… │ 3843… │ 520.0  │ True  │ 0/0/0  │
+│        │        │        │        │        │ MB    │ MB     │       │        │
+│        │        │        │        │        │       │ (+25.3 │       │        │
+│        │        │        │        │        │       │ MB)    │       │        │
+└────────┴────────┴────────┴────────┴────────┴───────┴────────┴───────┴────────┘
+/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/chapter5-m5-20260924T061203Z/
+correctness/chr22_individual_plugins/benchmark_plugins_summary.json
+/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/chapter5-m5-20260924T061203Z/
+correctness/chr22_individual_plugins/benchmark_plugins_summary.md
+plugin correctness gate passed: 2 chromosome reports
+finished_at_utc=2026-09-24T06:32:22Z
+run_dir=/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/chapter5-m5-20260924T061203Z
+2026-09-24T06:32:22Z\tWAITING_FOR_BENCHMARK_RUNNER
+2026-09-24T06:37:52Z\tRUNNING_BENCHMARKS
+benchmarks_started_at_utc=2026-09-24T06:37:52Z
+using vepyr 0.7.0 from /Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-native/bin/python
+VEPYR_ARCHIVE_ROOT /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/chapter5-m5-20260924T061203Z/benchmarks/vepyr does not exist; mount the archive volume first
+2026-09-24T06:37:52Z\tFAILED\texit_status=1

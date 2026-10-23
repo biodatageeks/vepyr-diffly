@@ -1,0 +1,1254 @@
+{
+  "chr22_scaling": {
+    "1": [
+      {
+        "annotation_seconds": 3.51,
+        "max_rss_gb": 1.07
+      },
+      {
+        "annotation_seconds": 2.9670828329981305,
+        "max_rss_bytes": 1224228864,
+        "max_rss_gb": 1.14,
+        "wall_seconds": 3.1213797079981305,
+        "repeat": 2,
+        "suite": "chr22_scaling",
+        "param": 1,
+        "timestamp": "2026-09-25T13:16:59.604462+00:00"
+      },
+      {
+        "annotation_seconds": 2.9653276249882765,
+        "max_rss_bytes": 1151991808,
+        "max_rss_gb": 1.073,
+        "wall_seconds": 3.1184858749911655,
+        "repeat": 3,
+        "suite": "chr22_scaling",
+        "param": 1,
+        "timestamp": "2026-09-25T13:17:19.856732+00:00"
+      },
+      {
+        "annotation_seconds": 2.9876807079999708,
+        "max_rss_bytes": 1199292416,
+        "max_rss_gb": 1.117,
+        "wall_seconds": 3.1439983749878593,
+        "repeat": 4,
+        "suite": "chr22_scaling",
+        "param": 1,
+        "timestamp": "2026-09-25T13:17:39.770543+00:00"
+      },
+      {
+        "annotation_seconds": 2.8781714999931864,
+        "max_rss_bytes": 1128464384,
+        "max_rss_gb": 1.051,
+        "wall_seconds": 3.0325182089873124,
+        "repeat": 5,
+        "suite": "chr22_scaling",
+        "param": 1,
+        "timestamp": "2026-09-25T13:17:59.695066+00:00"
+      }
+    ],
+    "2": [
+      {
+        "annotation_seconds": 2.22,
+        "max_rss_gb": 1.25
+      },
+      {
+        "annotation_seconds": 2.160735500016017,
+        "max_rss_bytes": 1384792064,
+        "max_rss_gb": 1.29,
+        "wall_seconds": 2.286090542009333,
+        "repeat": 2,
+        "suite": "chr22_scaling",
+        "param": 2,
+        "timestamp": "2026-09-25T13:16:54.481345+00:00"
+      },
+      {
+        "annotation_seconds": 2.3254422080062795,
+        "max_rss_bytes": 1340145664,
+        "max_rss_gb": 1.248,
+        "wall_seconds": 2.5032260000007227,
+        "repeat": 3,
+        "suite": "chr22_scaling",
+        "param": 2,
+        "timestamp": "2026-09-25T13:17:14.732601+00:00"
+      },
+      {
+        "annotation_seconds": 2.0181662919931114,
+        "max_rss_bytes": 1309360128,
+        "max_rss_gb": 1.219,
+        "wall_seconds": 2.186206249985844,
+        "repeat": 4,
+        "suite": "chr22_scaling",
+        "param": 2,
+        "timestamp": "2026-09-25T13:17:34.621903+00:00"
+      },
+      {
+        "annotation_seconds": 2.0148393340059556,
+        "max_rss_bytes": 1303265280,
+        "max_rss_gb": 1.214,
+        "wall_seconds": 2.1760422500083223,
+        "repeat": 5,
+        "suite": "chr22_scaling",
+        "param": 2,
+        "timestamp": "2026-09-25T13:17:54.656858+00:00"
+      }
+    ],
+    "4": [
+      {
+        "annotation_seconds": 1.45,
+        "max_rss_gb": 1.65
+      },
+      {
+        "annotation_seconds": 1.3989060000167228,
+        "max_rss_bytes": 1683439616,
+        "max_rss_gb": 1.568,
+        "wall_seconds": 1.560887834028108,
+        "repeat": 2,
+        "suite": "chr22_scaling",
+        "param": 4,
+        "timestamp": "2026-09-25T13:16:50.191593+00:00"
+      },
+      {
+        "annotation_seconds": 1.5456263340020087,
+        "max_rss_bytes": 1609252864,
+        "max_rss_gb": 1.499,
+        "wall_seconds": 1.716212125000311,
+        "repeat": 3,
+        "suite": "chr22_scaling",
+        "param": 4,
+        "timestamp": "2026-09-25T13:17:10.223703+00:00"
+      },
+      {
+        "annotation_seconds": 1.4009360000200104,
+        "max_rss_bytes": 1648590848,
+        "max_rss_gb": 1.535,
+        "wall_seconds": 1.5662662919785362,
+        "repeat": 4,
+        "suite": "chr22_scaling",
+        "param": 4,
+        "timestamp": "2026-09-25T13:17:30.430070+00:00"
+      },
+      {
+        "annotation_seconds": 1.5485584170091897,
+        "max_rss_bytes": 1583923200,
+        "max_rss_gb": 1.475,
+        "wall_seconds": 1.7157836660044268,
+        "repeat": 5,
+        "suite": "chr22_scaling",
+        "param": 4,
+        "timestamp": "2026-09-25T13:17:50.474956+00:00"
+      }
+    ],
+    "8": [
+      {
+        "annotation_seconds": 1.29,
+        "max_rss_gb": 1.68
+      },
+      {
+        "annotation_seconds": 1.2704156660183799,
+        "max_rss_bytes": 1737670656,
+        "max_rss_gb": 1.618,
+        "wall_seconds": 1.434545915981289,
+        "repeat": 2,
+        "suite": "chr22_scaling",
+        "param": 8,
+        "timestamp": "2026-09-25T13:16:46.625084+00:00"
+      },
+      {
+        "annotation_seconds": 1.2826841659843922,
+        "max_rss_bytes": 1855160320,
+        "max_rss_gb": 1.728,
+        "wall_seconds": 1.4514990000170656,
+        "repeat": 3,
+        "suite": "chr22_scaling",
+        "param": 8,
+        "timestamp": "2026-09-25T13:17:06.501745+00:00"
+      },
+      {
+        "annotation_seconds": 1.2434183330042288,
+        "max_rss_bytes": 1748500480,
+        "max_rss_gb": 1.628,
+        "wall_seconds": 1.4115714580111671,
+        "repeat": 4,
+        "suite": "chr22_scaling",
+        "param": 8,
+        "timestamp": "2026-09-25T13:17:26.858207+00:00"
+      },
+      {
+        "annotation_seconds": 1.4052551249915268,
+        "max_rss_bytes": 1712603136,
+        "max_rss_gb": 1.595,
+        "wall_seconds": 1.559749667008873,
+        "repeat": 5,
+        "suite": "chr22_scaling",
+        "param": 8,
+        "timestamp": "2026-09-25T13:17:46.753602+00:00"
+      }
+    ],
+    "10": [
+      {
+        "annotation_seconds": 1.26,
+        "max_rss_gb": 1.75
+      },
+      {
+        "annotation_seconds": 1.2521643330110237,
+        "max_rss_bytes": 1870348288,
+        "max_rss_gb": 1.742,
+        "wall_seconds": 1.3788127499865368,
+        "repeat": 2,
+        "suite": "chr22_scaling",
+        "param": 10,
+        "timestamp": "2026-09-25T13:16:43.184871+00:00"
+      },
+      {
+        "annotation_seconds": 1.2739080419996753,
+        "max_rss_bytes": 1778221056,
+        "max_rss_gb": 1.656,
+        "wall_seconds": 1.42985391599359,
+        "repeat": 3,
+        "suite": "chr22_scaling",
+        "param": 10,
+        "timestamp": "2026-09-25T13:17:03.044912+00:00"
+      },
+      {
+        "annotation_seconds": 1.3984357080189511,
+        "max_rss_bytes": 1766785024,
+        "max_rss_gb": 1.645,
+        "wall_seconds": 1.5788803749892395,
+        "repeat": 4,
+        "suite": "chr22_scaling",
+        "param": 10,
+        "timestamp": "2026-09-25T13:17:23.440967+00:00"
+      },
+      {
+        "annotation_seconds": 1.2479784580064006,
+        "max_rss_bytes": 1838481408,
+        "max_rss_gb": 1.712,
+        "wall_seconds": 1.4079604580183513,
+        "repeat": 5,
+        "suite": "chr22_scaling",
+        "param": 10,
+        "timestamp": "2026-09-25T13:17:43.188530+00:00"
+      }
+    ]
+  },
+  "chr1_scaling": {
+    "1": [
+      {
+        "annotation_seconds": 20.48,
+        "max_rss_gb": 3.37
+      },
+      {
+        "annotation_seconds": 18.64542395900935,
+        "max_rss_bytes": 3968221184,
+        "max_rss_gb": 3.696,
+        "wall_seconds": 18.854909749992657,
+        "repeat": 2,
+        "suite": "chr1_scaling",
+        "param": 1,
+        "timestamp": "2026-09-25T13:19:06.256303+00:00"
+      },
+      {
+        "annotation_seconds": 17.876149832998635,
+        "max_rss_bytes": 3900702720,
+        "max_rss_gb": 3.633,
+        "wall_seconds": 18.094735082995612,
+        "repeat": 3,
+        "suite": "chr1_scaling",
+        "param": 1,
+        "timestamp": "2026-09-25T13:20:13.078117+00:00"
+      },
+      {
+        "annotation_seconds": 19.645969458011677,
+        "max_rss_bytes": 3866296320,
+        "max_rss_gb": 3.601,
+        "wall_seconds": 19.864183583005797,
+        "repeat": 4,
+        "suite": "chr1_scaling",
+        "param": 1,
+        "timestamp": "2026-09-25T13:21:21.236430+00:00"
+      },
+      {
+        "annotation_seconds": 19.427873834007187,
+        "max_rss_bytes": 3845767168,
+        "max_rss_gb": 3.582,
+        "wall_seconds": 19.62201345799258,
+        "repeat": 5,
+        "suite": "chr1_scaling",
+        "param": 1,
+        "timestamp": "2026-09-25T13:22:31.676478+00:00"
+      }
+    ],
+    "2": [
+      {
+        "annotation_seconds": 10.52,
+        "max_rss_gb": 4.8
+      },
+      {
+        "annotation_seconds": 10.729968250001548,
+        "max_rss_bytes": 4150476800,
+        "max_rss_gb": 3.865,
+        "wall_seconds": 10.994203999987803,
+        "repeat": 2,
+        "suite": "chr1_scaling",
+        "param": 2,
+        "timestamp": "2026-09-25T13:18:44.395826+00:00"
+      },
+      {
+        "annotation_seconds": 10.978027915989514,
+        "max_rss_bytes": 4181868544,
+        "max_rss_gb": 3.895,
+        "wall_seconds": 11.19755579100456,
+        "repeat": 3,
+        "suite": "chr1_scaling",
+        "param": 2,
+        "timestamp": "2026-09-25T13:19:51.977707+00:00"
+      },
+      {
+        "annotation_seconds": 10.766890208004043,
+        "max_rss_bytes": 4184031232,
+        "max_rss_gb": 3.897,
+        "wall_seconds": 10.965912082989234,
+        "repeat": 4,
+        "suite": "chr1_scaling",
+        "param": 2,
+        "timestamp": "2026-09-25T13:20:58.366589+00:00"
+      },
+      {
+        "annotation_seconds": 11.522257791017182,
+        "max_rss_bytes": 4218011648,
+        "max_rss_gb": 3.928,
+        "wall_seconds": 11.721845916996244,
+        "repeat": 5,
+        "suite": "chr1_scaling",
+        "param": 2,
+        "timestamp": "2026-09-25T13:22:09.046266+00:00"
+      }
+    ],
+    "4": [
+      {
+        "annotation_seconds": 8.56,
+        "max_rss_gb": 4.92
+      },
+      {
+        "annotation_seconds": 8.557303458015667,
+        "max_rss_bytes": 4660772864,
+        "max_rss_gb": 4.341,
+        "wall_seconds": 8.76828425002168,
+        "repeat": 2,
+        "suite": "chr1_scaling",
+        "param": 4,
+        "timestamp": "2026-09-25T13:18:30.395749+00:00"
+      },
+      {
+        "annotation_seconds": 8.718314708006801,
+        "max_rss_bytes": 4626694144,
+        "max_rss_gb": 4.309,
+        "wall_seconds": 8.995017500012182,
+        "repeat": 3,
+        "suite": "chr1_scaling",
+        "param": 4,
+        "timestamp": "2026-09-25T13:19:37.774346+00:00"
+      },
+      {
+        "annotation_seconds": 8.242417125002248,
+        "max_rss_bytes": 4585521152,
+        "max_rss_gb": 4.271,
+        "wall_seconds": 8.459000583010493,
+        "repeat": 4,
+        "suite": "chr1_scaling",
+        "param": 4,
+        "timestamp": "2026-09-25T13:20:44.394923+00:00"
+      },
+      {
+        "annotation_seconds": 8.397348583006533,
+        "max_rss_bytes": 4498505728,
+        "max_rss_gb": 4.19,
+        "wall_seconds": 8.61726533298497,
+        "repeat": 5,
+        "suite": "chr1_scaling",
+        "param": 4,
+        "timestamp": "2026-09-25T13:21:54.319039+00:00"
+      }
+    ],
+    "8": [
+      {
+        "annotation_seconds": 7.83,
+        "max_rss_gb": 4.52
+      },
+      {
+        "annotation_seconds": 6.706711875012843,
+        "max_rss_bytes": 5352964096,
+        "max_rss_gb": 4.985,
+        "wall_seconds": 6.929130125005031,
+        "repeat": 2,
+        "suite": "chr1_scaling",
+        "param": 8,
+        "timestamp": "2026-09-25T13:18:18.582204+00:00"
+      },
+      {
+        "annotation_seconds": 6.359159375017043,
+        "max_rss_bytes": 5405523968,
+        "max_rss_gb": 5.034,
+        "wall_seconds": 6.549544790992513,
+        "repeat": 3,
+        "suite": "chr1_scaling",
+        "param": 8,
+        "timestamp": "2026-09-25T13:19:25.773703+00:00"
+      },
+      {
+        "annotation_seconds": 6.871807500021532,
+        "max_rss_bytes": 5199888384,
+        "max_rss_gb": 4.843,
+        "wall_seconds": 7.08941812501871,
+        "repeat": 4,
+        "suite": "chr1_scaling",
+        "param": 8,
+        "timestamp": "2026-09-25T13:20:32.930403+00:00"
+      },
+      {
+        "annotation_seconds": 7.979953083005967,
+        "max_rss_bytes": 5318049792,
+        "max_rss_gb": 4.953,
+        "wall_seconds": 8.204259957972681,
+        "repeat": 5,
+        "suite": "chr1_scaling",
+        "param": 8,
+        "timestamp": "2026-09-25T13:21:42.698870+00:00"
+      }
+    ],
+    "10": [
+      {
+        "annotation_seconds": 7.03,
+        "max_rss_gb": 5.11
+      },
+      {
+        "annotation_seconds": 6.709149666014127,
+        "max_rss_bytes": 5899239424,
+        "max_rss_gb": 5.494,
+        "wall_seconds": 6.9311792090011295,
+        "repeat": 2,
+        "suite": "chr1_scaling",
+        "param": 10,
+        "timestamp": "2026-09-25T13:18:08.642330+00:00"
+      },
+      {
+        "annotation_seconds": 6.66190700000152,
+        "max_rss_bytes": 5650890752,
+        "max_rss_gb": 5.263,
+        "wall_seconds": 6.951228624995565,
+        "repeat": 3,
+        "suite": "chr1_scaling",
+        "param": 10,
+        "timestamp": "2026-09-25T13:19:16.218710+00:00"
+      },
+      {
+        "annotation_seconds": 6.459893708000891,
+        "max_rss_bytes": 5621415936,
+        "max_rss_gb": 5.235,
+        "wall_seconds": 6.746788999997079,
+        "repeat": 4,
+        "suite": "chr1_scaling",
+        "param": 10,
+        "timestamp": "2026-09-25T13:20:22.835383+00:00"
+      },
+      {
+        "annotation_seconds": 6.933583291014656,
+        "max_rss_bytes": 5656821760,
+        "max_rss_gb": 5.268,
+        "wall_seconds": 7.241747042018687,
+        "repeat": 5,
+        "suite": "chr1_scaling",
+        "param": 10,
+        "timestamp": "2026-09-25T13:21:31.488872+00:00"
+      }
+    ]
+  },
+  "chr22_plugins": {
+    "baseline": [
+      {
+        "annotation_seconds": 3.08,
+        "max_rss_gb": 1.2
+      },
+      {
+        "annotation_seconds": 3.412154041987378,
+        "max_rss_bytes": 1266417664,
+        "max_rss_gb": 1.179,
+        "wall_seconds": 3.5712277500133496,
+        "repeat": 2,
+        "suite": "chr22_plugins",
+        "param": "baseline",
+        "timestamp": "2026-09-25T13:22:38.256389+00:00"
+      },
+      {
+        "annotation_seconds": 3.201609167008428,
+        "max_rss_bytes": 1266024448,
+        "max_rss_gb": 1.179,
+        "wall_seconds": 3.347221417003311,
+        "repeat": 3,
+        "suite": "chr22_plugins",
+        "param": "baseline",
+        "timestamp": "2026-09-25T13:23:14.674275+00:00"
+      },
+      {
+        "annotation_seconds": 2.9327048750128597,
+        "max_rss_bytes": 1275838464,
+        "max_rss_gb": 1.188,
+        "wall_seconds": 3.0776413749845233,
+        "repeat": 4,
+        "suite": "chr22_plugins",
+        "param": "baseline",
+        "timestamp": "2026-09-25T13:23:50.124251+00:00"
+      },
+      {
+        "annotation_seconds": 2.985922749998281,
+        "max_rss_bytes": 1185595392,
+        "max_rss_gb": 1.104,
+        "wall_seconds": 3.1030784170143306,
+        "repeat": 5,
+        "suite": "chr22_plugins",
+        "param": "baseline",
+        "timestamp": "2026-09-25T13:24:25.499694+00:00"
+      }
+    ],
+    "clinvar": [
+      {
+        "annotation_seconds": 3.2,
+        "max_rss_gb": 1.12
+      },
+      {
+        "annotation_seconds": 3.3187155830091797,
+        "max_rss_bytes": 1218691072,
+        "max_rss_gb": 1.135,
+        "wall_seconds": 3.4740325000020675,
+        "repeat": 2,
+        "suite": "chr22_plugins",
+        "param": "clinvar",
+        "timestamp": "2026-09-25T13:22:43.736095+00:00"
+      },
+      {
+        "annotation_seconds": 3.231966666993685,
+        "max_rss_bytes": 1239269376,
+        "max_rss_gb": 1.154,
+        "wall_seconds": 3.385900124994805,
+        "repeat": 3,
+        "suite": "chr22_plugins",
+        "param": "clinvar",
+        "timestamp": "2026-09-25T13:23:20.065702+00:00"
+      },
+      {
+        "annotation_seconds": 3.276930917025311,
+        "max_rss_bytes": 1191526400,
+        "max_rss_gb": 1.11,
+        "wall_seconds": 3.429866458987817,
+        "repeat": 4,
+        "suite": "chr22_plugins",
+        "param": "clinvar",
+        "timestamp": "2026-09-25T13:23:55.555805+00:00"
+      },
+      {
+        "annotation_seconds": 3.184653000003891,
+        "max_rss_bytes": 1377566720,
+        "max_rss_gb": 1.283,
+        "wall_seconds": 3.3117439589987043,
+        "repeat": 5,
+        "suite": "chr22_plugins",
+        "param": "clinvar",
+        "timestamp": "2026-09-25T13:24:30.816826+00:00"
+      }
+    ],
+    "spliceai": [
+      {
+        "annotation_seconds": 4.81,
+        "max_rss_gb": 1.23
+      },
+      {
+        "annotation_seconds": 4.909732707979856,
+        "max_rss_bytes": 1230241792,
+        "max_rss_gb": 1.146,
+        "wall_seconds": 5.061004874994978,
+        "repeat": 2,
+        "suite": "chr22_plugins",
+        "param": "spliceai",
+        "timestamp": "2026-09-25T13:22:50.802792+00:00"
+      },
+      {
+        "annotation_seconds": 4.949376417003805,
+        "max_rss_bytes": 1386741760,
+        "max_rss_gb": 1.292,
+        "wall_seconds": 5.103431750001619,
+        "repeat": 3,
+        "suite": "chr22_plugins",
+        "param": "spliceai",
+        "timestamp": "2026-09-25T13:23:27.174895+00:00"
+      },
+      {
+        "annotation_seconds": 4.784234999999171,
+        "max_rss_bytes": 1324138496,
+        "max_rss_gb": 1.233,
+        "wall_seconds": 4.944030791986734,
+        "repeat": 4,
+        "suite": "chr22_plugins",
+        "param": "spliceai",
+        "timestamp": "2026-09-25T13:24:02.505662+00:00"
+      },
+      {
+        "annotation_seconds": 4.688343124988023,
+        "max_rss_bytes": 1334525952,
+        "max_rss_gb": 1.243,
+        "wall_seconds": 4.846384625008795,
+        "repeat": 5,
+        "suite": "chr22_plugins",
+        "param": "spliceai",
+        "timestamp": "2026-09-25T13:24:37.668926+00:00"
+      }
+    ],
+    "cadd": [
+      {
+        "annotation_seconds": 4.81,
+        "max_rss_gb": 1.26
+      },
+      {
+        "annotation_seconds": 5.035067624994554,
+        "max_rss_bytes": 1311571968,
+        "max_rss_gb": 1.221,
+        "wall_seconds": 5.198452917014947,
+        "repeat": 2,
+        "suite": "chr22_plugins",
+        "param": "cadd",
+        "timestamp": "2026-09-25T13:22:58.006866+00:00"
+      },
+      {
+        "annotation_seconds": 4.782405707985163,
+        "max_rss_bytes": 1288077312,
+        "max_rss_gb": 1.2,
+        "wall_seconds": 4.928129000007175,
+        "repeat": 3,
+        "suite": "chr22_plugins",
+        "param": "cadd",
+        "timestamp": "2026-09-25T13:23:34.108695+00:00"
+      },
+      {
+        "annotation_seconds": 4.749619792011799,
+        "max_rss_bytes": 1254834176,
+        "max_rss_gb": 1.169,
+        "wall_seconds": 4.907210542005487,
+        "repeat": 4,
+        "suite": "chr22_plugins",
+        "param": "cadd",
+        "timestamp": "2026-09-25T13:24:09.418366+00:00"
+      },
+      {
+        "annotation_seconds": 4.672277417004807,
+        "max_rss_bytes": 1307426816,
+        "max_rss_gb": 1.218,
+        "wall_seconds": 4.8290290830191225,
+        "repeat": 5,
+        "suite": "chr22_plugins",
+        "param": "cadd",
+        "timestamp": "2026-09-25T13:24:44.503616+00:00"
+      }
+    ],
+    "alphamissense": [
+      {
+        "annotation_seconds": 3.23,
+        "max_rss_gb": 1.25
+      },
+      {
+        "annotation_seconds": 3.326781290990766,
+        "max_rss_bytes": 1147813888,
+        "max_rss_gb": 1.069,
+        "wall_seconds": 3.4841795829997864,
+        "repeat": 2,
+        "suite": "chr22_plugins",
+        "param": "alphamissense",
+        "timestamp": "2026-09-25T13:23:03.491652+00:00"
+      },
+      {
+        "annotation_seconds": 3.2217572910012677,
+        "max_rss_bytes": 1269006336,
+        "max_rss_gb": 1.182,
+        "wall_seconds": 3.3678619169804733,
+        "repeat": 3,
+        "suite": "chr22_plugins",
+        "param": "alphamissense",
+        "timestamp": "2026-09-25T13:23:39.493088+00:00"
+      },
+      {
+        "annotation_seconds": 3.215980708017014,
+        "max_rss_bytes": 1133821952,
+        "max_rss_gb": 1.056,
+        "wall_seconds": 3.3800655829836614,
+        "repeat": 4,
+        "suite": "chr22_plugins",
+        "param": "alphamissense",
+        "timestamp": "2026-09-25T13:24:14.802401+00:00"
+      },
+      {
+        "annotation_seconds": 3.176731208979618,
+        "max_rss_bytes": 1102348288,
+        "max_rss_gb": 1.027,
+        "wall_seconds": 3.3216048749745823,
+        "repeat": 5,
+        "suite": "chr22_plugins",
+        "param": "alphamissense",
+        "timestamp": "2026-09-25T13:24:49.827544+00:00"
+      }
+    ],
+    "dbnsfp": [
+      {
+        "annotation_seconds": 3.49,
+        "max_rss_gb": 1.18
+      },
+      {
+        "annotation_seconds": 3.6877239590103272,
+        "max_rss_bytes": 1190395904,
+        "max_rss_gb": 1.109,
+        "wall_seconds": 3.8198867909959517,
+        "repeat": 2,
+        "suite": "chr22_plugins",
+        "param": "dbnsfp",
+        "timestamp": "2026-09-25T13:23:09.318211+00:00"
+      },
+      {
+        "annotation_seconds": 3.3814339579839725,
+        "max_rss_bytes": 1195999232,
+        "max_rss_gb": 1.114,
+        "wall_seconds": 3.539953500003321,
+        "repeat": 3,
+        "suite": "chr22_plugins",
+        "param": "dbnsfp",
+        "timestamp": "2026-09-25T13:23:45.038708+00:00"
+      },
+      {
+        "annotation_seconds": 3.421753291011555,
+        "max_rss_bytes": 1205157888,
+        "max_rss_gb": 1.122,
+        "wall_seconds": 3.5857018750102725,
+        "repeat": 4,
+        "suite": "chr22_plugins",
+        "param": "dbnsfp",
+        "timestamp": "2026-09-25T13:24:20.393735+00:00"
+      },
+      {
+        "annotation_seconds": 3.3121759579807986,
+        "max_rss_bytes": 1303560192,
+        "max_rss_gb": 1.214,
+        "wall_seconds": 3.4693945000180975,
+        "repeat": 5,
+        "suite": "chr22_plugins",
+        "param": "dbnsfp",
+        "timestamp": "2026-09-25T13:24:55.303911+00:00"
+      }
+    ]
+  },
+  "chr1_plugins": {
+    "baseline": [
+      {
+        "annotation_seconds": 19.36,
+        "max_rss_gb": 3.61
+      },
+      {
+        "annotation_seconds": 17.77258008302306,
+        "max_rss_bytes": 3847847936,
+        "max_rss_gb": 3.584,
+        "wall_seconds": 17.952983416005736,
+        "repeat": 2,
+        "suite": "chr1_plugins",
+        "param": "baseline",
+        "timestamp": "2026-09-25T13:25:15.266129+00:00"
+      },
+      {
+        "annotation_seconds": 19.06479612502153,
+        "max_rss_bytes": 3838459904,
+        "max_rss_gb": 3.575,
+        "wall_seconds": 19.297849875001702,
+        "repeat": 3,
+        "suite": "chr1_plugins",
+        "param": "baseline",
+        "timestamp": "2026-09-25T13:27:54.829914+00:00"
+      },
+      {
+        "annotation_seconds": 18.846476249978878,
+        "max_rss_bytes": 3886645248,
+        "max_rss_gb": 3.62,
+        "wall_seconds": 19.044864208000945,
+        "repeat": 4,
+        "suite": "chr1_plugins",
+        "param": "baseline",
+        "timestamp": "2026-09-25T13:30:34.166429+00:00"
+      },
+      {
+        "annotation_seconds": 18.653318332973868,
+        "max_rss_bytes": 3946332160,
+        "max_rss_gb": 3.675,
+        "wall_seconds": 18.862469082989264,
+        "repeat": 5,
+        "suite": "chr1_plugins",
+        "param": "baseline",
+        "timestamp": "2026-09-25T13:33:14.228404+00:00"
+      }
+    ],
+    "clinvar": [
+      {
+        "annotation_seconds": 19.0,
+        "max_rss_gb": 3.73
+      },
+      {
+        "annotation_seconds": 18.995572540996363,
+        "max_rss_bytes": 3954638848,
+        "max_rss_gb": 3.683,
+        "wall_seconds": 19.191635750001296,
+        "repeat": 2,
+        "suite": "chr1_plugins",
+        "param": "clinvar",
+        "timestamp": "2026-09-25T13:25:37.463419+00:00"
+      },
+      {
+        "annotation_seconds": 20.379738957999507,
+        "max_rss_bytes": 3923197952,
+        "max_rss_gb": 3.654,
+        "wall_seconds": 20.609531459020218,
+        "repeat": 3,
+        "suite": "chr1_plugins",
+        "param": "clinvar",
+        "timestamp": "2026-09-25T13:28:18.445041+00:00"
+      },
+      {
+        "annotation_seconds": 20.536703666992253,
+        "max_rss_bytes": 3746758656,
+        "max_rss_gb": 3.489,
+        "wall_seconds": 20.69019229200785,
+        "repeat": 4,
+        "suite": "chr1_plugins",
+        "param": "clinvar",
+        "timestamp": "2026-09-25T13:30:57.862506+00:00"
+      },
+      {
+        "annotation_seconds": 19.223254082986386,
+        "max_rss_bytes": 3894951936,
+        "max_rss_gb": 3.627,
+        "wall_seconds": 19.42279862498981,
+        "repeat": 5,
+        "suite": "chr1_plugins",
+        "param": "clinvar",
+        "timestamp": "2026-09-25T13:33:36.656979+00:00"
+      }
+    ],
+    "spliceai": [
+      {
+        "annotation_seconds": 27.85,
+        "max_rss_gb": 3.66
+      },
+      {
+        "annotation_seconds": 29.426759541995125,
+        "max_rss_bytes": 3880484864,
+        "max_rss_gb": 3.614,
+        "wall_seconds": 29.65411895798752,
+        "repeat": 2,
+        "suite": "chr1_plugins",
+        "param": "spliceai",
+        "timestamp": "2026-09-25T13:26:10.123068+00:00"
+      },
+      {
+        "annotation_seconds": 28.838741792016663,
+        "max_rss_bytes": 3905142784,
+        "max_rss_gb": 3.637,
+        "wall_seconds": 29.05756333298632,
+        "repeat": 3,
+        "suite": "chr1_plugins",
+        "param": "spliceai",
+        "timestamp": "2026-09-25T13:28:50.508143+00:00"
+      },
+      {
+        "annotation_seconds": 29.546469541004626,
+        "max_rss_bytes": 3963600896,
+        "max_rss_gb": 3.691,
+        "wall_seconds": 29.767678541014902,
+        "repeat": 4,
+        "suite": "chr1_plugins",
+        "param": "spliceai",
+        "timestamp": "2026-09-25T13:31:30.635877+00:00"
+      },
+      {
+        "annotation_seconds": 28.44084362499416,
+        "max_rss_bytes": 3815849984,
+        "max_rss_gb": 3.554,
+        "wall_seconds": 28.64248274997226,
+        "repeat": 5,
+        "suite": "chr1_plugins",
+        "param": "spliceai",
+        "timestamp": "2026-09-25T13:34:08.304958+00:00"
+      }
+    ],
+    "cadd": [
+      {
+        "annotation_seconds": 30.4,
+        "max_rss_gb": 3.86
+      },
+      {
+        "annotation_seconds": 32.75417387500056,
+        "max_rss_bytes": 3895263232,
+        "max_rss_gb": 3.628,
+        "wall_seconds": 33.012573124986375,
+        "repeat": 2,
+        "suite": "chr1_plugins",
+        "param": "cadd",
+        "timestamp": "2026-09-25T13:26:46.141216+00:00"
+      },
+      {
+        "annotation_seconds": 31.442062957998132,
+        "max_rss_bytes": 3902767104,
+        "max_rss_gb": 3.635,
+        "wall_seconds": 31.689719166985014,
+        "repeat": 3,
+        "suite": "chr1_plugins",
+        "param": "cadd",
+        "timestamp": "2026-09-25T13:29:25.203502+00:00"
+      },
+      {
+        "annotation_seconds": 31.191526291979244,
+        "max_rss_bytes": 4015702016,
+        "max_rss_gb": 3.74,
+        "wall_seconds": 31.464959874982014,
+        "repeat": 4,
+        "suite": "chr1_plugins",
+        "param": "cadd",
+        "timestamp": "2026-09-25T13:32:05.106472+00:00"
+      },
+      {
+        "annotation_seconds": 30.688310333003756,
+        "max_rss_bytes": 3949428736,
+        "max_rss_gb": 3.678,
+        "wall_seconds": 30.92874612499145,
+        "repeat": 5,
+        "suite": "chr1_plugins",
+        "param": "cadd",
+        "timestamp": "2026-09-25T13:34:42.239218+00:00"
+      }
+    ],
+    "alphamissense": [
+      {
+        "annotation_seconds": 19.07,
+        "max_rss_gb": 3.72
+      },
+      {
+        "annotation_seconds": 19.613315916009014,
+        "max_rss_bytes": 3870408704,
+        "max_rss_gb": 3.605,
+        "wall_seconds": 19.860796583001502,
+        "repeat": 2,
+        "suite": "chr1_plugins",
+        "param": "alphamissense",
+        "timestamp": "2026-09-25T13:27:09.010469+00:00"
+      },
+      {
+        "annotation_seconds": 19.736692791979294,
+        "max_rss_bytes": 3883368448,
+        "max_rss_gb": 3.617,
+        "wall_seconds": 19.968974750023335,
+        "repeat": 3,
+        "suite": "chr1_plugins",
+        "param": "alphamissense",
+        "timestamp": "2026-09-25T13:29:48.178412+00:00"
+      },
+      {
+        "annotation_seconds": 20.367486333008856,
+        "max_rss_bytes": 3920691200,
+        "max_rss_gb": 3.651,
+        "wall_seconds": 20.63771037501283,
+        "repeat": 4,
+        "suite": "chr1_plugins",
+        "param": "alphamissense",
+        "timestamp": "2026-09-25T13:32:28.749163+00:00"
+      },
+      {
+        "annotation_seconds": 19.186705792002613,
+        "max_rss_bytes": 3846914048,
+        "max_rss_gb": 3.583,
+        "wall_seconds": 19.37572995899245,
+        "repeat": 5,
+        "suite": "chr1_plugins",
+        "param": "alphamissense",
+        "timestamp": "2026-09-25T13:35:04.622221+00:00"
+      }
+    ],
+    "dbnsfp": [
+      {
+        "annotation_seconds": 20.25,
+        "max_rss_gb": 3.73
+      },
+      {
+        "annotation_seconds": 20.307955875003245,
+        "max_rss_bytes": 3725705216,
+        "max_rss_gb": 3.47,
+        "wall_seconds": 20.50544350000564,
+        "repeat": 2,
+        "suite": "chr1_plugins",
+        "param": "dbnsfp",
+        "timestamp": "2026-09-25T13:27:32.521338+00:00"
+      },
+      {
+        "annotation_seconds": 20.70872187500936,
+        "max_rss_bytes": 4025942016,
+        "max_rss_gb": 3.749,
+        "wall_seconds": 20.924277834012173,
+        "repeat": 3,
+        "suite": "chr1_plugins",
+        "param": "dbnsfp",
+        "timestamp": "2026-09-25T13:30:12.108419+00:00"
+      },
+      {
+        "annotation_seconds": 20.406290540995542,
+        "max_rss_bytes": 3886137344,
+        "max_rss_gb": 3.619,
+        "wall_seconds": 20.602737624984,
+        "repeat": 4,
+        "suite": "chr1_plugins",
+        "param": "dbnsfp",
+        "timestamp": "2026-09-25T13:32:52.357397+00:00"
+      },
+      {
+        "annotation_seconds": 20.169380416016793,
+        "max_rss_bytes": 3783098368,
+        "max_rss_gb": 3.523,
+        "wall_seconds": 20.370515249989694,
+        "repeat": 5,
+        "suite": "chr1_plugins",
+        "param": "dbnsfp",
+        "timestamp": "2026-09-25T13:35:27.998360+00:00"
+      }
+    ]
+  },
+  "wgs_scaling": {
+    "1": [
+      {
+        "annotation_seconds": 276.63,
+        "max_rss_gb": 4.18
+      },
+      {
+        "annotation_seconds": 210.22989324998343,
+        "max_rss_bytes": 4166975488,
+        "max_rss_gb": 3.881,
+        "wall_seconds": 210.53282991598826,
+        "repeat": 2,
+        "suite": "wgs_scaling",
+        "param": 1,
+        "timestamp": "2026-09-25T13:47:05.407755+00:00"
+      },
+      {
+        "annotation_seconds": 211.41860124998493,
+        "max_rss_bytes": 4224892928,
+        "max_rss_gb": 3.935,
+        "wall_seconds": 211.74164729201584,
+        "repeat": 3,
+        "suite": "wgs_scaling",
+        "param": 1,
+        "timestamp": "2026-09-25T13:59:15.299201+00:00"
+      },
+      {
+        "annotation_seconds": 212.95114462499623,
+        "max_rss_bytes": 4223254528,
+        "max_rss_gb": 3.933,
+        "wall_seconds": 213.28375779098133,
+        "repeat": 4,
+        "suite": "wgs_scaling",
+        "param": 1,
+        "timestamp": "2026-09-25T14:11:48.120345+00:00"
+      },
+      {
+        "annotation_seconds": 214.3625511249993,
+        "max_rss_bytes": 4152229888,
+        "max_rss_gb": 3.867,
+        "wall_seconds": 214.6793912500143,
+        "repeat": 5,
+        "suite": "wgs_scaling",
+        "param": 1,
+        "timestamp": "2026-09-25T14:24:31.130028+00:00"
+      }
+    ],
+    "2": [
+      {
+        "annotation_seconds": 158.55,
+        "max_rss_gb": 5.52
+      },
+      {
+        "annotation_seconds": 135.98012483300408,
+        "max_rss_bytes": 6165266432,
+        "max_rss_gb": 5.742,
+        "wall_seconds": 136.3228330000129,
+        "repeat": 2,
+        "suite": "wgs_scaling",
+        "param": 2,
+        "timestamp": "2026-09-25T13:43:19.857638+00:00"
+      },
+      {
+        "annotation_seconds": 140.18688004199066,
+        "max_rss_bytes": 6130761728,
+        "max_rss_gb": 5.71,
+        "wall_seconds": 140.52512600002228,
+        "repeat": 3,
+        "suite": "wgs_scaling",
+        "param": 2,
+        "timestamp": "2026-09-25T13:55:28.545492+00:00"
+      },
+      {
+        "annotation_seconds": 142.02221641599317,
+        "max_rss_bytes": 5818171392,
+        "max_rss_gb": 5.419,
+        "wall_seconds": 142.38211775000673,
+        "repeat": 4,
+        "suite": "wgs_scaling",
+        "param": 2,
+        "timestamp": "2026-09-25T14:07:59.830558+00:00"
+      },
+      {
+        "annotation_seconds": 147.28028837498277,
+        "max_rss_bytes": 6634160128,
+        "max_rss_gb": 6.179,
+        "wall_seconds": 147.62929670800804,
+        "repeat": 5,
+        "suite": "wgs_scaling",
+        "param": 2,
+        "timestamp": "2026-09-25T14:20:41.441292+00:00"
+      }
+    ],
+    "4": [
+      {
+        "annotation_seconds": 116.62,
+        "max_rss_gb": 6.38
+      },
+      {
+        "annotation_seconds": 108.83836987501127,
+        "max_rss_bytes": 7080427520,
+        "max_rss_gb": 6.594,
+        "wall_seconds": 109.20468866699957,
+        "repeat": 2,
+        "suite": "wgs_scaling",
+        "param": 4,
+        "timestamp": "2026-09-25T13:40:48.523649+00:00"
+      },
+      {
+        "annotation_seconds": 112.46757716700085,
+        "max_rss_bytes": 6759890944,
+        "max_rss_gb": 6.296,
+        "wall_seconds": 112.81772150000324,
+        "repeat": 3,
+        "suite": "wgs_scaling",
+        "param": 4,
+        "timestamp": "2026-09-25T13:52:53.008266+00:00"
+      },
+      {
+        "annotation_seconds": 118.36308362500858,
+        "max_rss_bytes": 6940934144,
+        "max_rss_gb": 6.464,
+        "wall_seconds": 118.74107758302125,
+        "repeat": 4,
+        "suite": "wgs_scaling",
+        "param": 4,
+        "timestamp": "2026-09-25T14:05:22.436906+00:00"
+      },
+      {
+        "annotation_seconds": 116.65463612499298,
+        "max_rss_bytes": 7493828608,
+        "max_rss_gb": 6.979,
+        "wall_seconds": 117.05260583400377,
+        "repeat": 5,
+        "suite": "wgs_scaling",
+        "param": 4,
+        "timestamp": "2026-09-25T14:17:58.810305+00:00"
+      }
+    ],
+    "8": [
+      {
+        "annotation_seconds": 92.82,
+        "max_rss_gb": 7.99
+      },
+      {
+        "annotation_seconds": 92.24612887500552,
+        "max_rss_bytes": 9332801536,
+        "max_rss_gb": 8.692,
+        "wall_seconds": 92.62677475000964,
+        "repeat": 2,
+        "suite": "wgs_scaling",
+        "param": 8,
+        "timestamp": "2026-09-25T13:38:44.312862+00:00"
+      },
+      {
+        "annotation_seconds": 96.90804316700087,
+        "max_rss_bytes": 9137307648,
+        "max_rss_gb": 8.51,
+        "wall_seconds": 97.25447299997904,
+        "repeat": 3,
+        "suite": "wgs_scaling",
+        "param": 8,
+        "timestamp": "2026-09-25T13:50:45.177944+00:00"
+      },
+      {
+        "annotation_seconds": 103.89298087501084,
+        "max_rss_bytes": 8907784192,
+        "max_rss_gb": 8.296,
+        "wall_seconds": 104.36104416599846,
+        "repeat": 4,
+        "suite": "wgs_scaling",
+        "param": 8,
+        "timestamp": "2026-09-25T14:03:08.690975+00:00"
+      },
+      {
+        "annotation_seconds": 107.5282332909992,
+        "max_rss_bytes": 8461860864,
+        "max_rss_gb": 7.881,
+        "wall_seconds": 107.99866612500045,
+        "repeat": 5,
+        "suite": "wgs_scaling",
+        "param": 8,
+        "timestamp": "2026-09-25T14:15:46.752804+00:00"
+      }
+    ],
+    "10": [
+      {
+        "annotation_seconds": 86.26,
+        "max_rss_gb": 8.46
+      },
+      {
+        "annotation_seconds": 85.2818135000125,
+        "max_rss_bytes": 8833269760,
+        "max_rss_gb": 8.227,
+        "wall_seconds": 85.67216891702265,
+        "repeat": 2,
+        "suite": "wgs_scaling",
+        "param": 10,
+        "timestamp": "2026-09-25T13:36:56.679650+00:00"
+      },
+      {
+        "annotation_seconds": 92.01909891600371,
+        "max_rss_bytes": 9293938688,
+        "max_rss_gb": 8.656,
+        "wall_seconds": 92.43504379200749,
+        "repeat": 3,
+        "suite": "wgs_scaling",
+        "param": 10,
+        "timestamp": "2026-09-25T13:48:52.873991+00:00"
+      },
+      {
+        "annotation_seconds": 98.59431241700076,
+        "max_rss_bytes": 9363275776,
+        "max_rss_gb": 8.72,
+        "wall_seconds": 99.0006750409957,
+        "repeat": 4,
+        "suite": "wgs_scaling",
+        "param": 10,
+        "timestamp": "2026-09-25T14:01:09.319133+00:00"
+      },
+      {
+        "annotation_seconds": 100.18258391699055,
+        "max_rss_bytes": 9067200512,
+        "max_rss_gb": 8.444,
+        "wall_seconds": 100.60996408300707,
+        "repeat": 5,
+        "suite": "wgs_scaling",
+        "param": 10,
+        "timestamp": "2026-09-25T14:13:43.747923+00:00"
+      }
+    ]
+  }
+}

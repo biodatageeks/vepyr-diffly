@@ -1,0 +1,22 @@
+============================================================
+  profile:   merged_plugins
+  release:   116
+  cache_dir: /Users/lukaszjezapkowicz/workspace/data_vepyr/cache/116_GRCh38_merged
+  plugins:   /Users/lukaszjezapkowicz/workspace/data_vepyr/plugin_cache
+  vep_vcf:   /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr1_5plugins_vep116_caddfix.vcf.gz
+  results:   /Users/lukaszjezapkowicz/Desktop/magisterka/praca/magisterska_jezapkowicz/runs/plugin_scaling_m5_5repeats_20261013/chr1/workers10/repeat2/results/116
+============================================================
+  Normalizing HG002_normalized_chr1.vcf.gz (bcftools norm -m -both) ...
+Lines   total/split/joined/realigned/mismatch_removed/dup_removed/skipped:	323430/0/0/0/0/0/0
+  Created /Users/lukaszjezapkowicz/Desktop/magisterka/praca/magisterska_jezapkowicz/runs/plugin_scaling_m5_5repeats_20261013/chr1/workers10/repeat2/results/116/_shared/normalized.vcf.gz
+  contigs:   chr1
+
+============================================================
+  chr1 (profile=merged_plugins, release=116)
+============================================================
+  Created /Users/lukaszjezapkowicz/Desktop/magisterka/praca/magisterska_jezapkowicz/runs/plugin_scaling_m5_5repeats_20261013/chr1/workers10/repeat2/results/116/fast_chr1/input_chr1.vcf.gz
+  Input: 323,430 variants for chr1
+  Done: 323,430 variants in 12.9s (25,097 variants/s), 2688 MB
+  Report: /Users/lukaszjezapkowicz/Desktop/magisterka/praca/magisterska_jezapkowicz/runs/plugin_scaling_m5_5repeats_20261013/chr1/workers10/repeat2/reports/fast_chr1_merged_plugins_116_report.json
+
+Skipping aggregate summary (--skip-compare)

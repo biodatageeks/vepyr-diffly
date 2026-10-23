@@ -1,0 +1,15 @@
+{
+  "seconds_wall": 11240.332420110703,
+  "returncode": 0,
+  "disk_guard_kill": false,
+  "variant": "baseline_10cpu",
+  "repeat": 1,
+  "contigs": 1904,
+  "entities": [
+    "variation",
+    "transcript",
+    "exon",
+    "regulatory",
+    "motif"
+  ]
+}

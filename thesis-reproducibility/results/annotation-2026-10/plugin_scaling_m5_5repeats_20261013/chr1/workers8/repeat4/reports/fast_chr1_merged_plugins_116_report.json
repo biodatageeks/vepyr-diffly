@@ -1,0 +1,45 @@
+{
+  "chrom": "chr1",
+  "profile": "merged_plugins",
+  "release": "116",
+  "cache": "merged_plugins",
+  "cache_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/cache/116_GRCh38_merged",
+  "cache_identity": {
+    "vepyr_version": "0.7.0",
+    "cache_source_type": "merged",
+    "cache_version": "116",
+    "vep_codebase_version": "116.0",
+    "api_version": "116",
+    "ensembl_core_revision": "c0cf13d",
+    "ensembl_variation_revision": "2fb834b",
+    "semantics": "116",
+    "contig": "chr1"
+  },
+  "supported_target": {
+    "vepyr_version": "0.7.0",
+    "cache_version": "116",
+    "vep_codebase_version": "116.0",
+    "api_version": "116",
+    "ensembl_core_revision": "c0cf13d",
+    "ensembl_variation_revision": "2fb834b",
+    "semantics": "116"
+  },
+  "build": {
+    "branch": "main",
+    "vepyr_rev": "812c4b14ab6a",
+    "vepyr_dirty": true,
+    "bio_functions_rev": "unknown",
+    "dependencies": {}
+  },
+  "benchmark_artifacts": null,
+  "input_variants": 323430,
+  "annotation": {
+    "backend": "parquet",
+    "compression": "plain",
+    "time_s": 13.0,
+    "output_variants": 323430
+  },
+  "comparison": null,
+  "comparison_mode": null,
+  "plugin_cache_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/plugin_cache"
+}

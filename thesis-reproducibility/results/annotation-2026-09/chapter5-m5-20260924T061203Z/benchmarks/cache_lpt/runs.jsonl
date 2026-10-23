@@ -1,0 +1,4 @@
+{"elapsed_seconds": 220.389555, "knob": "build_concurrency", "knob_value": 1, "max_rss_bytes": 22636789760, "num_files": 21, "repeat": 1, "total_parquet_bytes": 1790419365, "total_rows": 67663043}
+{"elapsed_seconds": 168.443158, "knob": "build_concurrency", "knob_value": 2, "max_rss_bytes": 22430859264, "num_files": 21, "repeat": 1, "total_parquet_bytes": 1790400709, "total_rows": 67663043}
+{"elapsed_seconds": 136.683569, "knob": "build_concurrency", "knob_value": 4, "max_rss_bytes": 22165897216, "num_files": 21, "repeat": 1, "total_parquet_bytes": 1790211355, "total_rows": 67663043}
+{"elapsed_seconds": 169.127387, "knob": "build_concurrency", "knob_value": 8, "max_rss_bytes": 22017687552, "num_files": 21, "repeat": 1, "total_parquet_bytes": 1790286552, "total_rows": 67663043}

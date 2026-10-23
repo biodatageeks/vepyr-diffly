@@ -1,0 +1,77 @@
+[
+  {
+    "seconds_wall": 11080.042087078094,
+    "returncode": 0,
+    "disk_guard_kill": false,
+    "variant": "baseline_9cpu24gb",
+    "repeat": 1,
+    "contigs": 1904,
+    "entities": [
+      "variation",
+      "transcript",
+      "exon",
+      "regulatory",
+      "motif"
+    ]
+  },
+  {
+    "seconds_wall": 10959.786724090576,
+    "returncode": 0,
+    "disk_guard_kill": false,
+    "variant": "baseline_9cpu24gb",
+    "repeat": 2,
+    "contigs": 1904,
+    "entities": [
+      "variation",
+      "transcript",
+      "exon",
+      "regulatory",
+      "motif"
+    ]
+  },
+  {
+    "seconds_wall": 10910.174112081528,
+    "returncode": 0,
+    "disk_guard_kill": false,
+    "variant": "baseline_9cpu24gb",
+    "repeat": 3,
+    "contigs": 1904,
+    "entities": [
+      "variation",
+      "transcript",
+      "exon",
+      "regulatory",
+      "motif"
+    ]
+  },
+  {
+    "seconds_wall": 10970.343760967255,
+    "returncode": 0,
+    "disk_guard_kill": false,
+    "variant": "baseline_9cpu24gb",
+    "repeat": 4,
+    "contigs": 1904,
+    "entities": [
+      "variation",
+      "transcript",
+      "exon",
+      "regulatory",
+      "motif"
+    ]
+  },
+  {
+    "seconds_wall": 11000.416153907776,
+    "returncode": 0,
+    "disk_guard_kill": false,
+    "variant": "baseline_9cpu24gb",
+    "repeat": 5,
+    "contigs": 1904,
+    "entities": [
+      "variation",
+      "transcript",
+      "exon",
+      "regulatory",
+      "motif"
+    ]
+  }
+]

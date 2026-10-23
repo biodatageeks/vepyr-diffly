@@ -1,0 +1,77 @@
+[
+  {
+    "seconds_wall": 11240.332420110703,
+    "returncode": 0,
+    "disk_guard_kill": false,
+    "variant": "baseline_10cpu",
+    "repeat": 1,
+    "contigs": 1904,
+    "entities": [
+      "variation",
+      "transcript",
+      "exon",
+      "regulatory",
+      "motif"
+    ]
+  },
+  {
+    "seconds_wall": 11290.62018609047,
+    "returncode": 0,
+    "disk_guard_kill": false,
+    "variant": "baseline_10cpu",
+    "repeat": 2,
+    "contigs": 1904,
+    "entities": [
+      "variation",
+      "transcript",
+      "exon",
+      "regulatory",
+      "motif"
+    ]
+  },
+  {
+    "seconds_wall": 11100.407263994217,
+    "returncode": 0,
+    "disk_guard_kill": false,
+    "variant": "baseline_10cpu",
+    "repeat": 3,
+    "contigs": 1904,
+    "entities": [
+      "variation",
+      "transcript",
+      "exon",
+      "regulatory",
+      "motif"
+    ]
+  },
+  {
+    "seconds_wall": 11170.62199807167,
+    "returncode": 0,
+    "disk_guard_kill": false,
+    "variant": "baseline_10cpu",
+    "repeat": 4,
+    "contigs": 1904,
+    "entities": [
+      "variation",
+      "transcript",
+      "exon",
+      "regulatory",
+      "motif"
+    ]
+  },
+  {
+    "seconds_wall": 11190.79672384262,
+    "returncode": 0,
+    "disk_guard_kill": false,
+    "variant": "baseline_10cpu",
+    "repeat": 5,
+    "contigs": 1904,
+    "entities": [
+      "variation",
+      "transcript",
+      "exon",
+      "regulatory",
+      "motif"
+    ]
+  }
+]
