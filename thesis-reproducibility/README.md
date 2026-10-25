@@ -21,7 +21,8 @@ finished; all numbers in the thesis refer to artifacts in this directory.
 - Hardware: MacBook Air, Apple M5 (4 performance + 6 efficiency cores), 32 GiB RAM.
   One additional test (independent processes) was originally run on an Apple M1
   machine and repeated on the M5 in October 2026 (see `results/completion-2026-10`).
-- OS: macOS 27.0 (annotation series, September 2026), 27.0.1 (cache-build series, October 2026).
+- OS: macOS 27.0 (September 2026 runs), 27.0.1 (all October 2026 runs: cache builds, VEP
+  full-genome repeats 2–5, completion run).
 - Ensembl VEP 116.0 in Docker (`ensemblorg/ensembl-vep:release_116.0`) under Colima
   (Virtualization.framework, virtiofs, 10 vCPU); VEP cache 116, merged profile, GRCh38.
 - Input: GIAB HG002 v4.2.1, chromosomes 1–22, normalised with `bcftools norm -m -both`
@@ -49,7 +50,7 @@ were run on 2026-09-25 (VEPYR), 2026-09-26/28 (VEP, chromosomes 1 and 22) and
 |---|---|---|
 | VEPYR worker scaling chr1/chr22 (`tab:vepyr-scaling`) | `results/annotation-2026-09/5repeats_m5/` (`summary_5repeats.json`, `raw_runs.jsonl`); repeat 1: `chapter5-m5-20260924T061203Z/benchmarks/vepyr_chr*/` | `scripts/run_5repeats_benchmark.py`, `scripts/measure_once.py` |
 | VEP `--fork` scaling chr1/chr22 (section `sec:speedup-investigation`) | `results/annotation-2026-09/vep_5repeats_m5/`; repeat 1: `chapter5-m5-.../benchmarks/vep/`; second chr1 no-fork value: `vep_chr1_warmup/` | `scripts/run_vep_5repeats_suite.py` |
-| Plugin overhead O_x and VEP vs VEPYR per plugin (`tab:plugin-performance`, `tab:plugin-vep-vepyr`, `fig:plugin-overhead`) | `5repeats_m5/summary_5repeats.json` (`chr*_plugins`), `vep_5repeats_m5/summary_vep_5repeats.json` (`chr*_plugins`) | `scripts/fig_plugin_overhead.py` (figure) |
+| Plugin overhead O_x and VEP vs VEPYR per plugin (`tab:plugin-performance`, `tab:plugin-vep-vepyr`, `fig:plugin-overhead`) | `5repeats_m5/summary_5repeats.json` (`chr*_plugins`), repeat 1: `chapter5-m5-.../correctness/chr*_individual_plugins/benchmark_plugins_summary.json`; `vep_5repeats_m5/summary_vep_5repeats.json` (`chr*_plugins`) | `scripts/fig_plugin_overhead.py` (figure), `scripts/plugin_rss_gib.py` (VEPYR RSS) |
 | All-plugins scaling (`tab:scaling-synthesis`) | `results/annotation-2026-10/plugin_scaling_m5_5repeats_20261013/runs.jsonl` | `repeat_plugin_scaling_m5.py` (thesis repository) |
 | Full-input annotation (`tab:full-genome-performance`) | VEP: `results/vep-full-genome-2026-10/` (repeats 2–5, `summary.json`) and `chapter5-m5-.../benchmarks/vep/full_forknone.*` (repeat 1); VEPYR: `results/completion-2026-10/m5_completion_20261024/S5/` | `scripts/run_vep_full_repeats.sh`, `scripts/m5_completion_batch.py` |
 | E2E concordance chr1/chr22, baseline and all plugins (`tab:variant-results`, `tab:unit-accounting`) | `results/concordance-2026-09/e2e-reports/fast_chr{1,22}_merged{,_plugins}_116_*` (JSON report, empty mismatch ledger, summaries); log: `chapter5-m5-.../correctness/correctness.log` | `run_comparison.py` in biodatageeks/vepyr `e2e-testing/scripts` |
@@ -73,6 +74,14 @@ were run on 2026-09-25 (VEPYR), 2026-09-26/28 (VEP, chromosomes 1 and 22) and
   `ru_maxrss` in bytes and a field named `max_rss_gb` that is bytes / 1024^3
   (i.e. GiB); VEP records store VmHWM in kB, with `peak_rss_gb` = kB × 1024 / 10^9
   (decimal GB) and, in S9, also `peak_rss_gib`.
+- Repeat 1 of the VEPYR plugin series on chr1/chr22 was measured with
+  `vepyr-diffly benchmark-plugins`: its time includes Python interpreter start-up and its
+  peak RSS is the maximum of the periodically sampled RSS sum of the process tree, in MiB
+  (`peak_rss_mb`). `summary_5repeats.json` stores it as MiB/1000 under `max_rss_gb`; the
+  thesis converts it to GiB (MiB/1024) before averaging — `scripts/plugin_rss_gib.py`
+  reproduces the reported values. RSS from the worker-scaling series is not used in the
+  thesis (its repeat-1 entries in `summary_5repeats.json` do not all match the
+  `*.metrics.json` records, which store KiB).
 - Step S9 was first attempted without Docker (failed run kept in
   `S9/phase1_no_docker/`), and S7 likewise (`S7/result_phase1_no_docker.json`);
   both were re-run by `scripts/m5_phase2.sh`.
