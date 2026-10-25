@@ -1,0 +1,190 @@
+2026-10-25T11:14:23Z starting Colima
+time="2026-10-25T12:14:24+01:00" level=info msg="starting colima"
+time="2026-10-25T12:14:24+01:00" level=info msg="runtime: docker"
+time="2026-10-25T12:14:25+01:00" level=info msg="starting ..." context=vm
+time="2026-10-25T12:14:25+01:00" level=info msg="Using the existing instance \"colima\""
+time="2026-10-25T12:14:25+01:00" level=info msg="Starting the instance \"colima\" with internal VM driver \"vz\""
+time="2026-10-25T12:14:26+01:00" level=info msg="[hostagent] hostagent socket created at /Users/lukaszjezapkowicz/.colima/_lima/colima/ha.sock"
+time="2026-10-25T12:14:26+01:00" level=info msg="[hostagent] Starting VZ (hint: to watch the boot progress, see \"/Users/lukaszjezapkowicz/.colima/_lima/colima/serial*.log\")"
+time="2026-10-25T12:14:26+01:00" level=info msg="[hostagent] Mounting disk \"colima\" on \"/mnt/lima-colima\""
+time="2026-10-25T12:14:26+01:00" level=info msg="[hostagent] [VZ] - vm state change: running"
+time="2026-10-25T12:14:30+01:00" level=info msg="[hostagent] SSH server does not seem to be running on vsock port, using usernet forwarder"
+time="2026-10-25T12:14:30+01:00" level=info msg="SSH Local Port: 64986"
+time="2026-10-25T12:14:30+01:00" level=info msg="[hostagent] Waiting for the essential requirement 1 of 3: \"ssh\""
+time="2026-10-25T12:14:31+01:00" level=info msg="[hostagent] The essential requirement 1 of 3 is satisfied"
+time="2026-10-25T12:14:31+01:00" level=info msg="[hostagent] Waiting for the essential requirement 2 of 3: \"user session is ready for ssh\""
+time="2026-10-25T12:14:31+01:00" level=info msg="[hostagent] The essential requirement 2 of 3 is satisfied"
+time="2026-10-25T12:14:31+01:00" level=info msg="[hostagent] Waiting for the essential requirement 3 of 3: \"Explicitly start ssh ControlMaster\""
+time="2026-10-25T12:14:31+01:00" level=info msg="[hostagent] The essential requirement 3 of 3 is satisfied"
+time="2026-10-25T12:14:31+01:00" level=info msg="[hostagent] Waiting for the guest agent to be running"
+time="2026-10-25T12:14:31+01:00" level=info msg="[hostagent] Forwarding \"/var/run/docker.sock\" (guest) to \"/Users/lukaszjezapkowicz/.colima/default/docker.sock\" (host)"
+time="2026-10-25T12:14:31+01:00" level=info msg="[hostagent] Forwarding \"/var/run/containerd/containerd.sock\" (guest) to \"/Users/lukaszjezapkowicz/.colima/default/containerd.sock\" (host)"
+time="2026-10-25T12:14:31+01:00" level=info msg="[hostagent] Forwarding \"/var/run/docker.sock\" (guest) to \"/Users/lukaszjezapkowicz/.colima/docker.sock\" (host)"
+time="2026-10-25T12:14:31+01:00" level=info msg="[hostagent] Guest agent is running"
+time="2026-10-25T12:14:31+01:00" level=info msg="[hostagent] Waiting for the final requirement 1 of 1: \"boot scripts must have finished\""
+time="2026-10-25T12:14:31+01:00" level=info msg="[hostagent] Forwarding TCP from 127.0.0.1:53 to 127.0.0.1:53"
+time="2026-10-25T12:14:31+01:00" level=info msg="[hostagent] Forwarding \"127.0.0.1:53\" (guest) to \"/tmp/lima-psl-127.0.0.1-53-906649428/sock\" (host)"
+time="2026-10-25T12:14:31+01:00" level=info msg="[hostagent] The final requirement 1 of 1 is satisfied"
+time="2026-10-25T12:14:31+01:00" level=info msg="READY. Run `limactl shell colima` to open the shell."
+installing: 386 OK
+installing: amd64 OK
+{
+  "supported": [
+    "linux/arm64",
+    "linux/amd64",
+    "linux/386"
+  ],
+  "emulators": [
+    "python3.12",
+    "qemu-i386",
+    "qemu-x86_64"
+  ]
+}
+time="2026-10-25T12:14:31+01:00" level=info msg="provisioning ..." context=docker
+colima
+Successfully created context "colima"
+colima
+Current context is now "colima"
+time="2026-10-25T12:14:32+01:00" level=info msg="starting ..." context=docker
+time="2026-10-25T12:14:33+01:00" level=info msg=done
+2026-10-25T11:14:34Z references chr1 chr22: start
+2026-10-25T12:46:57Z references chr1 chr22: exit 0
+2026-10-25T12:47:04Z reference checksums recorded; stopping Colima
+time="2026-10-25T13:47:05+01:00" level=info msg="stopping colima"
+time="2026-10-25T13:47:05+01:00" level=info msg="stopping ..." context=docker
+Stopping 'docker.service', but its triggering units are still active:
+docker.socket
+colima
+time="2026-10-25T13:47:05+01:00" level=info msg="stopping ..." context=vm
+time="2026-10-25T13:47:07+01:00" level=info msg="Sending SIGINT to hostagent process 67471"
+time="2026-10-25T13:47:07+01:00" level=info msg="Waiting for the host agent and the driver processes to shut down"
+time="2026-10-25T13:47:07+01:00" level=info msg="[hostagent] Received SIGINT, shutting down the host agent"
+time="2026-10-25T13:47:07+01:00" level=info msg="[hostagent] Shutting down the host agent"
+time="2026-10-25T13:47:07+01:00" level=info msg="[hostagent] Stopping forwarding \"/var/run/docker.sock\" (guest) to \"/Users/lukaszjezapkowicz/.colima/default/docker.sock\" (host)"
+time="2026-10-25T13:47:07+01:00" level=info msg="[hostagent] Stopping forwarding \"/var/run/containerd/containerd.sock\" (guest) to \"/Users/lukaszjezapkowicz/.colima/default/containerd.sock\" (host)"
+time="2026-10-25T13:47:07+01:00" level=info msg="[hostagent] Stopping forwarding \"/var/run/docker.sock\" (guest) to \"/Users/lukaszjezapkowicz/.colima/docker.sock\" (host)"
+time="2026-10-25T13:47:07+01:00" level=info msg="[hostagent] Unmounting disk \"colima\""
+time="2026-10-25T13:47:07+01:00" level=info msg="[hostagent] Shutting down VZ"
+time="2026-10-25T13:47:07+01:00" level=info msg="[hostagent] [VZ] - vm state change: stopped"
+time="2026-10-25T13:47:08+01:00" level=info msg="Waiting for the instance to shut down"
+time="2026-10-25T13:47:08+01:00" level=info msg="The instance colima has shut down"
+time="2026-10-25T13:47:09+01:00" level=info msg=done
+2026-10-25T12:47:09Z E2E merged_plugins chr1: start
+2026-10-25T12:51:50Z E2E merged_plugins chr1: exit 0
+2026-10-25T12:51:50Z E2E merged_plugins chr22: start
+2026-10-25T12:52:51Z E2E merged_plugins chr22: exit 0
+2026-10-25T12:52:51Z parity gate merged_plugins chr1 chr22: exit 1
+2026-10-25T12:52:54Z benchmark-plugins chr1: start
+2026-10-25T12:59:27Z benchmark-plugins chr1: exit 0
+2026-10-25T12:59:27Z benchmark-plugins chr22: start
+2026-10-25T13:00:46Z benchmark-plugins chr22: exit 0
+2026-10-25T13:00:46Z VEP full-genome repeat 6: starting Colima
+time="2026-10-25T14:00:47+01:00" level=info msg="starting colima"
+time="2026-10-25T14:00:47+01:00" level=info msg="runtime: docker"
+time="2026-10-25T14:00:50+01:00" level=info msg="starting ..." context=vm
+time="2026-10-25T14:00:50+01:00" level=info msg="Using the existing instance \"colima\""
+time="2026-10-25T14:00:50+01:00" level=info msg="Starting the instance \"colima\" with internal VM driver \"vz\""
+time="2026-10-25T14:00:51+01:00" level=info msg="[hostagent] hostagent socket created at /Users/lukaszjezapkowicz/.colima/_lima/colima/ha.sock"
+time="2026-10-25T14:00:51+01:00" level=info msg="[hostagent] Starting VZ (hint: to watch the boot progress, see \"/Users/lukaszjezapkowicz/.colima/_lima/colima/serial*.log\")"
+time="2026-10-25T14:00:51+01:00" level=info msg="[hostagent] Mounting disk \"colima\" on \"/mnt/lima-colima\""
+time="2026-10-25T14:00:51+01:00" level=info msg="[hostagent] [VZ] - vm state change: running"
+time="2026-10-25T14:00:55+01:00" level=info msg="[hostagent] SSH server does not seem to be running on vsock port, using usernet forwarder"
+time="2026-10-25T14:00:56+01:00" level=info msg="SSH Local Port: 53866"
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] Waiting for the essential requirement 1 of 3: \"ssh\""
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] The essential requirement 1 of 3 is satisfied"
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] Waiting for the essential requirement 2 of 3: \"user session is ready for ssh\""
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] The essential requirement 2 of 3 is satisfied"
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] Waiting for the essential requirement 3 of 3: \"Explicitly start ssh ControlMaster\""
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] The essential requirement 3 of 3 is satisfied"
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] Waiting for the guest agent to be running"
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] Forwarding \"/var/run/docker.sock\" (guest) to \"/Users/lukaszjezapkowicz/.colima/default/docker.sock\" (host)"
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] Forwarding \"/var/run/containerd/containerd.sock\" (guest) to \"/Users/lukaszjezapkowicz/.colima/default/containerd.sock\" (host)"
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] Forwarding \"/var/run/docker.sock\" (guest) to \"/Users/lukaszjezapkowicz/.colima/docker.sock\" (host)"
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] Guest agent is running"
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] Waiting for the final requirement 1 of 1: \"boot scripts must have finished\""
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] Forwarding TCP from 127.0.0.1:53 to 127.0.0.1:53"
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] Forwarding \"127.0.0.1:53\" (guest) to \"/tmp/lima-psl-127.0.0.1-53-3005018117/sock\" (host)"
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] Not forwarding TCP 192.168.5.1:53"
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] Not forwarding TCP 0.0.0.0:22"
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] Not forwarding TCP [::]:22"
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] Not forwarding TCP [fe80::5055:55ff:fe49:5a3]:53"
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] Forwarding TCP from [::1]:53 to 127.0.0.1:53"
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] Forwarding \"[::1]:53\" (guest) to \"/tmp/lima-psl-127.0.0.1-53-1984058084/sock\" (host)"
+time="2026-10-25T14:00:56+01:00" level=info msg="[hostagent] Stopping forwarding \"[::1]:53\" (guest) to \"/tmp/lima-psl-127.0.0.1-53-1984058084/sock\" (host)"
+time="2026-10-25T14:00:56+01:00" level=warning msg="[hostagent] failed to set up forwarding tcp port 53 (negligible if already forwarded)" error="listen tcp 0.0.0.0:53: bind: address already in use"
+time="2026-10-25T14:00:59+01:00" level=info msg="[hostagent] The final requirement 1 of 1 is satisfied"
+time="2026-10-25T14:00:59+01:00" level=info msg="READY. Run `limactl shell colima` to open the shell."
+installing: 386 OK
+installing: amd64 OK
+{
+  "supported": [
+    "linux/arm64",
+    "linux/amd64",
+    "linux/386"
+  ],
+  "emulators": [
+    "python3.12",
+    "qemu-i386",
+    "qemu-x86_64"
+  ]
+}
+time="2026-10-25T14:01:00+01:00" level=info msg="provisioning ..." context=docker
+colima
+Successfully created context "colima"
+colima
+Current context is now "colima"
+time="2026-10-25T14:01:01+01:00" level=info msg="starting ..." context=docker
+time="2026-10-25T14:01:01+01:00" level=info msg=done
+2026-10-25T13:01:01Z repeat 6: start
+2026-10-25T20:20:09Z repeat 6: exit 0, real 26342.24
+2026-10-25T20:21:13Z repeat 6: body sha256 5fee6224bf135d80075712141cc06194e0730fa253ff8b131a9d25d661647ee9, output removed
+{
+  "n_successful": 6,
+  "mean_wall_s": 27708.0,
+  "min_wall_s": 26342.24,
+  "max_wall_s": 29050.82,
+  "body_sha256_identical_repeats_2_5": true,
+  "peak_rss_gb_max": 2.94
+}
+2026-10-25T20:21:13Z done
+{
+  "repeats": [
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "n": 5,
+  "mean_wall_s": 27555.79,
+  "min_wall_s": 26342.24,
+  "max_wall_s": 29050.82,
+  "rsd_wall_pct": 3.99,
+  "mean_peak_rss_gib": 2.729,
+  "min_peak_rss_gib": 2.721,
+  "max_peak_rss_gib": 2.738,
+  "body_sha256_identical": true,
+  "output_records": [
+    "4096123"
+  ]
+}
+time="2026-10-25T21:21:14+01:00" level=info msg="stopping colima"
+time="2026-10-25T21:21:14+01:00" level=info msg="stopping ..." context=docker
+Stopping 'docker.service', but its triggering units are still active:
+docker.socket
+colima
+time="2026-10-25T21:21:14+01:00" level=info msg="stopping ..." context=vm
+time="2026-10-25T21:21:16+01:00" level=info msg="Sending SIGINT to hostagent process 86476"
+time="2026-10-25T21:21:16+01:00" level=info msg="Waiting for the host agent and the driver processes to shut down"
+time="2026-10-25T21:21:16+01:00" level=info msg="[hostagent] Received SIGINT, shutting down the host agent"
+time="2026-10-25T21:21:16+01:00" level=info msg="[hostagent] Shutting down the host agent"
+time="2026-10-25T21:21:16+01:00" level=info msg="[hostagent] Stopping forwarding \"/var/run/docker.sock\" (guest) to \"/Users/lukaszjezapkowicz/.colima/default/docker.sock\" (host)"
+time="2026-10-25T21:21:16+01:00" level=info msg="[hostagent] Stopping forwarding \"/var/run/containerd/containerd.sock\" (guest) to \"/Users/lukaszjezapkowicz/.colima/default/containerd.sock\" (host)"
+time="2026-10-25T21:21:16+01:00" level=info msg="[hostagent] Stopping forwarding \"/var/run/docker.sock\" (guest) to \"/Users/lukaszjezapkowicz/.colima/docker.sock\" (host)"
+time="2026-10-25T21:21:16+01:00" level=info msg="[hostagent] Unmounting disk \"colima\""
+time="2026-10-25T21:21:16+01:00" level=info msg="[hostagent] Shutting down VZ"
+time="2026-10-25T21:21:20+01:00" level=info msg="[hostagent] [VZ] - vm state change: stopped"
+time="2026-10-25T21:21:20+01:00" level=info msg="Waiting for the instance to shut down"
+time="2026-10-25T21:21:21+01:00" level=info msg="The instance colima has shut down"
+time="2026-10-25T21:21:21+01:00" level=info msg=done
+2026-10-25T20:21:22Z done

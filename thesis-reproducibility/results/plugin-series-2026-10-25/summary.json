@@ -1,0 +1,110 @@
+{
+  "chr22/baseline": {
+    "n": 5,
+    "mean_s": 2.943,
+    "min_s": 2.8507,
+    "max_s": 3.2073,
+    "rsd_pct": 5.08,
+    "overhead_pct": null,
+    "mean_peak_rss_gib": 1.1705
+  },
+  "chr22/clinvar": {
+    "n": 5,
+    "mean_s": 3.1367,
+    "min_s": 3.0808,
+    "max_s": 3.2829,
+    "rsd_pct": 2.64,
+    "overhead_pct": 6.58,
+    "mean_peak_rss_gib": 1.1459
+  },
+  "chr22/spliceai": {
+    "n": 5,
+    "mean_s": 4.6655,
+    "min_s": 4.6289,
+    "max_s": 4.7143,
+    "rsd_pct": 0.68,
+    "overhead_pct": 58.53,
+    "mean_peak_rss_gib": 1.2464
+  },
+  "chr22/cadd": {
+    "n": 5,
+    "mean_s": 4.6889,
+    "min_s": 4.6269,
+    "max_s": 4.8619,
+    "rsd_pct": 2.08,
+    "overhead_pct": 59.32,
+    "mean_peak_rss_gib": 1.2139
+  },
+  "chr22/alphamissense": {
+    "n": 5,
+    "mean_s": 3.0945,
+    "min_s": 3.0814,
+    "max_s": 3.1306,
+    "rsd_pct": 0.66,
+    "overhead_pct": 5.15,
+    "mean_peak_rss_gib": 1.1251
+  },
+  "chr22/dbnsfp": {
+    "n": 5,
+    "mean_s": 3.2983,
+    "min_s": 3.2571,
+    "max_s": 3.354,
+    "rsd_pct": 1.06,
+    "overhead_pct": 12.07,
+    "mean_peak_rss_gib": 1.155
+  },
+  "chr1/baseline": {
+    "n": 5,
+    "mean_s": 17.6418,
+    "min_s": 17.2942,
+    "max_s": 18.9299,
+    "rsd_pct": 4.09,
+    "overhead_pct": null,
+    "mean_peak_rss_gib": 3.5904
+  },
+  "chr1/clinvar": {
+    "n": 5,
+    "mean_s": 18.4874,
+    "min_s": 18.3433,
+    "max_s": 18.8086,
+    "rsd_pct": 0.99,
+    "overhead_pct": 4.79,
+    "mean_peak_rss_gib": 3.5265
+  },
+  "chr1/spliceai": {
+    "n": 5,
+    "mean_s": 26.8444,
+    "min_s": 26.6705,
+    "max_s": 27.4333,
+    "rsd_pct": 1.23,
+    "overhead_pct": 52.16,
+    "mean_peak_rss_gib": 3.6767
+  },
+  "chr1/cadd": {
+    "n": 5,
+    "mean_s": 28.9156,
+    "min_s": 28.6163,
+    "max_s": 29.9864,
+    "rsd_pct": 2.07,
+    "overhead_pct": 63.9,
+    "mean_peak_rss_gib": 3.6791
+  },
+  "chr1/alphamissense": {
+    "n": 5,
+    "mean_s": 18.4348,
+    "min_s": 18.3104,
+    "max_s": 18.698,
+    "rsd_pct": 0.86,
+    "overhead_pct": 4.49,
+    "mean_peak_rss_gib": 3.5927
+  },
+  "chr1/dbnsfp": {
+    "n": 5,
+    "mean_s": 19.2962,
+    "min_s": 19.1359,
+    "max_s": 19.6306,
+    "rsd_pct": 1.0,
+    "overhead_pct": 9.38,
+    "mean_peak_rss_gib": 3.557
+  }
+}

@@ -1,0 +1,19 @@
+started_utc: 2026-10-25T20:24:12Z
+ProductName:		macOS
+ProductVersion:		27.0.1
+BuildVersion:		26A434
+Apple M5
+34359738368
+colima: time="2026-10-25T21:24:13+01:00" level=fatal msg="colima is not running"
+vepyr python package 0.7.0
+-rw-r--r--  1 lukaszjezapkowicz  staff  1342 23 Sep 22:10:16 2026 /Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-native/lib/python3.14/site-packages/vepyr-0.7.0.dist-info/RECORD
+vepyr: 479d8f46eee2101e1ececc902ad911ed65fc5c5c
+chr1 input body sha256: 5b4ff9b0218338ff34a0e947f9fc7e6d8b51ee0df81751b48a6c286cdb20aa7b
+chr22 input body sha256: f4781a6f90fd75b1168bf772d0d938e7fc0cfa6815f84f30876e4e36668ab618
+plugin_cache/plugin/clinvar -> /Users/lukaszjezapkowicz/workspace/data_vepyr/plugin_cache/plugin/clinvar
+plugin_cache/plugin/spliceai -> /Users/lukaszjezapkowicz/workspace/data_vepyr/plugin_cache/plugin/spliceai
+plugin_cache/plugin/cadd -> /Users/lukaszjezapkowicz/workspace/data_vepyr/plugin_cache/plugin/cadd
+plugin_cache/plugin/alphamissense -> /Users/lukaszjezapkowicz/workspace/data_vepyr/plugin_cache/plugin/alphamissense
+plugin_cache/plugin/dbnsfp -> /Users/lukaszjezapkowicz/workspace/data_vepyr/plugin_cache/plugin/dbnsfp
+fca4da6bfbba5305c14a5245e62e0897bae041cf9f963a119d109ed5c04187c4  /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/measure_once.py
+18262840ffc3099dc6f936f38b9cf423a728ac3271a9c2649477489ed949eb78  /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/rerun_plugin_series_5x.py

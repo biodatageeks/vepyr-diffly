@@ -29,3 +29,15 @@
   "peak_rss_gb_max": 2.938
 }
 2026-10-25T00:49:25Z done
+2026-10-25T13:01:01Z repeat 6: start
+2026-10-25T20:20:09Z repeat 6: exit 0, real 26342.24
+2026-10-25T20:21:13Z repeat 6: body sha256 5fee6224bf135d80075712141cc06194e0730fa253ff8b131a9d25d661647ee9, output removed
+{
+  "n_successful": 6,
+  "mean_wall_s": 27708.0,
+  "min_wall_s": 26342.24,
+  "max_wall_s": 29050.82,
+  "body_sha256_identical_repeats_2_5": true,
+  "peak_rss_gb_max": 2.94
+}
+2026-10-25T20:21:13Z done

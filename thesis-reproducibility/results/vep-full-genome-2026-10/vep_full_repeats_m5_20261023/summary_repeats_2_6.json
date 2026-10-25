@@ -1,0 +1,21 @@
+{
+  "repeats": [
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "n": 5,
+  "mean_wall_s": 27555.79,
+  "min_wall_s": 26342.24,
+  "max_wall_s": 29050.82,
+  "rsd_wall_pct": 3.99,
+  "mean_peak_rss_gib": 2.729,
+  "min_peak_rss_gib": 2.721,
+  "max_peak_rss_gib": 2.738,
+  "body_sha256_identical": true,
+  "output_records": [
+    "4096123"
+  ]
+}

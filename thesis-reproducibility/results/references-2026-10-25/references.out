@@ -1,0 +1,5 @@
+START chr1: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr1.BL8r4a log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr1.log
+START chr22: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr22.zNzpRz log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr22.log
+DONE chr22: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr22_5plugins_vep116_caddfix.vcf.gz
+DONE chr1: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr1_5plugins_vep116_caddfix.vcf.gz
+All requested references are complete under /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins

@@ -40,9 +40,16 @@ COPIES = [
     ("results/cache-build-2026-10/full_cache_20", T / "full_cache_20", None),
     ("results/cache-build-2026-10/full_core_5x", T / "full_core_5x", None),
     ("results/completion-2026-10/m5_completion_20261024", D / "runs/m5_completion_20261024", None),
+    ("results/references-2026-10-25", D / "runs/m5_references_20261025",
+     ["environment.txt", "run.log", "rclone.log", "references.out", "references.time.txt", "chr*_reference*",
+      "run_comparison.log", "gate.log", "e2e_reports/*", "chr*_benchmark_plugins.log",
+      "chr*_individual_plugins/benchmark_plugins_summary.*"]),
+    ("results/plugin-series-2026-10-25", D / "runs/plugin_series_m5_20261025", None),
+    ("results/plugin-series-2026-10-25", D / "runs", ["plugin_series_m5_20261025.out"]),
     ("scripts", D / "tools", ["measure_once.py", "run_5repeats_benchmark.py", "run_vep_5repeats_suite.py",
                               "run_vep_chr1_baseline.py", "run_full_vep_bench.py", "run_vep_full_repeats.sh",
-                              "m5_completion_batch.py", "m5_phase2.sh", "m5_progress.py", "plugin_rss_gib.py",
+                              "m5_completion_batch.py", "m5_phase2.sh", "m5_progress.py", "plugin_rss_gib.py", "m5_references_repeat6.sh",
+                              "rerun_plugin_series_5x.py", "after_repeat6_plugin_series.sh",
                               "assemble_repro_package.py"]),
 ]
 

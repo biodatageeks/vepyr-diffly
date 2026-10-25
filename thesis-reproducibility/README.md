@@ -8,12 +8,14 @@ Warsaw University of Technology, 2026.
 This directory holds the small raw artifacts behind the numbers reported in the
 thesis (chapter 5 and appendix A): per-run timing and memory records, summaries,
 command logs, concordance reports and the measurement scripts. Large outputs
-(annotated VCFs, Parquet caches, source data) are not included; they are listed
-in `LARGE_ARTIFACTS.tsv`. `MANIFEST.sha256` lists a SHA-256 checksum for every
-file in this directory.
+(annotated VCFs, Parquet caches, source data) are not included. `LARGE_ARTIFACTS.tsv`
+lists only the large files that were skipped while copying the result directories;
+caches and source data were never copied. `MANIFEST.sha256` lists a SHA-256 checksum
+for every file in this directory.
 
 **Status (2026-10-25):** complete. The October 2026 completion run
-(`results/completion-2026-10`, steps S0–S11) and VEP full-genome repeats 2–5 have
+(`results/completion-2026-10`, steps S0–S11), VEP full-genome repeats 2–6, the
+five-plugin references built on the M5 and the re-measured VEPYR plugin series have
 finished; all numbers in the thesis refer to artifacts in this directory.
 
 ## Environment
@@ -22,7 +24,7 @@ finished; all numbers in the thesis refer to artifacts in this directory.
   One additional test (independent processes) was originally run on an Apple M1
   machine and repeated on the M5 in October 2026 (see `results/completion-2026-10`).
 - OS: macOS 27.0 (September 2026 runs), 27.0.1 (all October 2026 runs: cache builds, VEP
-  full-genome repeats 2–5, completion run).
+  full-genome repeats 2–6, completion run, references and plugin series of 2026-10-25).
 - Ensembl VEP 116.0 in Docker (`ensemblorg/ensembl-vep:release_116.0`) under Colima
   (Virtualization.framework, virtiofs, 10 vCPU); VEP cache 116, merged profile, GRCh38.
 - Input: GIAB HG002 v4.2.1, chromosomes 1–22, normalised with `bcftools norm -m -both`
@@ -40,21 +42,27 @@ finished; all numbers in the thesis refer to artifacts in this directory.
 
 ## Map: thesis → artifacts
 
-Times are means of five runs. In the chromosome 1/22 annotation series and the
-VEP full-genome series, "repeat 1" is the single run of 2026-09-24; repeats 2–5
-were run on 2026-09-25 (VEPYR), 2026-09-26/28 (VEP, chromosomes 1 and 22) and
-2026-10-23/25 (VEP, full genome). VEPYR on the full input was run five times on
-2026-10-24 (step S5).
+Times are means of five runs. In the chromosome 1/22 annotation series (VEP and
+VEPYR worker scaling, VEP plugins), "repeat 1" is the single run of 2026-09-24;
+repeats 2–5 were run on 2026-09-25 (VEPYR) and 2026-09-26/28 (VEP). The VEPYR plugin
+series on chromosomes 1/22 used in the thesis was measured again on 2026-10-25, all
+five repeats with `measure_once.py` (`results/plugin-series-2026-10-25/`); the
+September VEPYR plugin series stays in `results/annotation-2026-09/5repeats_m5/`.
+VEP full-genome time and peak RSS are means over repeats 2–6 (2026-10-23/25,
+`summary_repeats_2_6.json`); repeat 1 (2026-09-25 00:59–08:53 UTC, 28,469.05 s, no
+RSS sampling) is kept but not averaged. VEPYR on the full input was run five times
+on 2026-10-24 (step S5).
 
 | Thesis item (LaTeX label) | Artifacts | Script |
 |---|---|---|
 | VEPYR worker scaling chr1/chr22 (`tab:vepyr-scaling`) | `results/annotation-2026-09/5repeats_m5/` (`summary_5repeats.json`, `raw_runs.jsonl`); repeat 1: `chapter5-m5-20260924T061203Z/benchmarks/vepyr_chr*/` | `scripts/run_5repeats_benchmark.py`, `scripts/measure_once.py` |
 | VEP `--fork` scaling chr1/chr22 (section `sec:speedup-investigation`) | `results/annotation-2026-09/vep_5repeats_m5/`; repeat 1: `chapter5-m5-.../benchmarks/vep/`; second chr1 no-fork value: `vep_chr1_warmup/` | `scripts/run_vep_5repeats_suite.py` |
-| Plugin overhead O_x and VEP vs VEPYR per plugin (`tab:plugin-performance`, `tab:plugin-vep-vepyr`, `fig:plugin-overhead`) | `5repeats_m5/summary_5repeats.json` (`chr*_plugins`), repeat 1: `chapter5-m5-.../correctness/chr*_individual_plugins/benchmark_plugins_summary.json`; `vep_5repeats_m5/summary_vep_5repeats.json` (`chr*_plugins`) | `scripts/fig_plugin_overhead.py` (figure), `scripts/plugin_rss_gib.py` (VEPYR RSS) |
+| Plugin overhead O_x and VEP vs VEPYR per plugin (`tab:plugin-performance`, `tab:plugin-vep-vepyr`, `fig:plugin-overhead`) | VEPYR: `results/plugin-series-2026-10-25/` (`raw_runs.jsonl`, `summary.json`, `environment.txt`, `run.log`); VEP: `results/annotation-2026-09/vep_5repeats_m5/summary_vep_5repeats.json` (`chr*_plugins`) | `scripts/rerun_plugin_series_5x.py` (calls `scripts/measure_once.py`), `scripts/after_repeat6_plugin_series.sh`, `scripts/fig_plugin_overhead.py` (figure, reads `raw_runs.jsonl`) |
 | All-plugins scaling (`tab:scaling-synthesis`) | `results/annotation-2026-10/plugin_scaling_m5_5repeats_20261013/runs.jsonl` | `repeat_plugin_scaling_m5.py` (thesis repository) |
-| Full-input annotation (`tab:full-genome-performance`) | VEP: `results/vep-full-genome-2026-10/` (repeats 2–5, `summary.json`) and `chapter5-m5-.../benchmarks/vep/full_forknone.*` (repeat 1); VEPYR: `results/completion-2026-10/m5_completion_20261024/S5/` | `scripts/run_vep_full_repeats.sh`, `scripts/m5_completion_batch.py` |
-| E2E concordance chr1/chr22, baseline and all plugins (`tab:variant-results`, `tab:unit-accounting`) | `results/concordance-2026-09/e2e-reports/fast_chr{1,22}_merged{,_plugins}_116_*` (JSON report, empty mismatch ledger, summaries); log: `chapter5-m5-.../correctness/correctness.log` | `run_comparison.py` in biodatageeks/vepyr `e2e-testing/scripts` |
-| Single-plugin field comparison (`tab:plugin-field-results`) | `chapter5-m5-.../correctness/chr{1,22}_individual_plugins/benchmark_plugins_summary.{json,md}` | `vepyr-diffly benchmark-plugins` (this repository) |
+| Full-input annotation (`tab:full-genome-performance`) | VEP: `results/vep-full-genome-2026-10/` (repeats 2–6 in `summary.json`, means in `summary_repeats_2_6.json`; repeat 1, not averaged: `chapter5-m5-.../benchmarks/vep/full_forknone.*`); VEPYR: `results/completion-2026-10/m5_completion_20261024/S5/` | `scripts/run_vep_full_repeats.sh`, `scripts/m5_references_repeat6.sh` (repeat 6 and the 2–6 summary), `scripts/m5_completion_batch.py` |
+| E2E concordance chr1/chr22, baseline and all plugins (`tab:variant-results`, `tab:unit-accounting`) | baseline: `results/completion-2026-10/m5_completion_20261024/S10/reports/fast_chr{1,22}_merged_116_*` (2026-10-24, against the full-genome VEP output of repeat 2); all plugins: `results/references-2026-10-25/e2e_reports/` (2026-10-25, against five-plugin references built on the M5 that day). The September comparisons against downloaded references (`results/concordance-2026-09/`, VEP headers 2026-07-27 and 2026-08-26) gave the same counts | `run_comparison.py` in biodatageeks/vepyr `e2e-testing/scripts` |
+| Five-plugin VEP references chr1/chr22 (appendix A) | `results/references-2026-10-25/` (`chr*_reference_*`: body SHA-256, record count, VEP header, plugin code and source identities, build log; `environment.txt`, `run.log`) | `generate_vep_plugin_references.sh` in biodatageeks/vepyr `e2e-testing/scripts`, driven by `scripts/m5_references_repeat6.sh` |
+| Single-plugin field comparison (`tab:plugin-field-results`) | `results/references-2026-10-25/chr{1,22}_individual_plugins/benchmark_plugins_summary.{json,md}` (2026-10-25; the September run in `chapter5-m5-.../correctness/` gave the same rows) | `vepyr-diffly benchmark-plugins` (this repository) |
 | Cache build: dynamic queue, native sequential, containers (`tab:cache-lpt`) | `results/cache-build-2026-10/parallel_full_cache/queue_20_10_repeats/`, `full_core_5x/`, `full_cache_20/` (`distributed_5_summary.json`, `baseline_*_summary.json`) | branches `thesis/cache-build-*` |
 | Full build including translation | `results/completion-2026-10/m5_completion_20261024/S11/` (repeat 1 from 2026-10-19 and repeats 2–5) | `full_e2e_all.py` on `thesis/cache-build-parallel` |
 | Determinism `workers=1` vs `workers=8`, container start-up overhead, independent-process test, per-plugin CSQ field counts, cache sizes, full-genome E2E concordance, VEP peak RSS on chr1/chr22 | `results/completion-2026-10/m5_completion_20261024/S4, S3, S6, S7, S8, S10, S9` (`result.json`, raw JSONL, logs) | `scripts/m5_completion_batch.py` |
@@ -68,23 +76,36 @@ were run on 2026-09-25 (VEPYR), 2026-09-26/28 (VEP, chromosomes 1 and 22) and
   Python process.
 - VEP peak memory is the `VmHWM` of the VEP (perl) process inside the container,
   sampled with `docker exec` (every 30 s in the full-genome series, every 5 s in
-  step S9). It was not recorded in full-genome repeat 1, and on chromosomes 1/22
-  it was measured for the baseline scenario only (S9, 2026-10-25).
+  step S9). It was not recorded in full-genome repeat 1, which is therefore left out
+  of the full-genome means, and on chromosomes 1/22 it was measured for the baseline
+  scenario only (S9, 2026-10-25).
 - Memory units: the thesis reports peak RSS in GiB. VEPYR records store
   `ru_maxrss` in bytes and a field named `max_rss_gb` that is bytes / 1024^3
   (i.e. GiB); VEP records store VmHWM in kB, with `peak_rss_gb` = kB × 1024 / 10^9
   (decimal GB) and, in S9, also `peak_rss_gib`.
-- Repeat 1 of the VEPYR plugin series on chr1/chr22 was measured with
-  `vepyr-diffly benchmark-plugins`: its time includes Python interpreter start-up and its
-  peak RSS is the maximum of the periodically sampled RSS sum of the process tree, in MiB
-  (`peak_rss_mb`). `summary_5repeats.json` stores it as MiB/1000 under `max_rss_gb`; the
-  thesis converts it to GiB (MiB/1024) before averaging — `scripts/plugin_rss_gib.py`
-  reproduces the reported values. RSS from the worker-scaling series is not used in the
-  thesis (its repeat-1 entries in `summary_5repeats.json` do not all match the
-  `*.metrics.json` records, which store KiB).
+- The September VEPYR plugin series on chr1/chr22 (`5repeats_m5`, `chr*_plugins`) mixed
+  two tools: repeat 1 was measured with `vepyr-diffly benchmark-plugins` (time including
+  Python interpreter start-up, peak RSS sampled over the process tree in MiB and stored
+  as MiB/1000 under `max_rss_gb`), repeats 2–5 with `measure_once.py`. The thesis
+  therefore uses the 2026-10-25 series, in which all five repeats use `measure_once.py`
+  with the same settings as repeats 2–5 (same vepyr build installed 2026-09-23,
+  `workers=1`, same per-plugin cache directories, same order). Its core cache is the one
+  rebuilt by step S2 with the same code, and its inputs are the chr1/chr22 slices
+  recreated by step S0 with the September command (the September files had been
+  deleted). `scripts/plugin_rss_gib.py` reproduces the RSS means of the
+  September series. RSS from the worker-scaling series is not used in the thesis (its
+  repeat-1 entries in `summary_5repeats.json` do not all match the `*.metrics.json`
+  records, which store KiB).
 - Step S9 was first attempted without Docker (failed run kept in
   `S9/phase1_no_docker/`), and S7 likewise (`S7/result_phase1_no_docker.json`);
   both were re-run by `scripts/m5_phase2.sh`.
 - Annotated VCFs from timing runs were deleted after each run; record counts and
   body checksums were kept.
+- The five-plugin references use the VEP 116 plugin code except CADD, which is the
+  corrected `CADD.pm` from VEP_plugins commit `7a1f6450fd12` (the release-116 plugin reads
+  the HGVS-shifted allele and misses valid annotations); the generator pins the SHA-256 of
+  every plugin file. Plugin sources were served from the local `plugin_input/` directory
+  with `rclone serve http`. The parity gate script (`verify_parity_gate.py`) covers the
+  core CSQ fields only and refuses the `merged_plugins` profile (`gate.log`); concordance
+  of that profile rests on the E2E reports and their empty mismatch ledgers.
 - Paths in scripts and JSON files refer to the author's machine.

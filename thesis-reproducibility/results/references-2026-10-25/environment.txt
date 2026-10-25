@@ -1,0 +1,20 @@
+started_utc: 2026-10-25T11:14:23Z
+ProductName:		macOS
+ProductVersion:		27.0.1
+BuildVersion:		26A434
+Apple M5
+34359738368
+cpu: 10
+disk: 150
+memory: 28
+vmType: vz
+mountType: virtiofs
+vepyr: 479d8f46eee2101e1ececc902ad911ed65fc5c5c 0 local changes
+vepyr-diffly: 4cc02d42beaa2fe04f1f5ffa6e2e7f03022a6b8c
+vepyr python package 0.7.0
+25e7164d2da4ff69f3ad42b4fbfc27022050933c6427b8d7ec483c978e68d14b  /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S7/plugins/AlphaMissense.pm
+f0bbe7ab1d4aff0de9e45aeedd4e112824394e81cc3e201ea1b8f001dd9e5cb4  /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S7/plugins/CADD.pm
+1574736e0371b12378211914db6f5de720eeba395cd42517fbe689cededb9f67  /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S7/plugins/dbNSFP.pm
+d08ce7d8c2e6b3229cef638beff145e465e224f0e3fcd43fd49d501ebc2740b1  /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S7/plugins/SpliceAI.pm
+/dev/disk3s5   926Gi   640Gi   257Gi    72%    2.7M  2.7G    0%   /System/Volumes/Data
+image_id: sha256:f354dd8d09073e4d943acbbd02f5eb234a9d9e9d444371c1c349910f2123de11

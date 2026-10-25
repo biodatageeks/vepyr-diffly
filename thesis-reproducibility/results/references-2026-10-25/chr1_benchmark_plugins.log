@@ -1,0 +1,41 @@
+benchmark-plugins: running config 'base'
+benchmark-plugins: skipping concordance for 'base' (no no-plugin VEP reference 
+given)
+benchmark-plugins: running config 'clinvar'
+benchmark-plugins: running config 'spliceai'
+benchmark-plugins: running config 'cadd'
+benchmark-plugins: running config 'alphamissense'
+benchmark-plugins: running config 'dbnsfp'
+                             vepyr plugin benchmark                             
+┏━━━━━━━━┳━━━━━━━━┳━━━━━━━━┳━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━┓
+┃        ┃        ┃        ┃        ┃        ┃       ┃ output ┃ plug… ┃        ┃
+┃        ┃ wall   ┃ cpu    ┃ RSS    ┃        ┃       ┃ (Δ     ┃ fiel… ┃ misma… ┃
+┃ config ┃ (s)    ┃ (s)    ┃ (MB)   ┃ var/s  ┃ cache ┃ base)  ┃ equal ┃ (L/R/… ┃
+┡━━━━━━━━╇━━━━━━━━╇━━━━━━━━╇━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━┩
+│ base   │ 18.3   │ 29.6   │ 3696   │ 17678… │ 0.0   │ 2302.4 │ n/a   │ n/a    │
+│        │        │        │        │        │ MB    │ MB (—) │       │        │
+│ clinv… │ 19.2   │ 30.5   │ 3569   │ 16816… │ 77.3  │ 2350.7 │ True  │ 0/0/0  │
+│        │        │        │        │        │ MB    │ MB     │       │        │
+│        │        │        │        │        │       │ (+48.2 │       │        │
+│        │        │        │        │        │       │ MB)    │       │        │
+│ splic… │ 27.7   │ 38.1   │ 3731   │ 11668… │ 2429… │ 2435.6 │ True  │ 0/0/0  │
+│        │        │        │        │        │ MB    │ MB     │       │        │
+│        │        │        │        │        │       │ (+133… │       │        │
+│        │        │        │        │        │       │ MB)    │       │        │
+│ cadd   │ 30.5   │ 40.4   │ 3701   │ 10587… │ 7084… │ 2385.4 │ True  │ 0/0/0  │
+│        │        │        │        │        │ MB    │ MB     │       │        │
+│        │        │        │        │        │       │ (+83.0 │       │        │
+│        │        │        │        │        │       │ MB)    │       │        │
+│ alpha… │ 19.2   │ 29.9   │ 3593   │ 16820… │ 544.7 │ 2313.4 │ True  │ 0/0/0  │
+│        │        │        │        │        │ MB    │ MB     │       │        │
+│        │        │        │        │        │       │ (+11.0 │       │        │
+│        │        │        │        │        │       │ MB)    │       │        │
+│ dbnsfp │ 20.1   │ 30.7   │ 3618   │ 16069… │ 3843… │ 2413.0 │ True  │ 0/0/0  │
+│        │        │        │        │        │ MB    │ MB     │       │        │
+│        │        │        │        │        │       │ (+110… │       │        │
+│        │        │        │        │        │       │ MB)    │       │        │
+└────────┴────────┴────────┴────────┴────────┴───────┴────────┴───────┴────────┘
+/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_references_20261025/chr1_i
+ndividual_plugins/benchmark_plugins_summary.json
+/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_references_20261025/chr1_i
+ndividual_plugins/benchmark_plugins_summary.md

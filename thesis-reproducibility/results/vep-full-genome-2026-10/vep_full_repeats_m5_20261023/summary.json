@@ -45,12 +45,22 @@
       "output_body": "5fee6224bf135d80075712141cc06194e0730fa253ff8b131a9d25d661647ee9",
       "output_records": "4096123",
       "output_bytes": "29418788307"
+    },
+    {
+      "repeat": 6,
+      "source": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/vep_full_repeats_m5_20261023/repeat_6",
+      "wall_s": 26342.24,
+      "exit_code": 0,
+      "peak_rss_gb": 2.94,
+      "output_body": "5fee6224bf135d80075712141cc06194e0730fa253ff8b131a9d25d661647ee9",
+      "output_records": "4096123",
+      "output_bytes": "29418788307"
     }
   ],
-  "n_successful": 5,
-  "mean_wall_s": 27981.15,
-  "min_wall_s": 26706.32,
+  "n_successful": 6,
+  "mean_wall_s": 27708.0,
+  "min_wall_s": 26342.24,
   "max_wall_s": 29050.82,
   "body_sha256_identical_repeats_2_5": true,
-  "peak_rss_gb_max": 2.938
+  "peak_rss_gb_max": 2.94
 }

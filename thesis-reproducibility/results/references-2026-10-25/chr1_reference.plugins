@@ -1,0 +1,10 @@
+PLUGIN AlphaMissense 25e7164d2da4ff69f3ad42b4fbfc27022050933c6427b8d7ec483c978e68d14b
+PLUGIN CADD f0bbe7ab1d4aff0de9e45aeedd4e112824394e81cc3e201ea1b8f001dd9e5cb4
+PLUGIN SpliceAI d08ce7d8c2e6b3229cef638beff145e465e224f0e3fcd43fd49d501ebc2740b1
+PLUGIN dbNSFP 1574736e0371b12378211914db6f5de720eeba395cd42517fbe689cededb9f67
+SOURCE clinvar/clinvar.vcf.gz mtime=Sat, 11 Jul 2026 11:43:03 GMT;size=192290992
+SOURCE spliceai/spliceai_scores.masked.snv.ensembl_mane.grch38.110.vcf.gz mtime=Sat, 11 Jul 2026 21:55:58 GMT;size=28512375517
+SOURCE alphamissense/AlphaMissense_hg38.bgz.tsv.gz mtime=Mon, 06 Jul 2026 07:27:08 GMT;size=628407716
+SOURCE dbnsfp/dbNSFP5.3.1a_grch38.gz mtime=Sun, 12 Jul 2026 19:35:05 GMT;size=50271494764
+SOURCE cadd/whole_genome_SNVs.tsv.gz mtime=Tue, 14 Jul 2026 00:51:27 GMT;size=87473403655
+SOURCE cadd/gnomad.genomes.r4.0.indel.tsv.gz mtime=Tue, 14 Jul 2026 00:54:55 GMT;size=1257151321

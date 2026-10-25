@@ -1,0 +1,56 @@
+{
+  "runs": [
+    {
+      "repeat": 1,
+      "wall_s": 28469.05,
+      "exit_code": 0,
+      "source": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/chapter5-m5-20260924T061203Z/benchmarks/vep/full_forknone.time.txt"
+    },
+    {
+      "repeat": 2,
+      "source": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/vep_full_repeats_m5_20261023/repeat_2",
+      "wall_s": 28193.85,
+      "exit_code": 0,
+      "peak_rss_gb": 2.927,
+      "output_body": "5fee6224bf135d80075712141cc06194e0730fa253ff8b131a9d25d661647ee9",
+      "output_records": "4096123",
+      "output_bytes": "29418788307"
+    },
+    {
+      "repeat": 3,
+      "source": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/vep_full_repeats_m5_20261023/repeat_3",
+      "wall_s": 29050.82,
+      "exit_code": 0,
+      "peak_rss_gb": 2.925,
+      "output_body": "5fee6224bf135d80075712141cc06194e0730fa253ff8b131a9d25d661647ee9",
+      "output_records": "4096123",
+      "output_bytes": "29418788307"
+    },
+    {
+      "repeat": 4,
+      "source": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/vep_full_repeats_m5_20261023/repeat_4",
+      "wall_s": 26706.32,
+      "exit_code": 0,
+      "peak_rss_gb": 2.938,
+      "output_body": "5fee6224bf135d80075712141cc06194e0730fa253ff8b131a9d25d661647ee9",
+      "output_records": "4096123",
+      "output_bytes": "29418788307"
+    },
+    {
+      "repeat": 5,
+      "source": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/vep_full_repeats_m5_20261023/repeat_5",
+      "wall_s": 27485.7,
+      "exit_code": 0,
+      "peak_rss_gb": 2.922,
+      "output_body": "5fee6224bf135d80075712141cc06194e0730fa253ff8b131a9d25d661647ee9",
+      "output_records": "4096123",
+      "output_bytes": "29418788307"
+    }
+  ],
+  "n_successful": 5,
+  "mean_wall_s": 27981.15,
+  "min_wall_s": 26706.32,
+  "max_wall_s": 29050.82,
+  "body_sha256_identical_repeats_2_5": true,
+  "peak_rss_gb_max": 2.938
+}
