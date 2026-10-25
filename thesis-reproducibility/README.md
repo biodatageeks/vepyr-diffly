@@ -57,7 +57,7 @@ on 2026-10-24 (step S5).
 |---|---|---|
 | VEPYR worker scaling chr1/chr22 (`tab:vepyr-scaling`) | `results/annotation-2026-09/5repeats_m5/` (`summary_5repeats.json`, `raw_runs.jsonl`); repeat 1: `chapter5-m5-20260924T061203Z/benchmarks/vepyr_chr*/` | `scripts/run_5repeats_benchmark.py`, `scripts/measure_once.py` |
 | VEP `--fork` scaling chr1/chr22 (section `sec:speedup-investigation`) | `results/annotation-2026-09/vep_5repeats_m5/`; repeat 1: `chapter5-m5-.../benchmarks/vep/`; second chr1 no-fork value: `vep_chr1_warmup/` | `scripts/run_vep_5repeats_suite.py` |
-| Plugin overhead O_x and VEP vs VEPYR per plugin (`tab:plugin-performance`, `tab:plugin-vep-vepyr`, `fig:plugin-overhead`) | VEPYR: `results/plugin-series-2026-10-25/` (`raw_runs.jsonl`, `summary.json`, `environment.txt`, `run.log`); VEP: `results/annotation-2026-09/vep_5repeats_m5/summary_vep_5repeats.json` (`chr*_plugins`) | `scripts/rerun_plugin_series_5x.py` (calls `scripts/measure_once.py`), `scripts/after_repeat6_plugin_series.sh`, `scripts/fig_plugin_overhead.py` (figure, reads `raw_runs.jsonl`) |
+| Plugin overhead O_x and VEP vs VEPYR per plugin (`tab:plugin-performance`, `tab:plugin-vep-vepyr`, `fig:plugin-overhead`) | VEPYR: `results/plugin-series-2026-10-25/` (`raw_runs.jsonl`, `summary.json`, `environment.txt`, `run.log`); VEP: `results/annotation-2026-09/vep_5repeats_m5/summary_vep_5repeats.json` (`chr*_plugins`) | `scripts/rerun_plugin_series_5x.py` (calls `scripts/measure_once.py`), `scripts/after_repeat6_plugin_series.sh`, `scripts/fig_plugin_overhead.py` (figure, reads `raw_runs.jsonl`, writes the PDF used in the thesis) |
 | All-plugins scaling (`tab:scaling-synthesis`) | `results/annotation-2026-10/plugin_scaling_m5_5repeats_20261013/runs.jsonl` (use rows with `returncode` 0; 25 failed chr22 runs were repeated) | `scripts/repeat_plugin_scaling_m5.py`, which calls the snapshot of the VEPYR E2E scripts in `scripts/full_correctness_m5_20261012/` (`run_comparison.py`; annotation time from `comparison/annotate.py`, `time.time`, 0.1 s). On the author's machine the snapshot sat in `full_correctness_m5_20261012/scripts/` next to the runner script |
 | Full-input annotation (`tab:full-genome-performance`) | VEP: `results/vep-full-genome-2026-10/` (repeats 2–6 in `summary.json`, means in `summary_repeats_2_6.json`; repeat 1, not averaged: `chapter5-m5-.../benchmarks/vep/full_forknone.*`); VEPYR: `results/completion-2026-10/m5_completion_20261024/S5/` | `scripts/run_vep_full_repeats.sh`, `scripts/m5_references_repeat6.sh` (repeat 6 and the 2–6 summary), `scripts/m5_completion_batch.py` |
 | E2E concordance chr1/chr22, baseline and all plugins (`tab:variant-results`, `tab:unit-accounting`) | baseline: `results/completion-2026-10/m5_completion_20261024/S10/reports/fast_chr{1,22}_merged_116_*` (2026-10-24, against the full-genome VEP output of repeat 2); all plugins: `results/references-2026-10-25/e2e_reports/` (2026-10-25, against five-plugin references built on the M5 that day). The September comparisons against downloaded references (`results/concordance-2026-09/`, VEP headers 2026-07-27 and 2026-08-26) gave the same counts | `run_comparison.py` in biodatageeks/vepyr `e2e-testing/scripts` |
@@ -114,4 +114,13 @@ on 2026-10-24 (step S5).
   the code version that built it nor the identities of the source files (they predate the
   `url`/`md5` fields of the `vepyr-plugins` manifests), so its agreement with the source files
   used by VEP rests on the plugin field comparisons.
+- Full-genome parity gate (S10): the PASS reported in the thesis is recorded in
+  `S10/gate_original_dir.log` ("PARITY GATE PASSED … 22 contigs", all counters 0), run on
+  the original reports directory. `S10/result.json` shows `gate_exit: 1` and `S10/gate.log`
+  two FAILs because the gate was first run on the copied reports, whose mismatch-ledger
+  paths no longer matched; all 22 reports have zero differences and empty ledgers.
+- Repeat 1 of the chr1/chr22 VEPYR worker-scaling series: use the unrounded times in
+  `chapter5-m5-.../benchmarks/vepyr_chr*/workers*.metrics.json`. `summary_5repeats.json`
+  stores them rounded to two decimals, which changes chr22 S_2 from 1.4246 (thesis: 1,42)
+  to 1.4255.
 - Paths in scripts and JSON files refer to the author's machine.

@@ -5,6 +5,7 @@ Usage: python3 fig_plugin_overhead.py <raw_runs.jsonl> <output.png>
 import json, statistics as st, sys
 import matplotlib
 matplotlib.use("Agg")
+matplotlib.rcParams["pdf.fonttype"] = 42
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 src, out = sys.argv[1], sys.argv[2]
@@ -26,7 +27,7 @@ for bars in (b1, b2):
         ax.annotate(f"{b.get_height():.1f}".replace(".", ","), (b.get_x()+b.get_width()/2, b.get_height()), xytext=(0,3), textcoords="offset points", ha="center", va="bottom", fontsize=8)
 ax.set_xticks(list(x)); ax.set_xticklabels([n for _,n in order], rotation=20, ha="right")
 ax.set_ylabel(r"Narzut $O_x$ [%]")
-ax.set_ylim(-5, max(75, 10*(int(max(v1+v22))//10+2)))
+ax.set_ylim(0, max(75, 10*(int(max(v1+v22))//10+2)))
 ax.yaxis.set_major_formatter(FuncFormatter(lambda v, _: f"{v:g}".replace(".", ",")))
 ax.axhline(0, color="#555", lw=0.8)
 ax.yaxis.grid(True, color="#e6e6e6"); ax.set_axisbelow(True)
