@@ -1,0 +1,7 @@
+$ /Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-native/bin/python3 -c import json,time,vepyr,importlib.metadata as m
+t0=time.perf_counter()
+r=vepyr.build_cache(116, '/Users/lukaszjezapkowicz/workspace/data_vepyr/cache', cache_type='merged', local_cache='/Users/lukaszjezapkowicz/workspace/data_vepyr/homo_sapiens_merged/116_GRCh38', overwrite=True, show_progress=False)
+print(json.dumps({'wall_seconds': time.perf_counter()-t0, 'files': len(r), 'vepyr': m.version('vepyr')}))
+
+{"wall_seconds": 7334.752501374809, "files": 7688, "vepyr": "0.7.0"}
+[exit 0]

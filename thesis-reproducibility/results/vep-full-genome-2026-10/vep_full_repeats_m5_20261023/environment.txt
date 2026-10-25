@@ -1,4 +1,4 @@
-started_utc: 2026-10-23T09:28:00Z
+started_utc: 2026-10-24T09:43:51Z
 ProductName:		macOS
 ProductVersion:		27.0.1
 BuildVersion:		26A434
@@ -10,4 +10,4 @@ memory: 28
 vmType: vz
 mountType: virtiofs
 image_id: sha256:f354dd8d09073e4d943acbbd02f5eb234a9d9e9d444371c1c349910f2123de11
-/dev/disk3s5   926Gi   815Gi    69Gi    93%    2.7M  721M    0%   /System/Volumes/Data
+/dev/disk3s5   926Gi   640Gi   257Gi    72%    2.7M  2.7G    0%   /System/Volumes/Data

@@ -1,34 +1,51 @@
 {
   "created": "2026-10-23T12:57:34+00:00",
-  "phase": "waiting_for_vep_reruns",
+  "phase": "finished",
   "steps": [
     {
       "id": "S0",
       "name": "Odtworzenie wejść chr1 i chr22 (bcftools view -r, jak 24.09)",
       "eta_min": 3,
       "deps": [],
-      "state": "pending"
+      "state": "done",
+      "started": "2026-10-24T01:25:41+00:00",
+      "disk_free_gb": 42.5,
+      "finished": "2026-10-24T01:25:43+00:00",
+      "minutes": 0.0
     },
     {
       "id": "S1",
       "name": "VEP pełny genom -> referencja E2E (bgzip+tabix, kontrola sumy, usunięcie kopii)",
       "eta_min": 25,
       "deps": [],
-      "state": "pending"
+      "state": "done",
+      "started": "2026-10-24T01:25:43+00:00",
+      "disk_free_gb": 42.5,
+      "finished": "2026-10-24T01:26:50+00:00",
+      "minutes": 1.1
     },
     {
       "id": "S2",
       "name": "Odbudowa rdzeniowej pamięci podręcznej VEPYR 0.7.0 (cache/116_GRCh38_merged)",
       "eta_min": 90,
       "deps": [],
-      "state": "pending"
+      "state": "done",
+      "started": "2026-10-24T01:26:50+00:00",
+      "disk_free_gb": 40.8,
+      "finished": "2026-10-24T03:29:05+00:00",
+      "minutes": 122.3
     },
     {
       "id": "S3",
       "name": "Narzut uruchomienia kontenera Docker, 5x",
       "eta_min": 2,
       "deps": [],
-      "state": "pending"
+      "state": "done",
+      "started": "2026-10-24T09:43:32+00:00",
+      "disk_free_gb": 275.9,
+      "finished": "2026-10-24T09:43:43+00:00",
+      "minutes": 0.2,
+      "detail": "command failed (1): /usr/bin/time -p -o /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S3/time_1.txt docker run --rm ensemblorg/ensembl-vep:release_116.0 true\nfailed to connect to the docker API at unix:///var/run/docker.sock; check if the path is correct and if the daemon is running: dial unix /var/run/docker.sock: connect: no such file or directory\n"
     },
     {
       "id": "S4",
@@ -38,7 +55,11 @@
         "S0",
         "S2"
       ],
-      "state": "pending"
+      "state": "done",
+      "started": "2026-10-24T03:29:05+00:00",
+      "disk_free_gb": 215.8,
+      "finished": "2026-10-24T03:29:38+00:00",
+      "minutes": 0.5
     },
     {
       "id": "S5",
@@ -47,7 +68,11 @@
       "deps": [
         "S2"
       ],
-      "state": "pending"
+      "state": "done",
+      "started": "2026-10-24T03:29:38+00:00",
+      "disk_free_gb": 216.9,
+      "finished": "2026-10-24T04:26:50+00:00",
+      "minutes": 57.2
     },
     {
       "id": "S6",
@@ -57,7 +82,11 @@
         "S0",
         "S2"
       ],
-      "state": "pending"
+      "state": "done",
+      "started": "2026-10-24T04:26:50+00:00",
+      "disk_free_gb": 218.0,
+      "finished": "2026-10-24T04:33:21+00:00",
+      "minutes": 6.5
     },
     {
       "id": "S7",
@@ -66,7 +95,12 @@
       "deps": [
         "S0"
       ],
-      "state": "pending"
+      "state": "done",
+      "started": "2026-10-24T09:43:43+00:00",
+      "disk_free_gb": 275.9,
+      "finished": "2026-10-24T09:43:51+00:00",
+      "minutes": 0.1,
+      "detail": "reset in phase 2: phase-1 run had no Docker"
     },
     {
       "id": "S8",
@@ -75,7 +109,11 @@
       "deps": [
         "S2"
       ],
-      "state": "pending"
+      "state": "done",
+      "started": "2026-10-24T04:33:22+00:00",
+      "disk_free_gb": 218.0,
+      "finished": "2026-10-24T04:37:53+00:00",
+      "minutes": 4.5
     },
     {
       "id": "S10",
@@ -85,7 +123,12 @@
         "S1",
         "S2"
       ],
-      "state": "pending"
+      "state": "done",
+      "started": "2026-10-24T09:01:38+00:00",
+      "disk_free_gb": 193.1,
+      "finished": "2026-10-24T09:43:16+00:00",
+      "minutes": 41.6,
+      "detail": "run_comparison exit 1; see run_comparison.log; {'run_comparison_exit': 1, 'gate_exit': 1, 'gate_tail': '', 'totals': {'variants': 374291, 'only_vepyr': 0, 'only_vep': 0, 'csq_count_mismatch': 0, 'csq_order_mismatch': 0}}"
     },
     {
       "id": "S9",
@@ -94,16 +137,25 @@
       "deps": [
         "S0"
       ],
-      "state": "pending"
+      "state": "done",
+      "disk_free_gb": 173.1,
+      "detail": "reset 2026-10-25: phase-1 run had no Docker; leftovers in S9/phase1_no_docker",
+      "started": "2026-10-25T00:49:25+00:00",
+      "finished": "2026-10-25T04:26:51+00:00",
+      "minutes": 217.4
     },
     {
       "id": "S11",
       "name": "Pełna budowa z encjami translacji (środowisko z 19.10), powtórzenia 2-5",
       "eta_min": 290,
       "deps": [],
-      "state": "pending"
+      "state": "done",
+      "started": "2026-10-24T04:38:16+00:00",
+      "disk_free_gb": 214.9,
+      "finished": "2026-10-24T09:00:43+00:00",
+      "minutes": 262.5
     }
   ],
-  "pid": 43035,
-  "updated": "2026-10-23T12:57:34+00:00"
+  "pid": 61639,
+  "updated": "2026-10-25T04:26:51+00:00"
 }

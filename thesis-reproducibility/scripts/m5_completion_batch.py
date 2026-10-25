@@ -444,7 +444,8 @@ def s10(d: Path) -> dict:
     if not backup.exists():
         shutil.copytree(E2E_REPORTS, backup)
     env = dict(os.environ, DATA_VEPYR_DIR=str(D))
-    p = run([PYN, RUN_COMPARISON, "--release", "116", "--profile", "merged", "--chroms", "1-22", "--workers", "4",
+    # run_comparison.py does not expand ranges (verify_parity_gate.py does), so list the contigs.
+    p = run([PYN, RUN_COMPARISON, "--release", "116", "--profile", "merged", "--chroms", *[str(i) for i in range(1, 23)], "--workers", "4",
              "--bgzf", "--force", "--vep", REF_WGS], d / "run_comparison.log", env=env, timeout=10 * 3600, check=False)
     newdir = d / "reports"
     newdir.mkdir(exist_ok=True)
@@ -472,7 +473,9 @@ def s10(d: Path) -> dict:
 
 def s9(d: Path) -> dict:
     raw = d / "raw_runs.jsonl"
-    done = {(r["chrom"], r["repeat"]) for r in map(json.loads, raw.read_text().splitlines())} if raw.exists() else set()
+    # only successful runs count; a failed record (e.g. no Docker) is re-run and excluded from the means
+    done = {(r["chrom"], r["repeat"]) for r in map(json.loads, raw.read_text().splitlines())
+            if r["exit"] == 0} if raw.exists() else set()
     for chrom in ("chr22", "chr1"):
         for rep in range(1, 6):
             if (chrom, rep) in done:
@@ -496,7 +499,7 @@ def s9(d: Path) -> dict:
             if rc != 0:
                 raise RuntimeError(f"VEP failed for {chrom} repeat {rep}")
             time.sleep(5)
-    runs = list(map(json.loads, raw.read_text().splitlines()))
+    runs = [r for r in map(json.loads, raw.read_text().splitlines()) if r["exit"] == 0]
     return {c: {"mean_wall_s": statistics.mean(r["wall_s"] for r in runs if r["chrom"] == c),
                 "mean_peak_rss_gib": statistics.mean(r["peak_rss_gib"] for r in runs if r["chrom"] == c),
                 "mean_peak_rss_gb": statistics.mean(r["peak_rss_gb"] for r in runs if r["chrom"] == c)}

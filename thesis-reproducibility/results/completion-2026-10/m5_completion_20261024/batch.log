@@ -1,1 +1,86 @@
 2026-10-23T12:57:34+00:00 batch started; waiting for VEP full-genome repeats to finish
+2026-10-24T01:25:41+00:00 VEP repeats finished; disk free 42.5 GB
+2026-10-24T01:25:41+00:00 S0 start: Odtworzenie wejść chr1 i chr22 (bcftools view -r, jak 24.09)
+2026-10-24T01:25:43+00:00 S0 done in 0.0 min
+2026-10-24T01:25:43+00:00 S1 start: VEP pełny genom -> referencja E2E (bgzip+tabix, kontrola sumy, usunięcie kopii)
+2026-10-24T01:26:50+00:00 S1 done in 1.1 min
+2026-10-24T01:26:50+00:00 S2 start: Odbudowa rdzeniowej pamięci podręcznej VEPYR 0.7.0 (cache/116_GRCh38_merged)
+2026-10-24T03:29:05+00:00 S2 done in 122.3 min
+2026-10-24T03:29:05+00:00 S3 start: Narzut uruchomienia kontenera Docker, 5x
+2026-10-24T03:29:05+00:00 S3 FAILED: command failed (1): /usr/bin/time -p -o /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S3/time_1.txt docker run --rm ensemblorg/ensembl-vep:release_116.0 true
+failed to connect to the docker API at unix:///var/run/docker.sock; check if the path is correct and if the daemon is running: dial unix /var/run/docker.sock: connect: no such file or directory
+
+2026-10-24T03:29:05+00:00 S4 start: Deterministyczność VEPYR workers=1 vs 8 (chr22, chr1)
+2026-10-24T03:29:38+00:00 S4 done in 0.5 min
+2026-10-24T03:29:38+00:00 S5 start: VEPYR pełne wejście, workers 10/8/4/2/1, 5x
+2026-10-24T03:31:01+00:00 S5 repeat 1 workers 10: 83.15s RSS 9.039 GiB
+2026-10-24T03:32:40+00:00 S5 repeat 1 workers 8: 94.73s RSS 8.46 GiB
+2026-10-24T03:34:37+00:00 S5 repeat 1 workers 4: 113.54s RSS 6.989 GiB
+2026-10-24T03:37:02+00:00 S5 repeat 1 workers 2: 141.92s RSS 6.329 GiB
+2026-10-24T03:40:34+00:00 S5 repeat 1 workers 1: 208.88s RSS 3.809 GiB
+2026-10-24T03:42:16+00:00 S5 repeat 2 workers 10: 98.04s RSS 8.501 GiB
+2026-10-24T03:43:58+00:00 S5 repeat 2 workers 8: 99.15s RSS 8.713 GiB
+2026-10-24T03:46:01+00:00 S5 repeat 2 workers 4: 119.39s RSS 6.662 GiB
+2026-10-24T03:48:29+00:00 S5 repeat 2 workers 2: 144.40s RSS 5.342 GiB
+2026-10-24T03:52:03+00:00 S5 repeat 2 workers 1: 211.29s RSS 3.803 GiB
+2026-10-24T03:53:48+00:00 S5 repeat 3 workers 10: 101.68s RSS 9.074 GiB
+2026-10-24T03:55:31+00:00 S5 repeat 3 workers 8: 98.77s RSS 8.727 GiB
+2026-10-24T03:57:30+00:00 S5 repeat 3 workers 4: 116.07s RSS 7.461 GiB
+2026-10-24T04:00:01+00:00 S5 repeat 3 workers 2: 147.27s RSS 6.029 GiB
+2026-10-24T04:03:35+00:00 S5 repeat 3 workers 1: 210.88s RSS 3.997 GiB
+2026-10-24T04:05:22+00:00 S5 repeat 4 workers 10: 103.37s RSS 9.031 GiB
+2026-10-24T04:07:10+00:00 S5 repeat 4 workers 8: 104.14s RSS 8.357 GiB
+2026-10-24T04:09:10+00:00 S5 repeat 4 workers 4: 117.14s RSS 6.45 GiB
+2026-10-24T04:11:40+00:00 S5 repeat 4 workers 2: 146.85s RSS 5.464 GiB
+2026-10-24T04:15:15+00:00 S5 repeat 4 workers 1: 211.14s RSS 3.787 GiB
+2026-10-24T04:17:01+00:00 S5 repeat 5 workers 10: 102.78s RSS 8.925 GiB
+2026-10-24T04:18:46+00:00 S5 repeat 5 workers 8: 101.24s RSS 8.484 GiB
+2026-10-24T04:20:44+00:00 S5 repeat 5 workers 4: 115.13s RSS 6.49 GiB
+2026-10-24T04:23:12+00:00 S5 repeat 5 workers 2: 144.63s RSS 5.629 GiB
+2026-10-24T04:26:47+00:00 S5 repeat 5 workers 1: 211.08s RSS 3.908 GiB
+2026-10-24T04:26:50+00:00 S5 done in 57.2 min
+2026-10-24T04:26:50+00:00 S6 start: Test niezależnych procesów na M5 (chr22, n=1,2,4,8; bazowy i komplet wtyczek), 5x
+2026-10-24T04:33:21+00:00 S6 done in 6.5 min
+2026-10-24T04:33:21+00:00 S7 start: Nagłówki CSQ VEP dla każdej wtyczki osobno (mały plik wejściowy)
+2026-10-24T04:33:22+00:00 S7 done in 0.0 min
+2026-10-24T04:33:22+00:00 S8 start: Rozmiary pamięci podręcznej chr1+chr22 (VEP, Parquet, źródła i Parquet wtyczek)
+2026-10-24T04:37:53+00:00 S8 done in 4.5 min
+2026-10-24T04:37:53+00:00 S10 start: Walidacja E2E pełnego genomu (chr1-22), VEPYR 0.7.0 vs referencja z S1 + bramka
+2026-10-24T04:38:11+00:00 S10 FAILED: run_comparison exit 1; see run_comparison.log; {'run_comparison_exit': 1, 'gate_exit': 1, 'gate_tail': '', 'totals': {'variants': 374291, 'only_vepyr': 0, 'only_vep': 0, 'csq_count_mismatch': 0, 'csq_order_mismatch': 0}}
+2026-10-24T04:38:11+00:00 S9 start: VEP RSS: scenariusz bazowy chr22 5x i chr1 5x (próbkowanie VmHWM)
+2026-10-24T04:38:16+00:00 S9 chr22 repeat 1: exit 1, 0.0s, VmHWM 0.0 GiB
+2026-10-24T04:38:16+00:00 S9 FAILED: VEP failed for chr22 repeat 1
+2026-10-24T04:38:16+00:00 S11 start: Pełna budowa z encjami translacji (środowisko z 19.10), powtórzenia 2-5
+2026-10-24T05:43:00+00:00 S11 repeat 2: 3882.3s
+2026-10-24T06:47:55+00:00 S11 repeat 3: 3893.7s
+2026-10-24T07:55:33+00:00 S11 repeat 4: 4056.7s
+2026-10-24T09:00:43+00:00 S11 repeat 5: 3909.2s
+2026-10-24T09:00:43+00:00 S11 done in 262.5 min
+2026-10-24T09:00:43+00:00 batch finished
+2026-10-24T09:01:38+00:00 batch started; waiting for VEP full-genome repeats to finish
+2026-10-24T09:01:38+00:00 VEP repeats finished; disk free 193.1 GB
+2026-10-24T09:01:38+00:00 S10 start: Walidacja E2E pełnego genomu (chr1-22), VEPYR 0.7.0 vs referencja z S1 + bramka
+2026-10-24T09:43:16+00:00 S10 done in 41.6 min
+2026-10-24T09:43:16+00:00 batch finished
+2026-10-24T09:43:32+00:00 batch started; waiting for VEP full-genome repeats to finish
+2026-10-24T09:43:32+00:00 VEP repeats finished; disk free 275.9 GB
+2026-10-24T09:43:32+00:00 S3 start: Narzut uruchomienia kontenera Docker, 5x
+2026-10-24T09:43:43+00:00 S3 done in 0.2 min
+2026-10-24T09:43:43+00:00 S7 start: Nagłówki CSQ VEP dla każdej wtyczki osobno (mały plik wejściowy)
+2026-10-24T09:43:51+00:00 S7 done in 0.1 min
+2026-10-24T09:43:51+00:00 batch finished
+2026-10-25T00:49:25+00:00 batch started; waiting for VEP full-genome repeats to finish
+2026-10-25T00:49:25+00:00 VEP repeats finished; disk free 173.1 GB
+2026-10-25T00:49:25+00:00 S9 start: VEP RSS: scenariusz bazowy chr22 5x i chr1 5x (próbkowanie VmHWM)
+2026-10-25T00:56:35+00:00 S9 chr22 repeat 1: exit 0, 426.75s, VmHWM 1.689 GiB
+2026-10-25T01:03:18+00:00 S9 chr22 repeat 2: exit 0, 397.64s, VmHWM 1.688 GiB
+2026-10-25T01:10:01+00:00 S9 chr22 repeat 3: exit 0, 395.41s, VmHWM 1.696 GiB
+2026-10-25T01:16:45+00:00 S9 chr22 repeat 4: exit 0, 393.83s, VmHWM 1.693 GiB
+2026-10-25T01:23:29+00:00 S9 chr22 repeat 5: exit 0, 394.41s, VmHWM 1.691 GiB
+2026-10-25T02:00:00+00:00 S9 chr1 repeat 1: exit 0, 2183.45s, VmHWM 1.641 GiB
+2026-10-25T02:36:58+00:00 S9 chr1 repeat 2: exit 0, 2208.08s, VmHWM 1.654 GiB
+2026-10-25T03:13:19+00:00 S9 chr1 repeat 3: exit 0, 2170.78s, VmHWM 1.653 GiB
+2026-10-25T03:49:49+00:00 S9 chr1 repeat 4: exit 0, 2180.04s, VmHWM 1.645 GiB
+2026-10-25T04:26:46+00:00 S9 chr1 repeat 5: exit 0, 2207.04s, VmHWM 1.638 GiB
+2026-10-25T04:26:51+00:00 S9 done in 217.4 min
+2026-10-25T04:26:51+00:00 batch finished

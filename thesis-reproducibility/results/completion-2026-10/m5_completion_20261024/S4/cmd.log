@@ -1,0 +1,64 @@
+$ /Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-native/bin/python3 -c 
+import hashlib, json, sys, time, vepyr
+vcf, out, workers = sys.argv[1], sys.argv[2], int(sys.argv[3])
+t0 = time.perf_counter()
+vepyr.annotate(vcf=vcf, cache_dir=sys.argv[4], everything=True, hgvs=True, reference_fasta=sys.argv[5],
+               workers=workers, output_vcf=out, show_progress=False)
+dt = time.perf_counter() - t0
+h = hashlib.sha256(); n = 0
+with open(out, "rb") as f:
+    for line in f:
+        if not line.startswith(b"#"):
+            h.update(line); n += 1
+print(json.dumps({"annotation_seconds": dt, "body_sha256": h.hexdigest(), "records": n}))
+ /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/inputs/HG002_normalized_chr22.vcf.gz /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S4/chr22_w1.vcf 1 /Users/lukaszjezapkowicz/workspace/data_vepyr/cache/116_GRCh38_merged /Users/lukaszjezapkowicz/workspace/data_vepyr/input/Homo_sapiens.GRCh38.dna.primary_assembly.fa
+{"annotation_seconds": 3.270810625050217, "body_sha256": "19efe3c74723b8582d0ee9a74cc50342384d85c46c723d3ac52791de7b07843a", "records": 50861}
+[exit 0]
+$ /Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-native/bin/python3 -c 
+import hashlib, json, sys, time, vepyr
+vcf, out, workers = sys.argv[1], sys.argv[2], int(sys.argv[3])
+t0 = time.perf_counter()
+vepyr.annotate(vcf=vcf, cache_dir=sys.argv[4], everything=True, hgvs=True, reference_fasta=sys.argv[5],
+               workers=workers, output_vcf=out, show_progress=False)
+dt = time.perf_counter() - t0
+h = hashlib.sha256(); n = 0
+with open(out, "rb") as f:
+    for line in f:
+        if not line.startswith(b"#"):
+            h.update(line); n += 1
+print(json.dumps({"annotation_seconds": dt, "body_sha256": h.hexdigest(), "records": n}))
+ /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/inputs/HG002_normalized_chr22.vcf.gz /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S4/chr22_w8.vcf 8 /Users/lukaszjezapkowicz/workspace/data_vepyr/cache/116_GRCh38_merged /Users/lukaszjezapkowicz/workspace/data_vepyr/input/Homo_sapiens.GRCh38.dna.primary_assembly.fa
+{"annotation_seconds": 1.2890744998585433, "body_sha256": "19efe3c74723b8582d0ee9a74cc50342384d85c46c723d3ac52791de7b07843a", "records": 50861}
+[exit 0]
+$ /Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-native/bin/python3 -c 
+import hashlib, json, sys, time, vepyr
+vcf, out, workers = sys.argv[1], sys.argv[2], int(sys.argv[3])
+t0 = time.perf_counter()
+vepyr.annotate(vcf=vcf, cache_dir=sys.argv[4], everything=True, hgvs=True, reference_fasta=sys.argv[5],
+               workers=workers, output_vcf=out, show_progress=False)
+dt = time.perf_counter() - t0
+h = hashlib.sha256(); n = 0
+with open(out, "rb") as f:
+    for line in f:
+        if not line.startswith(b"#"):
+            h.update(line); n += 1
+print(json.dumps({"annotation_seconds": dt, "body_sha256": h.hexdigest(), "records": n}))
+ /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/inputs/HG002_normalized_chr1.vcf.gz /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S4/chr1_w1.vcf 1 /Users/lukaszjezapkowicz/workspace/data_vepyr/cache/116_GRCh38_merged /Users/lukaszjezapkowicz/workspace/data_vepyr/input/Homo_sapiens.GRCh38.dna.primary_assembly.fa
+{"annotation_seconds": 19.104335374897346, "body_sha256": "e9703e5e71f9e85438575d0382a6ea797b668b09db799a9e7825e602c1f81ffa", "records": 323430}
+[exit 0]
+$ /Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-native/bin/python3 -c 
+import hashlib, json, sys, time, vepyr
+vcf, out, workers = sys.argv[1], sys.argv[2], int(sys.argv[3])
+t0 = time.perf_counter()
+vepyr.annotate(vcf=vcf, cache_dir=sys.argv[4], everything=True, hgvs=True, reference_fasta=sys.argv[5],
+               workers=workers, output_vcf=out, show_progress=False)
+dt = time.perf_counter() - t0
+h = hashlib.sha256(); n = 0
+with open(out, "rb") as f:
+    for line in f:
+        if not line.startswith(b"#"):
+            h.update(line); n += 1
+print(json.dumps({"annotation_seconds": dt, "body_sha256": h.hexdigest(), "records": n}))
+ /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/inputs/HG002_normalized_chr1.vcf.gz /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S4/chr1_w8.vcf 8 /Users/lukaszjezapkowicz/workspace/data_vepyr/cache/116_GRCh38_merged /Users/lukaszjezapkowicz/workspace/data_vepyr/input/Homo_sapiens.GRCh38.dna.primary_assembly.fa
+{"annotation_seconds": 6.2365272080060095, "body_sha256": "e9703e5e71f9e85438575d0382a6ea797b668b09db799a9e7825e602c1f81ffa", "records": 323430}
+[exit 0]

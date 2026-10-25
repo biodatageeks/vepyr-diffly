@@ -1,0 +1,842 @@
+{
+  "chrom": "chr13",
+  "profile": "merged",
+  "release": "116",
+  "cache": "merged",
+  "cache_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/cache/116_GRCh38_merged",
+  "cache_identity": {
+    "vepyr_version": "0.7.0",
+    "cache_source_type": "merged",
+    "cache_version": "116",
+    "vep_codebase_version": "116.0",
+    "api_version": "116",
+    "ensembl_core_revision": "c0cf13d",
+    "ensembl_variation_revision": "2fb834b",
+    "semantics": "116",
+    "contig": "chr13"
+  },
+  "supported_target": {
+    "vepyr_version": "0.7.0",
+    "cache_version": "116",
+    "vep_codebase_version": "116.0",
+    "api_version": "116",
+    "ensembl_core_revision": "c0cf13d",
+    "ensembl_variation_revision": "2fb834b",
+    "semantics": "116"
+  },
+  "build": {
+    "branch": "master",
+    "vepyr_rev": "479d8f46eee2",
+    "vepyr_dirty": false,
+    "bio_functions_rev": "06fb397d6b47",
+    "dependencies": {
+      "datafusion-bio-format-core": {
+        "version": "1.13.0",
+        "declared_source": null,
+        "declared_revision": null,
+        "effective_source": "git+https://github.com/biodatageeks/datafusion-bio-formats.git?tag=v1.13.0#00487b9edf53cbf36918d7d22a03a79fd0acf863",
+        "manifest_path": "/Users/lukaszjezapkowicz/.cargo/git/checkouts/datafusion-bio-formats-f4a7f32bff6627c2/00487b9/datafusion/bio-format-core/Cargo.toml",
+        "repo_root": "/Users/lukaszjezapkowicz/.cargo/git/checkouts/datafusion-bio-formats-f4a7f32bff6627c2/00487b9",
+        "revision": "00487b9edf53cbf36918d7d22a03a79fd0acf863",
+        "dirty": false
+      },
+      "datafusion-bio-format-ensembl-cache": {
+        "version": "1.13.0",
+        "declared_source": "git+https://github.com/biodatageeks/datafusion-bio-formats.git?tag=v1.13.0",
+        "declared_revision": null,
+        "effective_source": "git+https://github.com/biodatageeks/datafusion-bio-formats.git?tag=v1.13.0#00487b9edf53cbf36918d7d22a03a79fd0acf863",
+        "manifest_path": "/Users/lukaszjezapkowicz/.cargo/git/checkouts/datafusion-bio-formats-f4a7f32bff6627c2/00487b9/datafusion/bio-format-ensembl-cache/Cargo.toml",
+        "repo_root": "/Users/lukaszjezapkowicz/.cargo/git/checkouts/datafusion-bio-formats-f4a7f32bff6627c2/00487b9",
+        "revision": "00487b9edf53cbf36918d7d22a03a79fd0acf863",
+        "dirty": false
+      },
+      "datafusion-bio-format-vcf": {
+        "version": "1.13.0",
+        "declared_source": "git+https://github.com/biodatageeks/datafusion-bio-formats.git?tag=v1.13.0",
+        "declared_revision": null,
+        "effective_source": "git+https://github.com/biodatageeks/datafusion-bio-formats.git?tag=v1.13.0#00487b9edf53cbf36918d7d22a03a79fd0acf863",
+        "manifest_path": "/Users/lukaszjezapkowicz/.cargo/git/checkouts/datafusion-bio-formats-f4a7f32bff6627c2/00487b9/datafusion/bio-format-vcf/Cargo.toml",
+        "repo_root": "/Users/lukaszjezapkowicz/.cargo/git/checkouts/datafusion-bio-formats-f4a7f32bff6627c2/00487b9",
+        "revision": "00487b9edf53cbf36918d7d22a03a79fd0acf863",
+        "dirty": false
+      },
+      "datafusion-bio-function-vep": {
+        "version": "0.20.1",
+        "declared_source": "git+https://github.com/biodatageeks/datafusion-bio-functions.git?tag=v0.22.1",
+        "declared_revision": null,
+        "effective_source": "git+https://github.com/biodatageeks/datafusion-bio-functions.git?tag=v0.22.1#06fb397d6b474d594066230c17904f373e257f76",
+        "manifest_path": "/Users/lukaszjezapkowicz/.cargo/git/checkouts/datafusion-bio-functions-232cd471a782bd70/06fb397/datafusion/bio-function-vep/Cargo.toml",
+        "repo_root": "/Users/lukaszjezapkowicz/.cargo/git/checkouts/datafusion-bio-functions-232cd471a782bd70/06fb397",
+        "revision": "06fb397d6b474d594066230c17904f373e257f76",
+        "dirty": false
+      }
+    },
+    "cargo_lock_sha256": "7060c5c616a65ea52a585d6678c1b82248a33f66ff3fd03f74b4bc4576560ade"
+  },
+  "benchmark_artifacts": {
+    "input_vcf": {
+      "path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/input/HG002_GRCh38_1_22_v4.2.1_benchmark.vcf.gz",
+      "size": 156252944,
+      "mtime": 1771753298.0,
+      "mtime_ns": 1771753298000000000
+    },
+    "reference_fasta": {
+      "path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/input/Homo_sapiens.GRCh38.dna.primary_assembly.fa",
+      "size": 3151425851,
+      "mtime": 1773557648.0,
+      "mtime_ns": 1773557648000000000
+    },
+    "vep_reference_vcf": {
+      "path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/HG002_annotated_wgs_everything_hgvs_merged.vcf.gz",
+      "size": 1709395429,
+      "mtime": 1792805156.5276592,
+      "mtime_ns": 1792805156527659259
+    }
+  },
+  "input_variants": 161419,
+  "annotation": {
+    "backend": "parquet",
+    "compression": "bgzf",
+    "time_s": 3.3,
+    "output_variants": 161419
+  },
+  "comparison": {
+    "variants_compared": 161419,
+    "variants_only_in_vepyr": 0,
+    "variants_only_in_vep": 0,
+    "csq_entry_count_match": 161419,
+    "csq_entry_count_mismatch": 0,
+    "csq_entries_only_in_vepyr": 0,
+    "csq_entries_only_in_vep": 0,
+    "csq_order_mismatch": 0,
+    "csq_order_mismatch_examples": [],
+    "csq_order_ignored": 0,
+    "csq_order_ignored_examples": [],
+    "csq_order_ignore_reason": null,
+    "fields_only_in_vepyr": [],
+    "fields_only_in_vep": [],
+    "field_match_rates": {
+      "Allele": 100.0,
+      "Consequence": 100.0,
+      "IMPACT": 100.0,
+      "SYMBOL": 100.0,
+      "Gene": 100.0,
+      "Feature_type": 100.0,
+      "Feature": 100.0,
+      "BIOTYPE": 100.0,
+      "EXON": 100.0,
+      "INTRON": 100.0,
+      "HGVSc": 100.0,
+      "HGVSp": 100.0,
+      "cDNA_position": 100.0,
+      "CDS_position": 100.0,
+      "Protein_position": 100.0,
+      "Amino_acids": 100.0,
+      "Codons": 100.0,
+      "Existing_variation": 100.0,
+      "DISTANCE": 100.0,
+      "STRAND": 100.0,
+      "FLAGS": 100.0,
+      "VARIANT_CLASS": 100.0,
+      "SYMBOL_SOURCE": 100.0,
+      "HGNC_ID": 100.0,
+      "CANONICAL": 100.0,
+      "MANE": 100.0,
+      "MANE_SELECT": 100.0,
+      "MANE_PLUS_CLINICAL": 100.0,
+      "TSL": 100.0,
+      "APPRIS": 100.0,
+      "CCDS": 100.0,
+      "ENSP": 100.0,
+      "SWISSPROT": 100.0,
+      "TREMBL": 100.0,
+      "UNIPARC": 100.0,
+      "UNIPROT_ISOFORM": 100.0,
+      "REFSEQ_MATCH": 100.0,
+      "SOURCE": 100.0,
+      "REFSEQ_OFFSET": 100.0,
+      "GIVEN_REF": 100.0,
+      "USED_REF": 100.0,
+      "BAM_EDIT": 100.0,
+      "GENE_PHENO": 100.0,
+      "SIFT": 100.0,
+      "PolyPhen": 100.0,
+      "DOMAINS": 100.0,
+      "miRNA": 100.0,
+      "HGVS_OFFSET": 100.0,
+      "AF": 100.0,
+      "AFR_AF": 100.0,
+      "AMR_AF": 100.0,
+      "EAS_AF": 100.0,
+      "EUR_AF": 100.0,
+      "SAS_AF": 100.0,
+      "gnomADe_AF": 100.0,
+      "gnomADe_AFR_AF": 100.0,
+      "gnomADe_AMR_AF": 100.0,
+      "gnomADe_ASJ_AF": 100.0,
+      "gnomADe_EAS_AF": 100.0,
+      "gnomADe_FIN_AF": 100.0,
+      "gnomADe_MID_AF": 100.0,
+      "gnomADe_NFE_AF": 100.0,
+      "gnomADe_REMAINING_AF": 100.0,
+      "gnomADe_SAS_AF": 100.0,
+      "gnomADg_AF": 100.0,
+      "gnomADg_AFR_AF": 100.0,
+      "gnomADg_AMI_AF": 100.0,
+      "gnomADg_AMR_AF": 100.0,
+      "gnomADg_ASJ_AF": 100.0,
+      "gnomADg_EAS_AF": 100.0,
+      "gnomADg_FIN_AF": 100.0,
+      "gnomADg_MID_AF": 100.0,
+      "gnomADg_NFE_AF": 100.0,
+      "gnomADg_REMAINING_AF": 100.0,
+      "gnomADg_SAS_AF": 100.0,
+      "MAX_AF": 100.0,
+      "MAX_AF_POPS": 100.0,
+      "CLIN_SIG": 100.0,
+      "SOMATIC": 100.0,
+      "PHENO": 100.0,
+      "PUBMED": 100.0,
+      "MOTIF_NAME": 100.0,
+      "MOTIF_POS": 100.0,
+      "HIGH_INF_POS": 100.0,
+      "MOTIF_SCORE_CHANGE": 100.0,
+      "TRANSCRIPTION_FACTORS": 100.0
+    },
+    "field_mismatch_counts": {},
+    "field_mismatch_examples": {},
+    "field_order_mismatch_counts": {},
+    "field_order_mismatch_examples": {},
+    "field_format_mismatch_counts": {},
+    "field_format_mismatch_examples": {},
+    "field_equality_counts": {
+      "Allele": {
+        "both_empty": 0,
+        "both_nonempty_equal": 1865916,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "Consequence": {
+        "both_empty": 0,
+        "both_nonempty_equal": 1865916,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "IMPACT": {
+        "both_empty": 0,
+        "both_nonempty_equal": 1865916,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "SYMBOL": {
+        "both_empty": 202184,
+        "both_nonempty_equal": 1663732,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "Gene": {
+        "both_empty": 49810,
+        "both_nonempty_equal": 1816106,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "Feature_type": {
+        "both_empty": 44241,
+        "both_nonempty_equal": 1821675,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "Feature": {
+        "both_empty": 44241,
+        "both_nonempty_equal": 1821675,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "BIOTYPE": {
+        "both_empty": 44737,
+        "both_nonempty_equal": 1821179,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "EXON": {
+        "both_empty": 1816804,
+        "both_nonempty_equal": 49112,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "INTRON": {
+        "both_empty": 355361,
+        "both_nonempty_equal": 1510555,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "HGVSc": {
+        "both_empty": 306264,
+        "both_nonempty_equal": 1559652,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "HGVSp": {
+        "both_empty": 1858298,
+        "both_nonempty_equal": 7618,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "cDNA_position": {
+        "both_empty": 1816804,
+        "both_nonempty_equal": 49112,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "CDS_position": {
+        "both_empty": 1858295,
+        "both_nonempty_equal": 7621,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "Protein_position": {
+        "both_empty": 1858295,
+        "both_nonempty_equal": 7621,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "Amino_acids": {
+        "both_empty": 1858295,
+        "both_nonempty_equal": 7621,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "Codons": {
+        "both_empty": 1858295,
+        "both_nonempty_equal": 7621,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "Existing_variation": {
+        "both_empty": 13634,
+        "both_nonempty_equal": 1852282,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "DISTANCE": {
+        "both_empty": 1609472,
+        "both_nonempty_equal": 256444,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "STRAND": {
+        "both_empty": 49314,
+        "both_nonempty_equal": 1816602,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "FLAGS": {
+        "both_empty": 1843945,
+        "both_nonempty_equal": 21971,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "VARIANT_CLASS": {
+        "both_empty": 0,
+        "both_nonempty_equal": 1865916,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "SYMBOL_SOURCE": {
+        "both_empty": 202184,
+        "both_nonempty_equal": 1663732,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "HGNC_ID": {
+        "both_empty": 242952,
+        "both_nonempty_equal": 1622964,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "CANONICAL": {
+        "both_empty": 1633307,
+        "both_nonempty_equal": 232609,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "MANE": {
+        "both_empty": 1764258,
+        "both_nonempty_equal": 101658,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "MANE_SELECT": {
+        "both_empty": 1766556,
+        "both_nonempty_equal": 99360,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "MANE_PLUS_CLINICAL": {
+        "both_empty": 1863618,
+        "both_nonempty_equal": 2298,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "TSL": {
+        "both_empty": 1627878,
+        "both_nonempty_equal": 238038,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "APPRIS": {
+        "both_empty": 1602186,
+        "both_nonempty_equal": 263730,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "CCDS": {
+        "both_empty": 1604781,
+        "both_nonempty_equal": 261135,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "ENSP": {
+        "both_empty": 605414,
+        "both_nonempty_equal": 1260502,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "SWISSPROT": {
+        "both_empty": 1758134,
+        "both_nonempty_equal": 107782,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "TREMBL": {
+        "both_empty": 1707112,
+        "both_nonempty_equal": 158804,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "UNIPARC": {
+        "both_empty": 1395634,
+        "both_nonempty_equal": 470282,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "UNIPROT_ISOFORM": {
+        "both_empty": 1780908,
+        "both_nonempty_equal": 85008,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "REFSEQ_MATCH": {
+        "both_empty": 1865916,
+        "both_nonempty_equal": 0,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "SOURCE": {
+        "both_empty": 49810,
+        "both_nonempty_equal": 1816106,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "REFSEQ_OFFSET": {
+        "both_empty": 1865916,
+        "both_nonempty_equal": 0,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "GIVEN_REF": {
+        "both_empty": 197375,
+        "both_nonempty_equal": 1668541,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "USED_REF": {
+        "both_empty": 197375,
+        "both_nonempty_equal": 1668541,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "BAM_EDIT": {
+        "both_empty": 1855616,
+        "both_nonempty_equal": 10300,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "GENE_PHENO": {
+        "both_empty": 1470343,
+        "both_nonempty_equal": 395573,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "SIFT": {
+        "both_empty": 1863617,
+        "both_nonempty_equal": 2299,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "PolyPhen": {
+        "both_empty": 1864626,
+        "both_nonempty_equal": 1290,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "DOMAINS": {
+        "both_empty": 1861866,
+        "both_nonempty_equal": 4050,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "miRNA": {
+        "both_empty": 1865914,
+        "both_nonempty_equal": 2,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "HGVS_OFFSET": {
+        "both_empty": 1744975,
+        "both_nonempty_equal": 120941,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "AF": {
+        "both_empty": 139105,
+        "both_nonempty_equal": 1726811,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "AFR_AF": {
+        "both_empty": 139105,
+        "both_nonempty_equal": 1726811,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "AMR_AF": {
+        "both_empty": 139105,
+        "both_nonempty_equal": 1726811,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "EAS_AF": {
+        "both_empty": 139105,
+        "both_nonempty_equal": 1726811,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "EUR_AF": {
+        "both_empty": 139105,
+        "both_nonempty_equal": 1726811,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "SAS_AF": {
+        "both_empty": 139105,
+        "both_nonempty_equal": 1726811,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADe_AF": {
+        "both_empty": 1694964,
+        "both_nonempty_equal": 170952,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADe_AFR_AF": {
+        "both_empty": 1735978,
+        "both_nonempty_equal": 129938,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADe_AMR_AF": {
+        "both_empty": 1745299,
+        "both_nonempty_equal": 120617,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADe_ASJ_AF": {
+        "both_empty": 1744333,
+        "both_nonempty_equal": 121583,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADe_EAS_AF": {
+        "both_empty": 1739692,
+        "both_nonempty_equal": 126224,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADe_FIN_AF": {
+        "both_empty": 1723820,
+        "both_nonempty_equal": 142096,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADe_MID_AF": {
+        "both_empty": 1747647,
+        "both_nonempty_equal": 118269,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADe_NFE_AF": {
+        "both_empty": 1699826,
+        "both_nonempty_equal": 166090,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADe_REMAINING_AF": {
+        "both_empty": 1721105,
+        "both_nonempty_equal": 144811,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADe_SAS_AF": {
+        "both_empty": 1742031,
+        "both_nonempty_equal": 123885,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADg_AF": {
+        "both_empty": 16574,
+        "both_nonempty_equal": 1849342,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADg_AFR_AF": {
+        "both_empty": 16578,
+        "both_nonempty_equal": 1849338,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADg_AMI_AF": {
+        "both_empty": 17240,
+        "both_nonempty_equal": 1848676,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADg_AMR_AF": {
+        "both_empty": 16767,
+        "both_nonempty_equal": 1849149,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADg_ASJ_AF": {
+        "both_empty": 17014,
+        "both_nonempty_equal": 1848902,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADg_EAS_AF": {
+        "both_empty": 17059,
+        "both_nonempty_equal": 1848857,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADg_FIN_AF": {
+        "both_empty": 17054,
+        "both_nonempty_equal": 1848862,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADg_MID_AF": {
+        "both_empty": 17112,
+        "both_nonempty_equal": 1848804,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADg_NFE_AF": {
+        "both_empty": 16784,
+        "both_nonempty_equal": 1849132,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADg_REMAINING_AF": {
+        "both_empty": 16895,
+        "both_nonempty_equal": 1849021,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "gnomADg_SAS_AF": {
+        "both_empty": 17005,
+        "both_nonempty_equal": 1848911,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "MAX_AF": {
+        "both_empty": 16440,
+        "both_nonempty_equal": 1849476,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "MAX_AF_POPS": {
+        "both_empty": 16440,
+        "both_nonempty_equal": 1849476,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "CLIN_SIG": {
+        "both_empty": 1837652,
+        "both_nonempty_equal": 28264,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "SOMATIC": {
+        "both_empty": 1763896,
+        "both_nonempty_equal": 102020,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "PHENO": {
+        "both_empty": 1688377,
+        "both_nonempty_equal": 177539,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "PUBMED": {
+        "both_empty": 1736166,
+        "both_nonempty_equal": 129750,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "MOTIF_NAME": {
+        "both_empty": 1865420,
+        "both_nonempty_equal": 496,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "MOTIF_POS": {
+        "both_empty": 1865433,
+        "both_nonempty_equal": 483,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "HIGH_INF_POS": {
+        "both_empty": 1865420,
+        "both_nonempty_equal": 496,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "MOTIF_SCORE_CHANGE": {
+        "both_empty": 1865498,
+        "both_nonempty_equal": 418,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      },
+      "TRANSCRIPTION_FACTORS": {
+        "both_empty": 1865420,
+        "both_nonempty_equal": 496,
+        "vepyr_empty_only": 0,
+        "vep_empty_only": 0,
+        "both_nonempty_unequal": 0
+      }
+    },
+    "equality_bucket_counts": {
+      "both_empty": 88448129,
+      "both_nonempty_equal": 72020647,
+      "vepyr_empty_only": 0,
+      "vep_empty_only": 0,
+      "both_nonempty_unequal": 0
+    },
+    "mismatch_ledger": {
+      "path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/reports/fast_chr13_merged_116_mismatches.jsonl",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "comparison_mode": "field",
+  "reference_identity": {
+    "vep_version": "116.0",
+    "api_version": "116",
+    "cache_version": "116",
+    "cache_path": "/opt/vep/.vep/homo_sapiens_merged/116_GRCh38",
+    "assembly": "GRCh38.p14",
+    "ensembl_release": "116",
+    "ensembl_revision": "c0cf13d",
+    "ensembl_variation_release": "116",
+    "ensembl_variation_revision": "2fb834b",
+    "header": "##VEP=\"v116.0\" API=\"v116\" time=\"2026-10-23 09:28:01\" cache=\"/opt/vep/.vep/homo_sapiens_merged/116_GRCh38\" ensembl=116.c0cf13d ensembl-compara=116.46f80af ensembl-funcgen=116.90049ea ensembl-io=116.6afb5dc ensembl-variation=116.2fb834b 1000genomes=\"phase3\" COSMIC=\"102\" ClinVar=\"202509\" HGMD-PUBLIC=\"20204\" assembly=\"GRCh38.p14\" dbSNP=\"156\" gencode=\"GENCODE 50\" genebuild=\"GENCODE50\" gnomADe=\"v4.1\" gnomADg=\"v4.1\" polyphen=\"2.2.3\" refseq=\"GCF_000001405.40-RS_2025_08 - GCF_000001405.40_GRCh38.p14_genomic.gff\" regbuild=\"1.0\" sift=\"6.2.1\""
+  }
+}

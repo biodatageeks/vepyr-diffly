@@ -42,7 +42,8 @@ COPIES = [
     ("results/completion-2026-10/m5_completion_20261024", D / "runs/m5_completion_20261024", None),
     ("scripts", D / "tools", ["measure_once.py", "run_5repeats_benchmark.py", "run_vep_5repeats_suite.py",
                               "run_vep_chr1_baseline.py", "run_full_vep_bench.py", "run_vep_full_repeats.sh",
-                              "m5_completion_batch.py", "m5_progress.py", "assemble_repro_package.py"]),
+                              "m5_completion_batch.py", "m5_phase2.sh", "m5_progress.py",
+                              "assemble_repro_package.py"]),
 ]
 
 

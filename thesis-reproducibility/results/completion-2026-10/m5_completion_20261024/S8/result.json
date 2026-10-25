@@ -1,0 +1,48 @@
+{
+  "vep_native_chr1_chr22_bytes": 2994476165,
+  "vepyr_core_files": [
+    "exon/chr1.parquet",
+    "exon/chr22.parquet",
+    "motif/chr1.parquet",
+    "motif/chr22.parquet",
+    "regulatory/chr1.parquet",
+    "regulatory/chr22.parquet",
+    "transcript/chr1.parquet",
+    "transcript/chr22.parquet",
+    "translation_core/chr1.parquet",
+    "translation_core/chr22.parquet",
+    "translation_sift/chr1.parquet",
+    "translation_sift/chr22.parquet",
+    "variation/chr1.parquet",
+    "variation/chr22.parquet"
+  ],
+  "vepyr_core_chr1_chr22_bytes": 3707392008,
+  "plugin_parquet_files": [
+    "alphamissense/chr1.parquet",
+    "alphamissense/chr22.parquet",
+    "cadd/chr1.parquet",
+    "cadd/chr22.parquet",
+    "clinvar/chr1.parquet",
+    "clinvar/chr22.parquet",
+    "dbnsfp/chr1.parquet",
+    "dbnsfp/chr22.parquet",
+    "spliceai/chr1.parquet",
+    "spliceai/chr22.parquet"
+  ],
+  "plugin_parquet_chr1_chr22_bytes": 10627776725,
+  "plugin_source_slices_bytes": {
+    "clinvar_1": 17081683,
+    "clinvar_22": 4110548,
+    "spliceai_1": 2460874720,
+    "spliceai_22": 438467891,
+    "cadd_snv_1": 6419019231,
+    "cadd_snv_22": 1063329775,
+    "cadd_indel_1": 93346230,
+    "cadd_indel_22": 18949496,
+    "alphamissense_1": 63061129,
+    "alphamissense_22": 13008549,
+    "dbnsfp_1": 5052629513,
+    "dbnsfp_22": 1090883084
+  },
+  "plugin_source_chr1_chr22_bytes": 16734761849
+}

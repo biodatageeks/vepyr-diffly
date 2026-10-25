@@ -1,0 +1,11 @@
+PARITY GATE PASSED: vepyr 0.7.0, VEP/cache 116, profile merged, 22 contigs
+  variants_only_in_vepyr: 0
+  variants_only_in_vep: 0
+  csq_entry_count_mismatch: 0
+  csq_entries_only_in_vepyr: 0
+  csq_entries_only_in_vep: 0
+  csq_order_mismatch: 0
+  field_mismatch_total: 0
+  field_order_mismatch_total: 0
+  field_format_mismatch_total: 0
+  mismatch_ledger_rows: 0

@@ -1,0 +1,10 @@
+{
+  "chr1": {
+    "path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/inputs/HG002_normalized_chr1.vcf.gz",
+    "records": 323430
+  },
+  "chr22": {
+    "path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/inputs/HG002_normalized_chr22.vcf.gz",
+    "records": 50861
+  }
+}

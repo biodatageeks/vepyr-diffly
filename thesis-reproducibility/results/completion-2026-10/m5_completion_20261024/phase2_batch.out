@@ -1,0 +1,27 @@
+2026-10-24T09:01:38+00:00 batch started; waiting for VEP full-genome repeats to finish
+2026-10-24T09:01:38+00:00 VEP repeats finished; disk free 193.1 GB
+2026-10-24T09:01:38+00:00 S10 start: Walidacja E2E pełnego genomu (chr1-22), VEPYR 0.7.0 vs referencja z S1 + bramka
+2026-10-24T09:43:16+00:00 S10 done in 41.6 min
+2026-10-24T09:43:16+00:00 batch finished
+2026-10-24T09:43:32+00:00 batch started; waiting for VEP full-genome repeats to finish
+2026-10-24T09:43:32+00:00 VEP repeats finished; disk free 275.9 GB
+2026-10-24T09:43:32+00:00 S3 start: Narzut uruchomienia kontenera Docker, 5x
+2026-10-24T09:43:43+00:00 S3 done in 0.2 min
+2026-10-24T09:43:43+00:00 S7 start: Nagłówki CSQ VEP dla każdej wtyczki osobno (mały plik wejściowy)
+2026-10-24T09:43:51+00:00 S7 done in 0.1 min
+2026-10-24T09:43:51+00:00 batch finished
+2026-10-25T00:49:25+00:00 batch started; waiting for VEP full-genome repeats to finish
+2026-10-25T00:49:25+00:00 VEP repeats finished; disk free 173.1 GB
+2026-10-25T00:49:25+00:00 S9 start: VEP RSS: scenariusz bazowy chr22 5x i chr1 5x (próbkowanie VmHWM)
+2026-10-25T00:56:35+00:00 S9 chr22 repeat 1: exit 0, 426.75s, VmHWM 1.689 GiB
+2026-10-25T01:03:18+00:00 S9 chr22 repeat 2: exit 0, 397.64s, VmHWM 1.688 GiB
+2026-10-25T01:10:01+00:00 S9 chr22 repeat 3: exit 0, 395.41s, VmHWM 1.696 GiB
+2026-10-25T01:16:45+00:00 S9 chr22 repeat 4: exit 0, 393.83s, VmHWM 1.693 GiB
+2026-10-25T01:23:29+00:00 S9 chr22 repeat 5: exit 0, 394.41s, VmHWM 1.691 GiB
+2026-10-25T02:00:00+00:00 S9 chr1 repeat 1: exit 0, 2183.45s, VmHWM 1.641 GiB
+2026-10-25T02:36:58+00:00 S9 chr1 repeat 2: exit 0, 2208.08s, VmHWM 1.654 GiB
+2026-10-25T03:13:19+00:00 S9 chr1 repeat 3: exit 0, 2170.78s, VmHWM 1.653 GiB
+2026-10-25T03:49:49+00:00 S9 chr1 repeat 4: exit 0, 2180.04s, VmHWM 1.645 GiB
+2026-10-25T04:26:46+00:00 S9 chr1 repeat 5: exit 0, 2207.04s, VmHWM 1.638 GiB
+2026-10-25T04:26:51+00:00 S9 done in 217.4 min
+2026-10-25T04:26:51+00:00 batch finished

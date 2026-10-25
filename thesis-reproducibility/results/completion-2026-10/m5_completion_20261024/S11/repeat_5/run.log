@@ -1,0 +1,482 @@
+$ /Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-lpt/bin/python3 /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/full_build.py
+a_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_87.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_87.parquet", 390]]}
+{"completed": 1864, "total": 1909, "entity": "translation", "scope": "LRG_870", "seconds": 0.28507845918647945, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_870.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_870.parquet", 2725]]}
+{"completed": 1865, "total": 1909, "entity": "translation", "scope": "LRG_871", "seconds": 0.2865362500306219, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_871.parquet", 2], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_871.parquet", 2181]]}
+{"completed": 1866, "total": 1909, "entity": "translation", "scope": "LRG_872", "seconds": 0.2894423750694841, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_872.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_872.parquet", 6907]]}
+{"completed": 1867, "total": 1909, "entity": "translation", "scope": "LRG_873", "seconds": 0.2815578328445554, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_873.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_873.parquet", 593]]}
+{"completed": 1868, "total": 1909, "entity": "translation", "scope": "LRG_874", "seconds": 0.27654295787215233, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_874.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_874.parquet", 245]]}
+{"completed": 1869, "total": 1909, "entity": "translation", "scope": "LRG_875", "seconds": 0.28486587502993643, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_875.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_875.parquet", 2285]]}
+{"completed": 1870, "total": 1909, "entity": "translation", "scope": "LRG_876", "seconds": 0.2781326249241829, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_876.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_876.parquet", 105]]}
+{"completed": 1871, "total": 1909, "entity": "translation", "scope": "LRG_877", "seconds": 0.2911156250629574, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_877.parquet", 4], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_877.parquet", 3662]]}
+{"completed": 1872, "total": 1909, "entity": "translation", "scope": "LRG_878", "seconds": 0.2961016669869423, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_878.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_878.parquet", 1647]]}
+{"completed": 1873, "total": 1909, "entity": "translation", "scope": "LRG_879", "seconds": 0.28275745804421604, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_879.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_879.parquet", 330]]}
+{"completed": 1874, "total": 1909, "entity": "translation", "scope": "LRG_88", "seconds": 0.28026795806363225, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_88.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_88.parquet", 526]]}
+{"completed": 1875, "total": 1909, "entity": "translation", "scope": "LRG_880", "seconds": 0.2900592079386115, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_880.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_880.parquet", 5088]]}
+{"completed": 1876, "total": 1909, "entity": "translation", "scope": "LRG_881", "seconds": 0.2789573329500854, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_881.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_881.parquet", 260]]}
+{"completed": 1877, "total": 1909, "entity": "translation", "scope": "LRG_882", "seconds": 0.2821356251370162, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_882.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_882.parquet", 1590]]}
+{"completed": 1878, "total": 1909, "entity": "translation", "scope": "LRG_883", "seconds": 0.2823069579899311, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_883.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_883.parquet", 172]]}
+{"completed": 1879, "total": 1909, "entity": "translation", "scope": "LRG_884", "seconds": 0.2780566250439733, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_884.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_884.parquet", 617]]}
+{"completed": 1880, "total": 1909, "entity": "translation", "scope": "LRG_885", "seconds": 0.2847635841462761, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_885.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_885.parquet", 491]]}
+{"completed": 1881, "total": 1909, "entity": "translation", "scope": "LRG_886", "seconds": 0.278011417016387, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_886.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_886.parquet", 914]]}
+{"completed": 1882, "total": 1909, "entity": "translation", "scope": "LRG_887", "seconds": 0.2779124169610441, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_887.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_887.parquet", 383]]}
+{"completed": 1883, "total": 1909, "entity": "translation", "scope": "LRG_888", "seconds": 0.28247458301484585, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_888.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_888.parquet", 969]]}
+{"completed": 1884, "total": 1909, "entity": "translation", "scope": "LRG_89", "seconds": 0.2781612500548363, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_89.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_89.parquet", 317]]}
+{"completed": 1885, "total": 1909, "entity": "translation", "scope": "LRG_9", "seconds": 0.27683191606774926, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_9.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_9.parquet", 159]]}
+{"completed": 1886, "total": 1909, "entity": "translation", "scope": "LRG_90", "seconds": 0.2767648340668529, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_90.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_90.parquet", 299]]}
+{"completed": 1887, "total": 1909, "entity": "translation", "scope": "LRG_91", "seconds": 0.28232875000685453, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_91.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_91.parquet", 289]]}
+{"completed": 1888, "total": 1909, "entity": "translation", "scope": "LRG_92", "seconds": 0.2781263750512153, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_92.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_92.parquet", 189]]}
+{"completed": 1889, "total": 1909, "entity": "translation", "scope": "LRG_93", "seconds": 0.2763472499791533, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_93.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_93.parquet", 301]]}
+{"completed": 1890, "total": 1909, "entity": "translation", "scope": "LRG_94", "seconds": 0.2856505000963807, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_94.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_94.parquet", 555]]}
+{"completed": 1891, "total": 1909, "entity": "translation", "scope": "LRG_95", "seconds": 0.2788762911222875, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_95.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_95.parquet", 1306]]}
+{"completed": 1892, "total": 1909, "entity": "translation", "scope": "LRG_96", "seconds": 0.2778239590115845, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_96.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_96.parquet", 221]]}
+{"completed": 1893, "total": 1909, "entity": "translation", "scope": "LRG_97", "seconds": 0.2815975418779999, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_97.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_97.parquet", 192]]}
+{"completed": 1894, "total": 1909, "entity": "translation", "scope": "LRG_98", "seconds": 0.2793145829346031, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_98.parquet", 1]]}
+{"completed": 1895, "total": 1909, "entity": "translation", "scope": "LRG_989", "seconds": 0.27795270807109773, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_989.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_989.parquet", 840]]}
+{"completed": 1896, "total": 1909, "entity": "translation", "scope": "LRG_99", "seconds": 0.27928108302876353, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_99.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_99.parquet", 527]]}
+{"completed": 1897, "total": 1909, "entity": "translation", "scope": "LRG_990", "seconds": 0.27630029199644923, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_990.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_990.parquet", 295]]}
+{"completed": 1898, "total": 1909, "entity": "translation", "scope": "LRG_991", "seconds": 0.2819723749998957, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_991.parquet", 2], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_991.parquet", 652]]}
+{"completed": 1899, "total": 1909, "entity": "translation", "scope": "LRG_992", "seconds": 0.28202129201963544, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_992.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_992.parquet", 595]]}
+{"completed": 1900, "total": 1909, "entity": "translation", "scope": "LRG_993", "seconds": 0.2801316671539098, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_993.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_993.parquet", 822]]}
+{"completed": 1901, "total": 1909, "entity": "translation", "scope": "LRG_994", "seconds": 0.2821626670192927, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_994.parquet", 2], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_994.parquet", 1643]]}
+{"completed": 1902, "total": 1909, "entity": "translation", "scope": "LRG_995", "seconds": 0.2759738750755787, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_995.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_995.parquet", 644]]}
+{"completed": 1903, "total": 1909, "entity": "translation", "scope": "LRG_996", "seconds": 0.28154316707514226, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_996.parquet", 2], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_996.parquet", 1525]]}
+{"completed": 1904, "total": 1909, "entity": "translation", "scope": "LRG_997", "seconds": 0.2794843749143183, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_997.parquet", 1], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_997.parquet", 2347]]}
+{"completed": 1905, "total": 1909, "entity": "translation", "scope": "LRG_998", "seconds": 0.2834579998161644, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_998.parquet", 2], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_998.parquet", 503]]}
+{"completed": 1906, "total": 1909, "entity": "translation", "scope": "LRG_999", "seconds": 0.2921634581871331, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/LRG_999.parquet", 2], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/LRG_999.parquet", 4125]]}
+{"completed": 1907, "total": 1909, "entity": "translation", "scope": "MT", "seconds": 0.36094520799815655, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/chrMT.parquet", 26], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/chrMT.parquet", 7578]]}
+{"completed": 1908, "total": 1909, "entity": "translation", "scope": "X", "seconds": 15.535370165947825, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/chrX.parquet", 17563], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/chrX.parquet", 7688573]]}
+{"completed": 1909, "total": 1909, "entity": "translation", "scope": "Y", "seconds": 1.2481927920598537, "stats": [["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_core/chrY.parquet", 1096], ["/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache/116_GRCh38_merged/translation_sift/chrY.parquet", 512686]]}
+{
+  "wall_seconds": 3909.2141830411274,
+  "contigs": 1904,
+  "entities": [
+    "variation",
+    "transcript",
+    "exon",
+    "regulatory",
+    "motif",
+    "translation"
+  ],
+  "output_bytes": 39053782151,
+  "all_completed": true
+}
+ions=1
+[TRANSLATION_CONFIG] chrom=LRG_534 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_535 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_536 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_537 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_538 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_539 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_54 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_540 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_541 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_542 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_543 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_544 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_545 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_546 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_547 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_548 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_549 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_55 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_550 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_551 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_552 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_553 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_554 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_555 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_556 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_557 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_558 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_559 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_56 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_560 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_561 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_562 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_563 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_564 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_565 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_566 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_567 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_568 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_569 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_57 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_570 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_571 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_572 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_573 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_574 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_575 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_576 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_577 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_578 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_579 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_58 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_580 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_581 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_582 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_583 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_584 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_585 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_586 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_587 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_588 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_589 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_59 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_590 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_591 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_592 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_593 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_594 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_595 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_596 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_597 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_598 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_599 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_6 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_60 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_600 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_601 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_602 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_603 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_604 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_605 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_606 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_607 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_608 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_609 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_61 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_610 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_611 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_612 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_613 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_614 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_615 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_616 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_617 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_618 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_619 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_62 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_620 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_621 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_622 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_623 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_624 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_625 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_626 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_627 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_628 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_629 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_63 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_630 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_631 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_632 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_633 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_634 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_635 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_636 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_637 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_638 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_639 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_64 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_640 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_641 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_642 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_643 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_644 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_645 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_646 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_647 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_648 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_649 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_65 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_650 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_651 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_652 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_653 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_654 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_655 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_656 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_657 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_658 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_659 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_66 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_660 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_661 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_662 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_663 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_664 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_665 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_666 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_667 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_668 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_669 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_67 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_670 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_671 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_672 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_673 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_674 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_675 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_676 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_677 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_678 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_679 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_68 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_680 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_681 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_682 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_683 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_684 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_685 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_686 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_687 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_688 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_689 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_69 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_690 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_691 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_692 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_693 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_694 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_695 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_696 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_697 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_698 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_699 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_7 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_70 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_700 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_701 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_702 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_703 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_704 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_705 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_706 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_707 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_708 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_709 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_71 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_710 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_711 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_712 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_713 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_714 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_715 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_716 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_717 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_718 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_719 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_72 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_720 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_721 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_722 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_723 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_724 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_725 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_726 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_727 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_728 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_729 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_73 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_730 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_731 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_732 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_733 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_734 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_735 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_736 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_737 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_738 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_739 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_74 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_740 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_741 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_742 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_743 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_744 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_745 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_746 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_747 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_748 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_749 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_75 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_750 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_751 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_752 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_753 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_754 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_755 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_756 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_757 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_758 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_759 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_76 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_760 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_761 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_762 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_763 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_764 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_765 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_766 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_767 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_768 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_769 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_77 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_770 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_771 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_772 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_773 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_774 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_775 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_776 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_777 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_778 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_779 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_78 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_780 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_781 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_782 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_783 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_784 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_785 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_786 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_787 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_788 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_789 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_79 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_790 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_791 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_792 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_793 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_794 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_795 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_796 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_797 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_798 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_799 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_8 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_80 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_800 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_801 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_802 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_803 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_804 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_805 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_806 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_807 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_808 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_809 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_81 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_810 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_811 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_812 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_813 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_814 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_815 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_816 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_817 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_818 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_819 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_82 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_820 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_821 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_822 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_823 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_824 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_825 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_826 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_827 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_828 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_829 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_83 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_830 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_831 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_832 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_833 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_834 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_835 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_836 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_837 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_838 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_839 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_84 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_840 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_841 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_842 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_843 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_844 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_845 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_846 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_847 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_848 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_849 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_85 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_850 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_851 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_852 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_853 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_854 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_855 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_856 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_857 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_858 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_859 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_86 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_860 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_862 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_863 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_864 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_865 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_866 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_867 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_868 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_869 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_87 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_870 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_871 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_872 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_873 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_874 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_875 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_876 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_877 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_878 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_879 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_88 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_880 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_881 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_882 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_883 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_884 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_885 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_886 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_887 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_888 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_89 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_9 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_90 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_91 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_92 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_93 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_94 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_95 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_96 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_97 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_98 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_989 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_99 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_990 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_991 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_992 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_993 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_994 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_995 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_996 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_997 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_998 partitions=1
+[TRANSLATION_CONFIG] chrom=LRG_999 partitions=1
+[TRANSLATION_CONFIG] chrom=MT partitions=1
+[TRANSLATION_CONFIG] chrom=X partitions=1
+[TRANSLATION_CONFIG] chrom=Y partitions=1
+[exit 0]

@@ -1,1 +1,31 @@
 2026-10-23T09:28:01Z repeat 2: start
+2026-10-23T17:18:20Z repeat 2: exit 0, real 28193.85
+2026-10-23T17:19:25Z repeat 2: body sha256 5fee6224bf135d80075712141cc06194e0730fa253ff8b131a9d25d661647ee9, output removed
+2026-10-23T17:19:25Z repeat 3: start
+2026-10-24T01:23:55Z repeat 3: exit 0, real 29050.82
+2026-10-24T01:24:56Z repeat 3: body sha256 5fee6224bf135d80075712141cc06194e0730fa253ff8b131a9d25d661647ee9, output removed
+2026-10-24T01:24:56Z repeat 4: only 22 GB free (need ~30 GB for the output VCF), stopping
+{
+  "n_successful": 3,
+  "mean_wall_s": 28571.24,
+  "min_wall_s": 28193.85,
+  "max_wall_s": 29050.82,
+  "body_sha256_identical_repeats_2_5": false,
+  "peak_rss_gb_max": 2.927
+}
+2026-10-24T01:24:56Z done
+2026-10-24T09:43:51Z repeat 4: start
+2026-10-24T17:09:02Z repeat 4: exit 0, real 26706.32
+2026-10-24T17:10:06Z repeat 4: body sha256 5fee6224bf135d80075712141cc06194e0730fa253ff8b131a9d25d661647ee9, output removed
+2026-10-24T17:10:06Z repeat 5: start
+2026-10-25T00:48:21Z repeat 5: exit 0, real 27485.70
+2026-10-25T00:49:25Z repeat 5: body sha256 5fee6224bf135d80075712141cc06194e0730fa253ff8b131a9d25d661647ee9, output removed
+{
+  "n_successful": 5,
+  "mean_wall_s": 27981.15,
+  "min_wall_s": 26706.32,
+  "max_wall_s": 29050.82,
+  "body_sha256_identical_repeats_2_5": true,
+  "peak_rss_gb_max": 2.938
+}
+2026-10-25T00:49:25Z done

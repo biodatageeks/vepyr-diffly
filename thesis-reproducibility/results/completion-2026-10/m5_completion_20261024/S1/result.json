@@ -1,0 +1,10 @@
+{
+  "reference": "/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/HG002_annotated_wgs_everything_hgvs_merged.vcf.gz",
+  "bytes": 1709395429,
+  "body_sha256": "5fee6224bf135d80075712141cc06194e0730fa253ff8b131a9d25d661647ee9",
+  "records": 4096123,
+  "expected_sha256": "5fee6224bf135d80075712141cc06194e0730fa253ff8b131a9d25d661647ee9",
+  "expected_records": "4096123",
+  "matches_repeat2": true,
+  "kept_vcf_removed": true
+}

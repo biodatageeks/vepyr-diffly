@@ -1,0 +1,12 @@
+{
+  "run_comparison_exit": 0,
+  "gate_exit": 1,
+  "gate_tail": "",
+  "totals": {
+    "variants": 4096123,
+    "only_vepyr": 0,
+    "only_vep": 0,
+    "csq_count_mismatch": 0,
+    "csq_order_mismatch": 0
+  }
+}

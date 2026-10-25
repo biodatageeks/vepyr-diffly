@@ -18,7 +18,6 @@ VEP = D / "runs/vep_full_repeats_m5_20261023"
 OUT = D / "runs/m5_completion_20261024"
 PLAN = Path("/Users/lukaszjezapkowicz/Desktop/magisterka/praca/PLAN_DOKONCZENIA.md")
 VEP_MEAN_S = 28469.05  # repeat 1 (2026-09-24); replaced by the mean of finished repeats when available
-LOCAL = timezone(timedelta(hours=2))
 
 
 def ts(s: str) -> datetime:
@@ -32,7 +31,7 @@ def fmt_dur(sec: float) -> str:
 
 
 def fmt_local(dt: datetime) -> str:
-    return dt.astimezone(LOCAL).strftime("%a %d.%m %H:%M")
+    return dt.astimezone().strftime("%a %d.%m %H:%M")  # system time zone (CEST/CET switch on 25.10)
 
 
 def vep_status(now: datetime) -> tuple[list[str], datetime | None]:
@@ -56,17 +55,17 @@ def vep_status(now: datetime) -> tuple[list[str], datetime | None]:
         elif (d / "started_utc.txt").exists():
             current = (i, ts((d / "started_utc.txt").read_text().strip()))
     mean = sum(walls) / len(walls) if walls else VEP_MEAN_S
-    finished = (VEP / "summary.json").exists()
+    finished = (VEP / "repeat_5/exit_code.txt").exists() and (VEP / "summary.json").exists()
     eta_end = None
     if current and not finished:
         i, start = current
         el = (now - start).total_seconds()
         vcf = VEP / f"repeat_{i}/HG002_vep_forknone.vcf"
-        size = vcf.stat().st_size / 1e9 if vcf.exists() else 0
+        size = vcf.stat().st_size / 1024**3 if vcf.exists() else 0  # repeat 1 output: 27.40 GiB
         remaining_repeats = 5 - i
         eta_end = start + timedelta(seconds=mean * (remaining_repeats + 1) + 300 * (remaining_repeats + 1))
         lines.append(f"  - powtórzenie {i}: W TOKU od {fmt_local(start)}, upłynęło {fmt_dur(el)}, "
-                     f"wynik ~{size:.1f}/27,4 GB ({100 * size / 27.4:.0f}%), "
+                     f"wynik ~{size:.1f}/27,4 GiB ({100 * size / 27.4:.0f}%), "
                      f"szac. koniec tego powtórzenia {fmt_local(start + timedelta(seconds=mean))}")
     head = "zakończone" if finished else (f"w toku, szac. koniec wszystkich: {fmt_local(eta_end)}" if eta_end else "w toku")
     return [f"- **Powtórzenia VEP (pełny genom, 2–5)**: {head}"] + lines, eta_end
@@ -107,12 +106,26 @@ def batch_status(now: datetime, vep_end: datetime | None) -> list[str]:
     return lines
 
 
+def phase2_status(now: datetime) -> list[str]:
+    log = OUT / "phase2.log"
+    if not log.exists():
+        return ["- **Faza 2** (S10, potem Colima + S3, S7, powtórzenia VEP 4–5, S9): nie uruchomiona"]
+    lines = log.read_text().strip().splitlines()
+    last = lines[-1] if lines else ""
+    alive = subprocess.run(["pgrep", "-f", "m5_phase2.sh"], capture_output=True).returncode == 0
+    out = [f"- **Faza 2** (S10, potem Colima + S3, S7, powtórzenia VEP 4–5, S9): proces {'działa' if alive else 'nie działa'}; "
+           f"ostatni wpis: `{last[:140]}`"]
+    if "waiting for phase 1" in last:
+        out.append("  - czeka na koniec fazy 1; szacunkowo potrwa ok. 23 h od startu (S10 ~2 h, S3+S7 ~25 min, VEP 2 × ~7,9 h, S9 ~4 h)")
+    return out
+
+
 def main() -> None:
     now = datetime.now(timezone.utc)
     free = shutil.disk_usage(D).free / 1e9
     vl, vep_end = vep_status(now)
     bl = batch_status(now, vep_end)
-    block = [f"_Stan na {fmt_local(now)} (aktualizowane automatycznie przez tools/m5_progress.py)_", "", *vl, *bl,
+    block = [f"_Stan na {fmt_local(now)} (aktualizowane automatycznie przez tools/m5_progress.py)_", "", *vl, *bl, *phase2_status(now),
              f"- Wolne miejsce na dysku: {free:.0f} GB"]
     text = "\n".join(block)
     print(text)

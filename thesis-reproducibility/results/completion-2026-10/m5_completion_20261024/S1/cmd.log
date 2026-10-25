@@ -1,0 +1,2 @@
+$ tabix -f -p vcf /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/HG002_annotated_wgs_everything_hgvs_merged.vcf.gz
+[exit 0]

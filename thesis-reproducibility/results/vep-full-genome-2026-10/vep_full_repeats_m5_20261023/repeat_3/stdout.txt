@@ -1,0 +1,1 @@
+2026-10-23 17:19:29 - INFO: BAM-edited cache detected, enabling --use_transcript_ref; use --use_given_ref to override this

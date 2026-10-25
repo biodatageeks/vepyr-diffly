@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/Users/lukaszjezapkowicz/workspace/data_vepyr/tools/m5_completion_batch.py", line 597, in main
+    res = FUNCS[sid](d)
+  File "/Users/lukaszjezapkowicz/workspace/data_vepyr/tools/m5_completion_batch.py", line 469, in s10
+    raise RuntimeError(f"run_comparison exit {p.returncode}; see run_comparison.log; {summ}")
+RuntimeError: run_comparison exit 1; see run_comparison.log; {'run_comparison_exit': 1, 'gate_exit': 1, 'gate_tail': '', 'totals': {'variants': 374291, 'only_vepyr': 0, 'only_vep': 0, 'csq_count_mismatch': 0, 'csq_order_mismatch': 0}}

@@ -1,0 +1,17 @@
+{
+  "release": 116,
+  "cache_type": "merged",
+  "partitions": 1,
+  "local_cache": "/Users/lukaszjezapkowicz/workspace/data_vepyr/homo_sapiens_merged/116_GRCh38",
+  "output": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S11/repeat_5/cache",
+  "contigs": 1904,
+  "entities": [
+    "variation",
+    "transcript",
+    "exon",
+    "regulatory",
+    "motif",
+    "translation"
+  ],
+  "translation_mode": "one chromosome per call"
+}

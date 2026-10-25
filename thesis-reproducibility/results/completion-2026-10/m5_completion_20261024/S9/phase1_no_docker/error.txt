@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/Users/lukaszjezapkowicz/workspace/data_vepyr/tools/m5_completion_batch.py", line 597, in main
+    res = FUNCS[sid](d)
+  File "/Users/lukaszjezapkowicz/workspace/data_vepyr/tools/m5_completion_batch.py", line 497, in s9
+    raise RuntimeError(f"VEP failed for {chrom} repeat {rep}")
+RuntimeError: VEP failed for chr22 repeat 1

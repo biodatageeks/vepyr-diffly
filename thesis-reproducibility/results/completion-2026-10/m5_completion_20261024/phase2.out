@@ -1,0 +1,8 @@
+2026-10-24T04:45:32Z phase 2 waiting for phase 1 to finish
+2026-10-24T09:01:38Z phase 1 finished
+2026-10-24T09:01:38Z S10 rerun (Colima stopped)
+2026-10-24T09:43:16Z starting Colima
+2026-10-24T09:43:32Z S3 and S7 (Docker steps of phase 1)
+2026-10-24T09:43:51Z VEP full-genome repeats 4-5
+2026-10-25T00:49:25Z S9 (VEP peak RSS on chr22 and chr1)
+2026-10-25T04:26:51Z phase 2 done

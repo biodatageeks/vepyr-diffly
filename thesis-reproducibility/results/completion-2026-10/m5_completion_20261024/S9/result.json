@@ -1,0 +1,12 @@
+{
+  "chr22": {
+    "mean_wall_s": 401.608,
+    "mean_peak_rss_gib": 1.6914,
+    "mean_peak_rss_gb": 1.8164
+  },
+  "chr1": {
+    "mean_wall_s": 2189.878,
+    "mean_peak_rss_gib": 1.6461999999999999,
+    "mean_peak_rss_gb": 1.7674
+  }
+}

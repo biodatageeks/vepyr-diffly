@@ -1,0 +1,13 @@
+$ /usr/bin/time -p -o /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S3/time_1.txt docker run --rm ensemblorg/ensembl-vep:release_116.0 true
+failed to connect to the docker API at unix:///var/run/docker.sock; check if the path is correct and if the daemon is running: dial unix /var/run/docker.sock: connect: no such file or directory
+[exit 1]
+$ /usr/bin/time -p -o /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S3/time_1.txt docker run --rm ensemblorg/ensembl-vep:release_116.0 true
+[exit 0]
+$ /usr/bin/time -p -o /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S3/time_2.txt docker run --rm ensemblorg/ensembl-vep:release_116.0 true
+[exit 0]
+$ /usr/bin/time -p -o /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S3/time_3.txt docker run --rm ensemblorg/ensembl-vep:release_116.0 true
+[exit 0]
+$ /usr/bin/time -p -o /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S3/time_4.txt docker run --rm ensemblorg/ensembl-vep:release_116.0 true
+[exit 0]
+$ /usr/bin/time -p -o /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S3/time_5.txt docker run --rm ensemblorg/ensembl-vep:release_116.0 true
+[exit 0]

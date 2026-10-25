@@ -12,9 +12,9 @@ command logs, concordance reports and the measurement scripts. Large outputs
 in `LARGE_ARTIFACTS.tsv`. `MANIFEST.sha256` lists a SHA-256 checksum for every
 file in this directory.
 
-**Status (2026-10-23):** the October 2026 completion run (`results/completion-2026-10`,
-steps S0–S11) and VEP full-genome repeats 3–5 are still running; their results
-will be added to this directory when they finish.
+**Status (2026-10-25):** complete. The October 2026 completion run
+(`results/completion-2026-10`, steps S0–S11) and VEP full-genome repeats 2–5 have
+finished; all numbers in the thesis refer to artifacts in this directory.
 
 ## Environment
 
@@ -39,9 +39,11 @@ will be added to this directory when they finish.
 
 ## Map: thesis → artifacts
 
-Times are means of five runs unless stated otherwise; "repeat 1" of the
-annotation series is the single run of 2026-09-24, repeats 2–5 were run on
-2026-09-25 (VEPYR) and 2026-09-26/28 (VEP).
+Times are means of five runs. In the chromosome 1/22 annotation series and the
+VEP full-genome series, "repeat 1" is the single run of 2026-09-24; repeats 2–5
+were run on 2026-09-25 (VEPYR), 2026-09-26/28 (VEP, chromosomes 1 and 22) and
+2026-10-23/25 (VEP, full genome). VEPYR on the full input was run five times on
+2026-10-24 (step S5).
 
 | Thesis item (LaTeX label) | Artifacts | Script |
 |---|---|---|
@@ -64,7 +66,16 @@ annotation series is the single run of 2026-09-24, repeats 2–5 were run on
   annotation call measured with `time.perf_counter` inside an already running
   Python process.
 - VEP peak memory is the `VmHWM` of the VEP (perl) process inside the container,
-  sampled with `docker exec`.
+  sampled with `docker exec` (every 30 s in the full-genome series, every 5 s in
+  step S9). It was not recorded in full-genome repeat 1, and on chromosomes 1/22
+  it was measured for the baseline scenario only (S9, 2026-10-25).
+- Memory units: the thesis reports peak RSS in GiB. VEPYR records store
+  `ru_maxrss` in bytes and a field named `max_rss_gb` that is bytes / 1024^3
+  (i.e. GiB); VEP records store VmHWM in kB, with `peak_rss_gb` = kB × 1024 / 10^9
+  (decimal GB) and, in S9, also `peak_rss_gib`.
+- Step S9 was first attempted without Docker (failed run kept in
+  `S9/phase1_no_docker/`), and S7 likewise (`S7/result_phase1_no_docker.json`);
+  both were re-run by `scripts/m5_phase2.sh`.
 - Annotated VCFs from timing runs were deleted after each run; record counts and
   body checksums were kept.
 - Paths in scripts and JSON files refer to the author's machine.

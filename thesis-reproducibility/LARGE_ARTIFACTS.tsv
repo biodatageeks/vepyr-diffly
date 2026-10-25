@@ -1,3 +1,6 @@
 path_on_author_machine	bytes
-/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/vep_full_repeats_m5_20261023/kept_reference/HG002_vep_forknone_repeat2.vcf	16085901312
-/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/vep_full_repeats_m5_20261023/repeat_2/HG002_vep_forknone.vcf	16085901312
+/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S7/tiny_chr22.vcf.gz	14306
+/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/inputs/HG002_normalized_chr1.vcf.gz	12050726
+/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/inputs/HG002_normalized_chr1.vcf.gz.tbi	138374
+/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/inputs/HG002_normalized_chr22.vcf.gz	1915338
+/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/inputs/HG002_normalized_chr22.vcf.gz.tbi	20842

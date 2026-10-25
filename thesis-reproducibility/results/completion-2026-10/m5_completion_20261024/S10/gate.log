@@ -1,0 +1,6 @@
+$ /Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-native/bin/python3 /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/scripts/verify_parity_gate.py --release 116 --profile merged --chroms 1-22 --report-dir /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S10/reports
+PARITY GATE FAILED: missing release-qualified report: /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S10/reports/fast_chr2_merged_116_report.json
+[exit 1]
+$ /Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-native/bin/python3 /Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/scripts/verify_parity_gate.py --release 116 --profile merged --chroms 1-22 --report-dir /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S10/reports
+PARITY GATE FAILED: chr1: ledger path '/Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr/e2e-testing/reports/fast_chr1_merged_116_mismatches.jsonl' does not match expected /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/S10/reports/fast_chr1_merged_116_mismatches.jsonl
+[exit 1]

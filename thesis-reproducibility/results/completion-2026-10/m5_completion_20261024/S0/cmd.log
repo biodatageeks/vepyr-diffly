@@ -1,0 +1,8 @@
+$ bcftools view -r chr1 -Oz -o /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/inputs/HG002_normalized_chr1.vcf.gz /Users/lukaszjezapkowicz/workspace/data_vepyr/input/HG002_normalized.vcf.gz
+[exit 0]
+$ bcftools index -f -t /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/inputs/HG002_normalized_chr1.vcf.gz
+[exit 0]
+$ bcftools view -r chr22 -Oz -o /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/inputs/HG002_normalized_chr22.vcf.gz /Users/lukaszjezapkowicz/workspace/data_vepyr/input/HG002_normalized.vcf.gz
+[exit 0]
+$ bcftools index -f -t /Users/lukaszjezapkowicz/workspace/data_vepyr/runs/m5_completion_20261024/inputs/HG002_normalized_chr22.vcf.gz
+[exit 0]
