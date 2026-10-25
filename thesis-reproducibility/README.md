@@ -102,10 +102,16 @@ on 2026-10-24 (step S5).
 - Annotated VCFs from timing runs were deleted after each run; record counts and
   body checksums were kept.
 - The five-plugin references use the VEP 116 plugin code except CADD, which is the
-  corrected `CADD.pm` from VEP_plugins commit `7a1f6450fd12` (the release-116 plugin reads
+  corrected `CADD.pm` from commit `7a1f6450fd12` of the `mwiewior/VEP_plugins` fork (the release-116 plugin reads
   the HGVS-shifted allele and misses valid annotations); the generator pins the SHA-256 of
   every plugin file. Plugin sources were served from the local `plugin_input/` directory
   with `rclone serve http`. The parity gate script (`verify_parity_gate.py`) covers the
   core CSQ fields only and refuses the `merged_plugins` profile (`gate.log`); concordance
   of that profile rests on the E2E reports and their empty mismatch ledgers.
+- All VEPYR runs with plugins (plugin series, all-plugins scaling, E2E `merged_plugins`,
+  single-plugin field comparisons, S6, S8) used one plugin cache, built on 2026-08-27 and
+  downloaded from the team's data store with the other inputs. Its manifests record neither
+  the code version that built it nor the identities of the source files (they predate the
+  `url`/`md5` fields of the `vepyr-plugins` manifests), so its agreement with the source files
+  used by VEP rests on the plugin field comparisons.
 - Paths in scripts and JSON files refer to the author's machine.
