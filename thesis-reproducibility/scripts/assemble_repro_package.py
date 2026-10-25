@@ -46,6 +46,8 @@ COPIES = [
       "chr*_individual_plugins/benchmark_plugins_summary.*"]),
     ("results/plugin-series-2026-10-25", D / "runs/plugin_series_m5_20261025", None),
     ("results/plugin-series-2026-10-25", D / "runs", ["plugin_series_m5_20261025.out"]),
+    ("scripts", T, ["repeat_plugin_scaling_m5.py"]),
+    ("scripts/full_correctness_m5_20261012", T / "full_correctness_m5_20261012/scripts", None),
     ("scripts", D / "tools", ["measure_once.py", "run_5repeats_benchmark.py", "run_vep_5repeats_suite.py",
                               "run_vep_chr1_baseline.py", "run_full_vep_bench.py", "run_vep_full_repeats.sh",
                               "m5_completion_batch.py", "m5_phase2.sh", "m5_progress.py", "plugin_rss_gib.py", "m5_references_repeat6.sh",
