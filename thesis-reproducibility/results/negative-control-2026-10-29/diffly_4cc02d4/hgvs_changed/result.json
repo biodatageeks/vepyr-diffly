@@ -1,0 +1,1385 @@
+{
+ "class": "hgvs_changed",
+ "expected": {
+  "variants": 20,
+  "field_mismatches": {
+   "HGVSc": 20
+  }
+ },
+ "e2e": {
+  "variants_compared": 50861,
+  "variants_only_in_vepyr": 0,
+  "variants_only_in_vep": 0,
+  "csq_entry_count_match": 50861,
+  "csq_entry_count_mismatch": 0,
+  "csq_entries_only_in_vepyr": 0,
+  "csq_entries_only_in_vep": 0,
+  "csq_order_mismatch": 0,
+  "csq_order_mismatch_examples": [],
+  "csq_order_ignored": 0,
+  "csq_order_ignored_examples": [],
+  "csq_order_ignore_reason": null,
+  "fields_only_in_vepyr": [],
+  "fields_only_in_vep": [],
+  "field_match_rates": {
+   "Allele": 100.0,
+   "Consequence": 100.0,
+   "IMPACT": 100.0,
+   "SYMBOL": 100.0,
+   "Gene": 100.0,
+   "Feature_type": 100.0,
+   "Feature": 100.0,
+   "BIOTYPE": 100.0,
+   "EXON": 100.0,
+   "INTRON": 100.0,
+   "HGVSc": 99.9984,
+   "HGVSp": 100.0,
+   "cDNA_position": 100.0,
+   "CDS_position": 100.0,
+   "Protein_position": 100.0,
+   "Amino_acids": 100.0,
+   "Codons": 100.0,
+   "Existing_variation": 100.0,
+   "DISTANCE": 100.0,
+   "STRAND": 100.0,
+   "FLAGS": 100.0,
+   "VARIANT_CLASS": 100.0,
+   "SYMBOL_SOURCE": 100.0,
+   "HGNC_ID": 100.0,
+   "CANONICAL": 100.0,
+   "MANE": 100.0,
+   "MANE_SELECT": 100.0,
+   "MANE_PLUS_CLINICAL": 100.0,
+   "TSL": 100.0,
+   "APPRIS": 100.0,
+   "CCDS": 100.0,
+   "ENSP": 100.0,
+   "SWISSPROT": 100.0,
+   "TREMBL": 100.0,
+   "UNIPARC": 100.0,
+   "UNIPROT_ISOFORM": 100.0,
+   "REFSEQ_MATCH": 100.0,
+   "SOURCE": 100.0,
+   "REFSEQ_OFFSET": 100.0,
+   "GIVEN_REF": 100.0,
+   "USED_REF": 100.0,
+   "BAM_EDIT": 100.0,
+   "GENE_PHENO": 100.0,
+   "SIFT": 100.0,
+   "PolyPhen": 100.0,
+   "DOMAINS": 100.0,
+   "miRNA": 100.0,
+   "HGVS_OFFSET": 100.0,
+   "AF": 100.0,
+   "AFR_AF": 100.0,
+   "AMR_AF": 100.0,
+   "EAS_AF": 100.0,
+   "EUR_AF": 100.0,
+   "SAS_AF": 100.0,
+   "gnomADe_AF": 100.0,
+   "gnomADe_AFR_AF": 100.0,
+   "gnomADe_AMR_AF": 100.0,
+   "gnomADe_ASJ_AF": 100.0,
+   "gnomADe_EAS_AF": 100.0,
+   "gnomADe_FIN_AF": 100.0,
+   "gnomADe_MID_AF": 100.0,
+   "gnomADe_NFE_AF": 100.0,
+   "gnomADe_REMAINING_AF": 100.0,
+   "gnomADe_SAS_AF": 100.0,
+   "gnomADg_AF": 100.0,
+   "gnomADg_AFR_AF": 100.0,
+   "gnomADg_AMI_AF": 100.0,
+   "gnomADg_AMR_AF": 100.0,
+   "gnomADg_ASJ_AF": 100.0,
+   "gnomADg_EAS_AF": 100.0,
+   "gnomADg_FIN_AF": 100.0,
+   "gnomADg_MID_AF": 100.0,
+   "gnomADg_NFE_AF": 100.0,
+   "gnomADg_REMAINING_AF": 100.0,
+   "gnomADg_SAS_AF": 100.0,
+   "MAX_AF": 100.0,
+   "MAX_AF_POPS": 100.0,
+   "CLIN_SIG": 100.0,
+   "SOMATIC": 100.0,
+   "PHENO": 100.0,
+   "PUBMED": 100.0,
+   "MOTIF_NAME": 100.0,
+   "MOTIF_POS": 100.0,
+   "HIGH_INF_POS": 100.0,
+   "MOTIF_SCORE_CHANGE": 100.0,
+   "TRANSCRIPTION_FACTORS": 100.0,
+   "SpliceAI_pred_DP_AG": 100.0,
+   "SpliceAI_pred_DP_AL": 100.0,
+   "SpliceAI_pred_DP_DG": 100.0,
+   "SpliceAI_pred_DP_DL": 100.0,
+   "SpliceAI_pred_DS_AG": 100.0,
+   "SpliceAI_pred_DS_AL": 100.0,
+   "SpliceAI_pred_DS_DG": 100.0,
+   "SpliceAI_pred_DS_DL": 100.0,
+   "SpliceAI_pred_SYMBOL": 100.0,
+   "CADD_PHRED": 100.0,
+   "CADD_RAW": 100.0,
+   "am_class": 100.0,
+   "am_pathogenicity": 100.0,
+   "CADD_phred": 100.0,
+   "CADD_raw": 100.0,
+   "GERP++_RS": 100.0,
+   "MetaLR_pred": 100.0,
+   "MetaLR_score": 100.0,
+   "MetaSVM_pred": 100.0,
+   "MetaSVM_score": 100.0,
+   "MutationTaster_pred": 100.0,
+   "MutationTaster_score": 100.0,
+   "PROVEAN_pred": 100.0,
+   "PROVEAN_score": 100.0,
+   "Polyphen2_HDIV_score": 100.0,
+   "Polyphen2_HVAR_score": 100.0,
+   "REVEL_score": 100.0,
+   "SIFT4G_pred": 100.0,
+   "SIFT4G_score": 100.0,
+   "VEST4_score": 100.0,
+   "phastCons100way_vertebrate": 100.0,
+   "phyloP100way_vertebrate": 100.0,
+   "ClinVar": 100.0,
+   "ClinVar_CLNSIG": 100.0,
+   "ClinVar_CLNREVSTAT": 100.0,
+   "ClinVar_CLNDN": 100.0,
+   "ClinVar_CLNVC": 100.0,
+   "ClinVar_CLNVI": 100.0
+  },
+  "field_mismatch_counts": {
+   "HGVSc": 20
+  },
+  "field_mismatch_examples": {
+   "HGVSc": [
+    {
+     "variant": "chr22\t17951272\tC\tG",
+     "vepyr": "ENST00000424046.1:c.-74-44387G>C",
+     "vep": "ENST00000424046.1:c.-74-44386G>C",
+     "allele_num": "",
+     "allele": "G",
+     "feature": "ENST00000424046",
+     "duplicate_ordinal": 1
+    },
+    {
+     "variant": "chr22\t24938902\tG\tA",
+     "vepyr": "ENST00000407886.2:c.-13+434C>T",
+     "vep": "ENST00000407886.2:c.-13+433C>T",
+     "allele_num": "",
+     "allele": "A",
+     "feature": "ENST00000407886",
+     "duplicate_ordinal": 1
+    },
+    {
+     "variant": "chr22\t25751590\tA\tG",
+     "vepyr": "ENST00000335473.12:c.-110+9298A>G",
+     "vep": "ENST00000335473.12:c.-110+9297A>G",
+     "allele_num": "",
+     "allele": "G",
+     "feature": "ENST00000335473",
+     "duplicate_ordinal": 1
+    },
+    {
+     "variant": "chr22\t29970935\tC\tCT",
+     "vepyr": "ENST00000323630.10:c.-405-7498dup",
+     "vep": "ENST00000323630.10:c.-405-7497dup",
+     "allele_num": "",
+     "allele": "T",
+     "feature": "ENST00000323630",
+     "duplicate_ordinal": 1
+    },
+    {
+     "variant": "chr22\t30566899\tA\tG",
+     "vepyr": "ENST00000402369.6:c.-10+7568T>C",
+     "vep": "ENST00000402369.6:c.-10+7567T>C",
+     "allele_num": "",
+     "allele": "G",
+     "feature": "ENST00000402369",
+     "duplicate_ordinal": 1
+    },
+    {
+     "variant": "chr22\t32577084\tA\tG",
+     "vepyr": "ENST00000358763.7:c.774+19591T>C",
+     "vep": "ENST00000358763.7:c.774+19590T>C",
+     "allele_num": "",
+     "allele": "G",
+     "feature": "ENST00000358763",
+     "duplicate_ordinal": 1
+    },
+    {
+     "variant": "chr22\t32688994\tG\tA",
+     "vepyr": "ENST00000358763.7:c.712-92259C>T",
+     "vep": "ENST00000358763.7:c.712-92258C>T",
+     "allele_num": "",
+     "allele": "A",
+     "feature": "ENST00000358763",
+     "duplicate_ordinal": 1
+    },
+    {
+     "variant": "chr22\t36134380\tG\tA",
+     "vepyr": "ENST00000803732.1:n.464-357C>T",
+     "vep": "ENST00000803732.1:n.464-356C>T",
+     "allele_num": "",
+     "allele": "A",
+     "feature": "ENST00000803732",
+     "duplicate_ordinal": 1
+    },
+    {
+     "variant": "chr22\t36714224\tT\tC",
+     "vepyr": "ENST00000430281.4:n.417-6693T>C",
+     "vep": "ENST00000430281.4:n.417-6692T>C",
+     "allele_num": "",
+     "allele": "C",
+     "feature": "ENST00000430281",
+     "duplicate_ordinal": 1
+    },
+    {
+     "variant": "chr22\t36921135\tC\tG",
+     "vepyr": "ENST00000403662.8:c.-172-902C>G",
+     "vep": "ENST00000403662.8:c.-172-901C>G",
+     "allele_num": "",
+     "allele": "G",
+     "feature": "ENST00000403662",
+     "duplicate_ordinal": 1
+    }
+   ]
+  },
+  "field_order_mismatch_counts": {},
+  "field_order_mismatch_examples": {},
+  "field_format_mismatch_counts": {},
+  "field_format_mismatch_examples": {},
+  "field_equality_counts": {
+   "Allele": {
+    "both_empty": 0,
+    "both_nonempty_equal": 1242828,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Consequence": {
+    "both_empty": 0,
+    "both_nonempty_equal": 1242828,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "IMPACT": {
+    "both_empty": 0,
+    "both_nonempty_equal": 1242828,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SYMBOL": {
+    "both_empty": 64580,
+    "both_nonempty_equal": 1178248,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Gene": {
+    "both_empty": 10722,
+    "both_nonempty_equal": 1232106,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Feature_type": {
+    "both_empty": 6491,
+    "both_nonempty_equal": 1236337,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Feature": {
+    "both_empty": 6491,
+    "both_nonempty_equal": 1236337,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "BIOTYPE": {
+    "both_empty": 6807,
+    "both_nonempty_equal": 1236021,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "EXON": {
+    "both_empty": 1195681,
+    "both_nonempty_equal": 47147,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "INTRON": {
+    "both_empty": 324444,
+    "both_nonempty_equal": 918384,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "HGVSc": {
+    "both_empty": 277306,
+    "both_nonempty_equal": 965502,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 20
+   },
+   "HGVSp": {
+    "both_empty": 1232937,
+    "both_nonempty_equal": 9891,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "cDNA_position": {
+    "both_empty": 1195680,
+    "both_nonempty_equal": 47148,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "CDS_position": {
+    "both_empty": 1232933,
+    "both_nonempty_equal": 9895,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Protein_position": {
+    "both_empty": 1232933,
+    "both_nonempty_equal": 9895,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Amino_acids": {
+    "both_empty": 1232934,
+    "both_nonempty_equal": 9894,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Codons": {
+    "both_empty": 1232934,
+    "both_nonempty_equal": 9894,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Existing_variation": {
+    "both_empty": 10763,
+    "both_nonempty_equal": 1232065,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "DISTANCE": {
+    "both_empty": 976252,
+    "both_nonempty_equal": 266576,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "STRAND": {
+    "both_empty": 10406,
+    "both_nonempty_equal": 1232422,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "FLAGS": {
+    "both_empty": 1215647,
+    "both_nonempty_equal": 27181,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "VARIANT_CLASS": {
+    "both_empty": 0,
+    "both_nonempty_equal": 1242828,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SYMBOL_SOURCE": {
+    "both_empty": 64580,
+    "both_nonempty_equal": 1178248,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "HGNC_ID": {
+    "both_empty": 75878,
+    "both_nonempty_equal": 1166950,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "CANONICAL": {
+    "both_empty": 1135664,
+    "both_nonempty_equal": 107164,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MANE": {
+    "both_empty": 1182757,
+    "both_nonempty_equal": 60071,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MANE_SELECT": {
+    "both_empty": 1182757,
+    "both_nonempty_equal": 60071,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MANE_PLUS_CLINICAL": {
+    "both_empty": 1242828,
+    "both_nonempty_equal": 0,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "TSL": {
+    "both_empty": 1053915,
+    "both_nonempty_equal": 188913,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "APPRIS": {
+    "both_empty": 1006559,
+    "both_nonempty_equal": 236269,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "CCDS": {
+    "both_empty": 1021309,
+    "both_nonempty_equal": 221519,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "ENSP": {
+    "both_empty": 339641,
+    "both_nonempty_equal": 903187,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SWISSPROT": {
+    "both_empty": 1161958,
+    "both_nonempty_equal": 80870,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "TREMBL": {
+    "both_empty": 1109247,
+    "both_nonempty_equal": 133581,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "UNIPARC": {
+    "both_empty": 864285,
+    "both_nonempty_equal": 378543,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "UNIPROT_ISOFORM": {
+    "both_empty": 1174630,
+    "both_nonempty_equal": 68198,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "REFSEQ_MATCH": {
+    "both_empty": 1242828,
+    "both_nonempty_equal": 0,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SOURCE": {
+    "both_empty": 10722,
+    "both_nonempty_equal": 1232106,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "REFSEQ_OFFSET": {
+    "both_empty": 1242828,
+    "both_nonempty_equal": 0,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "GIVEN_REF": {
+    "both_empty": 108933,
+    "both_nonempty_equal": 1133895,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "USED_REF": {
+    "both_empty": 108933,
+    "both_nonempty_equal": 1133895,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "BAM_EDIT": {
+    "both_empty": 1236066,
+    "both_nonempty_equal": 6762,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "GENE_PHENO": {
+    "both_empty": 915586,
+    "both_nonempty_equal": 327242,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SIFT": {
+    "both_empty": 1238647,
+    "both_nonempty_equal": 4181,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "PolyPhen": {
+    "both_empty": 1240575,
+    "both_nonempty_equal": 2253,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "DOMAINS": {
+    "both_empty": 1236895,
+    "both_nonempty_equal": 5933,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "miRNA": {
+    "both_empty": 1242824,
+    "both_nonempty_equal": 4,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "HGVS_OFFSET": {
+    "both_empty": 1160478,
+    "both_nonempty_equal": 82350,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "AF": {
+    "both_empty": 113861,
+    "both_nonempty_equal": 1128967,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "AFR_AF": {
+    "both_empty": 113861,
+    "both_nonempty_equal": 1128967,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "AMR_AF": {
+    "both_empty": 113861,
+    "both_nonempty_equal": 1128967,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "EAS_AF": {
+    "both_empty": 113861,
+    "both_nonempty_equal": 1128967,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "EUR_AF": {
+    "both_empty": 113861,
+    "both_nonempty_equal": 1128967,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SAS_AF": {
+    "both_empty": 113861,
+    "both_nonempty_equal": 1128967,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_AF": {
+    "both_empty": 1014114,
+    "both_nonempty_equal": 228714,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_AFR_AF": {
+    "both_empty": 1053959,
+    "both_nonempty_equal": 188869,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_AMR_AF": {
+    "both_empty": 1068487,
+    "both_nonempty_equal": 174341,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_ASJ_AF": {
+    "both_empty": 1067654,
+    "both_nonempty_equal": 175174,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_EAS_AF": {
+    "both_empty": 1057909,
+    "both_nonempty_equal": 184919,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_FIN_AF": {
+    "both_empty": 1038472,
+    "both_nonempty_equal": 204356,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_MID_AF": {
+    "both_empty": 1071387,
+    "both_nonempty_equal": 171441,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_NFE_AF": {
+    "both_empty": 1017798,
+    "both_nonempty_equal": 225030,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_REMAINING_AF": {
+    "both_empty": 1035035,
+    "both_nonempty_equal": 207793,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_SAS_AF": {
+    "both_empty": 1060629,
+    "both_nonempty_equal": 182199,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_AF": {
+    "both_empty": 14634,
+    "both_nonempty_equal": 1228194,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_AFR_AF": {
+    "both_empty": 14732,
+    "both_nonempty_equal": 1228096,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_AMI_AF": {
+    "both_empty": 14923,
+    "both_nonempty_equal": 1227905,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_AMR_AF": {
+    "both_empty": 14636,
+    "both_nonempty_equal": 1228192,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_ASJ_AF": {
+    "both_empty": 14786,
+    "both_nonempty_equal": 1228042,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_EAS_AF": {
+    "both_empty": 14716,
+    "both_nonempty_equal": 1228112,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_FIN_AF": {
+    "both_empty": 14680,
+    "both_nonempty_equal": 1228148,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_MID_AF": {
+    "both_empty": 15187,
+    "both_nonempty_equal": 1227641,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_NFE_AF": {
+    "both_empty": 14671,
+    "both_nonempty_equal": 1228157,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_REMAINING_AF": {
+    "both_empty": 14743,
+    "both_nonempty_equal": 1228085,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_SAS_AF": {
+    "both_empty": 14693,
+    "both_nonempty_equal": 1228135,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MAX_AF": {
+    "both_empty": 12430,
+    "both_nonempty_equal": 1230398,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MAX_AF_POPS": {
+    "both_empty": 12430,
+    "both_nonempty_equal": 1230398,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "CLIN_SIG": {
+    "both_empty": 1199235,
+    "both_nonempty_equal": 43593,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SOMATIC": {
+    "both_empty": 1156687,
+    "both_nonempty_equal": 86141,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "PHENO": {
+    "both_empty": 1060262,
+    "both_nonempty_equal": 182566,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "PUBMED": {
+    "both_empty": 1079780,
+    "both_nonempty_equal": 163048,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MOTIF_NAME": {
+    "both_empty": 1242512,
+    "both_nonempty_equal": 316,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MOTIF_POS": {
+    "both_empty": 1242516,
+    "both_nonempty_equal": 312,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "HIGH_INF_POS": {
+    "both_empty": 1242512,
+    "both_nonempty_equal": 316,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MOTIF_SCORE_CHANGE": {
+    "both_empty": 1242558,
+    "both_nonempty_equal": 270,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "TRANSCRIPTION_FACTORS": {
+    "both_empty": 1242512,
+    "both_nonempty_equal": 316,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SpliceAI_pred_DP_AG": {
+    "both_empty": 606349,
+    "both_nonempty_equal": 636479,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SpliceAI_pred_DP_AL": {
+    "both_empty": 606349,
+    "both_nonempty_equal": 636479,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SpliceAI_pred_DP_DG": {
+    "both_empty": 606349,
+    "both_nonempty_equal": 636479,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SpliceAI_pred_DP_DL": {
+    "both_empty": 606349,
+    "both_nonempty_equal": 636479,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SpliceAI_pred_DS_AG": {
+    "both_empty": 606349,
+    "both_nonempty_equal": 636479,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SpliceAI_pred_DS_AL": {
+    "both_empty": 606349,
+    "both_nonempty_equal": 636479,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SpliceAI_pred_DS_DG": {
+    "both_empty": 606349,
+    "both_nonempty_equal": 636479,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SpliceAI_pred_DS_DL": {
+    "both_empty": 606349,
+    "both_nonempty_equal": 636479,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SpliceAI_pred_SYMBOL": {
+    "both_empty": 606349,
+    "both_nonempty_equal": 636479,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "CADD_PHRED": {
+    "both_empty": 11468,
+    "both_nonempty_equal": 1231360,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "CADD_RAW": {
+    "both_empty": 11468,
+    "both_nonempty_equal": 1231360,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "am_class": {
+    "both_empty": 1240324,
+    "both_nonempty_equal": 2504,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "am_pathogenicity": {
+    "both_empty": 1240324,
+    "both_nonempty_equal": 2504,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "CADD_phred": {
+    "both_empty": 1238265,
+    "both_nonempty_equal": 4563,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "CADD_raw": {
+    "both_empty": 1238265,
+    "both_nonempty_equal": 4563,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "GERP++_RS": {
+    "both_empty": 1238402,
+    "both_nonempty_equal": 4426,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MetaLR_pred": {
+    "both_empty": 1238502,
+    "both_nonempty_equal": 4326,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MetaLR_score": {
+    "both_empty": 1238502,
+    "both_nonempty_equal": 4326,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MetaSVM_pred": {
+    "both_empty": 1238502,
+    "both_nonempty_equal": 4326,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MetaSVM_score": {
+    "both_empty": 1238502,
+    "both_nonempty_equal": 4326,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MutationTaster_pred": {
+    "both_empty": 1238384,
+    "both_nonempty_equal": 4444,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MutationTaster_score": {
+    "both_empty": 1238384,
+    "both_nonempty_equal": 4444,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "PROVEAN_pred": {
+    "both_empty": 1238340,
+    "both_nonempty_equal": 4488,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "PROVEAN_score": {
+    "both_empty": 1238340,
+    "both_nonempty_equal": 4488,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Polyphen2_HDIV_score": {
+    "both_empty": 1238407,
+    "both_nonempty_equal": 4421,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Polyphen2_HVAR_score": {
+    "both_empty": 1238407,
+    "both_nonempty_equal": 4421,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "REVEL_score": {
+    "both_empty": 1238341,
+    "both_nonempty_equal": 4487,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SIFT4G_pred": {
+    "both_empty": 1238373,
+    "both_nonempty_equal": 4455,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SIFT4G_score": {
+    "both_empty": 1238373,
+    "both_nonempty_equal": 4455,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "VEST4_score": {
+    "both_empty": 1238368,
+    "both_nonempty_equal": 4460,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "phastCons100way_vertebrate": {
+    "both_empty": 1238265,
+    "both_nonempty_equal": 4563,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "phyloP100way_vertebrate": {
+    "both_empty": 1238265,
+    "both_nonempty_equal": 4563,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "ClinVar": {
+    "both_empty": 1195528,
+    "both_nonempty_equal": 47300,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "ClinVar_CLNSIG": {
+    "both_empty": 1198580,
+    "both_nonempty_equal": 44248,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "ClinVar_CLNREVSTAT": {
+    "both_empty": 1198580,
+    "both_nonempty_equal": 44248,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "ClinVar_CLNDN": {
+    "both_empty": 1198580,
+    "both_nonempty_equal": 44248,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "ClinVar_CLNVC": {
+    "both_empty": 1195528,
+    "both_nonempty_equal": 47300,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "ClinVar_CLNVI": {
+    "both_empty": 1198772,
+    "both_nonempty_equal": 44056,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   }
+  },
+  "equality_bucket_counts": {
+   "both_empty": 95807189,
+   "both_nonempty_equal": 58303463,
+   "vepyr_empty_only": 0,
+   "vep_empty_only": 0,
+   "both_nonempty_unequal": 20
+  },
+  "mismatch_ledger": {
+   "path": "out/hgvs_changed/e2e_ledger.jsonl",
+   "rows": 20,
+   "sha256": "1a57bb4944f21c94e800e7868ab5be8fedb215e723e4949f74f18dbf0058dd19"
+  }
+ },
+ "diffly_full": {
+  "preset": "ensembl_everything",
+  "input_vcf": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/base_chr22_all_plugins.vcf",
+  "annotated_left_vcf": "base_chr22_all_plugins.vcf",
+  "annotated_right_vcf": "out/hgvs_changed/modified.vcf",
+  "sample_first_n": null,
+  "requested_chromosomes": null,
+  "effective_chromosomes": [],
+  "progress_log_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out/hgvs_changed/diffly_full/runtime/compare.progress.log",
+  "compare_mode": "fast",
+  "bucket_count": null,
+  "compare_workers": null,
+  "memory_budget_mb": null,
+  "resource_plan": {
+   "memory_budget_mb": 2048,
+   "bucket_count": 8,
+   "variant_chunk_rows": 50000,
+   "consequence_chunk_rows": 16384,
+   "compare_workers": 4,
+   "parallelize_sides": false,
+   "use_bucketed_variant": true,
+   "use_bucketed_consequence": true
+  },
+  "fingerprint_only": false,
+  "timings": {
+   "variant_summary_seconds": 4.435,
+   "consequence_bucketization_seconds": 14.323,
+   "schema_validation_seconds": 0.004,
+   "variant_diff_seconds": 0.089,
+   "consequence_diff_seconds": 72.486
+  },
+  "tiers": {
+   "variant": {
+    "equal": true,
+    "left_only_rows": 0,
+    "right_only_rows": 0,
+    "unequal_rows": 0,
+    "joined_equal_rows": 50861,
+    "diff_frame_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out/hgvs_changed/diffly_full/variant_diff.parquet",
+    "mismatches_tsv_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out/hgvs_changed/diffly_full/variant_mismatches.tsv",
+    "details": {
+     "compare_mode": "fast",
+     "fingerprint_only": false,
+     "precheck_equal_buckets": 8,
+     "exact_diff_run_buckets": 0,
+     "bucket_count": 8,
+     "buckets_compared": 8,
+     "workers": 1
+    },
+    "per_chromosome": {
+     "22": {
+      "left_rows": 50861,
+      "right_rows": 50861,
+      "joined_equal_rows": 50861,
+      "left_only_rows": 0,
+      "right_only_rows": 0,
+      "unequal_rows": 0
+     }
+    }
+   },
+   "consequence": {
+    "equal": false,
+    "left_only_rows": 19,
+    "right_only_rows": 19,
+    "unequal_rows": 0,
+    "joined_equal_rows": 1232480,
+    "diff_frame_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out/hgvs_changed/diffly_full/consequence_diff.parquet",
+    "mismatches_tsv_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out/hgvs_changed/diffly_full/consequence_mismatches.tsv",
+    "details": {
+     "compare_mode": "fast",
+     "fingerprint_only": false,
+     "precheck_equal_buckets": 0,
+     "exact_diff_run_buckets": 8,
+     "bucket_count": 8,
+     "buckets_compared": 8,
+     "workers": 4
+    },
+    "per_chromosome": {
+     "22": {
+      "left_rows": 1232499,
+      "right_rows": 1232499,
+      "joined_equal_rows": 1232480,
+      "left_only_rows": 19,
+      "right_only_rows": 19,
+      "unequal_rows": 0
+     }
+    }
+   }
+  },
+  "chromosomes": {
+   "per_chromosome": {
+    "22": {
+     "variant": {
+      "left_rows": 50861,
+      "right_rows": 50861,
+      "joined_equal_rows": 50861,
+      "left_only_rows": 0,
+      "right_only_rows": 0,
+      "unequal_rows": 0,
+      "equal": true
+     },
+     "consequence": {
+      "left_rows": 1232499,
+      "right_rows": 1232499,
+      "joined_equal_rows": 1232480,
+      "left_only_rows": 19,
+      "right_only_rows": 19,
+      "unequal_rows": 0,
+      "equal": false
+     },
+     "timings": {
+      "variant_summary_seconds": 4.435,
+      "consequence_bucketization_seconds": 14.323,
+      "consequence_summary_seconds": 0.0,
+      "variant_diff_seconds": 0.089,
+      "consequence_diff_seconds": 72.486
+     }
+    }
+   },
+   "requested": [],
+   "effective": []
+  }
+ },
+ "diffly_plugins": {
+  "preset": "ensembl_everything",
+  "input_vcf": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/base_chr22_all_plugins.vcf",
+  "annotated_left_vcf": "base_chr22_all_plugins.vcf",
+  "annotated_right_vcf": "out/hgvs_changed/modified.vcf",
+  "sample_first_n": null,
+  "requested_chromosomes": null,
+  "effective_chromosomes": [],
+  "progress_log_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out/hgvs_changed/diffly_plugins/runtime/compare.progress.log",
+  "compare_mode": "fast",
+  "bucket_count": null,
+  "compare_workers": null,
+  "memory_budget_mb": null,
+  "resource_plan": {
+   "memory_budget_mb": 2048,
+   "bucket_count": 8,
+   "variant_chunk_rows": 50000,
+   "consequence_chunk_rows": 16384,
+   "compare_workers": 4,
+   "parallelize_sides": false,
+   "use_bucketed_variant": true,
+   "use_bucketed_consequence": true
+  },
+  "fingerprint_only": false,
+  "timings": {
+   "variant_summary_seconds": 4.499,
+   "consequence_bucketization_seconds": 5.333,
+   "schema_validation_seconds": 0.004,
+   "variant_diff_seconds": 0.082,
+   "consequence_diff_seconds": 0.915
+  },
+  "tiers": {
+   "variant": {
+    "equal": true,
+    "left_only_rows": 0,
+    "right_only_rows": 0,
+    "unequal_rows": 0,
+    "joined_equal_rows": 50861,
+    "diff_frame_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out/hgvs_changed/diffly_plugins/variant_diff.parquet",
+    "mismatches_tsv_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out/hgvs_changed/diffly_plugins/variant_mismatches.tsv",
+    "details": {
+     "compare_mode": "fast",
+     "fingerprint_only": false,
+     "precheck_equal_buckets": 8,
+     "exact_diff_run_buckets": 0,
+     "bucket_count": 8,
+     "buckets_compared": 8,
+     "workers": 1
+    },
+    "per_chromosome": {
+     "22": {
+      "left_rows": 50861,
+      "right_rows": 50861,
+      "joined_equal_rows": 50861,
+      "left_only_rows": 0,
+      "right_only_rows": 0,
+      "unequal_rows": 0
+     }
+    }
+   },
+   "consequence": {
+    "equal": true,
+    "left_only_rows": 0,
+    "right_only_rows": 0,
+    "unequal_rows": 0,
+    "joined_equal_rows": 59043,
+    "diff_frame_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out/hgvs_changed/diffly_plugins/consequence_diff.parquet",
+    "mismatches_tsv_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out/hgvs_changed/diffly_plugins/consequence_mismatches.tsv",
+    "details": {
+     "compare_mode": "fast",
+     "fingerprint_only": false,
+     "precheck_equal_buckets": 8,
+     "exact_diff_run_buckets": 0,
+     "bucket_count": 8,
+     "buckets_compared": 8,
+     "workers": 4
+    },
+    "per_chromosome": {
+     "22": {
+      "left_rows": 59043,
+      "right_rows": 59043,
+      "joined_equal_rows": 59043,
+      "left_only_rows": 0,
+      "right_only_rows": 0,
+      "unequal_rows": 0
+     }
+    }
+   }
+  },
+  "chromosomes": {
+   "per_chromosome": {
+    "22": {
+     "variant": {
+      "left_rows": 50861,
+      "right_rows": 50861,
+      "joined_equal_rows": 50861,
+      "left_only_rows": 0,
+      "right_only_rows": 0,
+      "unequal_rows": 0,
+      "equal": true
+     },
+     "consequence": {
+      "left_rows": 59043,
+      "right_rows": 59043,
+      "joined_equal_rows": 59043,
+      "left_only_rows": 0,
+      "right_only_rows": 0,
+      "unequal_rows": 0,
+      "equal": true
+     },
+     "timings": {
+      "variant_summary_seconds": 4.499,
+      "consequence_bucketization_seconds": 5.333,
+      "consequence_summary_seconds": 0.0,
+      "variant_diff_seconds": 0.082,
+      "consequence_diff_seconds": 0.915
+     }
+    }
+   },
+   "requested": [],
+   "effective": []
+  }
+ },
+ "seconds": {
+  "e2e": 54.074110984802246,
+  "diffly_full": 91.56274199485779,
+  "diffly_plugins": 11.021647691726685
+ }
+}

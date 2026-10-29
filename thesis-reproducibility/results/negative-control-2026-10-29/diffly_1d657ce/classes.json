@@ -1,0 +1,101 @@
+[
+ {
+  "class": "identity",
+  "expected": {
+   "variants": 0
+  }
+ },
+ {
+  "class": "variant_removed",
+  "expected": {
+   "variants": 20
+  }
+ },
+ {
+  "class": "variant_added",
+  "expected": {
+   "variants": 20
+  }
+ },
+ {
+  "class": "csq_entry_removed",
+  "expected": {
+   "variants": 20
+  }
+ },
+ {
+  "class": "csq_entry_added",
+  "expected": {
+   "variants": 20
+  }
+ },
+ {
+  "class": "consequence_changed",
+  "expected": {
+   "variants": 20,
+   "field_mismatches": {
+    "Consequence": 20
+   }
+  }
+ },
+ {
+  "class": "hgvs_changed",
+  "expected": {
+   "variants": 20,
+   "field_mismatches": {
+    "HGVSc": 20
+   }
+  }
+ },
+ {
+  "class": "plugin_value_changed",
+  "expected": {
+   "variants": 20,
+   "field_mismatches": {
+    "CADD_PHRED": 326
+   },
+   "plugin": "cadd"
+  }
+ },
+ {
+  "class": "plugin_value_removed",
+  "expected": {
+   "variants": 20,
+   "field_mismatches": {
+    "ClinVar_CLNSIG": 1049
+   },
+   "plugin": "clinvar"
+  }
+ },
+ {
+  "class": "csq_order_swapped",
+  "expected": {
+   "variants": 20
+  }
+ },
+ {
+  "class": "equiv_number_format",
+  "expected": {
+   "variants": 20,
+   "format_only": {
+    "CADD_PHRED": 273
+   },
+   "plugin": "cadd"
+  }
+ },
+ {
+  "class": "equiv_amp_order",
+  "expected": {
+   "variants": 20,
+   "order_only": {
+    "Existing_variation": 896
+   }
+  }
+ },
+ {
+  "class": "equiv_header",
+  "expected": {
+   "variants": 0
+  }
+ }
+]

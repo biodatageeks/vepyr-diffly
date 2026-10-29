@@ -1,0 +1,16 @@
+{
+  "wall_seconds": 8032.9046850001905,
+  "files": 7688,
+  "vepyr": "0.7.0",
+  "bytes": 37510083795,
+  "entities": [
+    "exon",
+    "motif",
+    "regulatory",
+    "transcript",
+    "translation_core",
+    "translation_sift",
+    "variation"
+  ],
+  "step_wall_s": 8033.329555988312
+}

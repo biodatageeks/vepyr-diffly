@@ -1,0 +1,21 @@
+chrom	pos	ref	alt	record_count	consequence_count	ids	filters	diff_kind	consequence_count_left	consequence_count_right	filters_left	filters_right	ids_left	ids_right	record_count_left	record_count_right
+22	45674970	C	T					unequal	51	50	PASS	PASS	.	.	1	1
+22	21878392	C	T					unequal	2	1	PASS	PASS	.	.	1	1
+22	43598491	A	G					unequal	26	25	PASS	PASS	.	.	1	1
+22	50013825	G	GC					unequal	9	8	PASS	PASS	.	.	1	1
+22	26693456	G	GC					unequal	86	85	PASS	PASS	.	.	1	1
+22	24654351	C	G					unequal	46	45	PASS	PASS	.	.	1	1
+22	43141576	CT	C					unequal	22	21	PASS	PASS	.	.	1	1
+22	21812161	A	G					unequal	23	22	PASS	PASS	.	.	1	1
+22	39289827	G	A					unequal	9	8	PASS	PASS	.	.	1	1
+22	48739663	G	A					unequal	13	12	PASS	PASS	.	.	1	1
+22	33598132	G	A					unequal	80	79	PASS	PASS	.	.	1	1
+22	24219670	C	CTCT					unequal	125	124	PASS	PASS	.	.	1	1
+22	42069570	G	A					unequal	37	36	PASS	PASS	.	.	1	1
+22	17167456	G	A					unequal	8	7	PASS	PASS	.	.	1	1
+22	43660064	A	G					unequal	29	28	PASS	PASS	.	.	1	1
+22	38676676	G	T					unequal	54	53	PASS	PASS	.	.	1	1
+22	39596655	G	A					unequal	6	5	PASS	PASS	.	.	1	1
+22	39675225	C	T					unequal	8	7	PASS	PASS	.	.	1	1
+22	32823467	G	A					unequal	29	28	PASS	PASS	.	.	1	1
+22	27764086	T	C					unequal	5	4	PASS	PASS	.	.	1	1

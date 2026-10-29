@@ -1,0 +1,123 @@
+{
+  "preset": "ensembl_everything",
+  "input_vcf": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/base_chr22_all_plugins.vcf",
+  "annotated_left_vcf": "base_chr22_all_plugins.vcf",
+  "annotated_right_vcf": "out/consequence_changed/modified.vcf",
+  "sample_first_n": null,
+  "requested_chromosomes": null,
+  "effective_chromosomes": [],
+  "progress_log_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out/consequence_changed/diffly_full/runtime/compare.progress.log",
+  "compare_mode": "fast",
+  "bucket_count": null,
+  "compare_workers": null,
+  "memory_budget_mb": null,
+  "resource_plan": {
+    "memory_budget_mb": 2048,
+    "bucket_count": 8,
+    "variant_chunk_rows": 50000,
+    "consequence_chunk_rows": 16384,
+    "compare_workers": 4,
+    "parallelize_sides": false,
+    "use_bucketed_variant": true,
+    "use_bucketed_consequence": true
+  },
+  "fingerprint_only": false,
+  "timings": {
+    "variant_summary_seconds": 4.443,
+    "consequence_bucketization_seconds": 14.36,
+    "schema_validation_seconds": 0.005,
+    "variant_diff_seconds": 0.091,
+    "consequence_diff_seconds": 89.581
+  },
+  "tiers": {
+    "variant": {
+      "equal": true,
+      "left_only_rows": 0,
+      "right_only_rows": 0,
+      "unequal_rows": 0,
+      "joined_equal_rows": 50861,
+      "diff_frame_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out/consequence_changed/diffly_full/variant_diff.parquet",
+      "mismatches_tsv_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out/consequence_changed/diffly_full/variant_mismatches.tsv",
+      "details": {
+        "compare_mode": "fast",
+        "fingerprint_only": false,
+        "precheck_equal_buckets": 8,
+        "exact_diff_run_buckets": 0,
+        "bucket_count": 8,
+        "buckets_compared": 8,
+        "workers": 1
+      },
+      "per_chromosome": {
+        "22": {
+          "left_rows": 50861,
+          "right_rows": 50861,
+          "joined_equal_rows": 50861,
+          "left_only_rows": 0,
+          "right_only_rows": 0,
+          "unequal_rows": 0
+        }
+      }
+    },
+    "consequence": {
+      "equal": false,
+      "left_only_rows": 20,
+      "right_only_rows": 20,
+      "unequal_rows": 0,
+      "joined_equal_rows": 1232479,
+      "diff_frame_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out/consequence_changed/diffly_full/consequence_diff.parquet",
+      "mismatches_tsv_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out/consequence_changed/diffly_full/consequence_mismatches.tsv",
+      "details": {
+        "compare_mode": "fast",
+        "fingerprint_only": false,
+        "precheck_equal_buckets": 0,
+        "exact_diff_run_buckets": 8,
+        "bucket_count": 8,
+        "buckets_compared": 8,
+        "workers": 4
+      },
+      "per_chromosome": {
+        "22": {
+          "left_rows": 1232499,
+          "right_rows": 1232499,
+          "joined_equal_rows": 1232479,
+          "left_only_rows": 20,
+          "right_only_rows": 20,
+          "unequal_rows": 0
+        }
+      }
+    }
+  },
+  "chromosomes": {
+    "per_chromosome": {
+      "22": {
+        "variant": {
+          "left_rows": 50861,
+          "right_rows": 50861,
+          "joined_equal_rows": 50861,
+          "left_only_rows": 0,
+          "right_only_rows": 0,
+          "unequal_rows": 0,
+          "equal": true
+        },
+        "consequence": {
+          "left_rows": 1232499,
+          "right_rows": 1232499,
+          "joined_equal_rows": 1232479,
+          "left_only_rows": 20,
+          "right_only_rows": 20,
+          "unequal_rows": 0,
+          "equal": false
+        },
+        "timings": {
+          "variant_summary_seconds": 4.443,
+          "consequence_bucketization_seconds": 14.36,
+          "consequence_summary_seconds": 0.0,
+          "variant_diff_seconds": 0.091,
+          "consequence_diff_seconds": 89.581
+        }
+      }
+    },
+    "requested": [],
+    "effective": []
+  }
+}

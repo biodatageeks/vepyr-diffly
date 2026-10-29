@@ -1,0 +1,7454 @@
+{
+ "class": "csq_order_swapped",
+ "expected": {
+  "variants": 20
+ },
+ "e2e": {
+  "variants_compared": 50861,
+  "variants_only_in_vepyr": 0,
+  "variants_only_in_vep": 0,
+  "csq_entry_count_match": 50861,
+  "csq_entry_count_mismatch": 0,
+  "csq_entries_only_in_vepyr": 0,
+  "csq_entries_only_in_vep": 0,
+  "csq_order_mismatch": 20,
+  "csq_order_mismatch_examples": [
+   {
+    "variant": "chr22\t16821913\tG\tA",
+    "vepyr_order": [
+     [
+      "",
+      "A",
+      "ENST00000684488",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000331428",
+      "upstream_gene_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001093998",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001093999",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001094000",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001094001",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001126783",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001131990",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001318251.3",
+      "upstream_gene_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001386955.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001386956.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001386957.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_175878.5",
+      "upstream_gene_variant"
+     ]
+    ],
+    "vep_order": [
+     [
+      "",
+      "A",
+      "ENST00000331428",
+      "upstream_gene_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000684488",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001093998",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001093999",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001094000",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001094001",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001126783",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001131990",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001318251.3",
+      "upstream_gene_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001386955.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001386956.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001386957.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_175878.5",
+      "upstream_gene_variant"
+     ]
+    ]
+   },
+   {
+    "variant": "chr22\t17875867\tA\tG",
+    "vepyr_order": [
+     [
+      "",
+      "G",
+      "ENST00000400561",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000383094",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000414725",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000441493",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000461307",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000462645",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000465886",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000495076",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000498345",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000585038",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000672019",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000998344",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00001011834",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00001011835",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00001111924",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "NM_001122731.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "NM_001136004.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "NM_015241.3",
+      "intron_variant"
+     ]
+    ],
+    "vep_order": [
+     [
+      "",
+      "G",
+      "ENST00000383094",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000400561",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000414725",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000441493",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000461307",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000462645",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000465886",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000495076",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000498345",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000585038",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000672019",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000998344",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00001011834",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00001011835",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00001111924",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "NM_001122731.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "NM_001136004.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "NM_015241.3",
+      "intron_variant"
+     ]
+    ]
+   },
+   {
+    "variant": "chr22\t20045059\tG\tA",
+    "vepyr_order": [
+     [
+      "",
+      "A",
+      "ENST00000398042",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000327374",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000399807",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000401833",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000401886",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000411907",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000420290",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000430807",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000432198",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000432883",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000434168",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000434570",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000444651",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000447208",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000450019",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000450664",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000456048",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000462579",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000471707",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000475446",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000479679",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000484373",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000485715",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000852305",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000852306",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000852307",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000852308",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000852309",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000852310",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000852311",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000938895",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000938896",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000957774",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000957775",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000957776",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000957777",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000957778",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000992005",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000992006",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000992007",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000992008",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000992009",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000992010",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000992011",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000992012",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051398",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051399",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051400",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051401",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051402",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051403",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051404",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051405",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051406",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051407",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051408",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051409",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051410",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051411",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051412",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051413",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051414",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051415",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051416",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051417",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051418",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051419",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051420",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051421",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051422",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001087967",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001098289",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001098290",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001110632",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001110633",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001115107",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001125404",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001125405",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001130029",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001130030",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001131877",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283106.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283116.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283129.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283148.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283154.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283179.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283186.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283199.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283215.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283235.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283248.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322141.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322142.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322143.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322144.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322145.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322146.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322147.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322148.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322149.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322150.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322153.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322155.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322160.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322163.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322166.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322167.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322169.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322171.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322172.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322173.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322174.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322175.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_152906.7",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NR_104274.3",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "NR_104275.3",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "NR_136206.2",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "NR_136211.2",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "NR_136212.1",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_017028577.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_017028579.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_017028580.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_017028585.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_017028586.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441118.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441119.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441120.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441121.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441122.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441123.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441124.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441125.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441126.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441127.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441128.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441129.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441130.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441131.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441132.1",
+      "intron_variant"
+     ]
+    ],
+    "vep_order": [
+     [
+      "",
+      "A",
+      "ENST00000327374",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000398042",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000399807",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000401833",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000401886",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000411907",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000420290",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000430807",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000432198",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000432883",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000434168",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000434570",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000444651",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000447208",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000450019",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000450664",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000456048",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000462579",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000471707",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000475446",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000479679",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000484373",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000485715",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000852305",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000852306",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000852307",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000852308",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000852309",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000852310",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000852311",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000938895",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000938896",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000957774",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000957775",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000957776",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000957777",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000957778",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000992005",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000992006",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000992007",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000992008",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000992009",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000992010",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000992011",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000992012",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051398",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051399",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051400",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051401",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051402",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051403",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051404",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051405",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051406",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051407",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051408",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051409",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051410",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051411",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051412",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051413",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051414",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051415",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051416",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051417",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051418",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051419",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051420",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051421",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001051422",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001087967",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001098289",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001098290",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001110632",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001110633",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001115107",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001125404",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001125405",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001130029",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001130030",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001131877",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283106.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283116.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283129.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283148.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283154.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283179.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283186.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283199.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283215.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283235.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001283248.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322141.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322142.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322143.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322144.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322145.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322146.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322147.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322148.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322149.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322150.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322153.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322155.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322160.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322163.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322166.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322167.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322169.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322171.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322172.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322173.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322174.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001322175.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_152906.7",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NR_104274.3",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "NR_104275.3",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "NR_136206.2",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "NR_136211.2",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "NR_136212.1",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_017028577.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_017028579.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_017028580.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_017028585.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_017028586.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441118.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441119.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441120.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441121.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441122.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441123.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441124.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441125.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441126.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441127.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441128.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441129.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441130.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441131.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "XM_047441132.1",
+      "intron_variant"
+     ]
+    ]
+   },
+   {
+    "variant": "chr22\t20092499\tC\tG",
+    "vepyr_order": [
+     [
+      "",
+      "G",
+      "ENST00000407755",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000351989",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000457069",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000491892",
+      "upstream_gene_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000495826",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000498171",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000704820",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000704821",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000868483",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000868484",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000868485",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000868486",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000868487",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000868488",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000927223",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000954973",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000954974",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000984463",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00001051557",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00001051558",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00001073656",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00001073657",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00001135446",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "NM_001190326.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "NM_022720.7",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "XM_006724268.4",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "XM_047441418.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "XM_047441419.1",
+      "intron_variant"
+     ]
+    ],
+    "vep_order": [
+     [
+      "",
+      "G",
+      "ENST00000351989",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000407755",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000457069",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000491892",
+      "upstream_gene_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000495826",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000498171",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000704820",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000704821",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000868483",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000868484",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000868485",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000868486",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000868487",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000868488",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000927223",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000954973",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000954974",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00000984463",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00001051557",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00001051558",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00001073656",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00001073657",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "G",
+      "ENST00001135446",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "NM_001190326.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "NM_022720.7",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "XM_006724268.4",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "XM_047441418.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "G",
+      "XM_047441419.1",
+      "intron_variant"
+     ]
+    ]
+   },
+   {
+    "variant": "chr22\t20573843\tC\tT",
+    "vepyr_order": [
+     [
+      "",
+      "T",
+      "ENST00000292733",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000263205",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000382974",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000406969",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000433831",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000478831",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000489651",
+      "non_coding_transcript_exon_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000492381",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853210",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853211",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853212",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853213",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853214",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853215",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853216",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853217",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853218",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853219",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853220",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853221",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853222",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853223",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853224",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853225",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853226",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000912866",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000912867",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000912868",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000912869",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000912870",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000954415",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000954416",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000954417",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000954418",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000954419",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000954420",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001005729",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001005730",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001005731",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001023156",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001023157",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001023158",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001023159",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001023162",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001023163",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001084521",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001084522",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001126414",
+      "3_prime_UTR_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001126415",
+      "missense_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001135258",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001003891.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001293234.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001293235.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001293236.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001293237.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_015889.5",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_011530218.4",
+      "missense_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_011530219.3",
+      "3_prime_UTR_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_017028821.3",
+      "downstream_gene_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441395.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441396.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441397.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441398.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441399.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441400.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441401.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441402.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441403.1",
+      "intron_variant"
+     ]
+    ],
+    "vep_order": [
+     [
+      "",
+      "T",
+      "ENST00000263205",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000292733",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000382974",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000406969",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000433831",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000478831",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000489651",
+      "non_coding_transcript_exon_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000492381",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853210",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853211",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853212",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853213",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853214",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853215",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853216",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853217",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853218",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853219",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853220",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853221",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853222",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853223",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853224",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853225",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000853226",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000912866",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000912867",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000912868",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000912869",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000912870",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000954415",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000954416",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000954417",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000954418",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000954419",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000954420",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001005729",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001005730",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001005731",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001023156",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001023157",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001023158",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001023159",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001023162",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001023163",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001084521",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001084522",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001126414",
+      "3_prime_UTR_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001126415",
+      "missense_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001135258",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001003891.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001293234.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001293235.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001293236.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001293237.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_015889.5",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_011530218.4",
+      "missense_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_011530219.3",
+      "3_prime_UTR_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_017028821.3",
+      "downstream_gene_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441395.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441396.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441397.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441398.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441399.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441400.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441401.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441402.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441403.1",
+      "intron_variant"
+     ]
+    ]
+   },
+   {
+    "variant": "chr22\t27409502\tT\tC",
+    "vepyr_order": [
+     [
+      "",
+      "C",
+      "ENST00000625043",
+      "downstream_gene_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000623572",
+      "downstream_gene_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000729519",
+      "intron_variant&non_coding_transcript_variant"
+     ]
+    ],
+    "vep_order": [
+     [
+      "",
+      "C",
+      "ENST00000623572",
+      "downstream_gene_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000625043",
+      "downstream_gene_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000729519",
+      "intron_variant&non_coding_transcript_variant"
+     ]
+    ]
+   },
+   {
+    "variant": "chr22\t29739817\tG\tA",
+    "vepyr_order": [
+     [
+      "",
+      "A",
+      "ENST00000890523",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000344318",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890526",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890529",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890530",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890531",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890533",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890536",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890540",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890542",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890544",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890548",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890551",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890552",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890554",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890556",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890558",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000922634",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000922635",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000922636",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000922637",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000922638",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000922639",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000952497",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000952498",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000952499",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000952500",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000975289",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000975290",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000975291",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000975292",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001088960",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001093623",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001093624",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001093625",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001131597",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001003692.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001318129.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_019103.3",
+      "intron_variant"
+     ]
+    ],
+    "vep_order": [
+     [
+      "",
+      "A",
+      "ENST00000344318",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890523",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890526",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890529",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890530",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890531",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890533",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890536",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890540",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890542",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890544",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890548",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890551",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890552",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890554",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890556",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000890558",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000922634",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000922635",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000922636",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000922637",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000922638",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000922639",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000952497",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000952498",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000952499",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000952500",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000975289",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000975290",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000975291",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000975292",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001088960",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001093623",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001093624",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001093625",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001131597",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001003692.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_001318129.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_019103.3",
+      "intron_variant"
+     ]
+    ]
+   },
+   {
+    "variant": "chr22\t29969791\tG\tA",
+    "vepyr_order": [
+     [
+      "",
+      "A",
+      "ENST00000333027",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000323630",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000351488",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000401950",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000406629",
+      "upstream_gene_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000415511",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000445401",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000495098",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000908090",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000908091",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000908092",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000908093",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000908094",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000908095",
+      "5_prime_UTR_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000908096",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000908097",
+      "upstream_gene_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000940445",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000956488",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000956489",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000956490",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000956491",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000987813",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000987814",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000987815",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001129190",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001133665",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_021090.4",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_153050.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_153051.3",
+      "intron_variant"
+     ]
+    ],
+    "vep_order": [
+     [
+      "",
+      "A",
+      "ENST00000323630",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000333027",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000351488",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000401950",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000406629",
+      "upstream_gene_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000415511",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000445401",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000495098",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000908090",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000908091",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000908092",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000908093",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000908094",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000908095",
+      "5_prime_UTR_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000908096",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000908097",
+      "upstream_gene_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000940445",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000956488",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000956489",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000956490",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000956491",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000987813",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000987814",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00000987815",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001129190",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "ENST00001133665",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_021090.4",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_153050.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "A",
+      "NM_153051.3",
+      "intron_variant"
+     ]
+    ]
+   },
+   {
+    "variant": "chr22\t31500246\tT\tC",
+    "vepyr_order": [
+     [
+      "",
+      "C",
+      "ENST00000397520",
+      "upstream_gene_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000382162",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000400288",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000400289",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000411518",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000432498",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000443011",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000444859",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000465437",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000465646",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000540643",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000548143",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891985",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891986",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891987",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891988",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891989",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891990",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891991",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891992",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891993",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891994",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891995",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891996",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891997",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891998",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891999",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892000",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892001",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892002",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892003",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892004",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892005",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892006",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892007",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892008",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892009",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892010",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892011",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892291",
+      "upstream_gene_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930451",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930452",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930453",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930454",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930455",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930456",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930457",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930458",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930459",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930460",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930461",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930462",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930463",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930464",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930465",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930466",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930467",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930468",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930469",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930470",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930471",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930472",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930473",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972447",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972448",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972449",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972450",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972451",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972452",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972453",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972454",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972455",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972456",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972457",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972458",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972459",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972460",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972461",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972462",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972463",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972526",
+      "upstream_gene_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000991744",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001029457",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001062231",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001062232",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001062233",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001107187",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001107188",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001115515",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001117923",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001131161",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001131913",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "NM_001007467.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "NM_001258325.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "NM_001258326.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "NM_001258327.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "NM_014775.4",
+      "intron_variant"
+     ]
+    ],
+    "vep_order": [
+     [
+      "",
+      "C",
+      "ENST00000382162",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000397520",
+      "upstream_gene_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000400288",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000400289",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000411518",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000432498",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000443011",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000444859",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000465437",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000465646",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000540643",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000548143",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891985",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891986",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891987",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891988",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891989",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891990",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891991",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891992",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891993",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891994",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891995",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891996",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891997",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891998",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000891999",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892000",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892001",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892002",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892003",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892004",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892005",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892006",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892007",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892008",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892009",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892010",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892011",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000892291",
+      "upstream_gene_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930451",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930452",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930453",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930454",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930455",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930456",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930457",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930458",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930459",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930460",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930461",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930462",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930463",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930464",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930465",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930466",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930467",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930468",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930469",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930470",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930471",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930472",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000930473",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972447",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972448",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972449",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972450",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972451",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972452",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972453",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972454",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972455",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972456",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972457",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972458",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972459",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972460",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972461",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972462",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972463",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000972526",
+      "upstream_gene_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00000991744",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001029457",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001062231",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001062232",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001062233",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001107187",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001107188",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001115515",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001117923",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001131161",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "ENST00001131913",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "NM_001007467.3",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "NM_001258325.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "NM_001258326.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "NM_001258327.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "C",
+      "NM_014775.4",
+      "intron_variant"
+     ]
+    ]
+   },
+   {
+    "variant": "chr22\t33792777\tC\tT",
+    "vepyr_order": [
+     [
+      "",
+      "T",
+      "ENST00000397394",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000354992",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000402320",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000413114",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000423375",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000430220",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000432776",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000434071",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000674543",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000674789",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000675277",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000675416",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000676070",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000676132",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000676370",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000899788",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000899789",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000899790",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000899791",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000899792",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000899793",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000899794",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000899795",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000911678",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000911679",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000911680",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000911681",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000911682",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000966030",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000966031",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000966032",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000966033",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000966034",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000966035",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000966036",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000966037",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000966038",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001053747",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001053748",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001053749",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001053750",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001053751",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001053752",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001105941",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001105942",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001105943",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001112217",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001112218",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001112219",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001112220",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001132338",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001362949.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001362951.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001362953.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001378624.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001378625.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001378626.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001378627.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001378628.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001378629.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_004737.7",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_133642.5",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_024452302.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_024452303.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441599.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441600.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441601.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441602.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441604.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441605.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XR_002958722.2",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "XR_007067993.1",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "XR_007067994.1",
+      "intron_variant&non_coding_transcript_variant"
+     ]
+    ],
+    "vep_order": [
+     [
+      "",
+      "T",
+      "ENST00000354992",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000397394",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000402320",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000413114",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000423375",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000430220",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000432776",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000434071",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000674543",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000674789",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000675277",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000675416",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000676070",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000676132",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000676370",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000899788",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000899789",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000899790",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000899791",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000899792",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000899793",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000899794",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000899795",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000911678",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000911679",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000911680",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000911681",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000911682",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000966030",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000966031",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000966032",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000966033",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000966034",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000966035",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000966036",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000966037",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00000966038",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001053747",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001053748",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001053749",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001053750",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001053751",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001053752",
+      "intron_variant&NMD_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001105941",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001105942",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001105943",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001112217",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001112218",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001112219",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001112220",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "ENST00001132338",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001362949.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001362951.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001362953.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001378624.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001378625.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001378626.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001378627.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001378628.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_001378629.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_004737.7",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "NM_133642.5",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_024452302.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_024452303.2",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441599.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441600.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441601.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441602.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441604.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XM_047441605.1",
+      "intron_variant"
+     ],
+     [
+      "",
+      "T",
+      "XR_002958722.2",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "XR_007067993.1",
+      "intron_variant&non_coding_transcript_variant"
+     ],
+     [
+      "",
+      "T",
+      "XR_007067994.1",
+      "intron_variant&non_coding_transcript_variant"
+     ]
+    ]
+   }
+  ],
+  "csq_order_ignored": 0,
+  "csq_order_ignored_examples": [],
+  "csq_order_ignore_reason": null,
+  "fields_only_in_vepyr": [],
+  "fields_only_in_vep": [],
+  "field_match_rates": {
+   "Allele": 100.0,
+   "Consequence": 100.0,
+   "IMPACT": 100.0,
+   "SYMBOL": 100.0,
+   "Gene": 100.0,
+   "Feature_type": 100.0,
+   "Feature": 100.0,
+   "BIOTYPE": 100.0,
+   "EXON": 100.0,
+   "INTRON": 100.0,
+   "HGVSc": 100.0,
+   "HGVSp": 100.0,
+   "cDNA_position": 100.0,
+   "CDS_position": 100.0,
+   "Protein_position": 100.0,
+   "Amino_acids": 100.0,
+   "Codons": 100.0,
+   "Existing_variation": 100.0,
+   "DISTANCE": 100.0,
+   "STRAND": 100.0,
+   "FLAGS": 100.0,
+   "VARIANT_CLASS": 100.0,
+   "SYMBOL_SOURCE": 100.0,
+   "HGNC_ID": 100.0,
+   "CANONICAL": 100.0,
+   "MANE": 100.0,
+   "MANE_SELECT": 100.0,
+   "MANE_PLUS_CLINICAL": 100.0,
+   "TSL": 100.0,
+   "APPRIS": 100.0,
+   "CCDS": 100.0,
+   "ENSP": 100.0,
+   "SWISSPROT": 100.0,
+   "TREMBL": 100.0,
+   "UNIPARC": 100.0,
+   "UNIPROT_ISOFORM": 100.0,
+   "REFSEQ_MATCH": 100.0,
+   "SOURCE": 100.0,
+   "REFSEQ_OFFSET": 100.0,
+   "GIVEN_REF": 100.0,
+   "USED_REF": 100.0,
+   "BAM_EDIT": 100.0,
+   "GENE_PHENO": 100.0,
+   "SIFT": 100.0,
+   "PolyPhen": 100.0,
+   "DOMAINS": 100.0,
+   "miRNA": 100.0,
+   "HGVS_OFFSET": 100.0,
+   "AF": 100.0,
+   "AFR_AF": 100.0,
+   "AMR_AF": 100.0,
+   "EAS_AF": 100.0,
+   "EUR_AF": 100.0,
+   "SAS_AF": 100.0,
+   "gnomADe_AF": 100.0,
+   "gnomADe_AFR_AF": 100.0,
+   "gnomADe_AMR_AF": 100.0,
+   "gnomADe_ASJ_AF": 100.0,
+   "gnomADe_EAS_AF": 100.0,
+   "gnomADe_FIN_AF": 100.0,
+   "gnomADe_MID_AF": 100.0,
+   "gnomADe_NFE_AF": 100.0,
+   "gnomADe_REMAINING_AF": 100.0,
+   "gnomADe_SAS_AF": 100.0,
+   "gnomADg_AF": 100.0,
+   "gnomADg_AFR_AF": 100.0,
+   "gnomADg_AMI_AF": 100.0,
+   "gnomADg_AMR_AF": 100.0,
+   "gnomADg_ASJ_AF": 100.0,
+   "gnomADg_EAS_AF": 100.0,
+   "gnomADg_FIN_AF": 100.0,
+   "gnomADg_MID_AF": 100.0,
+   "gnomADg_NFE_AF": 100.0,
+   "gnomADg_REMAINING_AF": 100.0,
+   "gnomADg_SAS_AF": 100.0,
+   "MAX_AF": 100.0,
+   "MAX_AF_POPS": 100.0,
+   "CLIN_SIG": 100.0,
+   "SOMATIC": 100.0,
+   "PHENO": 100.0,
+   "PUBMED": 100.0,
+   "MOTIF_NAME": 100.0,
+   "MOTIF_POS": 100.0,
+   "HIGH_INF_POS": 100.0,
+   "MOTIF_SCORE_CHANGE": 100.0,
+   "TRANSCRIPTION_FACTORS": 100.0,
+   "SpliceAI_pred_DP_AG": 100.0,
+   "SpliceAI_pred_DP_AL": 100.0,
+   "SpliceAI_pred_DP_DG": 100.0,
+   "SpliceAI_pred_DP_DL": 100.0,
+   "SpliceAI_pred_DS_AG": 100.0,
+   "SpliceAI_pred_DS_AL": 100.0,
+   "SpliceAI_pred_DS_DG": 100.0,
+   "SpliceAI_pred_DS_DL": 100.0,
+   "SpliceAI_pred_SYMBOL": 100.0,
+   "CADD_PHRED": 100.0,
+   "CADD_RAW": 100.0,
+   "am_class": 100.0,
+   "am_pathogenicity": 100.0,
+   "CADD_phred": 100.0,
+   "CADD_raw": 100.0,
+   "GERP++_RS": 100.0,
+   "MetaLR_pred": 100.0,
+   "MetaLR_score": 100.0,
+   "MetaSVM_pred": 100.0,
+   "MetaSVM_score": 100.0,
+   "MutationTaster_pred": 100.0,
+   "MutationTaster_score": 100.0,
+   "PROVEAN_pred": 100.0,
+   "PROVEAN_score": 100.0,
+   "Polyphen2_HDIV_score": 100.0,
+   "Polyphen2_HVAR_score": 100.0,
+   "REVEL_score": 100.0,
+   "SIFT4G_pred": 100.0,
+   "SIFT4G_score": 100.0,
+   "VEST4_score": 100.0,
+   "phastCons100way_vertebrate": 100.0,
+   "phyloP100way_vertebrate": 100.0,
+   "ClinVar": 100.0,
+   "ClinVar_CLNSIG": 100.0,
+   "ClinVar_CLNREVSTAT": 100.0,
+   "ClinVar_CLNDN": 100.0,
+   "ClinVar_CLNVC": 100.0,
+   "ClinVar_CLNVI": 100.0
+  },
+  "field_mismatch_counts": {},
+  "field_mismatch_examples": {},
+  "field_order_mismatch_counts": {},
+  "field_order_mismatch_examples": {},
+  "field_format_mismatch_counts": {},
+  "field_format_mismatch_examples": {},
+  "field_equality_counts": {
+   "Allele": {
+    "both_empty": 0,
+    "both_nonempty_equal": 1242828,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Consequence": {
+    "both_empty": 0,
+    "both_nonempty_equal": 1242828,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "IMPACT": {
+    "both_empty": 0,
+    "both_nonempty_equal": 1242828,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SYMBOL": {
+    "both_empty": 64580,
+    "both_nonempty_equal": 1178248,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Gene": {
+    "both_empty": 10722,
+    "both_nonempty_equal": 1232106,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Feature_type": {
+    "both_empty": 6491,
+    "both_nonempty_equal": 1236337,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Feature": {
+    "both_empty": 6491,
+    "both_nonempty_equal": 1236337,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "BIOTYPE": {
+    "both_empty": 6807,
+    "both_nonempty_equal": 1236021,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "EXON": {
+    "both_empty": 1195681,
+    "both_nonempty_equal": 47147,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "INTRON": {
+    "both_empty": 324444,
+    "both_nonempty_equal": 918384,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "HGVSc": {
+    "both_empty": 277306,
+    "both_nonempty_equal": 965522,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "HGVSp": {
+    "both_empty": 1232937,
+    "both_nonempty_equal": 9891,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "cDNA_position": {
+    "both_empty": 1195680,
+    "both_nonempty_equal": 47148,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "CDS_position": {
+    "both_empty": 1232933,
+    "both_nonempty_equal": 9895,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Protein_position": {
+    "both_empty": 1232933,
+    "both_nonempty_equal": 9895,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Amino_acids": {
+    "both_empty": 1232934,
+    "both_nonempty_equal": 9894,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Codons": {
+    "both_empty": 1232934,
+    "both_nonempty_equal": 9894,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Existing_variation": {
+    "both_empty": 10763,
+    "both_nonempty_equal": 1232065,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "DISTANCE": {
+    "both_empty": 976252,
+    "both_nonempty_equal": 266576,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "STRAND": {
+    "both_empty": 10406,
+    "both_nonempty_equal": 1232422,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "FLAGS": {
+    "both_empty": 1215647,
+    "both_nonempty_equal": 27181,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "VARIANT_CLASS": {
+    "both_empty": 0,
+    "both_nonempty_equal": 1242828,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SYMBOL_SOURCE": {
+    "both_empty": 64580,
+    "both_nonempty_equal": 1178248,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "HGNC_ID": {
+    "both_empty": 75878,
+    "both_nonempty_equal": 1166950,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "CANONICAL": {
+    "both_empty": 1135664,
+    "both_nonempty_equal": 107164,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MANE": {
+    "both_empty": 1182757,
+    "both_nonempty_equal": 60071,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MANE_SELECT": {
+    "both_empty": 1182757,
+    "both_nonempty_equal": 60071,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MANE_PLUS_CLINICAL": {
+    "both_empty": 1242828,
+    "both_nonempty_equal": 0,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "TSL": {
+    "both_empty": 1053915,
+    "both_nonempty_equal": 188913,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "APPRIS": {
+    "both_empty": 1006559,
+    "both_nonempty_equal": 236269,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "CCDS": {
+    "both_empty": 1021309,
+    "both_nonempty_equal": 221519,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "ENSP": {
+    "both_empty": 339641,
+    "both_nonempty_equal": 903187,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SWISSPROT": {
+    "both_empty": 1161958,
+    "both_nonempty_equal": 80870,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "TREMBL": {
+    "both_empty": 1109247,
+    "both_nonempty_equal": 133581,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "UNIPARC": {
+    "both_empty": 864285,
+    "both_nonempty_equal": 378543,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "UNIPROT_ISOFORM": {
+    "both_empty": 1174630,
+    "both_nonempty_equal": 68198,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "REFSEQ_MATCH": {
+    "both_empty": 1242828,
+    "both_nonempty_equal": 0,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SOURCE": {
+    "both_empty": 10722,
+    "both_nonempty_equal": 1232106,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "REFSEQ_OFFSET": {
+    "both_empty": 1242828,
+    "both_nonempty_equal": 0,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "GIVEN_REF": {
+    "both_empty": 108933,
+    "both_nonempty_equal": 1133895,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "USED_REF": {
+    "both_empty": 108933,
+    "both_nonempty_equal": 1133895,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "BAM_EDIT": {
+    "both_empty": 1236066,
+    "both_nonempty_equal": 6762,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "GENE_PHENO": {
+    "both_empty": 915586,
+    "both_nonempty_equal": 327242,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SIFT": {
+    "both_empty": 1238647,
+    "both_nonempty_equal": 4181,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "PolyPhen": {
+    "both_empty": 1240575,
+    "both_nonempty_equal": 2253,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "DOMAINS": {
+    "both_empty": 1236895,
+    "both_nonempty_equal": 5933,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "miRNA": {
+    "both_empty": 1242824,
+    "both_nonempty_equal": 4,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "HGVS_OFFSET": {
+    "both_empty": 1160478,
+    "both_nonempty_equal": 82350,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "AF": {
+    "both_empty": 113861,
+    "both_nonempty_equal": 1128967,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "AFR_AF": {
+    "both_empty": 113861,
+    "both_nonempty_equal": 1128967,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "AMR_AF": {
+    "both_empty": 113861,
+    "both_nonempty_equal": 1128967,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "EAS_AF": {
+    "both_empty": 113861,
+    "both_nonempty_equal": 1128967,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "EUR_AF": {
+    "both_empty": 113861,
+    "both_nonempty_equal": 1128967,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SAS_AF": {
+    "both_empty": 113861,
+    "both_nonempty_equal": 1128967,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_AF": {
+    "both_empty": 1014114,
+    "both_nonempty_equal": 228714,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_AFR_AF": {
+    "both_empty": 1053959,
+    "both_nonempty_equal": 188869,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_AMR_AF": {
+    "both_empty": 1068487,
+    "both_nonempty_equal": 174341,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_ASJ_AF": {
+    "both_empty": 1067654,
+    "both_nonempty_equal": 175174,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_EAS_AF": {
+    "both_empty": 1057909,
+    "both_nonempty_equal": 184919,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_FIN_AF": {
+    "both_empty": 1038472,
+    "both_nonempty_equal": 204356,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_MID_AF": {
+    "both_empty": 1071387,
+    "both_nonempty_equal": 171441,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_NFE_AF": {
+    "both_empty": 1017798,
+    "both_nonempty_equal": 225030,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_REMAINING_AF": {
+    "both_empty": 1035035,
+    "both_nonempty_equal": 207793,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADe_SAS_AF": {
+    "both_empty": 1060629,
+    "both_nonempty_equal": 182199,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_AF": {
+    "both_empty": 14634,
+    "both_nonempty_equal": 1228194,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_AFR_AF": {
+    "both_empty": 14732,
+    "both_nonempty_equal": 1228096,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_AMI_AF": {
+    "both_empty": 14923,
+    "both_nonempty_equal": 1227905,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_AMR_AF": {
+    "both_empty": 14636,
+    "both_nonempty_equal": 1228192,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_ASJ_AF": {
+    "both_empty": 14786,
+    "both_nonempty_equal": 1228042,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_EAS_AF": {
+    "both_empty": 14716,
+    "both_nonempty_equal": 1228112,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_FIN_AF": {
+    "both_empty": 14680,
+    "both_nonempty_equal": 1228148,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_MID_AF": {
+    "both_empty": 15187,
+    "both_nonempty_equal": 1227641,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_NFE_AF": {
+    "both_empty": 14671,
+    "both_nonempty_equal": 1228157,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_REMAINING_AF": {
+    "both_empty": 14743,
+    "both_nonempty_equal": 1228085,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "gnomADg_SAS_AF": {
+    "both_empty": 14693,
+    "both_nonempty_equal": 1228135,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MAX_AF": {
+    "both_empty": 12430,
+    "both_nonempty_equal": 1230398,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MAX_AF_POPS": {
+    "both_empty": 12430,
+    "both_nonempty_equal": 1230398,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "CLIN_SIG": {
+    "both_empty": 1199235,
+    "both_nonempty_equal": 43593,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SOMATIC": {
+    "both_empty": 1156687,
+    "both_nonempty_equal": 86141,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "PHENO": {
+    "both_empty": 1060262,
+    "both_nonempty_equal": 182566,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "PUBMED": {
+    "both_empty": 1079780,
+    "both_nonempty_equal": 163048,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MOTIF_NAME": {
+    "both_empty": 1242512,
+    "both_nonempty_equal": 316,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MOTIF_POS": {
+    "both_empty": 1242516,
+    "both_nonempty_equal": 312,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "HIGH_INF_POS": {
+    "both_empty": 1242512,
+    "both_nonempty_equal": 316,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MOTIF_SCORE_CHANGE": {
+    "both_empty": 1242558,
+    "both_nonempty_equal": 270,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "TRANSCRIPTION_FACTORS": {
+    "both_empty": 1242512,
+    "both_nonempty_equal": 316,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SpliceAI_pred_DP_AG": {
+    "both_empty": 606349,
+    "both_nonempty_equal": 636479,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SpliceAI_pred_DP_AL": {
+    "both_empty": 606349,
+    "both_nonempty_equal": 636479,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SpliceAI_pred_DP_DG": {
+    "both_empty": 606349,
+    "both_nonempty_equal": 636479,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SpliceAI_pred_DP_DL": {
+    "both_empty": 606349,
+    "both_nonempty_equal": 636479,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SpliceAI_pred_DS_AG": {
+    "both_empty": 606349,
+    "both_nonempty_equal": 636479,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SpliceAI_pred_DS_AL": {
+    "both_empty": 606349,
+    "both_nonempty_equal": 636479,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SpliceAI_pred_DS_DG": {
+    "both_empty": 606349,
+    "both_nonempty_equal": 636479,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SpliceAI_pred_DS_DL": {
+    "both_empty": 606349,
+    "both_nonempty_equal": 636479,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SpliceAI_pred_SYMBOL": {
+    "both_empty": 606349,
+    "both_nonempty_equal": 636479,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "CADD_PHRED": {
+    "both_empty": 11468,
+    "both_nonempty_equal": 1231360,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "CADD_RAW": {
+    "both_empty": 11468,
+    "both_nonempty_equal": 1231360,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "am_class": {
+    "both_empty": 1240324,
+    "both_nonempty_equal": 2504,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "am_pathogenicity": {
+    "both_empty": 1240324,
+    "both_nonempty_equal": 2504,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "CADD_phred": {
+    "both_empty": 1238265,
+    "both_nonempty_equal": 4563,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "CADD_raw": {
+    "both_empty": 1238265,
+    "both_nonempty_equal": 4563,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "GERP++_RS": {
+    "both_empty": 1238402,
+    "both_nonempty_equal": 4426,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MetaLR_pred": {
+    "both_empty": 1238502,
+    "both_nonempty_equal": 4326,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MetaLR_score": {
+    "both_empty": 1238502,
+    "both_nonempty_equal": 4326,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MetaSVM_pred": {
+    "both_empty": 1238502,
+    "both_nonempty_equal": 4326,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MetaSVM_score": {
+    "both_empty": 1238502,
+    "both_nonempty_equal": 4326,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MutationTaster_pred": {
+    "both_empty": 1238384,
+    "both_nonempty_equal": 4444,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "MutationTaster_score": {
+    "both_empty": 1238384,
+    "both_nonempty_equal": 4444,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "PROVEAN_pred": {
+    "both_empty": 1238340,
+    "both_nonempty_equal": 4488,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "PROVEAN_score": {
+    "both_empty": 1238340,
+    "both_nonempty_equal": 4488,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Polyphen2_HDIV_score": {
+    "both_empty": 1238407,
+    "both_nonempty_equal": 4421,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "Polyphen2_HVAR_score": {
+    "both_empty": 1238407,
+    "both_nonempty_equal": 4421,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "REVEL_score": {
+    "both_empty": 1238341,
+    "both_nonempty_equal": 4487,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SIFT4G_pred": {
+    "both_empty": 1238373,
+    "both_nonempty_equal": 4455,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "SIFT4G_score": {
+    "both_empty": 1238373,
+    "both_nonempty_equal": 4455,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "VEST4_score": {
+    "both_empty": 1238368,
+    "both_nonempty_equal": 4460,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "phastCons100way_vertebrate": {
+    "both_empty": 1238265,
+    "both_nonempty_equal": 4563,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "phyloP100way_vertebrate": {
+    "both_empty": 1238265,
+    "both_nonempty_equal": 4563,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "ClinVar": {
+    "both_empty": 1195528,
+    "both_nonempty_equal": 47300,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "ClinVar_CLNSIG": {
+    "both_empty": 1198580,
+    "both_nonempty_equal": 44248,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "ClinVar_CLNREVSTAT": {
+    "both_empty": 1198580,
+    "both_nonempty_equal": 44248,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "ClinVar_CLNDN": {
+    "both_empty": 1198580,
+    "both_nonempty_equal": 44248,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "ClinVar_CLNVC": {
+    "both_empty": 1195528,
+    "both_nonempty_equal": 47300,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   },
+   "ClinVar_CLNVI": {
+    "both_empty": 1198772,
+    "both_nonempty_equal": 44056,
+    "vepyr_empty_only": 0,
+    "vep_empty_only": 0,
+    "both_nonempty_unequal": 0
+   }
+  },
+  "equality_bucket_counts": {
+   "both_empty": 95807189,
+   "both_nonempty_equal": 58303483,
+   "vepyr_empty_only": 0,
+   "vep_empty_only": 0,
+   "both_nonempty_unequal": 0
+  },
+  "mismatch_ledger": {
+   "path": "out_fixed/csq_order_swapped/e2e_ledger.jsonl",
+   "rows": 20,
+   "sha256": "c5c0e0cf68115ef99b508dc93d61ad8b540618b489a15a185096b2d5691604aa"
+  }
+ },
+ "diffly_full": {
+  "preset": "ensembl_everything",
+  "input_vcf": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/base_chr22_all_plugins.vcf",
+  "annotated_left_vcf": "base_chr22_all_plugins.vcf",
+  "annotated_right_vcf": "out_fixed/csq_order_swapped/modified.vcf",
+  "sample_first_n": null,
+  "requested_chromosomes": null,
+  "effective_chromosomes": [],
+  "progress_log_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out_fixed/csq_order_swapped/diffly_full/runtime/compare.progress.log",
+  "compare_mode": "fast",
+  "bucket_count": null,
+  "compare_workers": null,
+  "memory_budget_mb": null,
+  "resource_plan": {
+   "memory_budget_mb": 2048,
+   "bucket_count": 8,
+   "variant_chunk_rows": 50000,
+   "consequence_chunk_rows": 16384,
+   "compare_workers": 4,
+   "parallelize_sides": false,
+   "use_bucketed_variant": true,
+   "use_bucketed_consequence": true
+  },
+  "fingerprint_only": false,
+  "timings": {
+   "variant_summary_seconds": 4.884,
+   "consequence_bucketization_seconds": 16.878,
+   "schema_validation_seconds": 0.007,
+   "variant_diff_seconds": 0.123,
+   "consequence_diff_seconds": 75.682
+  },
+  "tiers": {
+   "variant": {
+    "equal": true,
+    "left_only_rows": 0,
+    "right_only_rows": 0,
+    "unequal_rows": 0,
+    "joined_equal_rows": 50861,
+    "diff_frame_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out_fixed/csq_order_swapped/diffly_full/variant_diff.parquet",
+    "mismatches_tsv_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out_fixed/csq_order_swapped/diffly_full/variant_mismatches.tsv",
+    "details": {
+     "compare_mode": "fast",
+     "fingerprint_only": false,
+     "precheck_equal_buckets": 8,
+     "exact_diff_run_buckets": 0,
+     "bucket_count": 8,
+     "buckets_compared": 8,
+     "workers": 1
+    },
+    "per_chromosome": {
+     "22": {
+      "left_rows": 50861,
+      "right_rows": 50861,
+      "joined_equal_rows": 50861,
+      "left_only_rows": 0,
+      "right_only_rows": 0,
+      "unequal_rows": 0
+     }
+    }
+   },
+   "consequence": {
+    "equal": true,
+    "left_only_rows": 0,
+    "right_only_rows": 0,
+    "unequal_rows": 0,
+    "joined_equal_rows": 1242828,
+    "diff_frame_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out_fixed/csq_order_swapped/diffly_full/consequence_diff.parquet",
+    "mismatches_tsv_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out_fixed/csq_order_swapped/diffly_full/consequence_mismatches.tsv",
+    "details": {
+     "compare_mode": "fast",
+     "fingerprint_only": false,
+     "precheck_equal_buckets": 8,
+     "exact_diff_run_buckets": 0,
+     "bucket_count": 8,
+     "buckets_compared": 8,
+     "workers": 4
+    },
+    "per_chromosome": {
+     "22": {
+      "left_rows": 1242828,
+      "right_rows": 1242828,
+      "joined_equal_rows": 1242828,
+      "left_only_rows": 0,
+      "right_only_rows": 0,
+      "unequal_rows": 0
+     }
+    }
+   }
+  },
+  "chromosomes": {
+   "per_chromosome": {
+    "22": {
+     "variant": {
+      "left_rows": 50861,
+      "right_rows": 50861,
+      "joined_equal_rows": 50861,
+      "left_only_rows": 0,
+      "right_only_rows": 0,
+      "unequal_rows": 0,
+      "equal": true
+     },
+     "consequence": {
+      "left_rows": 1242828,
+      "right_rows": 1242828,
+      "joined_equal_rows": 1242828,
+      "left_only_rows": 0,
+      "right_only_rows": 0,
+      "unequal_rows": 0,
+      "equal": true
+     },
+     "timings": {
+      "variant_summary_seconds": 4.884,
+      "consequence_bucketization_seconds": 16.878,
+      "consequence_summary_seconds": 0.0,
+      "variant_diff_seconds": 0.123,
+      "consequence_diff_seconds": 75.682
+     }
+    }
+   },
+   "requested": [],
+   "effective": []
+  }
+ },
+ "diffly_plugins": {
+  "preset": "ensembl_everything",
+  "input_vcf": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/base_chr22_all_plugins.vcf",
+  "annotated_left_vcf": "base_chr22_all_plugins.vcf",
+  "annotated_right_vcf": "out_fixed/csq_order_swapped/modified.vcf",
+  "sample_first_n": null,
+  "requested_chromosomes": null,
+  "effective_chromosomes": [],
+  "progress_log_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out_fixed/csq_order_swapped/diffly_plugins/runtime/compare.progress.log",
+  "compare_mode": "fast",
+  "bucket_count": null,
+  "compare_workers": null,
+  "memory_budget_mb": null,
+  "resource_plan": {
+   "memory_budget_mb": 2048,
+   "bucket_count": 8,
+   "variant_chunk_rows": 50000,
+   "consequence_chunk_rows": 16384,
+   "compare_workers": 4,
+   "parallelize_sides": false,
+   "use_bucketed_variant": true,
+   "use_bucketed_consequence": true
+  },
+  "fingerprint_only": false,
+  "timings": {
+   "variant_summary_seconds": 4.839,
+   "consequence_bucketization_seconds": 5.207,
+   "schema_validation_seconds": 0.004,
+   "variant_diff_seconds": 0.087,
+   "consequence_diff_seconds": 0.978
+  },
+  "tiers": {
+   "variant": {
+    "equal": true,
+    "left_only_rows": 0,
+    "right_only_rows": 0,
+    "unequal_rows": 0,
+    "joined_equal_rows": 50861,
+    "diff_frame_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out_fixed/csq_order_swapped/diffly_plugins/variant_diff.parquet",
+    "mismatches_tsv_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out_fixed/csq_order_swapped/diffly_plugins/variant_mismatches.tsv",
+    "details": {
+     "compare_mode": "fast",
+     "fingerprint_only": false,
+     "precheck_equal_buckets": 8,
+     "exact_diff_run_buckets": 0,
+     "bucket_count": 8,
+     "buckets_compared": 8,
+     "workers": 1
+    },
+    "per_chromosome": {
+     "22": {
+      "left_rows": 50861,
+      "right_rows": 50861,
+      "joined_equal_rows": 50861,
+      "left_only_rows": 0,
+      "right_only_rows": 0,
+      "unequal_rows": 0
+     }
+    }
+   },
+   "consequence": {
+    "equal": true,
+    "left_only_rows": 0,
+    "right_only_rows": 0,
+    "unequal_rows": 0,
+    "joined_equal_rows": 59046,
+    "diff_frame_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out_fixed/csq_order_swapped/diffly_plugins/consequence_diff.parquet",
+    "mismatches_tsv_path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/thesis_extra_20261029/B1/out_fixed/csq_order_swapped/diffly_plugins/consequence_mismatches.tsv",
+    "details": {
+     "compare_mode": "fast",
+     "fingerprint_only": false,
+     "precheck_equal_buckets": 8,
+     "exact_diff_run_buckets": 0,
+     "bucket_count": 8,
+     "buckets_compared": 8,
+     "workers": 4
+    },
+    "per_chromosome": {
+     "22": {
+      "left_rows": 59046,
+      "right_rows": 59046,
+      "joined_equal_rows": 59046,
+      "left_only_rows": 0,
+      "right_only_rows": 0,
+      "unequal_rows": 0
+     }
+    }
+   }
+  },
+  "chromosomes": {
+   "per_chromosome": {
+    "22": {
+     "variant": {
+      "left_rows": 50861,
+      "right_rows": 50861,
+      "joined_equal_rows": 50861,
+      "left_only_rows": 0,
+      "right_only_rows": 0,
+      "unequal_rows": 0,
+      "equal": true
+     },
+     "consequence": {
+      "left_rows": 59046,
+      "right_rows": 59046,
+      "joined_equal_rows": 59046,
+      "left_only_rows": 0,
+      "right_only_rows": 0,
+      "unequal_rows": 0,
+      "equal": true
+     },
+     "timings": {
+      "variant_summary_seconds": 4.839,
+      "consequence_bucketization_seconds": 5.207,
+      "consequence_summary_seconds": 0.0,
+      "variant_diff_seconds": 0.087,
+      "consequence_diff_seconds": 0.978
+     }
+    }
+   },
+   "requested": [],
+   "effective": []
+  }
+ },
+ "seconds": {
+  "e2e": 58.8892240524292,
+  "diffly_full": 97.80230712890625,
+  "diffly_plugins": 11.360030889511108
+ }
+}

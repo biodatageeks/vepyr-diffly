@@ -1,0 +1,13 @@
+identity {"variants": 0}
+variant_removed {"variants": 20}
+variant_added {"variants": 20}
+csq_entry_removed {"variants": 20}
+csq_entry_added {"variants": 20}
+consequence_changed {"variants": 20, "field_mismatches": {"Consequence": 20}}
+hgvs_changed {"variants": 20, "field_mismatches": {"HGVSc": 20}}
+plugin_value_changed {"variants": 20, "field_mismatches": {"CADD_PHRED": 326}, "plugin": "cadd"}
+plugin_value_removed {"variants": 20, "field_mismatches": {"ClinVar_CLNSIG": 1049}, "plugin": "clinvar"}
+csq_order_swapped {"variants": 20}
+equiv_number_format {"variants": 20, "format_only": {"CADD_PHRED": 273}, "plugin": "cadd"}
+equiv_amp_order {"variants": 20, "order_only": {"Existing_variation": 896}}
+equiv_header {"variants": 0}

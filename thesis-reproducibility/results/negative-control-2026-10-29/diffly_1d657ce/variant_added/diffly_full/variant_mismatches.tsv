@@ -1,0 +1,21 @@
+chrom	pos	ref	alt	record_count	consequence_count	ids	filters	diff_kind	consequence_count_left	consequence_count_right	filters_left	filters_right	ids_left	ids_right	record_count_left	record_count_right
+22	29516896	G	C	1	0	.	PASS	right_only								
+22	23419473	A	C	1	0	.	PASS	right_only								
+22	50015571	G	C	1	0	.	PASS	right_only								
+22	27099521	A	C	1	0	.	PASS	right_only								
+22	23844171	T	A	1	0	.	PASS	right_only								
+22	30183897	T	C	1	0	.	PASS	right_only								
+22	27025173	T	A	1	0	.	PASS	right_only								
+22	48420424	T	A	1	0	.	PASS	right_only								
+22	45405364	C	A	1	0	.	PASS	right_only								
+22	36828288	T	A	1	0	.	PASS	right_only								
+22	28797650	G	A	1	0	.	PASS	right_only								
+22	44666031	T	A	1	0	.	PASS	right_only								
+22	38581885	G	A	1	0	.	PASS	right_only								
+22	34198259	T	A	1	0	.	PASS	right_only								
+22	21558108	C	A	1	0	.	PASS	right_only								
+22	44785064	A	C	1	0	.	PASS	right_only								
+22	32531843	C	A	1	0	.	PASS	right_only								
+22	20133456	C	A	1	0	.	PASS	right_only								
+22	42015599	T	A	1	0	.	PASS	right_only								
+22	26937828	T	A	1	0	.	PASS	right_only								
