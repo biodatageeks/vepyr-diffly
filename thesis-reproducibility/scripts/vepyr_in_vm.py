@@ -14,9 +14,15 @@ In the timing series VEPYR ran natively on macOS and VEP in Docker inside the Co
          as for VEP), annotation time inside the container (perf_counter around
          vepyr.annotate, as measure_once.py), CPU (getrusage), peak RSS (ru_maxrss) and the
          body SHA-256, which must equal the native output (chr1: e9703e5e...).
+  grid   item D13: chr1 baseline with workers p in {1, 2, 4, 8, 10} on c in {1, 2, 4, 10} VM
+         CPUs (docker --cpuset-cpus 0..c-1), REPEATS rounds in shuffled order. The engine's
+         threads are not bounded by `workers` alone (spawn_blocking and std::thread besides the
+         tokio runtime), so the core count is limited from outside; workers=p on one CPU is
+         the single-core time of the partitioned (tabix-indexed) path.
 
 Usage: vepyr_in_vm.py build OUT_DIR
        vepyr_in_vm.py run OUT_DIR [REPEATS]
+       vepyr_in_vm.py grid OUT_DIR [REPEATS]
 """
 from __future__ import annotations
 
@@ -94,17 +100,18 @@ def build(out: Path) -> None:
     print(json.dumps(info, indent=1))
 
 
-def run_one(out: Path, chrom: str, workers: int, rep: int) -> dict:
+def run_one(out: Path, chrom: str, workers: int, rep: int, cpus: int | None = None) -> dict:
     work = out / "work"
     work.mkdir(exist_ok=True)
     inp, t = INPUT[chrom], out / "time_tmp.txt"
+    limit = ["--cpuset-cpus", f"0-{cpus - 1}"] if cpus else []
     cmd = ["/usr/bin/time", "-p", "-o", str(t), "docker", "run", "--rm", "--user", "501:20", "--env", "HOME=/tmp",
-           "-v", f"{D}/cache/116_GRCh38_merged:/cache:ro", "-v", f"{D}/input:/ref:ro",
+           *limit, "-v", f"{D}/cache/116_GRCh38_merged:/cache:ro", "-v", f"{D}/input:/ref:ro",
            "-v", f"{inp.parent}:/input:ro", "-v", f"{work}:/output", TAG,
            "python", "-c", CHILD, f"/input/{inp.name}", "/output/vepyr.vcf", str(workers)]
     p = subprocess.run(cmd, capture_output=True, text=True)
     (work / "vepyr.vcf").unlink(missing_ok=True)
-    r = {"chrom": chrom, "workers": workers, "repeat": rep, "returncode": p.returncode,
+    r = {"chrom": chrom, "workers": workers, "cpus": cpus, "repeat": rep, "returncode": p.returncode,
          "utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
          "docker_run_wall_s": float(next(l.split()[1] for l in t.read_text().splitlines() if l.startswith("real")))}
     if p.returncode == 0:
@@ -116,7 +123,7 @@ def run_one(out: Path, chrom: str, workers: int, rep: int) -> dict:
     return r
 
 
-def run(out: Path, reps: int) -> int:
+def run(out: Path, reps: int, grid: bool = False) -> int:
     (out / "environment.json").write_text(json.dumps({
         "image_id": subprocess.run(["docker", "image", "inspect", "--format", "{{.Id}}", TAG], capture_output=True,
                                    text=True).stdout.strip(),
@@ -126,11 +133,14 @@ def run(out: Path, reps: int) -> int:
     for chrom in ("chr22", "chr1"):  # warm-up, excluded
         run_one(out, chrom, 1, 0)
     for rep in range(1, reps + 1):
-        cells = [(c, w) for c in ("chr22", "chr1") for w in (1, 10)]
+        if grid:
+            cells = [("chr1", w, c) for w in (1, 2, 4, 8, 10) for c in (1, 2, 4, 10)]
+        else:
+            cells = [(c, w, None) for c in ("chr22", "chr1") for w in (1, 10)]
         rng.shuffle(cells)
-        for chrom, w in cells:
-            r = run_one(out, chrom, w, rep)
-            with (out / "runs.jsonl").open("a") as f:
+        for chrom, w, cpus in cells:
+            r = run_one(out, chrom, w, rep, cpus)
+            with (out / ("grid_runs.jsonl" if grid else "runs.jsonl")).open("a") as f:
                 f.write(json.dumps(r) + "\n")
             print(json.dumps({k: v for k, v in r.items() if k != "stderr_tail"}), flush=True)
             if r["returncode"]:
@@ -146,8 +156,8 @@ def main() -> int:
     if mode == "build":
         build(out)
         return 0
-    if mode == "run":
-        return run(out, int(sys.argv[3]) if len(sys.argv) > 3 else 5)
+    if mode in ("run", "grid"):
+        return run(out, int(sys.argv[3]) if len(sys.argv) > 3 else (5 if mode == "run" else 3), mode == "grid")
     raise SystemExit(__doc__)
 
 

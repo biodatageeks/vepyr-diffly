@@ -22,7 +22,8 @@ between the children, so its sum does not count them several times.
 
 Usage: vep_fork_series.py full OUT_DIR [REPEATS]
        vep_fork_series.py plugins OUT_DIR CHROM [REPEATS]
-Env: INTERVAL (seconds between memory samples, default 5), PLUGIN_WORK.
+Env: INTERVAL (seconds between memory samples, default 5), PLUGIN_WORK, KEEP_FIRST (path: the
+repeat-1 output is bgzipped there instead of deleted, e.g. as the chr1-22 VEP reference for B2).
 """
 from __future__ import annotations
 
@@ -108,6 +109,11 @@ def run_vep(run: Path, name: str, mounts: list[str], args: list[str], output: Pa
     if output.exists():
         r["body_sha256"], r["records"] = body(output)
         r["body_identical"] = r["body_sha256"] == expected_body
+        keep = os.environ.get("KEEP_FIRST")
+        if keep and run.name.endswith("_r1") and not Path(keep).exists():
+            subprocess.run(f"bgzip -c {shlex.quote(str(output))} > {shlex.quote(keep)} && tabix -p vcf {shlex.quote(keep)}",
+                           shell=True, check=True)
+            r["kept_output"] = keep
         output.unlink()
     (run / "result.json").write_text(json.dumps(r, indent=1) + "\n")
     return r
