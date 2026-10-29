@@ -1,0 +1,60 @@
+{
+ "edge": {
+  "returncode": 0,
+  "stderr_lines": 0,
+  "records_in": 5,
+  "records_out": 3,
+  "records": {
+   "chr22:17951272:C:G": {
+    "csq_entries": 12,
+    "consequences": [
+     "NMD_transcript_variant",
+     "intron_variant",
+     "regulatory_region_variant"
+    ],
+    "existing_variation": [
+     "rs35972244"
+    ]
+   },
+   "chrX:153866000:A:G": {
+    "csq_entries": 19,
+    "consequences": [
+     "downstream_gene_variant",
+     "intron_variant",
+     "upstream_gene_variant"
+    ],
+    "existing_variation": []
+   },
+   "chrM:3243:A:G": {
+    "csq_entries": 1,
+    "consequences": [
+     "intergenic_variant"
+    ],
+    "existing_variation": [
+     "rs199474657"
+    ]
+   },
+   "chrUn_KI270742v1:10000:A:G": "missing from output",
+   "chrFAKE:100:A:G": "missing from output"
+  }
+ },
+ "mt": {
+  "returncode": 0,
+  "stderr_lines": 0,
+  "records_in": 1,
+  "records_out": 1,
+  "records": {
+   "MT:3243:A:G": {
+    "csq_entries": 38,
+    "consequences": [
+     "downstream_gene_variant",
+     "non_coding_transcript_exon_variant",
+     "upstream_gene_variant"
+    ],
+    "existing_variation": [
+     "rs199474657"
+    ]
+   }
+  }
+ }
+}

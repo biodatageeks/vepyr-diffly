@@ -1,0 +1,12 @@
+##fileformat=VCFv4.2
+##contig=<ID=chr22>
+##contig=<ID=chrX>
+##contig=<ID=chrM>
+##contig=<ID=chrUn_KI270742v1>
+##contig=<ID=chrFAKE>
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+chr22	17951272	.	C	G	.	PASS	.
+chrX	153866000	.	A	G	.	PASS	.
+chrM	3243	.	A	G	.	PASS	.
+chrUn_KI270742v1	10000	.	A	G	.	PASS	.
+chrFAKE	100	.	A	G	.	PASS	.
