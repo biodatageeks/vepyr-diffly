@@ -66,6 +66,7 @@ on 2026-10-24 (step S5).
 | Cache build: dynamic queue, native sequential, containers (`tab:cache-lpt`) | `results/cache-build-2026-10/parallel_full_cache/queue_20_10_repeats/`, `full_core_5x/`, `full_cache_20/` (`distributed_5_summary.json`, `baseline_*_summary.json`) | branches `thesis/cache-build-*` |
 | Full build including translation | `results/completion-2026-10/m5_completion_20261024/S11/` (repeat 1 from 2026-10-19 and repeats 2–5) | `full_e2e_all.py` on `thesis/cache-build-parallel` |
 | Queue analysis: makespan vs lower bound, cost-estimate correlation per entity, Gantt chart (`fig:queue-gantt`, ch. 5) | `results/queue-analysis-2026-10-29/queue_analysis.json`, from the queue summary above | `scripts/queue_analysis.py [OUT_PDF]` |
+| Annotation scaling and time-RSS figure (`fig:annotation-scaling`, ch. 5) | dispersion JSON above and `completion-2026-10/.../S5/result.json` | `scripts/fig_annotation_scaling.py OUT_PDF` |
 | Dispersion of all timing configurations: median, SD (n-1), min-max, CV (appendix A, `tab:repro-dispersion`) | `results/dispersion-2026-10-29/` (`dispersion.json`, `dispersion.tsv`), computed from the raw files listed above | `scripts/dispersion_stats.py` |
 | Determinism `workers=1` vs `workers=8`, container start-up overhead, independent-process test, per-plugin CSQ field counts, cache sizes, full-genome E2E concordance, VEP peak RSS on chr1/chr22 | `results/completion-2026-10/m5_completion_20261024/S4, S3, S6, S7, S8, S10, S9` (`result.json`, raw JSONL, logs) | `scripts/m5_completion_batch.py` |
 
