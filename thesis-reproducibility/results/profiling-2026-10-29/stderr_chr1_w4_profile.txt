@@ -1,0 +1,119 @@
+[VEP_PROFILE] concurrency_plan lookup_partitions=4 workers=4 cold_parquet_target_partitions=1 spawn_vcf_provider_open=true
+[VEP_PROFILE] detected partitioned cache: 463 chroms in /Users/lukaszjezapkowicz/workspace/data_vepyr/cache/116_GRCh38_merged [parquet]
+[VEP_PROFILE] ====== scan_with_transcript_engine_partitioned START ======
+[VEP_PROFILE] 0. discover_contigs...............................      2.3ms  1 VCF contigs, 463 in cache, 1 to process
+[VEP_PROFILE] ====== scan_with_transcript_engine_partitioned: returning ContigAnnotationExec ======
+[VEP_RSS] chr1: after_context_load peak_rss=1142MB
+[VEP_RSS] chr1: after_sift_load peak_rss=1145MB
+[VEP_RSS] chr1: after_prepare_data peak_rss=1570MB
+[VEP_PROFILE] ------ contig chr1 START ------
+[VEP_RSS] chr1: after_prepare peak_rss=1601MB
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 10000/0 (+10000) at 1.4s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 20000/0 (+10000) at 1.6s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 30000/0 (+10000) at 1.7s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 40000/0 (+10000) at 1.9s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 50000/0 (+10000) at 2.2s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 60000/0 (+10000) at 2.4s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 65000/0 (+5000) at 2.5s
+[VEP_PROGRESS] annotated 75000/0 (+10000) at 2.7s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 80000/0 (+5000) at 2.8s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 95000/0 (+15000) at 3.0s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 110000/0 (+15000) at 3.3s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 115000/0 (+5000) at 3.5s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 125000/0 (+10000) at 3.6s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 130000/0 (+5000) at 3.8s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 140000/0 (+10000) at 3.9s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 145000/0 (+5000) at 4.1s
+[VEP_PROGRESS] annotated 150000/0 (+5000) at 4.2s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 155000/0 (+5000) at 4.4s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 165000/0 (+10000) at 4.5s
+[VEP_PROGRESS] annotated 170000/0 (+5000) at 4.7s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 180000/0 (+10000) at 4.9s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 185000/0 (+5000) at 5.0s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 195000/0 (+10000) at 5.2s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 205000/0 (+10000) at 5.3s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 210000/0 (+5000) at 5.5s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 225000/0 (+15000) at 5.6s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 240000/0 (+15000) at 6.0s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 260000/0 (+20000) at 6.3s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 265000/0 (+5000) at 6.4s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_RSS] run done colocated_entries=84297 input_rows=85000 output_rows=85000 peak_rss=4224MB
+[VEP_PROGRESS] annotated 280000/0 (+15000) at 6.6s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 285000/0 (+5000) at 6.7s
+[VEP_RSS] run done colocated_entries=79107 input_rows=80000 output_rows=80000 peak_rss=4236MB
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 295000/0 (+10000) at 6.9s
+[VEP_PROGRESS] annotated 300000/0 (+5000) at 7.1s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_RSS] run done colocated_entries=77803 input_rows=78430 output_rows=78430 peak_rss=4237MB
+[VEP_PROGRESS] annotated 308430/0 (+8430) at 7.2s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 313430/0 (+5000) at 7.5s
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROGRESS] annotated 318430/0 (+5000) at 7.8s
+[VEP_RSS] run done colocated_entries=79335 input_rows=80000 output_rows=80000 peak_rss=4237MB
+[VEP_PROFILE] chr1: TOTAL.......................................   7359.9ms  323430 rows
+[VEP_PROFILE] chr1: pipeline_profile lookup_partitions=4 lookup_batches=0 lookup_buffered_batches_max=0 lookup_buffered_partitions_max=0 input_buffers=65 output_batches=0 output_rows=0 prepare_total=0.633s prepare_setup=0.001s prepare_shared_ctx=0.239s context_load=0.591s context_tx_scan=0.287s context_tx=0.094s context_exons_scan=0.023s context_exons=0.027s context_tl_scan=0.100s context_tl=0.037s context_reg_scan=0.002s context_reg=0.002s context_motif_scan=0.008s context_motif=0.010s worker_init=0.000s lookup_wait=0.000s hydrate=0.000s annotate=17.659s input_buffer=0.004s variant_bounds=0.012s tx_window=0.179s exon_filter=0.019s tl_filter=0.006s prepared_ctx=1.062s sift_load=0.002s engine=16.380s projection=0.000s send_wait=7.131s ordered_drain_wait=0.000s run_pool_runs=0 head_wait=0.000s
+[VEP_PROGRESS] annotated 323430/0 (+5000) at 8.2s
+[VEP_PROFILE] vcf_sink_profile batches=0 rows=0 lines=0 body_chunk_bytes=0 format_jobs=0 format_inflight_max=0 contig_partitions=0 contig_inflight_max=0 stream_next=0.000s batch_to_lines=0.000s format_wait=0.000s write_records=0.000s writer_finish=0.000s
