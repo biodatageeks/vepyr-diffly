@@ -8,6 +8,8 @@ Subcommands (all use the VEP 116 image and options of the timing series: --cache
                      records in/out, CSQ entries, consequences, VEP warnings (B19).
   forkprocs OUT_DIR  VEP on chr22 with --fork 1 and --fork 4; `docker top` sampled every
                      0.2 s, maximum number of concurrent vep processes (D15). No timing claim.
+  b8 OUT_DIR         VEP on the edge-case input of edge_variants.py; per-record CSQ entries,
+                     consequences and warnings next to the VEPYR summary (B8).
   sexmt OUT_DIR      ClinVar variants on X (random 5000 + all in PAR1/PAR2), Y (all) and MT
                      (all), contigs written as chrX, chrY and MT; VEP and VEPYR (workers=1)
                      annotate the same input and the E2E comparator of the vepyr repository
@@ -37,6 +39,7 @@ IMAGE = "ensemblorg/ensembl-vep:release_116.0"
 CLINVAR = D / "plugin_input/clinvar/clinvar.vcf.gz"
 CHR22 = D / "runs/m5_completion_20261024/inputs/HG002_normalized_chr22.vcf.gz"
 EDGE = Path(__file__).resolve().parent.parent / "results/edge-contigs-2026-10-29"
+EDGEV = Path(__file__).resolve().parent.parent / "results/edge-variants-2026-10-29"
 PAR = {"X": [(10001, 2781479), (155701383, 156030895)]}
 SEED = 20261030
 
@@ -89,6 +92,23 @@ def cmd_edge(out: Path) -> dict:
         res[name] = {"returncode": p.returncode, "records_in": len(records(inp)), "records_out": len(got),
                      "records": got, "warnings": warn.read_text().splitlines() if warn.exists() else []}
     return res
+
+
+def cmd_b8(out: Path) -> dict:
+    inp = EDGEV / "edge_variants.vcf"
+    p = subprocess.run(vep_cmd(inp, out, "edge_variants.vep.vcf"), capture_output=True, text=True)
+    (out / "edge_variants.vep.stderr.txt").write_text(p.stdout + p.stderr)
+    warn = out / "edge_variants.vep.vcf_warnings.txt"
+    vep = records(out / "edge_variants.vep.vcf") if p.returncode == 0 else {}
+    vepyr = records(EDGEV / "vepyr_w1.vcf")
+    cases = json.loads((EDGEV / "cases.json").read_text())
+    rows = []
+    for c in cases:
+        k = f"chr22:{c['pos']}:{c['ref']}:{c['alt']}"
+        rows.append({"case": c["case"], "key": k, "vep": vep.get(k, "missing from output"),
+                     "vepyr": vepyr.get(k, "missing from output")})
+    return {"returncode": p.returncode, "records_vep": len(vep), "records_vepyr": len(vepyr), "cases": rows,
+            "warnings": warn.read_text().splitlines() if warn.exists() else []}
 
 
 def cmd_forkprocs(out: Path) -> dict:
@@ -176,7 +196,7 @@ def cmd_sexmt(out: Path) -> dict:
 def main() -> int:
     sub, out = sys.argv[1], Path(sys.argv[2]).resolve()
     out.mkdir(parents=True, exist_ok=True)
-    res = {"edge": cmd_edge, "forkprocs": cmd_forkprocs, "sexmt": cmd_sexmt}[sub](out)
+    res = {"edge": cmd_edge, "b8": cmd_b8, "forkprocs": cmd_forkprocs, "sexmt": cmd_sexmt}[sub](out)
     (out / "summary.json").write_text(json.dumps(res, indent=1, default=str) + "\n")
     print(json.dumps(res, indent=1, default=str)[:4000])
     return 0

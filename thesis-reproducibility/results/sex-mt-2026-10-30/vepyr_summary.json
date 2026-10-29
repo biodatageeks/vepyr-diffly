@@ -1,0 +1,25 @@
+{
+ "input": {
+  "chrX": 7327,
+  "chrY": 677,
+  "MT": 3124,
+  "chrX_PAR": 2327
+ },
+ "rc": 0,
+ "seconds": 15.4,
+ "out_per_contig": {
+  "chrX": 7327,
+  "chrY": 677,
+  "MT": 3124
+ },
+ "no_csq": {
+  "chrX": 0,
+  "chrY": 0,
+  "MT": 0
+ },
+ "only_intergenic": {
+  "chrX": 2,
+  "chrY": 0,
+  "MT": 0
+ }
+}
