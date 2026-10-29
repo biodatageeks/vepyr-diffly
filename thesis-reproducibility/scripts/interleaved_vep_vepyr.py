@@ -3,7 +3,9 @@
 baseline annotated alternately by VEP 116 (one process, no --fork, docker run timed
 with /usr/bin/time -p as in the September series) and VEPYR (workers=1, timed with
 time.perf_counter around vepyr.annotate as in measure_once.py), REPEATS times, so
-both tools see the same machine state and the same core cache build.
+both tools see the same machine state and the same core cache build. CPU time (D6): for VEP
+the container's cgroup cpu.stat read after vep exits (all VEP processes; the command runs
+under `sh -c` for that), for VEPYR getrusage(RUSAGE_SELF) around vepyr.annotate.
 
 Usage: interleaved_vep_vepyr.py OUT_DIR CHROM [REPEATS]
 """
@@ -16,12 +18,17 @@ INPUT = {"chr22": D / "runs/m5_completion_20261024/inputs/HG002_normalized_chr22
          "chr1": D / "runs/m5_completion_20261024/inputs/HG002_normalized_chr1.vcf.gz"}
 PYN = D / ".venv-native/bin/python3"
 CHILD = r'''
-import json, sys, time, vepyr
+import json, resource, sys, time, vepyr
+u0 = resource.getrusage(resource.RUSAGE_SELF)
 t0 = time.perf_counter()
 vepyr.annotate(vcf=sys.argv[1], cache_dir=sys.argv[2], everything=True, hgvs=True, reference_fasta=sys.argv[3],
                workers=1, output_vcf=sys.argv[4], show_progress=False)
-print(json.dumps({"annotation_seconds": time.perf_counter() - t0}))
+dt = time.perf_counter() - t0
+u1 = resource.getrusage(resource.RUSAGE_SELF)
+print(json.dumps({"annotation_seconds": dt, "user_s": u1.ru_utime - u0.ru_utime, "sys_s": u1.ru_stime - u0.ru_stime}))
 '''
+# vep runs unchanged; afterwards the container's own cgroup reports the CPU time of every process in it
+WRAP = 'vep "$@"; rc=$?; echo CPUSTAT; cat /sys/fs/cgroup/cpu.stat; exit $rc'
 
 
 def vep(chrom, out):
@@ -29,14 +36,16 @@ def vep(chrom, out):
     t = out / "vep.time.txt"
     cmd = ["/usr/bin/time", "-p", "-o", str(t), "docker", "run", "--rm", "--user", "501:20", "--env", "HOME=/tmp",
            "-v", f"{D}/homo_sapiens_merged/116_GRCh38:/opt/vep/.vep/homo_sapiens_merged/116_GRCh38:ro",
-           "-v", f"{D}/input:/ref:ro", "-v", f"{inp.parent}:/input:ro", "-v", f"{out}:/output", IMAGE, "vep",
+           "-v", f"{D}/input:/ref:ro", "-v", f"{inp.parent}:/input:ro", "-v", f"{out}:/output", IMAGE, "sh", "-c", WRAP, "vep",
            "--dir", "/opt/vep/.vep", "--cache", "--merged", "--offline", "--assembly", "GRCh38",
            "--input_file", f"/input/{inp.name}", "--output_file", "/output/vep.vcf", "--vcf", "--force_overwrite",
            "--no_stats", "--everything", "--hgvs", "--fasta", "/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa"]
     p = subprocess.run(cmd, capture_output=True, text=True)
     real = float(next(l.split()[1] for l in t.read_text().splitlines() if l.startswith("real")))
     (out / "vep.vcf").unlink(missing_ok=True)
-    return {"tool": "vep", "returncode": p.returncode, "seconds": real}
+    stat = dict(l.split() for l in p.stdout.split("CPUSTAT\n", 1)[-1].splitlines() if len(l.split()) == 2)
+    cpu = {k: int(stat[f"{k}_usec"]) / 1e6 for k in ("usage", "user", "system") if f"{k}_usec" in stat}
+    return {"tool": "vep", "returncode": p.returncode, "seconds": real, "cgroup_cpu_s": cpu}
 
 
 def vepyr(chrom, out):
@@ -44,8 +53,9 @@ def vepyr(chrom, out):
                         str(D / "input/Homo_sapiens.GRCh38.dna.primary_assembly.fa"), str(out / "vepyr.vcf")],
                        capture_output=True, text=True)
     (out / "vepyr.vcf").unlink(missing_ok=True)
-    sec = json.loads(p.stdout.strip().splitlines()[-1])["annotation_seconds"] if p.returncode == 0 else None
-    return {"tool": "vepyr", "returncode": p.returncode, "seconds": sec}
+    r = json.loads(p.stdout.strip().splitlines()[-1]) if p.returncode == 0 else {}
+    return {"tool": "vepyr", "returncode": p.returncode, "seconds": r.get("annotation_seconds"),
+            "user_s": r.get("user_s"), "sys_s": r.get("sys_s")}
 
 
 def main():
