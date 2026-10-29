@@ -100,6 +100,7 @@ def _base_variant_rows(source: pl.LazyFrame) -> pl.LazyFrame:
             _clean_string_expr("filter"),
             pl.col("csq").cast(pl.String).alias("csq"),
         )
+        .with_columns(pl.col("alt").list.len().gt(1).alias("_multi_alt"))
         .explode("alt")
         .with_columns(_clean_string_expr("alt"))
         .filter(~pl.col("alt").is_in([".", ""]))
@@ -116,30 +117,61 @@ def _filter_source_by_chromosomes(
 
 
 def _normalized_allele_expr() -> pl.Expr:
-    ref = pl.col("ref").cast(pl.String)
-    alt = pl.col("alt").cast(pl.String)
-    trimmed = (
-        pl.when(
-            (ref.str.len_chars() > 0)
-            & (alt.str.len_chars() > 0)
-            & (ref.str.slice(0, 1) == alt.str.slice(0, 1))
+    return (
+        pl.struct(
+            pl.col("ref").cast(pl.String),
+            pl.col("alt").cast(pl.String),
+            pl.col("_multi_alt").cast(pl.Boolean),
         )
-        .then(alt.str.slice(1))
-        .otherwise(alt)
+        .map_batches(
+            lambda rows: pl.Series(
+                [
+                    normalize_alt_for_csq_allele(ref, alt, multi_alt=bool(multi))
+                    for ref, alt, multi in zip(
+                        rows.struct.field("ref").to_list(),
+                        rows.struct.field("alt").to_list(),
+                        rows.struct.field("_multi_alt").to_list(),
+                    )
+                ],
+                dtype=pl.String,
+            ),
+            return_dtype=pl.String,
+        )
+        .alias("normalized_allele")
     )
-    return pl.when(trimmed == "").then(pl.lit("-")).otherwise(trimmed).alias("normalized_allele")
 
 
-def normalize_alt_for_csq_allele(ref: str, alt: str) -> str:
+def normalize_alt_for_csq_allele(ref: str, alt: str, *, multi_alt: bool = False) -> str:
+    """The ALT allele as VEP writes it in the CSQ Allele field.
+
+    For a record with one ALT, VEP drops the whole prefix shared by REF and ALT (not
+    only the first base) and, when the alleles differ in length, also the shared
+    suffix; an empty result is written as "-". Same-length substitutions keep their
+    suffix (GCCTT>TCCTT stays TCCTT). Matching only the first base dropped the CSQ
+    entries of single-ALT indels such as AT>ATT (CSQ Allele "T") or CAAATAAAT>CAAAT
+    ("-"). For a multi-ALT record VEP trims only the shared first base, so that rule
+    is kept when ``multi_alt`` is true.
+    """
     ref_value = ref or ""
     alt_value = alt or ""
-    if ref_value and alt_value and ref_value[0] == alt_value[0]:
-        alt_trimmed = alt_value[1:]
-    else:
-        alt_trimmed = alt_value
-    if alt_trimmed == "":
-        return "-"
-    return alt_trimmed
+    if multi_alt:
+        trimmed = alt_value[1:] if ref_value and alt_value and ref_value[0] == alt_value[0] else alt_value
+        return trimmed or "-"
+    start = 0
+    while start < len(ref_value) and start < len(alt_value) and ref_value[start] == alt_value[start]:
+        start += 1
+    ref_rest, alt_rest = ref_value[start:], alt_value[start:]
+    if len(ref_value) != len(alt_value):
+        end = 0
+        while (
+            end < len(ref_rest)
+            and end < len(alt_rest)
+            and ref_rest[-1 - end] == alt_rest[-1 - end]
+        ):
+            end += 1
+        if end:
+            alt_rest = alt_rest[: len(alt_rest) - end]
+    return alt_rest or "-"
 
 
 def build_variant_summary_lazy(
@@ -261,11 +293,11 @@ def build_consequence_summary_lazy(
     group_key = VARIANT_KEY + csq_fields
     consequence_rows = (
         consequence_rows.select(
-            *VARIANT_KEY, *_csq_field_exprs(csq_fields, field_indexes=field_indexes)
+            *VARIANT_KEY, "_multi_alt", *_csq_field_exprs(csq_fields, field_indexes=field_indexes)
         )
         .with_columns(_normalized_allele_expr())
         .filter(pl.col("Allele") == pl.col("normalized_allele"))
-        .drop("normalized_allele")
+        .drop("normalized_allele", "_multi_alt")
     )
     if drop_empty_csq_rows:
         consequence_rows = consequence_rows.filter(_non_empty_csq_payload_expr(csq_fields))
@@ -602,6 +634,7 @@ def _aggregate_consequence_chunk(
         .with_columns(
             pl.col("alt").cast(pl.String).str.split(",").alias("alt"),
         )
+        .with_columns(pl.col("alt").list.len().gt(1).alias("_multi_alt"))
         .explode("alt")
         .with_columns(_clean_string_expr("alt"))
         .filter(~pl.col("alt").is_in([".", ""]))
@@ -642,6 +675,7 @@ def _aggregate_variant_chunk(
         .with_columns(
             pl.col("alt").cast(pl.String).str.split(",").alias("alt"),
         )
+        .with_columns(pl.col("alt").list.len().gt(1).alias("_multi_alt"))
         .explode("alt")
         .with_columns(
             _clean_string_expr("alt"),
@@ -670,6 +704,7 @@ def _aggregate_variant_chunk(
         .with_columns(
             pl.col("alt").cast(pl.String).str.split(",").alias("alt"),
         )
+        .with_columns(pl.col("alt").list.len().gt(1).alias("_multi_alt"))
         .explode("alt")
         .with_columns(
             _clean_string_expr("alt"),

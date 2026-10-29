@@ -139,10 +139,14 @@ def test_extract_csq_entries_from_info_bytes_keeps_unescaped_semicolons_inside_c
 
 
 def test_normalize_alt_for_csq_allele_handles_insertions_and_deletions() -> None:
+    # alleles of one multi-ALT record: VEP trims only the shared first base
+    assert normalize_alt_for_csq_allele("G", "GGTTT", multi_alt=True) == "GTTT"
+    assert normalize_alt_for_csq_allele("G", "GTTTT", multi_alt=True) == "TTTT"
+    assert normalize_alt_for_csq_allele("CAAAACAAAAACA", "CAAAACA", multi_alt=True) == "AAAACA"
+    assert normalize_alt_for_csq_allele("CAAAACAAAAACA", "C", multi_alt=True) == "-"
+    # the same alleles as separate single-ALT records
+    assert normalize_alt_for_csq_allele("CAAAACAAAAACA", "CAAAACA") == "-"
     assert normalize_alt_for_csq_allele("G", "GGTTT") == "GTTT"
-    assert normalize_alt_for_csq_allele("G", "GTTTT") == "TTTT"
-    assert normalize_alt_for_csq_allele("CAAAACAAAAACA", "CAAAACA") == "AAAACA"
-    assert normalize_alt_for_csq_allele("CAAAACAAAAACA", "C") == "-"
 
 
 def test_normalize_annotated_vcf_matches_csq_to_the_correct_multiallelic_alt() -> None:
@@ -177,3 +181,15 @@ def test_normalize_annotated_vcf_can_filter_standard_chromosome_aliases() -> Non
     assert result.variant.height == 1
     assert result.variant.item(0, "chrom") == "1"
     assert result.consequence.height == 1
+
+
+def test_normalize_alt_for_csq_allele_matches_vep_minimal_alleles() -> None:
+    # Observed in VEP 116 / VEPYR CSQ output for HG002 chr1 and chr22.
+    assert normalize_alt_for_csq_allele("AT", "ATT") == "T"
+    assert normalize_alt_for_csq_allele("ATT", "AT") == "-"
+    assert normalize_alt_for_csq_allele("CAAATAAAT", "CAAAT") == "-"
+    assert normalize_alt_for_csq_allele("CAGTGTGTG", "CTGTGTG") == "-"
+    assert normalize_alt_for_csq_allele("CTGTT", "CCGTTTGTTTGTT") == "CGTTTGTT"
+    assert normalize_alt_for_csq_allele("GCCTT", "TCCTT") == "TCCTT"
+    assert normalize_alt_for_csq_allele("A", "G") == "G"
+    assert normalize_alt_for_csq_allele("T", "TCAC") == "CAC"
