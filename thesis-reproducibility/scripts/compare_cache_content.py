@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Content check of a queue-built cache against the reference build (thesis, B15).
 
-For every (entity, contig) Parquet file of the five queue entities, compares the row
+For every (entity, contig) Parquet file of the queue entities (five in the scaling runs;
+also translation_core and translation_sift when the run built them, as the E5 queue does), compares the row
 count and two order-independent digests of the rows (sum of 32-bit row hashes and XOR
 of 64-bit row hashes, polars hash over all columns) between the per-task outputs of
 one dynamic-queue run and the core cache built sequentially by VEPYR 0.7.0 (S2).
@@ -13,7 +14,7 @@ import json, sys, time
 from pathlib import Path
 import polars as pl
 
-ENTITIES = ["variation", "transcript", "exon", "regulatory", "motif"]
+ENTITIES = ["variation", "transcript", "exon", "regulatory", "motif", "translation_core", "translation_sift"]
 
 
 def digest(path: Path):
@@ -28,7 +29,8 @@ def digest(path: Path):
 def main():
     qdir, ref, out = Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3])
     res, t0 = [], time.time()
-    for e in ENTITIES:
+    built = {p.name for p in qdir.glob("task_*/cache/*") if p.is_dir()}
+    for e in [x for x in ENTITIES if x in built]:
         qfiles = {p.name: p for p in qdir.glob(f"task_*/cache/{e}/*.parquet")}
         rfiles = {p.name: p for p in (ref / e).glob("*.parquet")}
         for name in sorted(set(qfiles) | set(rfiles)):
