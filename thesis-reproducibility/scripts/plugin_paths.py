@@ -13,7 +13,10 @@ c = Counter()
 for line in open(path):
     if line.startswith('##INFO=<ID=CSQ'):
         F = line.split('Format: ')[1].rstrip('">\n').split('|'); ix = {k: i for i, k in enumerate(F)}
-        dbn = [k for k in F if k.startswith('dbNSFP_') or k in ('SIFT4G_score','REVEL_score')]
+        dbn = [k for k in ("SIFT4G_score,SIFT4G_pred,Polyphen2_HDIV_score,Polyphen2_HVAR_score,MutationTaster_score,"
+                           "MutationTaster_pred,PROVEAN_score,PROVEAN_pred,VEST4_score,MetaSVM_score,MetaSVM_pred,"
+                           "MetaLR_score,MetaLR_pred,REVEL_score,GERP++_RS,phyloP100way_vertebrate,"
+                           "phastCons100way_vertebrate,CADD_raw,CADD_phred").split(",") if k in ix]
         continue
     if line[0] == '#': continue
     f = line.split('\t', 8); ref, alt = f[3], f[4]
