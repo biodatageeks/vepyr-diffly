@@ -1,0 +1,121 @@
+[
+ {
+  "case": "multiallelic_snv",
+  "pos": 16591593,
+  "ref": "A",
+  "alt": "C,G",
+  "info": "."
+ },
+ {
+  "case": "spanning_deletion_star",
+  "pos": 16591600,
+  "ref": "A",
+  "alt": "C,*",
+  "info": "."
+ },
+ {
+  "case": "gvcf_non_ref",
+  "pos": 16591605,
+  "ref": "G",
+  "alt": "A,<NON_REF>",
+  "info": "."
+ },
+ {
+  "case": "mnv_2bp",
+  "pos": 16591610,
+  "ref": "AC",
+  "alt": "CA",
+  "info": "."
+ },
+ {
+  "case": "complex_delins",
+  "pos": 16591620,
+  "ref": "CAT",
+  "alt": "G",
+  "info": "."
+ },
+ {
+  "case": "ref_mismatch",
+  "pos": 16591630,
+  "ref": "A",
+  "alt": "C",
+  "info": "."
+ },
+ {
+  "case": "no_alt_dot",
+  "pos": 16591640,
+  "ref": "A",
+  "alt": ".",
+  "info": "."
+ },
+ {
+  "case": "duplicate_record",
+  "pos": 16591650,
+  "ref": "C",
+  "alt": "A",
+  "info": "."
+ },
+ {
+  "case": "duplicate_record",
+  "pos": 16591650,
+  "ref": "C",
+  "alt": "A",
+  "info": "."
+ },
+ {
+  "case": "del_left_aligned",
+  "pos": 19029750,
+  "ref": "CG",
+  "alt": "C",
+  "info": "."
+ },
+ {
+  "case": "ins_left_aligned",
+  "pos": 19029750,
+  "ref": "C",
+  "alt": "CG",
+  "info": "."
+ },
+ {
+  "case": "del_right_shifted",
+  "pos": 19029754,
+  "ref": "GG",
+  "alt": "G",
+  "info": "."
+ },
+ {
+  "case": "ins_right_shifted",
+  "pos": 19029755,
+  "ref": "G",
+  "alt": "GG",
+  "info": "."
+ },
+ {
+  "case": "long_deletion_60bp",
+  "pos": 19029760,
+  "ref": "GGCGGCCGGGCGCGGGCGAGAGGACCGGCGCGCACAGCCGCGGGCTCCGTGTGCTCGGTA",
+  "alt": "G",
+  "info": "."
+ },
+ {
+  "case": "symbolic_del",
+  "pos": 19029830,
+  "ref": "C",
+  "alt": "<DEL>",
+  "info": "SVTYPE=DEL;END=19030330;SVLEN=-500"
+ },
+ {
+  "case": "symbolic_dup",
+  "pos": 19029840,
+  "ref": "G",
+  "alt": "<DUP>",
+  "info": "SVTYPE=DUP;END=19030140;SVLEN=300"
+ },
+ {
+  "case": "symbolic_ins",
+  "pos": 19029850,
+  "ref": "C",
+  "alt": "<INS>",
+  "info": "SVTYPE=INS;SVLEN=120"
+ }
+]

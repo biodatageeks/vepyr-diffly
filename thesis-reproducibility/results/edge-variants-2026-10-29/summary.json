@@ -1,0 +1,1028 @@
+{
+ "workers1": {
+  "returncode": 0,
+  "stderr_tail": "",
+  "records_in": 17,
+  "records_out": 16,
+  "cases": [
+   {
+    "case": "multiallelic_snv",
+    "key": "chr22:16591593:A:C,G",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "C"
+      ],
+      "consequences": [
+       "G"
+      ],
+      "hgvsc": [
+       "1/2",
+       "1/3"
+      ],
+      "hgvsp": []
+     }
+    ]
+   },
+   {
+    "case": "spanning_deletion_star",
+    "key": "chr22:16591600:A:C,*",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "C"
+      ],
+      "consequences": [
+       "*"
+      ],
+      "hgvsc": [
+       "1/2",
+       "1/3"
+      ],
+      "hgvsp": []
+     }
+    ]
+   },
+   {
+    "case": "gvcf_non_ref",
+    "key": "chr22:16591605:G:A,<NON_REF>",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "A"
+      ],
+      "consequences": [
+       "<NON_REF>"
+      ],
+      "hgvsc": [
+       "1/2",
+       "1/3"
+      ],
+      "hgvsp": []
+     }
+    ]
+   },
+   {
+    "case": "mnv_2bp",
+    "key": "chr22:16591610:AC:CA",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "CA"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "intron_variant",
+       "missense_variant",
+       "non_coding_transcript_variant",
+       "upstream_gene_variant"
+      ],
+      "hgvsc": [
+       "ENST00000359963.4:c.940_941delinsTG",
+       "ENST00000472972.2:n.287-6917_287-6916delinsTG",
+       "ENST00000725389.1:n.112-6917_112-6916delinsTG",
+       "ENST00000725390.1:n.114-8906_114-8905delinsTG",
+       "ENST00000725391.1:n.322-6917_322-6916delinsTG",
+       "NM_014406.5:c.940_941delinsTG"
+      ],
+      "hgvsp": [
+       "ENSP00000353048.3:p.Val314Trp",
+       "NP_055221.1:p.Val314Trp"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "complex_delins",
+    "key": "chr22:16591620:CAT:G",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "G"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "frameshift_variant",
+       "intron_variant",
+       "non_coding_transcript_variant",
+       "upstream_gene_variant"
+      ],
+      "hgvsc": [
+       "ENST00000359963.4:c.929_931delinsC",
+       "ENST00000472972.2:n.287-6928_287-6926delinsC",
+       "ENST00000725389.1:n.112-6928_112-6926delinsC",
+       "ENST00000725390.1:n.114-8917_114-8915delinsC",
+       "ENST00000725391.1:n.322-6928_322-6926delinsC",
+       "NM_014406.5:c.929_931delinsC"
+      ],
+      "hgvsp": [
+       "ENSP00000353048.3:p.Tyr310SerfsTer8",
+       "NP_055221.1:p.Tyr310SerfsTer8"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "ref_mismatch",
+    "key": "chr22:16591630:A:C",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "C"
+      ],
+      "consequences": [
+       "coding_sequence_variant",
+       "downstream_gene_variant",
+       "intron_variant",
+       "non_coding_transcript_variant",
+       "synonymous_variant",
+       "upstream_gene_variant"
+      ],
+      "hgvsc": [
+       "ENST00000359963.4:c.921T>G",
+       "ENST00000472972.2:n.287-6936T>G",
+       "ENST00000725389.1:n.112-6936T>G",
+       "ENST00000725390.1:n.114-8925T>G",
+       "ENST00000725391.1:n.322-6936T>G",
+       "NM_014406.5:c.921G>G"
+      ],
+      "hgvsp": [
+       "NP_055221.1:p.Ala307%3D"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "no_alt_dot",
+    "key": "chr22:16591640:A:.",
+    "out": "missing from output"
+   },
+   {
+    "case": "duplicate_record",
+    "key": "chr22:16591650:C:A",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "A"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "intron_variant",
+       "non_coding_transcript_variant",
+       "stop_gained",
+       "upstream_gene_variant"
+      ],
+      "hgvsc": [
+       "ENST00000359963.4:c.901G>T",
+       "ENST00000472972.2:n.287-6956G>T",
+       "ENST00000725389.1:n.112-6956G>T",
+       "ENST00000725390.1:n.114-8945G>T",
+       "ENST00000725391.1:n.322-6956G>T",
+       "NM_014406.5:c.901G>T"
+      ],
+      "hgvsp": [
+       "ENSP00000353048.3:p.Glu301Ter",
+       "NP_055221.1:p.Glu301Ter"
+      ]
+     },
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "A"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "intron_variant",
+       "non_coding_transcript_variant",
+       "stop_gained",
+       "upstream_gene_variant"
+      ],
+      "hgvsc": [
+       "ENST00000359963.4:c.901G>T",
+       "ENST00000472972.2:n.287-6956G>T",
+       "ENST00000725389.1:n.112-6956G>T",
+       "ENST00000725390.1:n.114-8945G>T",
+       "ENST00000725391.1:n.322-6956G>T",
+       "NM_014406.5:c.901G>T"
+      ],
+      "hgvsp": [
+       "ENSP00000353048.3:p.Glu301Ter",
+       "NP_055221.1:p.Glu301Ter"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "duplicate_record",
+    "key": "chr22:16591650:C:A",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "A"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "intron_variant",
+       "non_coding_transcript_variant",
+       "stop_gained",
+       "upstream_gene_variant"
+      ],
+      "hgvsc": [
+       "ENST00000359963.4:c.901G>T",
+       "ENST00000472972.2:n.287-6956G>T",
+       "ENST00000725389.1:n.112-6956G>T",
+       "ENST00000725390.1:n.114-8945G>T",
+       "ENST00000725391.1:n.322-6956G>T",
+       "NM_014406.5:c.901G>T"
+      ],
+      "hgvsp": [
+       "ENSP00000353048.3:p.Glu301Ter",
+       "NP_055221.1:p.Glu301Ter"
+      ]
+     },
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "A"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "intron_variant",
+       "non_coding_transcript_variant",
+       "stop_gained",
+       "upstream_gene_variant"
+      ],
+      "hgvsc": [
+       "ENST00000359963.4:c.901G>T",
+       "ENST00000472972.2:n.287-6956G>T",
+       "ENST00000725389.1:n.112-6956G>T",
+       "ENST00000725390.1:n.114-8945G>T",
+       "ENST00000725391.1:n.322-6956G>T",
+       "NM_014406.5:c.901G>T"
+      ],
+      "hgvsp": [
+       "ENSP00000353048.3:p.Glu301Ter",
+       "NP_055221.1:p.Glu301Ter"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "del_left_aligned",
+    "key": "chr22:19029750:CG:C",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "-"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "frameshift_variant",
+       "intron_variant",
+       "non_coding_transcript_exon_variant",
+       "non_coding_transcript_variant"
+      ],
+      "hgvsc": [
+       "ENST00000652053.1:c.232del",
+       "ENST00000697771.1:c.232del",
+       "NM_001396027.1:c.232del",
+       "NR_110533.2:n.896-1027del",
+       "NR_173148.1:n.232del"
+      ],
+      "hgvsp": [
+       "ENSP00000498832.1:p.Ala78ProfsTer59",
+       "ENSP00000513435.1:p.Ala78ProfsTer59",
+       "NP_001382956.1:p.Ala78ProfsTer38"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "ins_left_aligned",
+    "key": "chr22:19029750:C:CG",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "G"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "frameshift_variant",
+       "intron_variant",
+       "non_coding_transcript_exon_variant",
+       "non_coding_transcript_variant"
+      ],
+      "hgvsc": [
+       "ENST00000652053.1:c.232dup",
+       "ENST00000697771.1:c.232dup",
+       "NM_001396027.1:c.232dup",
+       "NR_110533.2:n.896-1027dup",
+       "NR_173148.1:n.232dup"
+      ],
+      "hgvsp": [
+       "ENSP00000498832.1:p.Ala78GlyfsTer156",
+       "ENSP00000513435.1:p.Ala78GlyfsTer156",
+       "NP_001382956.1:p.Ala78GlyfsTer59"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "del_right_shifted",
+    "key": "chr22:19029754:GG:G",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "-"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "frameshift_variant",
+       "intron_variant",
+       "non_coding_transcript_exon_variant",
+       "non_coding_transcript_variant"
+      ],
+      "hgvsc": [
+       "ENST00000652053.1:c.232del",
+       "ENST00000697771.1:c.232del",
+       "NM_001396027.1:c.232del",
+       "NR_110533.2:n.896-1027del",
+       "NR_173148.1:n.232del"
+      ],
+      "hgvsp": [
+       "ENSP00000498832.1:p.Ala78ProfsTer59",
+       "ENSP00000513435.1:p.Ala78ProfsTer59",
+       "NP_001382956.1:p.Ala78ProfsTer38"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "ins_right_shifted",
+    "key": "chr22:19029755:G:GG",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "G"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "frameshift_variant",
+       "intron_variant",
+       "non_coding_transcript_exon_variant",
+       "non_coding_transcript_variant"
+      ],
+      "hgvsc": [
+       "ENST00000652053.1:c.232dup",
+       "ENST00000697771.1:c.232dup",
+       "NM_001396027.1:c.232dup",
+       "NR_110533.2:n.896-1027dup",
+       "NR_173148.1:n.232dup"
+      ],
+      "hgvsp": [
+       "ENSP00000498832.1:p.Ala78GlyfsTer156",
+       "ENSP00000513435.1:p.Ala78GlyfsTer156",
+       "NP_001382956.1:p.Ala78GlyfsTer59"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "long_deletion_60bp",
+    "key": "chr22:19029760:GGCGGCCGGGCGCGGGCGAGAGGACCGGCGCGCACAGCCGCGGGCTCCGTGTGCTCGGTA:G",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "-"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "frameshift_variant",
+       "intron_variant",
+       "non_coding_transcript_exon_variant",
+       "non_coding_transcript_variant"
+      ],
+      "hgvsc": [
+       "ENST00000652053.1:c.238_296del",
+       "ENST00000697771.1:c.238_296del",
+       "NM_001396027.1:c.238_294del",
+       "NR_110533.2:n.896-1021_896-963del",
+       "NR_173148.1:n.238_296del"
+      ],
+      "hgvsp": [
+       "ENSP00000498832.1:p.Ala80CysfsTer134",
+       "ENSP00000513435.1:p.Ala80CysfsTer134"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "symbolic_del",
+    "key": "chr22:19029830:C:<DEL>",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "<DEL>"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "frameshift_variant",
+       "intron_variant",
+       "non_coding_transcript_exon_variant",
+       "non_coding_transcript_variant"
+      ],
+      "hgvsc": [
+       "ENST00000652053.1:c.307delins<DEL>",
+       "ENST00000697771.1:c.307delins<DEL>",
+       "NM_001396027.1:c.305delins<DEL>",
+       "NR_110533.2:n.896-952delins<DEL>",
+       "NR_173148.1:n.307delins<DEL>"
+      ],
+      "hgvsp": []
+     }
+    ]
+   },
+   {
+    "case": "symbolic_dup",
+    "key": "chr22:19029840:G:<DUP>",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "<DUP>"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "frameshift_variant",
+       "intron_variant",
+       "non_coding_transcript_exon_variant",
+       "non_coding_transcript_variant"
+      ],
+      "hgvsc": [
+       "ENST00000652053.1:c.317delins<DUP>",
+       "ENST00000697771.1:c.317delins<DUP>",
+       "NM_001396027.1:c.315delins<DUP>",
+       "NR_110533.2:n.896-942delins<DUP>",
+       "NR_173148.1:n.317delins<DUP>"
+      ],
+      "hgvsp": []
+     }
+    ]
+   },
+   {
+    "case": "symbolic_ins",
+    "key": "chr22:19029850:C:<INS>",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "<INS>"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "frameshift_variant",
+       "intron_variant",
+       "non_coding_transcript_exon_variant",
+       "non_coding_transcript_variant"
+      ],
+      "hgvsc": [
+       "ENST00000652053.1:c.327delins<INS>",
+       "ENST00000697771.1:c.327delins<INS>",
+       "NM_001396027.1:c.325delins<INS>",
+       "NR_110533.2:n.896-932delins<INS>",
+       "NR_173148.1:n.327delins<INS>"
+      ],
+      "hgvsp": []
+     }
+    ]
+   }
+  ]
+ },
+ "workers2": {
+  "returncode": 0,
+  "stderr_tail": "",
+  "records_in": 17,
+  "records_out": 16,
+  "cases": [
+   {
+    "case": "multiallelic_snv",
+    "key": "chr22:16591593:A:C,G",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "C"
+      ],
+      "consequences": [
+       "G"
+      ],
+      "hgvsc": [
+       "1/2",
+       "1/3"
+      ],
+      "hgvsp": []
+     }
+    ]
+   },
+   {
+    "case": "spanning_deletion_star",
+    "key": "chr22:16591600:A:C,*",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "C"
+      ],
+      "consequences": [
+       "*"
+      ],
+      "hgvsc": [
+       "1/2",
+       "1/3"
+      ],
+      "hgvsp": []
+     }
+    ]
+   },
+   {
+    "case": "gvcf_non_ref",
+    "key": "chr22:16591605:G:A,<NON_REF>",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "A"
+      ],
+      "consequences": [
+       "<NON_REF>"
+      ],
+      "hgvsc": [
+       "1/2",
+       "1/3"
+      ],
+      "hgvsp": []
+     }
+    ]
+   },
+   {
+    "case": "mnv_2bp",
+    "key": "chr22:16591610:AC:CA",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "CA"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "intron_variant",
+       "missense_variant",
+       "non_coding_transcript_variant",
+       "upstream_gene_variant"
+      ],
+      "hgvsc": [
+       "ENST00000359963.4:c.940_941delinsTG",
+       "ENST00000472972.2:n.287-6917_287-6916delinsTG",
+       "ENST00000725389.1:n.112-6917_112-6916delinsTG",
+       "ENST00000725390.1:n.114-8906_114-8905delinsTG",
+       "ENST00000725391.1:n.322-6917_322-6916delinsTG",
+       "NM_014406.5:c.940_941delinsTG"
+      ],
+      "hgvsp": [
+       "ENSP00000353048.3:p.Val314Trp",
+       "NP_055221.1:p.Val314Trp"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "complex_delins",
+    "key": "chr22:16591620:CAT:G",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "G"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "frameshift_variant",
+       "intron_variant",
+       "non_coding_transcript_variant",
+       "upstream_gene_variant"
+      ],
+      "hgvsc": [
+       "ENST00000359963.4:c.929_931delinsC",
+       "ENST00000472972.2:n.287-6928_287-6926delinsC",
+       "ENST00000725389.1:n.112-6928_112-6926delinsC",
+       "ENST00000725390.1:n.114-8917_114-8915delinsC",
+       "ENST00000725391.1:n.322-6928_322-6926delinsC",
+       "NM_014406.5:c.929_931delinsC"
+      ],
+      "hgvsp": [
+       "ENSP00000353048.3:p.Tyr310SerfsTer8",
+       "NP_055221.1:p.Tyr310SerfsTer8"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "ref_mismatch",
+    "key": "chr22:16591630:A:C",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "C"
+      ],
+      "consequences": [
+       "coding_sequence_variant",
+       "downstream_gene_variant",
+       "intron_variant",
+       "non_coding_transcript_variant",
+       "synonymous_variant",
+       "upstream_gene_variant"
+      ],
+      "hgvsc": [
+       "ENST00000359963.4:c.921T>G",
+       "ENST00000472972.2:n.287-6936T>G",
+       "ENST00000725389.1:n.112-6936T>G",
+       "ENST00000725390.1:n.114-8925T>G",
+       "ENST00000725391.1:n.322-6936T>G",
+       "NM_014406.5:c.921G>G"
+      ],
+      "hgvsp": [
+       "NP_055221.1:p.Ala307%3D"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "no_alt_dot",
+    "key": "chr22:16591640:A:.",
+    "out": "missing from output"
+   },
+   {
+    "case": "duplicate_record",
+    "key": "chr22:16591650:C:A",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "A"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "intron_variant",
+       "non_coding_transcript_variant",
+       "stop_gained",
+       "upstream_gene_variant"
+      ],
+      "hgvsc": [
+       "ENST00000359963.4:c.901G>T",
+       "ENST00000472972.2:n.287-6956G>T",
+       "ENST00000725389.1:n.112-6956G>T",
+       "ENST00000725390.1:n.114-8945G>T",
+       "ENST00000725391.1:n.322-6956G>T",
+       "NM_014406.5:c.901G>T"
+      ],
+      "hgvsp": [
+       "ENSP00000353048.3:p.Glu301Ter",
+       "NP_055221.1:p.Glu301Ter"
+      ]
+     },
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "A"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "intron_variant",
+       "non_coding_transcript_variant",
+       "stop_gained",
+       "upstream_gene_variant"
+      ],
+      "hgvsc": [
+       "ENST00000359963.4:c.901G>T",
+       "ENST00000472972.2:n.287-6956G>T",
+       "ENST00000725389.1:n.112-6956G>T",
+       "ENST00000725390.1:n.114-8945G>T",
+       "ENST00000725391.1:n.322-6956G>T",
+       "NM_014406.5:c.901G>T"
+      ],
+      "hgvsp": [
+       "ENSP00000353048.3:p.Glu301Ter",
+       "NP_055221.1:p.Glu301Ter"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "duplicate_record",
+    "key": "chr22:16591650:C:A",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "A"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "intron_variant",
+       "non_coding_transcript_variant",
+       "stop_gained",
+       "upstream_gene_variant"
+      ],
+      "hgvsc": [
+       "ENST00000359963.4:c.901G>T",
+       "ENST00000472972.2:n.287-6956G>T",
+       "ENST00000725389.1:n.112-6956G>T",
+       "ENST00000725390.1:n.114-8945G>T",
+       "ENST00000725391.1:n.322-6956G>T",
+       "NM_014406.5:c.901G>T"
+      ],
+      "hgvsp": [
+       "ENSP00000353048.3:p.Glu301Ter",
+       "NP_055221.1:p.Glu301Ter"
+      ]
+     },
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "A"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "intron_variant",
+       "non_coding_transcript_variant",
+       "stop_gained",
+       "upstream_gene_variant"
+      ],
+      "hgvsc": [
+       "ENST00000359963.4:c.901G>T",
+       "ENST00000472972.2:n.287-6956G>T",
+       "ENST00000725389.1:n.112-6956G>T",
+       "ENST00000725390.1:n.114-8945G>T",
+       "ENST00000725391.1:n.322-6956G>T",
+       "NM_014406.5:c.901G>T"
+      ],
+      "hgvsp": [
+       "ENSP00000353048.3:p.Glu301Ter",
+       "NP_055221.1:p.Glu301Ter"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "del_left_aligned",
+    "key": "chr22:19029750:CG:C",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "-"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "frameshift_variant",
+       "intron_variant",
+       "non_coding_transcript_exon_variant",
+       "non_coding_transcript_variant"
+      ],
+      "hgvsc": [
+       "ENST00000652053.1:c.232del",
+       "ENST00000697771.1:c.232del",
+       "NM_001396027.1:c.232del",
+       "NR_110533.2:n.896-1027del",
+       "NR_173148.1:n.232del"
+      ],
+      "hgvsp": [
+       "ENSP00000498832.1:p.Ala78ProfsTer59",
+       "ENSP00000513435.1:p.Ala78ProfsTer59",
+       "NP_001382956.1:p.Ala78ProfsTer38"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "ins_left_aligned",
+    "key": "chr22:19029750:C:CG",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "G"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "frameshift_variant",
+       "intron_variant",
+       "non_coding_transcript_exon_variant",
+       "non_coding_transcript_variant"
+      ],
+      "hgvsc": [
+       "ENST00000652053.1:c.232dup",
+       "ENST00000697771.1:c.232dup",
+       "NM_001396027.1:c.232dup",
+       "NR_110533.2:n.896-1027dup",
+       "NR_173148.1:n.232dup"
+      ],
+      "hgvsp": [
+       "ENSP00000498832.1:p.Ala78GlyfsTer156",
+       "ENSP00000513435.1:p.Ala78GlyfsTer156",
+       "NP_001382956.1:p.Ala78GlyfsTer59"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "del_right_shifted",
+    "key": "chr22:19029754:GG:G",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "-"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "frameshift_variant",
+       "intron_variant",
+       "non_coding_transcript_exon_variant",
+       "non_coding_transcript_variant"
+      ],
+      "hgvsc": [
+       "ENST00000652053.1:c.232del",
+       "ENST00000697771.1:c.232del",
+       "NM_001396027.1:c.232del",
+       "NR_110533.2:n.896-1027del",
+       "NR_173148.1:n.232del"
+      ],
+      "hgvsp": [
+       "ENSP00000498832.1:p.Ala78ProfsTer59",
+       "ENSP00000513435.1:p.Ala78ProfsTer59",
+       "NP_001382956.1:p.Ala78ProfsTer38"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "ins_right_shifted",
+    "key": "chr22:19029755:G:GG",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "G"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "frameshift_variant",
+       "intron_variant",
+       "non_coding_transcript_exon_variant",
+       "non_coding_transcript_variant"
+      ],
+      "hgvsc": [
+       "ENST00000652053.1:c.232dup",
+       "ENST00000697771.1:c.232dup",
+       "NM_001396027.1:c.232dup",
+       "NR_110533.2:n.896-1027dup",
+       "NR_173148.1:n.232dup"
+      ],
+      "hgvsp": [
+       "ENSP00000498832.1:p.Ala78GlyfsTer156",
+       "ENSP00000513435.1:p.Ala78GlyfsTer156",
+       "NP_001382956.1:p.Ala78GlyfsTer59"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "long_deletion_60bp",
+    "key": "chr22:19029760:GGCGGCCGGGCGCGGGCGAGAGGACCGGCGCGCACAGCCGCGGGCTCCGTGTGCTCGGTA:G",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "-"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "frameshift_variant",
+       "intron_variant",
+       "non_coding_transcript_exon_variant",
+       "non_coding_transcript_variant"
+      ],
+      "hgvsc": [
+       "ENST00000652053.1:c.238_296del",
+       "ENST00000697771.1:c.238_296del",
+       "NM_001396027.1:c.238_294del",
+       "NR_110533.2:n.896-1021_896-963del",
+       "NR_173148.1:n.238_296del"
+      ],
+      "hgvsp": [
+       "ENSP00000498832.1:p.Ala80CysfsTer134",
+       "ENSP00000513435.1:p.Ala80CysfsTer134"
+      ]
+     }
+    ]
+   },
+   {
+    "case": "symbolic_del",
+    "key": "chr22:19029830:C:<DEL>",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "<DEL>"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "frameshift_variant",
+       "intron_variant",
+       "non_coding_transcript_exon_variant",
+       "non_coding_transcript_variant"
+      ],
+      "hgvsc": [
+       "ENST00000652053.1:c.307delins<DEL>",
+       "ENST00000697771.1:c.307delins<DEL>",
+       "NM_001396027.1:c.305delins<DEL>",
+       "NR_110533.2:n.896-952delins<DEL>",
+       "NR_173148.1:n.307delins<DEL>"
+      ],
+      "hgvsp": []
+     }
+    ]
+   },
+   {
+    "case": "symbolic_dup",
+    "key": "chr22:19029840:G:<DUP>",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "<DUP>"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "frameshift_variant",
+       "intron_variant",
+       "non_coding_transcript_exon_variant",
+       "non_coding_transcript_variant"
+      ],
+      "hgvsc": [
+       "ENST00000652053.1:c.317delins<DUP>",
+       "ENST00000697771.1:c.317delins<DUP>",
+       "NM_001396027.1:c.315delins<DUP>",
+       "NR_110533.2:n.896-942delins<DUP>",
+       "NR_173148.1:n.317delins<DUP>"
+      ],
+      "hgvsp": []
+     }
+    ]
+   },
+   {
+    "case": "symbolic_ins",
+    "key": "chr22:19029850:C:<INS>",
+    "out": [
+     {
+      "csq_entries": 9,
+      "alleles": [
+       "<INS>"
+      ],
+      "consequences": [
+       "downstream_gene_variant",
+       "frameshift_variant",
+       "intron_variant",
+       "non_coding_transcript_exon_variant",
+       "non_coding_transcript_variant"
+      ],
+      "hgvsc": [
+       "ENST00000652053.1:c.327delins<INS>",
+       "ENST00000697771.1:c.327delins<INS>",
+       "NM_001396027.1:c.325delins<INS>",
+       "NR_110533.2:n.896-932delins<INS>",
+       "NR_173148.1:n.327delins<INS>"
+      ],
+      "hgvsp": []
+     }
+    ]
+   }
+  ]
+ }
+}

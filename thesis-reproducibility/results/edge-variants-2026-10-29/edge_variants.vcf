@@ -1,0 +1,27 @@
+##fileformat=VCFv4.2
+##contig=<ID=chr22,length=50818468>
+##ALT=<ID=DEL,Description="Deletion">
+##ALT=<ID=DUP,Description="Duplication">
+##ALT=<ID=INS,Description="Insertion">
+##ALT=<ID=NON_REF,Description="Any other allele">
+##INFO=<ID=SVTYPE,Number=1,Type=String,Description="SV type">
+##INFO=<ID=END,Number=1,Type=Integer,Description="End position">
+##INFO=<ID=SVLEN,Number=.,Type=Integer,Description="SV length">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+chr22	16591593	.	A	C,G	.	PASS	.
+chr22	16591600	.	A	C,*	.	PASS	.
+chr22	16591605	.	G	A,<NON_REF>	.	PASS	.
+chr22	16591610	.	AC	CA	.	PASS	.
+chr22	16591620	.	CAT	G	.	PASS	.
+chr22	16591630	.	A	C	.	PASS	.
+chr22	16591640	.	A	.	.	PASS	.
+chr22	16591650	.	C	A	.	PASS	.
+chr22	16591650	.	C	A	.	PASS	.
+chr22	19029750	.	CG	C	.	PASS	.
+chr22	19029750	.	C	CG	.	PASS	.
+chr22	19029754	.	GG	G	.	PASS	.
+chr22	19029755	.	G	GG	.	PASS	.
+chr22	19029760	.	GGCGGCCGGGCGCGGGCGAGAGGACCGGCGCGCACAGCCGCGGGCTCCGTGTGCTCGGTA	G	.	PASS	.
+chr22	19029830	.	C	<DEL>	.	PASS	SVTYPE=DEL;END=19030330;SVLEN=-500
+chr22	19029840	.	G	<DUP>	.	PASS	SVTYPE=DUP;END=19030140;SVLEN=300
+chr22	19029850	.	C	<INS>	.	PASS	SVTYPE=INS;SVLEN=120
