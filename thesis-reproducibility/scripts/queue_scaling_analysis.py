@@ -7,6 +7,9 @@ process count p it reports the build time T_p (mean, median, SD n-1, min-max), t
 speedup S_p = mean T_1 / mean T_p with the range mean T_1 / max T_p .. mean T_1 / min T_p,
 the efficiency E_p = S_p / p, the summed task time, the longest task and the lower
 bound LB_p = max(longest task, summed task time / p) with T_p / LB_p per run.
+When LB_p is the summed task time W_p / p, E_p splits into W_1 / W_p (tasks running
+longer under concurrency) times LB_p / T_p (idle time left by the schedule); both factors
+are reported as work_ratio and lb_over_T (means over runs).
 Only runs with exit code 0 and a summary are used. The power source before and after each
 run is taken from the pmset snapshot; a run is marked on_battery if either says battery.
 With --reruns DIR (run_queue_reruns.py output), the cells re-run on AC replace the
@@ -69,10 +72,12 @@ def summarize(runs: list[dict]) -> list[dict]:
                "T_over_LB_max": max(r["T_over_LB"] for r in by[p]),
                "files": sorted({r["files"] for r in by[p]}),
                "n_on_battery": sum(r["on_battery"] for r in by[p]),
-               "n_interference": sum(bool(r["interference"]) for r in by[p])}
+               "n_interference": sum(bool(r["interference"]) for r in by[p]),
+               "lb_over_T": st.mean(r["LB"] / r["T"] for r in by[p])}
         if t1:
             row.update({"S": t1 / row["mean"], "S_lo": t1 / row["max"], "S_hi": t1 / row["min"],
-                        "E": t1 / row["mean"] / p})
+                        "E": t1 / row["mean"] / p,
+                        "work_ratio": st.mean(r["sum_task"] for r in by[1]) / row["sum_task_mean"]})
         out.append(row)
     return out
 
@@ -136,7 +141,7 @@ def main() -> int:
     (out / "queue_scaling_runs.json").write_text(json.dumps(runs, indent=1) + "\n")
     (out / "queue_scaling.json").write_text(json.dumps(rows, indent=1) + "\n")
     cols = ["p", "n", "mean", "median", "sd", "min", "max", "S", "S_lo", "S_hi", "E",
-            "sum_task_mean", "max_task_mean", "T_over_LB_min", "T_over_LB_max", "n_on_battery", "n_interference"]
+            "sum_task_mean", "max_task_mean", "T_over_LB_min", "T_over_LB_max", "work_ratio", "lb_over_T", "n_on_battery", "n_interference"]
     lines = ["\t".join(cols)] + ["\t".join("" if r.get(c) is None else
                                            (f"{r[c]:.4f}" if isinstance(r.get(c), float) else str(r[c]))
                                            for c in cols) for r in rows]
