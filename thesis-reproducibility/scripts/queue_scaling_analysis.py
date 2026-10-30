@@ -11,8 +11,11 @@ Only runs with exit code 0 and a summary are used. The power source before and a
 run is taken from the pmset snapshot; a run is marked on_battery if either says battery.
 With --reruns DIR (run_queue_reruns.py output), the cells re-run on AC replace the
 original ones, and the replaced runs are written to battery_vs_ac.json for comparison.
+With --interference FILE (JSON list of {label, start_utc, end_utc}), every run whose
+before..after interval overlaps a window is tagged with its label (e.g. a download that
+ran during the series); counted per p in n_interference.
 
-Usage: queue_scaling_analysis.py RUN_DIR OUT_DIR [FIG_PDF] [--reruns RERUN_DIR]
+Usage: queue_scaling_analysis.py RUN_DIR OUT_DIR [FIG_PDF] [--reruns RERUN_DIR] [--interference FILE]
 """
 from __future__ import annotations
 
@@ -20,10 +23,11 @@ import json
 import re
 import statistics as st
 import sys
+from datetime import datetime
 from pathlib import Path
 
 
-def load(run_dir: Path) -> list[dict]:
+def load(run_dir: Path, windows: list[dict] = ()) -> list[dict]:
     runs = []
     for line in (run_dir / "runs.jsonl").read_text().splitlines():
         r = json.loads(line)
@@ -40,6 +44,10 @@ def load(run_dir: Path) -> list[dict]:
         runs.append({"p": p, "repeat": r["repeat"], "T": s["seconds_wall"], "sum_task": sum(secs),
                      "power": power, "on_battery": any(src == "battery" for src, _ in power),
                      "rerun_on_ac": bool(r.get("rerun_on_ac")),
+                     "start_utc": r["before"]["utc"], "end_utc": r["after"]["utc"],
+                     "interference": [w["label"] for w in windows
+                                      if datetime.fromisoformat(w["start_utc"]) < datetime.fromisoformat(r["after"]["utc"])
+                                      and datetime.fromisoformat(r["before"]["utc"]) < datetime.fromisoformat(w["end_utc"])],
                      "max_task": max(secs), "LB": lb, "T_over_LB": s["seconds_wall"] / lb,
                      "files": r.get("files"), "therm_before": r["before"]["therm"].splitlines()[-1:],
                      "load_before": r["before"]["load"]})
@@ -60,7 +68,8 @@ def summarize(runs: list[dict]) -> list[dict]:
                "T_over_LB_min": min(r["T_over_LB"] for r in by[p]),
                "T_over_LB_max": max(r["T_over_LB"] for r in by[p]),
                "files": sorted({r["files"] for r in by[p]}),
-               "n_on_battery": sum(r["on_battery"] for r in by[p])}
+               "n_on_battery": sum(r["on_battery"] for r in by[p]),
+               "n_interference": sum(bool(r["interference"]) for r in by[p])}
         if t1:
             row.update({"S": t1 / row["mean"], "S_lo": t1 / row["max"], "S_hi": t1 / row["min"],
                         "E": t1 / row["mean"] / p})
@@ -102,28 +111,32 @@ def figure(rows: list[dict], path: str) -> None:
 
 def main() -> int:
     args = sys.argv[1:]
-    reruns = None
+    reruns, windows = None, []
     if "--reruns" in args:
         i = args.index("--reruns")
         reruns = Path(args[i + 1])
         del args[i:i + 2]
+    if "--interference" in args:
+        i = args.index("--interference")
+        windows = json.loads(Path(args[i + 1]).read_text())
+        del args[i:i + 2]
     run_dir, out = Path(args[0]), Path(args[1])
     out.mkdir(parents=True, exist_ok=True)
-    runs = load(run_dir)
+    runs = load(run_dir, windows)
     if reruns:
-        new = {(r["p"], r["repeat"]): r for r in load(reruns)}
+        new = {(r["p"], r["repeat"]): r for r in load(reruns, windows)}
         replaced = [r for r in runs if (r["p"], r["repeat"]) in new]
         runs = [r for r in runs if (r["p"], r["repeat"]) not in new] + list(new.values())
         runs.sort(key=lambda r: (r["p"], r["repeat"]))
         (out / "battery_vs_ac.json").write_text(json.dumps(
             [{"p": r["p"], "repeat": r["repeat"], "T_original": r["T"], "power_original": r["power"],
-              "T_rerun_ac": new[(r["p"], r["repeat"])]["T"],
+              "interference_original": r["interference"], "T_rerun_ac": new[(r["p"], r["repeat"])]["T"],
               "ratio": r["T"] / new[(r["p"], r["repeat"])]["T"]} for r in replaced], indent=1) + "\n")
     rows = summarize(runs)
     (out / "queue_scaling_runs.json").write_text(json.dumps(runs, indent=1) + "\n")
     (out / "queue_scaling.json").write_text(json.dumps(rows, indent=1) + "\n")
     cols = ["p", "n", "mean", "median", "sd", "min", "max", "S", "S_lo", "S_hi", "E",
-            "sum_task_mean", "max_task_mean", "T_over_LB_min", "T_over_LB_max", "n_on_battery"]
+            "sum_task_mean", "max_task_mean", "T_over_LB_min", "T_over_LB_max", "n_on_battery", "n_interference"]
     lines = ["\t".join(cols)] + ["\t".join("" if r.get(c) is None else
                                            (f"{r[c]:.4f}" if isinstance(r.get(c), float) else str(r[c]))
                                            for c in cols) for r in rows]
