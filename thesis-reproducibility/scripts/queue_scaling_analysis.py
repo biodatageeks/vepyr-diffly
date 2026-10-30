@@ -91,6 +91,8 @@ def figure(rows: list[dict], path: str) -> None:
     fig, (a, b) = plt.subplots(1, 2, figsize=(7.4, 3.0))
     a.plot([1, 10], [1, 10], color="#9a9a9a", lw=1, ls="--", label="skalowanie idealne")
     a.axvspan(4.5, 10.5, color="#eeeeee", zorder=0)
+    a.text(7.5, 0.6, "$p>4$: więcej procesów\nniż rdzeni wydajnościowych", fontsize=6.5, color="#555555",
+           ha="center", va="bottom")
     a.errorbar(ps, [r["S"] for r in rows],
                yerr=[[r["S"] - r["S_lo"] for r in rows], [r["S_hi"] - r["S"] for r in rows]],
                color="#3b6fb6", marker="o", ms=4, lw=1.5, capsize=3, label="dynamiczna kolejka")

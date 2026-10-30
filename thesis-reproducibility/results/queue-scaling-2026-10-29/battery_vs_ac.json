@@ -1,0 +1,92 @@
+[
+ {
+  "p": 1,
+  "repeat": 1,
+  "T_original": 4604.929417848587,
+  "power_original": [
+   [
+    "AC",
+    64
+   ],
+   [
+    "battery",
+    68
+   ]
+  ],
+  "interference_original": [],
+  "T_rerun_ac": 4984.782740831375,
+  "ratio": 0.9237974165109881
+ },
+ {
+  "p": 8,
+  "repeat": 1,
+  "T_original": 1543.7606389522552,
+  "power_original": [
+   [
+    "battery",
+    67
+   ],
+   [
+    "battery",
+    52
+   ]
+  ],
+  "interference_original": [],
+  "T_rerun_ac": 1442.8473930358887,
+  "ratio": 1.0699403460154129
+ },
+ {
+  "p": 10,
+  "repeat": 1,
+  "T_original": 1403.1084733009338,
+  "power_original": [
+   [
+    "battery",
+    52
+   ],
+   [
+    "battery",
+    39
+   ]
+  ],
+  "interference_original": [],
+  "T_rerun_ac": 1483.3420979976654,
+  "ratio": 0.9459102355383581
+ },
+ {
+  "p": 10,
+  "repeat": 2,
+  "T_original": 1433.2214739322662,
+  "power_original": [
+   [
+    "battery",
+    39
+   ],
+   [
+    "battery",
+    25
+   ]
+  ],
+  "interference_original": [],
+  "T_rerun_ac": 1513.1975150108337,
+  "ratio": 0.9471476523816555
+ },
+ {
+  "p": 2,
+  "repeat": 2,
+  "T_original": 3235.009532213211,
+  "power_original": [
+   [
+    "battery",
+    25
+   ],
+   [
+    "battery",
+    1
+   ]
+  ],
+  "interference_original": [],
+  "T_rerun_ac": 2843.674896001816,
+  "ratio": 1.137615814227431
+ }
+]

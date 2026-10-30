@@ -1,0 +1,841 @@
+[
+ {
+  "p": 1,
+  "repeat": 1,
+  "T": 4984.782740831375,
+  "sum_task": 4979.864578008652,
+  "power": [
+   [
+    "AC",
+    80
+   ],
+   [
+    "AC",
+    80
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": true,
+  "start_utc": "2026-10-30T15:16:02.192511+00:00",
+  "end_utc": "2026-10-30T16:39:07.267506+00:00",
+  "interference": [],
+  "max_task": 335.2595760822296,
+  "LB": 4979.864578008652,
+  "T_over_LB": 1.00098760975237,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   1.9833984375,
+   1.87451171875,
+   2.42724609375
+  ]
+ },
+ {
+  "p": 1,
+  "repeat": 2,
+  "T": 4825.747158765793,
+  "sum_task": 4820.007828474045,
+  "power": [
+   [
+    "AC",
+    1
+   ],
+   [
+    "AC",
+    27
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-29T21:12:15.914799+00:00",
+  "end_utc": "2026-10-29T22:32:42.137523+00:00",
+  "interference": [
+   "refseq_download"
+  ],
+  "max_task": 510.21852707862854,
+  "LB": 4820.007828474045,
+  "T_over_LB": 1.0011907304917314,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   3.88037109375,
+   3.96728515625,
+   4.24365234375
+  ]
+ },
+ {
+  "p": 1,
+  "repeat": 3,
+  "T": 4555.911190032959,
+  "sum_task": 4552.767500162125,
+  "power": [
+   [
+    "AC",
+    78
+   ],
+   [
+    "AC",
+    80
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-30T01:29:36.197187+00:00",
+  "end_utc": "2026-10-30T02:45:32.432332+00:00",
+  "interference": [
+   "refseq_download"
+  ],
+  "max_task": 314.9988331794739,
+  "LB": 4552.767500162125,
+  "T_over_LB": 1.0006905008592515,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   2.91748046875,
+   3.17724609375,
+   3.3603515625
+  ]
+ },
+ {
+  "p": 1,
+  "repeat": 4,
+  "T": 4555.61018371582,
+  "sum_task": 4548.994395494461,
+  "power": [
+   [
+    "AC",
+    80
+   ],
+   [
+    "AC",
+    80
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-30T03:40:23.156099+00:00",
+  "end_utc": "2026-10-30T04:56:19.128030+00:00",
+  "interference": [],
+  "max_task": 322.892126083374,
+  "LB": 4548.994395494461,
+  "T_over_LB": 1.001454340816052,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   3.58544921875,
+   8.6220703125,
+   10.6689453125
+  ]
+ },
+ {
+  "p": 1,
+  "repeat": 5,
+  "T": 4555.720023870468,
+  "sum_task": 4555.576031446457,
+  "power": [
+   [
+    "AC",
+    80
+   ],
+   [
+    "AC",
+    80
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-30T06:48:53.732990+00:00",
+  "end_utc": "2026-10-30T08:04:49.778251+00:00",
+  "interference": [],
+  "max_task": 313.17204570770264,
+  "LB": 4555.576031446457,
+  "T_over_LB": 1.0000316079510072,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   2.32861328125,
+   2.9462890625,
+   3.283203125
+  ]
+ },
+ {
+  "p": 2,
+  "repeat": 1,
+  "T": 2963.7213711738586,
+  "sum_task": 5838.151151418686,
+  "power": [
+   [
+    "AC",
+    53
+   ],
+   [
+    "AC",
+    64
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-29T16:08:43.459916+00:00",
+  "end_utc": "2026-10-29T16:58:07.481600+00:00",
+  "interference": [],
+  "max_task": 357.81158804893494,
+  "LB": 2919.075575709343,
+  "T_over_LB": 1.0152944979691616,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   3.16064453125,
+   4.7578125,
+   5.30615234375
+  ]
+ },
+ {
+  "p": 2,
+  "repeat": 2,
+  "T": 2843.674896001816,
+  "sum_task": 5599.475988864899,
+  "power": [
+   [
+    "AC",
+    80
+   ],
+   [
+    "AC",
+    80
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": true,
+  "start_utc": "2026-10-30T17:54:32.401871+00:00",
+  "end_utc": "2026-10-30T18:41:56.384392+00:00",
+  "interference": [],
+  "max_task": 365.6891179084778,
+  "LB": 2799.7379944324493,
+  "T_over_LB": 1.015693219028616,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   3.11279296875,
+   9.53271484375,
+   11.78369140625
+  ]
+ },
+ {
+  "p": 2,
+  "repeat": 3,
+  "T": 2974.244861841202,
+  "sum_task": 5862.85165977478,
+  "power": [
+   [
+    "AC",
+    64
+   ],
+   [
+    "AC",
+    78
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-30T00:39:41.051599+00:00",
+  "end_utc": "2026-10-30T01:29:15.584062+00:00",
+  "interference": [
+   "refseq_download"
+  ],
+  "max_task": 380.8876118659973,
+  "LB": 2931.42582988739,
+  "T_over_LB": 1.014606895906166,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   3.3359375,
+   5.11083984375,
+   5.89892578125
+  ]
+ },
+ {
+  "p": 2,
+  "repeat": 4,
+  "T": 2934.3752698898315,
+  "sum_task": 5793.734776973724,
+  "power": [
+   [
+    "AC",
+    80
+   ],
+   [
+    "AC",
+    80
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-30T05:59:38.421636+00:00",
+  "end_utc": "2026-10-30T06:48:33.126996+00:00",
+  "interference": [],
+  "max_task": 376.77089619636536,
+  "LB": 2896.867388486862,
+  "T_over_LB": 1.0129477384957415,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   4.099609375,
+   7.904296875,
+   8.7421875
+  ]
+ },
+ {
+  "p": 2,
+  "repeat": 5,
+  "T": 3024.2130360603333,
+  "sum_task": 5950.807135820389,
+  "power": [
+   [
+    "AC",
+    80
+   ],
+   [
+    "AC",
+    80
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-30T09:11:20.470249+00:00",
+  "end_utc": "2026-10-30T10:01:45.000033+00:00",
+  "interference": [],
+  "max_task": 398.7395040988922,
+  "LB": 2975.4035679101944,
+  "T_over_LB": 1.0164043186196825,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   3.923828125,
+   8.4814453125,
+   9.39111328125
+  ]
+ },
+ {
+  "p": 4,
+  "repeat": 1,
+  "T": 1972.9437880516052,
+  "sum_task": 7702.813040494919,
+  "power": [
+   [
+    "AC",
+    45
+   ],
+   [
+    "AC",
+    52
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-29T15:35:29.486520+00:00",
+  "end_utc": "2026-10-29T16:08:22.797896+00:00",
+  "interference": [],
+  "max_task": 560.6963789463043,
+  "LB": 1925.7032601237297,
+  "T_over_LB": 1.0245315718709642,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   3.85205078125,
+   5.97314453125,
+   6.0390625
+  ]
+ },
+ {
+  "p": 4,
+  "repeat": 2,
+  "T": 2082.8630509376526,
+  "sum_task": 8149.3341064453125,
+  "power": [
+   [
+    "AC",
+    27
+   ],
+   [
+    "AC",
+    37
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-29T22:33:02.776009+00:00",
+  "end_utc": "2026-10-29T23:07:45.947678+00:00",
+  "interference": [
+   "refseq_download"
+  ],
+  "max_task": 546.5472910404205,
+  "LB": 2037.3335266113281,
+  "T_over_LB": 1.0223476047154896,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   2.166015625,
+   2.296875,
+   2.28271484375
+  ]
+ },
+ {
+  "p": 4,
+  "repeat": 3,
+  "T": 2183.3968498706818,
+  "sum_task": 8557.77453660965,
+  "power": [
+   [
+    "AC",
+    54
+   ],
+   [
+    "AC",
+    64
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-30T00:02:56.674368+00:00",
+  "end_utc": "2026-10-30T00:39:20.457892+00:00",
+  "interference": [
+   "refseq_download"
+  ],
+  "max_task": 589.1949079036713,
+  "LB": 2139.4436341524124,
+  "T_over_LB": 1.0205442270208172,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   2.9375,
+   9.66748046875,
+   11.8212890625
+  ]
+ },
+ {
+  "p": 4,
+  "repeat": 4,
+  "T": 2103.1178798675537,
+  "sum_task": 8219.417659282684,
+  "power": [
+   [
+    "AC",
+    80
+   ],
+   [
+    "AC",
+    80
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-30T04:56:39.705385+00:00",
+  "end_utc": "2026-10-30T05:31:43.205990+00:00",
+  "interference": [],
+  "max_task": 564.3351380825043,
+  "LB": 2054.854414820671,
+  "T_over_LB": 1.023487535028653,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   1.81689453125,
+   1.794921875,
+   1.9052734375
+  ]
+ },
+ {
+  "p": 4,
+  "repeat": 5,
+  "T": 2223.6137130260468,
+  "sum_task": 8724.807029485703,
+  "power": [
+   [
+    "AC",
+    80
+   ],
+   [
+    "AC",
+    80
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-30T08:05:10.398887+00:00",
+  "end_utc": "2026-10-30T08:42:14.361475+00:00",
+  "interference": [],
+  "max_task": 605.5716779232025,
+  "LB": 2181.2017573714256,
+  "T_over_LB": 1.0194443065669139,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   2.388671875,
+   2.14697265625,
+   2.015625
+  ]
+ },
+ {
+  "p": 8,
+  "repeat": 1,
+  "T": 1442.8473930358887,
+  "sum_task": 10928.404347419739,
+  "power": [
+   [
+    "AC",
+    80
+   ],
+   [
+    "AC",
+    80
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": true,
+  "start_utc": "2026-10-30T16:39:27.911845+00:00",
+  "end_utc": "2026-10-30T17:03:31.539678+00:00",
+  "interference": [],
+  "max_task": 726.6183166503906,
+  "LB": 1366.0505434274673,
+  "T_over_LB": 1.0562181611638874,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   2.0693359375,
+   2.39892578125,
+   3.00244140625
+  ]
+ },
+ {
+  "p": 8,
+  "repeat": 2,
+  "T": 1633.0428512096405,
+  "sum_task": 12493.52749633789,
+  "power": [
+   [
+    "AC",
+    37
+   ],
+   [
+    "AC",
+    45
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-29T23:08:06.603381+00:00",
+  "end_utc": "2026-10-29T23:35:20.461881+00:00",
+  "interference": [
+   "refseq_download"
+  ],
+  "max_task": 870.8936848640442,
+  "LB": 1561.6909370422363,
+  "T_over_LB": 1.0456888827840296,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   3.35986328125,
+   4.78125,
+   4.90283203125
+  ]
+ },
+ {
+  "p": 8,
+  "repeat": 3,
+  "T": 1643.1796061992645,
+  "sum_task": 12505.403431415558,
+  "power": [
+   [
+    "AC",
+    80
+   ],
+   [
+    "AC",
+    80
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-30T02:45:53.087755+00:00",
+  "end_utc": "2026-10-30T03:13:17.097005+00:00",
+  "interference": [],
+  "max_task": 845.1151888370514,
+  "LB": 1563.1754289269447,
+  "T_over_LB": 1.0511805494072022,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   2.044921875,
+   2.1083984375,
+   2.10400390625
+  ]
+ },
+ {
+  "p": 8,
+  "repeat": 4,
+  "T": 1633.093278169632,
+  "sum_task": 12495.549477815628,
+  "power": [
+   [
+    "AC",
+    80
+   ],
+   [
+    "AC",
+    80
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-30T05:32:03.902620+00:00",
+  "end_utc": "2026-10-30T05:59:17.687914+00:00",
+  "interference": [],
+  "max_task": 869.1816871166229,
+  "LB": 1561.9436847269535,
+  "T_over_LB": 1.0455519582033563,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   2.92041015625,
+   5.16162109375,
+   5.021484375
+  ]
+ },
+ {
+  "p": 8,
+  "repeat": 5,
+  "T": 1703.4156761169434,
+  "sum_task": 13057.268614768982,
+  "power": [
+   [
+    "AC",
+    80
+   ],
+   [
+    "AC",
+    80
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-30T08:42:35.046313+00:00",
+  "end_utc": "2026-10-30T09:10:59.430855+00:00",
+  "interference": [],
+  "max_task": 910.500470161438,
+  "LB": 1632.1585768461227,
+  "T_over_LB": 1.0436581961346632,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   2.46484375,
+   4.6953125,
+   5.03955078125
+  ]
+ },
+ {
+  "p": 10,
+  "repeat": 1,
+  "T": 1483.3420979976654,
+  "sum_task": 13613.585010290146,
+  "power": [
+   [
+    "AC",
+    80
+   ],
+   [
+    "AC",
+    80
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": true,
+  "start_utc": "2026-10-30T17:03:52.301151+00:00",
+  "end_utc": "2026-10-30T17:28:36.824183+00:00",
+  "interference": [],
+  "max_task": 914.9055418968201,
+  "LB": 1361.3585010290146,
+  "T_over_LB": 1.0896043157452255,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   3.240234375,
+   7.70068359375,
+   7.99755859375
+  ]
+ },
+ {
+  "p": 10,
+  "repeat": 2,
+  "T": 1513.1975150108337,
+  "sum_task": 13966.262898683548,
+  "power": [
+   [
+    "AC",
+    80
+   ],
+   [
+    "AC",
+    80
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": true,
+  "start_utc": "2026-10-30T17:28:57.577931+00:00",
+  "end_utc": "2026-10-30T17:54:11.705303+00:00",
+  "interference": [],
+  "max_task": 948.7197351455688,
+  "LB": 1396.626289868355,
+  "T_over_LB": 1.083466297310977,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   3.45849609375,
+   9.12548828125,
+   11.25390625
+  ]
+ },
+ {
+  "p": 10,
+  "repeat": 3,
+  "T": 1613.8388409614563,
+  "sum_task": 14947.706861257553,
+  "power": [
+   [
+    "AC",
+    45
+   ],
+   [
+    "AC",
+    53
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-29T23:35:41.175307+00:00",
+  "end_utc": "2026-10-30T00:02:35.974144+00:00",
+  "interference": [
+   "refseq_download"
+  ],
+  "max_task": 1025.3643879890442,
+  "LB": 1494.7706861257552,
+  "T_over_LB": 1.0796564690095105,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   3.73486328125,
+   7.56494140625,
+   8.48681640625
+  ]
+ },
+ {
+  "p": 10,
+  "repeat": 4,
+  "T": 1583.6805260181427,
+  "sum_task": 14629.958714008331,
+  "power": [
+   [
+    "AC",
+    80
+   ],
+   [
+    "AC",
+    80
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-30T03:13:37.785135+00:00",
+  "end_utc": "2026-10-30T03:40:02.461856+00:00",
+  "interference": [],
+  "max_task": 1005.9262228012085,
+  "LB": 1462.995871400833,
+  "T_over_LB": 1.0824914526257363,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   4.28173828125,
+   8.29833984375,
+   8.509765625
+  ]
+ },
+ {
+  "p": 10,
+  "repeat": 5,
+  "T": 1352.853965997696,
+  "sum_task": 12464.408275842667,
+  "power": [
+   [
+    "AC",
+    80
+   ],
+   [
+    "AC",
+    80
+   ]
+  ],
+  "on_battery": false,
+  "rerun_on_ac": false,
+  "start_utc": "2026-10-30T10:02:05.591229+00:00",
+  "end_utc": "2026-10-30T10:24:39.147572+00:00",
+  "interference": [],
+  "max_task": 852.2261352539062,
+  "LB": 1246.4408275842666,
+  "T_over_LB": 1.0853735982153836,
+  "files": 4243,
+  "therm_before": [
+   "Note: No CPU power status has been recorded"
+  ],
+  "load_before": [
+   2.498046875,
+   3.857421875,
+   4.04248046875
+  ]
+ }
+]

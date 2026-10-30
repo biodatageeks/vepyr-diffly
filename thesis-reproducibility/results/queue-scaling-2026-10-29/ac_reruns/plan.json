@@ -1,0 +1,28 @@
+{
+  "cells": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      8
+    ],
+    [
+      1,
+      10
+    ],
+    [
+      2,
+      10
+    ],
+    [
+      2,
+      2
+    ]
+  ],
+  "python": "/Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-lpt/bin/python3",
+  "queue": "/private/tmp/claude-501/-Users-lukaszjezapkowicz/3fc203b0-e9c0-4fa4-b8fa-1b56289ba13b/scratchpad/vepyr-scaling/scripts/thesis/cache-build-parallel/parallel_entity_queue.py",
+  "groups": 20,
+  "reason": "battery-powered cells of 2026-10-29 re-run on AC"
+}
