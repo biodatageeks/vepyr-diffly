@@ -1,0 +1,4 @@
+[
+ {"label": "refseq_download", "start_utc": "2026-10-29T21:20:17+00:00", "end_utc": "2026-10-30T02:36:07+00:00",
+  "note": "curl (nice 19) of homo_sapiens_refseq_vep_116_GRCh38.tar.gz, 26.4 GB, file birth/mtime; includes the D20 downloads 21:32:38-21:35:02 UTC (330 MB)"}
+]
