@@ -1,0 +1,4 @@
+vepyr-diffly: 1d657cea11ec5066c4bf30ecad8a5776fac243c6 0 local changes
+vepyr 0.7.0
+chr22 reference body sha256 4d8ff253436c68b350eff49cdb8d6db2f373fa0129d77b981d72b4930d38b5b8
+chr1 reference body sha256 2e272263dabb9cf4d00f95eabde1a0f442fc4b326031be42e68b5ef51c2e0d82
