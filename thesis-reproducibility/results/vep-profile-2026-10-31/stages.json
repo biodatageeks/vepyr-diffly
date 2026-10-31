@@ -1,0 +1,55 @@
+{
+ "total_s": 1145.145332,
+ "stages": {
+  "transcripts": {
+   "seconds": 153.670734,
+   "share": 0.13419321522414415,
+   "subs": [
+    "Bio::EnsEMBL::VEP::AnnotationType::Transcript::annotate_InputBuffer"
+   ]
+  },
+  "known_variants": {
+   "seconds": 74.829503,
+   "share": 0.06534498365313164,
+   "subs": [
+    "Bio::EnsEMBL::VEP::AnnotationSource::Cache::VariationTabix::annotate_InputBuffer"
+   ]
+  },
+  "csq_entries": {
+   "seconds": 672.905801,
+   "share": 0.5876160712498979,
+   "subs": [
+    "Bio::EnsEMBL::VEP::OutputFactory::get_all_VariationFeatureOverlapAllele_output_hashes"
+   ]
+  },
+  "vcf_formatting": {
+   "seconds": 186.345881,
+   "share": 0.16272683981040756,
+   "subs": [
+    "Bio::EnsEMBL::VEP::OutputFactory::VCF::output_hash_to_vcf_info_chunk"
+   ]
+  },
+  "rest": {
+   "seconds": 57.39341300000001,
+   "share": 0.050118890062418736
+  }
+ },
+ "within_csq_entries": {
+  "consequence_predicates": {
+   "seconds": 189.904057,
+   "share_of_total": 0.16583402271599182,
+   "subs": [
+    "Bio::EnsEMBL::Variation::BaseVariationFeatureOverlapAllele::get_all_OverlapConsequences"
+   ]
+  },
+  "hgvs": {
+   "seconds": 262.06295,
+   "share_of_total": 0.22884689189825907,
+   "subs": [
+    "Bio::EnsEMBL::Variation::TranscriptVariationAllele::hgvs_transcript",
+    "Bio::EnsEMBL::Variation::TranscriptVariationAllele::hgvs_protein"
+   ]
+  }
+ },
+ "csq_entries_calls": 1242828
+}

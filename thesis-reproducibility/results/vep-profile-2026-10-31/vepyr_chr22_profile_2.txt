@@ -1,0 +1,26 @@
+[VEP_PROFILE] concurrency_plan lookup_partitions=1 workers=1 cold_parquet_target_partitions=1 spawn_vcf_provider_open=false
+[VEP_PROFILE] detected partitioned cache: 463 chroms in /Users/lukaszjezapkowicz/workspace/data_vepyr/cache/116_GRCh38_merged [parquet]
+[VEP_PROFILE] ====== scan_with_transcript_engine_partitioned START ======
+[VEP_PROFILE] 0. discover_contigs...............................      1.7ms  1 VCF contigs, 463 in cache, 1 to process
+[VEP_PROFILE] ====== scan_with_transcript_engine_partitioned: returning ContigAnnotationExec ======
+[VEP_RSS] chr22: after_context_load peak_rss=309MB
+[VEP_RSS] chr22: after_sift_load peak_rss=309MB
+[VEP_RSS] chr22: after_prepare_data peak_rss=409MB
+[VEP_PROFILE] ------ contig chr22 START ------
+[VEP_RSS] chr22: after_prepare peak_rss=411MB
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] chr22: 1. variation_lookup........................   2480.0ms  50861 rows
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] first window HGVS hydration: 0 CDS transcripts
+[VEP_PROFILE] chr22: TOTAL......................................   2737.4ms  50861 rows
+[VEP_PROFILE] chr22: pipeline_profile lookup_partitions=1 lookup_batches=13 lookup_buffered_batches_max=1 lookup_buffered_partitions_max=1 input_buffers=11 output_batches=22 output_rows=50861 prepare_total=0.093s prepare_setup=0.000s prepare_shared_ctx=0.049s context_load=0.084s context_tx_scan=0.021s context_tx=0.020s context_exons_scan=0.005s context_exons=0.006s context_tl_scan=0.019s context_tl=0.008s context_reg_scan=0.001s context_reg=0.000s context_motif_scan=0.002s context_motif=0.002s worker_init=0.001s lookup_wait=0.677s hydrate=0.000s annotate=2.102s input_buffer=0.001s variant_bounds=0.001s tx_window=0.016s exon_filter=0.003s tl_filter=0.001s prepared_ctx=0.026s sift_load=0.001s engine=2.054s projection=0.000s send_wait=0.432s ordered_drain_wait=0.000s run_pool_runs=0 head_wait=0.000s
+[VEP_PROFILE] ------ contig chr22 END ------
+[VEP_PROFILE] vcf_sink_profile batches=22 rows=50861 lines=50861 body_chunk_bytes=0 format_jobs=0 format_inflight_max=0 contig_partitions=0 contig_inflight_max=0 stream_next=2.511s batch_to_lines=0.211s format_wait=0.000s write_records=0.115s writer_finish=0.000s

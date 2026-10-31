@@ -1,0 +1,22 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  3.072kB
+Step 1/4 : FROM ensemblorg/ensembl-vep:release_116.0
+ ---> f354dd8d0907
+Step 2/4 : USER root
+ ---> Running in feacfa2ff903
+ ---> Removed intermediate container feacfa2ff903
+ ---> 0a26fba9efc9
+Step 3/4 : RUN apt-get update -qq && apt-get install -y -qq libdevel-nytprof-perl > /dev/null && rm -rf /var/lib/apt/lists/*
+ ---> Running in 157578612b29
+[91mdebconf: delaying package configuration, since apt-utils is not installed
+[0m ---> Removed intermediate container 157578612b29
+ ---> e3cd837ec0fa
+Step 4/4 : USER vep
+ ---> Running in 52156eb38a64
+ ---> Removed intermediate container 52156eb38a64
+ ---> f19cfc3a6089
+Successfully built f19cfc3a6089
+Successfully tagged vep-nytprof:116
