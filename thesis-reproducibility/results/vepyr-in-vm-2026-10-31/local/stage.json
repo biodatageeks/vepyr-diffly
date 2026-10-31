@@ -1,0 +1,33 @@
+{
+ "volume": "vepyr-local-479d8f4",
+ "files": [
+  "exon/chrom_manifest.json",
+  "exon/chr1.parquet",
+  "exon/chr22.parquet",
+  "motif/chrom_manifest.json",
+  "motif/chr1.parquet",
+  "motif/chr22.parquet",
+  "regulatory/chrom_manifest.json",
+  "regulatory/chr1.parquet",
+  "regulatory/chr22.parquet",
+  "transcript/chrom_manifest.json",
+  "transcript/chr1.parquet",
+  "transcript/chr22.parquet",
+  "translation_core/chrom_manifest.json",
+  "translation_core/chr1.parquet",
+  "translation_core/chr22.parquet",
+  "translation_sift/chrom_manifest.json",
+  "translation_sift/chr1.parquet",
+  "translation_sift/chr22.parquet",
+  "variation/chrom_manifest.json",
+  "variation/chr1.parquet",
+  "variation/chr22.parquet"
+ ],
+ "seconds": 6.507735013961792,
+ "du": [
+  "3708094913\t/v/cache",
+  "3151436353\t/v/ref",
+  "14129386\t/v/input",
+  ""
+ ]
+}

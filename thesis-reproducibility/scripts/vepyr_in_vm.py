@@ -14,6 +14,10 @@ In the timing series VEPYR ran natively on macOS and VEP in Docker inside the Co
          as for VEP), annotation time inside the container (perf_counter around
          vepyr.annotate, as measure_once.py), CPU (getrusage), peak RSS (ru_maxrss) and the
          body SHA-256, which must equal the native output (chr1: e9703e5e...).
+  stage  copy the chr1 and chr22 inputs, their core cache fragments (+ chrom_manifest.json) and the FASTA
+         into the docker volume VOLUME (ext4 inside the VM), so that no file is read over virtiofs.
+  run-local / grid-local  as run / grid, with cache, FASTA, input and output in that volume
+         (separates the cost of virtiofs from the cost of the VM itself).
   grid   item D13: chr1 baseline with workers p in {1, 2, 4, 8, 10} on c in {1, 2, 4, 10} VM
          CPUs (docker --cpuset-cpus 0..c-1), REPEATS rounds in shuffled order. The engine's
          threads are not bounded by `workers` alone (spawn_blocking and std::thread besides the
@@ -21,6 +25,8 @@ In the timing series VEPYR ran natively on macOS and VEP in Docker inside the Co
          the single-core time of the partitioned (tabix-indexed) path.
 
 Usage: vepyr_in_vm.py build OUT_DIR
+       vepyr_in_vm.py stage OUT_DIR
+       vepyr_in_vm.py run-local|grid-local OUT_DIR [REPEATS]
        vepyr_in_vm.py run OUT_DIR [REPEATS]
        vepyr_in_vm.py grid OUT_DIR [REPEATS]
 """
@@ -45,6 +51,8 @@ INPUT = {"chr22": D / "runs/m5_completion_20261024/inputs/HG002_normalized_chr22
 NATIVE_BODY = {"chr1": "e9703e5e71f9e85438575d0382a6ea797b668b09db799a9e7825e602c1f81ffa"}
 FASTA = "Homo_sapiens.GRCh38.dna.primary_assembly.fa"
 SEED = 20261030
+VOLUME = "vepyr-local-479d8f4"
+LOCAL = False  # set by the *-local modes
 CHILD = r'''
 import hashlib, json, resource, sys, time, vepyr
 vcf, out, workers = sys.argv[1], sys.argv[2], int(sys.argv[3])
@@ -105,9 +113,14 @@ def run_one(out: Path, chrom: str, workers: int, rep: int, cpus: int | None = No
     work.mkdir(exist_ok=True)
     inp, t = INPUT[chrom], out / "time_tmp.txt"
     limit = ["--cpuset-cpus", f"0-{cpus - 1}"] if cpus else []
+    if LOCAL:
+        mounts = [a for sub, dst, ro in (("cache", "/cache", 1), ("ref", "/ref", 1), ("input", "/input", 1), ("out", "/output", 0))
+                  for a in ("--mount", f"type=volume,src={VOLUME},dst={dst},volume-subpath={sub}" + (",readonly" if ro else ""))]
+    else:
+        mounts = ["-v", f"{D}/cache/116_GRCh38_merged:/cache:ro", "-v", f"{D}/input:/ref:ro",
+                  "-v", f"{inp.parent}:/input:ro", "-v", f"{work}:/output"]
     cmd = ["/usr/bin/time", "-p", "-o", str(t), "docker", "run", "--rm", "--user", "501:20", "--env", "HOME=/tmp",
-           *limit, "-v", f"{D}/cache/116_GRCh38_merged:/cache:ro", "-v", f"{D}/input:/ref:ro",
-           "-v", f"{inp.parent}:/input:ro", "-v", f"{work}:/output", TAG,
+           *limit, *mounts, TAG,
            "python", "-c", CHILD, f"/input/{inp.name}", "/output/vepyr.vcf", str(workers)]
     p = subprocess.run(cmd, capture_output=True, text=True)
     (work / "vepyr.vcf").unlink(missing_ok=True)
@@ -123,8 +136,28 @@ def run_one(out: Path, chrom: str, workers: int, rep: int, cpus: int | None = No
     return r
 
 
+def stage(out: Path) -> None:
+    """Copy inputs, chr1/chr22 cache fragments and the FASTA into the volume; record what was copied."""
+    cache = D / "cache/116_GRCh38_merged"
+    ents = sorted(p.name for p in cache.iterdir() if p.is_dir())
+    files = [f"{e}/{n}" for e in ents for n in ("chrom_manifest.json", "chr1.parquet", "chr22.parquet") if (cache / e / n).exists()]
+    script = ("set -e; rm -rf /v/cache /v/ref /v/input /v/out; mkdir -p /v/cache /v/ref /v/input /v/out; "
+              + "; ".join(f"mkdir -p /v/cache/{e}" for e in ents) + "; "
+              + "; ".join(f"cp /c/{f} /v/cache/{f}" for f in files) + "; "
+              + f"cp /r/{FASTA} /r/{FASTA}.fai /v/ref/; "
+              + "; ".join(f"cp /i/{p.name} /i/{p.name}.tbi /v/input/" for p in INPUT.values())
+              + "; chown -R 501:20 /v/out; du -sb /v/cache /v/ref /v/input")
+    t0 = time.time()
+    p = subprocess.run(["docker", "run", "--rm", "-v", f"{VOLUME}:/v", "-v", f"{cache}:/c:ro", "-v", f"{D}/input:/r:ro",
+                        "-v", f"{INPUT['chr1'].parent}:/i:ro", TAG, "sh", "-c", script], capture_output=True, text=True, check=True)
+    info = {"volume": VOLUME, "files": files, "seconds": time.time() - t0, "du": p.stdout.split("\n")}
+    (out / "stage.json").write_text(json.dumps(info, indent=1) + "\n")
+    print(json.dumps(info))
+
+
 def run(out: Path, reps: int, grid: bool = False) -> int:
     (out / "environment.json").write_text(json.dumps({
+        "mode": f"local volume {VOLUME}" if LOCAL else "virtiofs mounts",
         "image_id": subprocess.run(["docker", "image", "inspect", "--format", "{{.Id}}", TAG], capture_output=True,
                                    text=True).stdout.strip(),
         "colima": [l for l in (Path.home() / ".colima/default/colima.yaml").read_text().splitlines()
@@ -156,6 +189,13 @@ def main() -> int:
     if mode == "build":
         build(out)
         return 0
+    if mode == "stage":
+        stage(out)
+        return 0
+    if mode in ("run-local", "grid-local"):
+        global LOCAL
+        LOCAL = True
+        mode = mode[:-6]
     if mode in ("run", "grid"):
         return run(out, int(sys.argv[3]) if len(sys.argv) > 3 else (5 if mode == "run" else 3), mode == "grid")
     raise SystemExit(__doc__)

@@ -1,0 +1,9 @@
+{
+ "image_id": "sha256:f3ea2820a2bbb0c394863750c6b8b49274ced35795465509082f8b3b57bee0cd",
+ "colima": [
+  "cpu: 10",
+  "memory: 28",
+  "vmType: vz",
+  "mountType: virtiofs"
+ ]
+}
