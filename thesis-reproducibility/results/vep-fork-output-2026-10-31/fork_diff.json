@@ -1,0 +1,21 @@
+{
+ "a": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/b17_fork_20261031/vep_nofork.vcf",
+ "b": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/b17_fork_20261031/vep_fork10.vcf",
+ "records": 50861,
+ "differing_records": 93,
+ "differing_csq_entries": 93,
+ "records_differing_outside_csq_values": 0,
+ "fields": {
+  "HGNC_ID": 93
+ },
+ "combinations": {
+  "HGNC:13437 ->  | RSPH14 | XM_017028774.2": 52,
+  "HGNC:26931 ->  | C22orf31 | NM_001386866.1": 21,
+  "HGNC:6511 ->  | LARGE1 | XR_007067993.1": 12,
+  "HGNC:9977 ->  | RFPL1 | NM_001393612.1": 8
+ },
+ "first_last_differing": [
+  "chr22:23163712",
+  "chr22:33073045"
+ ]
+}
