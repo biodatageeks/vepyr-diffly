@@ -1,0 +1,8 @@
+single 270.3 s 5fee6224bf13 expected: True
+N=1 {'makespan_s': 309.82, 'split_s': 11.23, 'merge_s': 1.73, 'stage_s_max': 0.05, 'annotate_wall_s_max': 284.09, 'max_rss_gib': 3.74, 'sum_contig_annotation_s': 260.96, 'merged_body_equals_single': True, 'records_match_parts': True, 'merged_records': 4096123, 'speedup_vs_single': 0.87}
+N=2 {'makespan_s': 212.6, 'split_s': 11.16, 'merge_s': 1.86, 'stage_s_max': 0.03, 'annotate_wall_s_max': 186.81, 'max_rss_gib': 3.73, 'sum_contig_annotation_s': 339.95, 'merged_body_equals_single': True, 'records_match_parts': True, 'merged_records': 4096123, 'speedup_vs_single': 1.27}
+N=4 {'makespan_s': 164.38, 'split_s': 11.2, 'merge_s': 1.74, 'stage_s_max': 0.03, 'annotate_wall_s_max': 138.68, 'max_rss_gib': 3.42, 'sum_contig_annotation_s': 486.8, 'merged_body_equals_single': True, 'records_match_parts': True, 'merged_records': 4096123, 'speedup_vs_single': 1.64}
+LPT N=2: 130.8 s (bound 130.5), speedup 2.00
+LPT N=4: 66.9 s (bound 65.2), speedup 3.90
+LPT N=8: 34.2 s (bound 32.6), speedup 7.64
+LPT N=16: 23.8 s (bound 23.8), speedup 10.97

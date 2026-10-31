@@ -1,0 +1,46 @@
+{
+ "input": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/in.vcf.gz",
+ "input_sha256": "bc3691d524df52103c270515147faf38b400236504a2e810384d16f4dae62f33",
+ "contig_order": [
+  "chr21",
+  "chr22"
+ ],
+ "records": {
+  "chr21": 55812,
+  "chr22": 50861
+ },
+ "nodes": [
+  {
+   "name": "n1",
+   "host": null,
+   "workdir": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/nodes/n1",
+   "python": [
+    "/Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-native/bin/python3"
+   ],
+   "workers": 1,
+   "speed": 1.0,
+   "contigs": [
+    "chr21"
+   ]
+  },
+  {
+   "name": "n2",
+   "host": null,
+   "workdir": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/nodes/n2",
+   "python": [
+    "/Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-native/bin/python3"
+   ],
+   "workers": 1,
+   "speed": 1.0,
+   "contigs": [
+    "chr22"
+   ]
+  }
+ ],
+ "predicted_load": {
+  "n1": 55812.0,
+  "n2": 50861.0
+ },
+ "lower_bound": 55812.0,
+ "created_utc": "2026-10-31T04:18:40Z"
+}

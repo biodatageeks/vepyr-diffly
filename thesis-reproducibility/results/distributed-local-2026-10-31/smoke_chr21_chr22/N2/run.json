@@ -1,0 +1,146 @@
+{
+ "plan": {
+  "input": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/in.vcf.gz",
+  "input_sha256": "bc3691d524df52103c270515147faf38b400236504a2e810384d16f4dae62f33",
+  "contig_order": [
+   "chr21",
+   "chr22"
+  ],
+  "records": {
+   "chr21": 55812,
+   "chr22": 50861
+  },
+  "nodes": [
+   {
+    "name": "n1",
+    "host": null,
+    "workdir": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/nodes/n1",
+    "python": [
+     "/Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-native/bin/python3"
+    ],
+    "workers": 1,
+    "speed": 1.0,
+    "contigs": [
+     "chr21"
+    ]
+   },
+   {
+    "name": "n2",
+    "host": null,
+    "workdir": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/nodes/n2",
+    "python": [
+     "/Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-native/bin/python3"
+    ],
+    "workers": 1,
+    "speed": 1.0,
+    "contigs": [
+     "chr22"
+    ]
+   }
+  ],
+  "predicted_load": {
+   "n1": 55812.0,
+   "n2": 50861.0
+  },
+  "lower_bound": 55812.0,
+  "created_utc": "2026-10-31T04:18:40Z"
+ },
+ "split_s": 2.9127216250635684,
+ "merge_s": 0.2115661660209298,
+ "makespan_s": 53.61716370820068,
+ "nodes": [
+  {
+   "node": "n1",
+   "host": null,
+   "workers": 1,
+   "contigs": [
+    "chr21"
+   ],
+   "stage": {
+    "input": {
+     "bytes": 2106576,
+     "seconds": 0.0018029159400612116,
+     "files": 2
+    },
+    "cache": {
+     "bytes": 431004709,
+     "seconds": 0.008334749843925238,
+     "files": 14
+    },
+    "fasta": {
+     "bytes": 3151432257,
+     "seconds": 0.002052250085398555,
+     "files": 2
+    }
+   },
+   "annotate_wall_s": 32.650558167137206,
+   "per_contig": [
+    {
+     "contig": "chr21",
+     "annotation_seconds": 29.383412666851655,
+     "user_s": 10.157568,
+     "sys_s": 0.877341,
+     "records": 55812,
+     "body_sha256": "3ceb3dd9d19784157b87ae8655d290d753e3dad2753ad11fa877669492772b18"
+    }
+   ],
+   "max_rss_gib": 0.701080322265625,
+   "vepyr": "0.7.0",
+   "fetch_s": 0.0009929158259183168,
+   "fetch_bytes": 22530593,
+   "node_total_s": 32.69987462507561
+  },
+  {
+   "node": "n2",
+   "host": null,
+   "workers": 1,
+   "contigs": [
+    "chr22"
+   ],
+   "stage": {
+    "input": {
+     "bytes": 1936074,
+     "seconds": 0.0014598749112337828,
+     "files": 2
+    },
+    "cache": {
+     "bytes": 554609928,
+     "seconds": 0.014320666901767254,
+     "files": 14
+    },
+    "fasta": {
+     "bytes": 3151432257,
+     "seconds": 0.001267499988898635,
+     "files": 2
+    }
+   },
+   "annotate_wall_s": 46.73229620908387,
+   "per_contig": [
+    {
+     "contig": "chr22",
+     "annotation_seconds": 41.973441750044,
+     "user_s": 12.797627,
+     "sys_s": 1.2356639999999999,
+     "records": 50861,
+     "body_sha256": "19efe3c74723b8582d0ee9a74cc50342384d85c46c723d3ac52791de7b07843a"
+    }
+   ],
+   "max_rss_gib": 0.9705963134765625,
+   "vepyr": "0.7.0",
+   "fetch_s": 0.0010634581558406353,
+   "fetch_bytes": 30238189,
+   "node_total_s": 46.78307000012137
+  }
+ ],
+ "part_headers_identical": false,
+ "part_header_differences": [
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/nodes/n1/in/chr21.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/nodes/n1/out/chr21.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/nodes/n1/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/nodes/n1/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/nodes/n1/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/nodes/n2/in/chr22.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/nodes/n2/out/chr22.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/nodes/n2/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/nodes/n2/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/nodes/n2/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep=\"0.19.0\" cache=\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/nodes/n1/cache\" cache_type=\"merged\" cache_format=\"parquet\" tool=\"vepyr 0.7.0\"",
+  "##datafusion-bio-function-vep=\"0.19.0\" cache=\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/nodes/n2/cache\" cache_type=\"merged\" cache_format=\"parquet\" tool=\"vepyr 0.7.0\""
+ ],
+ "merged_records": 106673,
+ "records_match_parts": true,
+ "merged_body_sha256": "3c3066ce2b98e8f0ae5f78f05bdb1867e8f17897deb3194595e12c39d051bd54",
+ "finished_utc": "2026-10-31T04:20:47Z"
+}

@@ -1,0 +1,14 @@
+{
+ "annotation_seconds": 270.2895715830382,
+ "user_s": 376.319824,
+ "sys_s": 19.263851,
+ "max_rss_gib": 3.8255462646484375,
+ "records": 4096123,
+ "body_sha256": "5fee6224bf135d80075712141cc06194e0730fa253ff8b131a9d25d661647ee9",
+ "vepyr": "0.7.0",
+ "node": "n1",
+ "workers": 1,
+ "process_wall_s": 293.45642970781773,
+ "input": "/Users/lukaszjezapkowicz/workspace/data_vepyr/input/HG002_normalized.vcf.gz",
+ "finished_utc": "2026-10-31T04:51:57Z"
+}

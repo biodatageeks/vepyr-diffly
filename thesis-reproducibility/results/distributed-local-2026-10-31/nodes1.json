@@ -1,0 +1,12 @@
+[
+ {
+  "name": "n1",
+  "host": null,
+  "workdir": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1",
+  "python": [
+   "/Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-native/bin/python3"
+  ],
+  "workers": 1,
+  "speed": 1.0
+ }
+]

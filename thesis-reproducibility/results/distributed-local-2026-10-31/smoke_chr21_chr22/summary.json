@@ -1,0 +1,40 @@
+{
+ "single": {
+  "annotation_seconds": 65.30307083297521,
+  "user_s": 23.077842,
+  "sys_s": 2.02694,
+  "max_rss_gib": 1.1089324951171875,
+  "records": 106673,
+  "body_sha256": "3c3066ce2b98e8f0ae5f78f05bdb1867e8f17897deb3194595e12c39d051bd54",
+  "vepyr": "0.7.0",
+  "node": "n1",
+  "workers": 1,
+  "process_wall_s": 72.57104683388025,
+  "input": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/in.vcf.gz",
+  "finished_utc": "2026-10-31T04:18:40Z"
+ },
+ "single_equals_expected": null,
+ "runs": {
+  "2": {
+   "makespan_s": 53.61716370820068,
+   "split_s": 2.9127216250635684,
+   "merge_s": 0.2115661660209298,
+   "stage_s_max": 0.01704804180189967,
+   "annotate_wall_s_max": 46.73229620908387,
+   "annotate_wall_s": {
+    "n1": 32.650558167137206,
+    "n2": 46.73229620908387
+   },
+   "max_rss_gib": 0.9705963134765625,
+   "cache_bytes_per_node": {
+    "n1": 431004709,
+    "n2": 554609928
+   },
+   "sum_contig_annotation_s": 71.35685441689566,
+   "merged_body_equals_single": true,
+   "records_match_parts": true,
+   "merged_records": 106673,
+   "speedup_vs_single": 1.2179508634282195
+  }
+ }
+}

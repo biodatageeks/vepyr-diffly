@@ -1,0 +1,14 @@
+{
+ "annotation_seconds": 65.30307083297521,
+ "user_s": 23.077842,
+ "sys_s": 2.02694,
+ "max_rss_gib": 1.1089324951171875,
+ "records": 106673,
+ "body_sha256": "3c3066ce2b98e8f0ae5f78f05bdb1867e8f17897deb3194595e12c39d051bd54",
+ "vepyr": "0.7.0",
+ "node": "n1",
+ "workers": 1,
+ "process_wall_s": 72.57104683388025,
+ "input": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_smoke_20261031/in.vcf.gz",
+ "finished_utc": "2026-10-31T04:18:40Z"
+}

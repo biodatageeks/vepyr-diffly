@@ -1,0 +1,492 @@
+{
+ "plan": {
+  "input": "/Users/lukaszjezapkowicz/workspace/data_vepyr/input/HG002_normalized.vcf.gz",
+  "input_sha256": "76931747a93b077464046236fb7357e0bc8ca8e4581e6f19a95c97334867965b",
+  "contig_order": [
+   "chr1",
+   "chr2",
+   "chr3",
+   "chr4",
+   "chr5",
+   "chr6",
+   "chr7",
+   "chr8",
+   "chr9",
+   "chr10",
+   "chr11",
+   "chr12",
+   "chr13",
+   "chr14",
+   "chr15",
+   "chr16",
+   "chr17",
+   "chr18",
+   "chr19",
+   "chr20",
+   "chr21",
+   "chr22"
+  ],
+  "records": {
+   "chr1": 323430,
+   "chr2": 331324,
+   "chr3": 288531,
+   "chr4": 307295,
+   "chr5": 264411,
+   "chr6": 271966,
+   "chr7": 234522,
+   "chr8": 225240,
+   "chr9": 176111,
+   "chr10": 213466,
+   "chr11": 206822,
+   "chr12": 197815,
+   "chr13": 161419,
+   "chr14": 133199,
+   "chr15": 125179,
+   "chr16": 123358,
+   "chr17": 108376,
+   "chr18": 119383,
+   "chr19": 90699,
+   "chr20": 86904,
+   "chr21": 55812,
+   "chr22": 50861
+  },
+  "nodes": [
+   {
+    "name": "n1",
+    "host": null,
+    "workdir": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1",
+    "python": [
+     "/Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-native/bin/python3"
+    ],
+    "workers": 1,
+    "speed": 1.0,
+    "contigs": [
+     "chr2",
+     "chr8",
+     "chr10",
+     "chr16",
+     "chr19",
+     "chr21"
+    ]
+   },
+   {
+    "name": "n2",
+    "host": null,
+    "workdir": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2",
+    "python": [
+     "/Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-native/bin/python3"
+    ],
+    "workers": 1,
+    "speed": 1.0,
+    "contigs": [
+     "chr1",
+     "chr7",
+     "chr11",
+     "chr15",
+     "chr18"
+    ]
+   },
+   {
+    "name": "n3",
+    "host": null,
+    "workdir": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3",
+    "python": [
+     "/Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-native/bin/python3"
+    ],
+    "workers": 1,
+    "speed": 1.0,
+    "contigs": [
+     "chr4",
+     "chr5",
+     "chr9",
+     "chr13",
+     "chr20",
+     "chr22"
+    ]
+   },
+   {
+    "name": "n4",
+    "host": null,
+    "workdir": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n4",
+    "python": [
+     "/Users/lukaszjezapkowicz/workspace/data_vepyr/.venv-native/bin/python3"
+    ],
+    "workers": 1,
+    "speed": 1.0,
+    "contigs": [
+     "chr3",
+     "chr6",
+     "chr12",
+     "chr14",
+     "chr17"
+    ]
+   }
+  ],
+  "predicted_load": {
+   "n1": 1039899.0,
+   "n2": 1009336.0,
+   "n3": 1047001.0,
+   "n4": 999887.0
+  },
+  "lower_bound": 1024030.75,
+  "created_utc": "2026-10-31T05:00:40Z"
+ },
+ "split_s": 11.20177795784548,
+ "merge_s": 1.741581290960312,
+ "makespan_s": 164.3826292080339,
+ "nodes": [
+  {
+   "node": "n1",
+   "host": null,
+   "workers": 1,
+   "contigs": [
+    "chr2",
+    "chr8",
+    "chr10",
+    "chr16",
+    "chr19",
+    "chr21"
+   ],
+   "stage": {
+    "input": {
+     "bytes": 39025803,
+     "seconds": 0.004109374945983291,
+     "files": 12
+    },
+    "cache": {
+     "bytes": 9021362678,
+     "seconds": 0.025480125099420547,
+     "files": 49
+    },
+    "fasta": {
+     "bytes": 3151432257,
+     "seconds": 0.0010588329751044512,
+     "files": 2
+    }
+   },
+   "annotate_wall_s": 138.6823342081625,
+   "per_contig": [
+    {
+     "contig": "chr2",
+     "annotation_seconds": 44.83528754208237,
+     "user_s": 65.76635399999999,
+     "sys_s": 3.197406,
+     "records": 331324,
+     "body_sha256": "36144252921b84276badc6ffa87818a291aabf4dcf5457584fb73fc1a03106e9"
+    },
+    {
+     "contig": "chr8",
+     "annotation_seconds": 24.528506790986285,
+     "user_s": 34.563597,
+     "sys_s": 1.884573,
+     "records": 225240,
+     "body_sha256": "00c3692a98acc7bf04e43ae3685ff35b83befe24ca42d8081ab215ce1184f24c"
+    },
+    {
+     "contig": "chr10",
+     "annotation_seconds": 25.987344333902,
+     "user_s": 34.856694000000005,
+     "sys_s": 1.9119169999999999,
+     "records": 213466,
+     "body_sha256": "b546293e75cb3720568b91e6cc07b0436381bf68e35603fdd2581562526efefd"
+    },
+    {
+     "contig": "chr16",
+     "annotation_seconds": 15.571188499918208,
+     "user_s": 20.366615999999993,
+     "sys_s": 1.3085730000000009,
+     "records": 123358,
+     "body_sha256": "27edaa71f5bdb7bcd136d74cc04487525c8c1a4077c607898524a9689eb61a58"
+    },
+    {
+     "contig": "chr19",
+     "annotation_seconds": 13.910548500018194,
+     "user_s": 15.81098399999999,
+     "sys_s": 1.339169,
+     "records": 90699,
+     "body_sha256": "fe3025440c5ede5d27293ad2b3dcfdb704fc85d6982a8947a1ac44138576f09f"
+    },
+    {
+     "contig": "chr21",
+     "annotation_seconds": 3.208600833080709,
+     "user_s": 4.234645999999998,
+     "sys_s": 0.22731999999999886,
+     "records": 55812,
+     "body_sha256": "3ceb3dd9d19784157b87ae8655d290d753e3dad2753ad11fa877669492772b18"
+    }
+   ],
+   "max_rss_gib": 3.1887664794921875,
+   "vepyr": "0.7.0",
+   "fetch_s": 0.00036154198460280895,
+   "fetch_bytes": 462846717,
+   "node_total_s": 138.72281345911324
+  },
+  {
+   "node": "n2",
+   "host": null,
+   "workers": 1,
+   "contigs": [
+    "chr1",
+    "chr7",
+    "chr11",
+    "chr15",
+    "chr18"
+   ],
+   "stage": {
+    "input": {
+     "bytes": 37818747,
+     "seconds": 0.0033932910300791264,
+     "files": 10
+    },
+    "cache": {
+     "bytes": 8587396541,
+     "seconds": 0.021987208165228367,
+     "files": 42
+    },
+    "fasta": {
+     "bytes": 3151432257,
+     "seconds": 0.001101166009902954,
+     "files": 2
+    }
+   },
+   "annotate_wall_s": 135.09144129185006,
+   "per_contig": [
+    {
+     "contig": "chr1",
+     "annotation_seconds": 46.80824049981311,
+     "user_s": 66.223473,
+     "sys_s": 3.5424689999999996,
+     "records": 323430,
+     "body_sha256": "e9703e5e71f9e85438575d0382a6ea797b668b09db799a9e7825e602c1f81ffa"
+    },
+    {
+     "contig": "chr7",
+     "annotation_seconds": 27.11049004108645,
+     "user_s": 37.498960999999994,
+     "sys_s": 2.128339,
+     "records": 234522,
+     "body_sha256": "81681324cd5c8d1dd24bc4e98a027385277da56e50c99ff559857290a7347515"
+    },
+    {
+     "contig": "chr11",
+     "annotation_seconds": 25.443355915835127,
+     "user_s": 33.51454,
+     "sys_s": 2.074147,
+     "records": 206822,
+     "body_sha256": "b2f9c66a6880144925f437c528c02d5abd157ad41ed9eaa7a920a70b3ac13f8e"
+    },
+    {
+     "contig": "chr15",
+     "annotation_seconds": 14.808073292020708,
+     "user_s": 19.597218999999996,
+     "sys_s": 1.1238420000000007,
+     "records": 125179,
+     "body_sha256": "bdc3f4610976b14d9c9cba04bb4a0b1c5ea9bedbb46a9075f3a10f3276c2cae7"
+    },
+    {
+     "contig": "chr18",
+     "annotation_seconds": 10.034331124974415,
+     "user_s": 14.095709,
+     "sys_s": 0.7236639999999994,
+     "records": 119383,
+     "body_sha256": "1859e8ffeea3107ffc88fe3e89254228f65c3026398395f39b2575d876085048"
+    }
+   ],
+   "max_rss_gib": 3.419677734375,
+   "vepyr": "0.7.0",
+   "fetch_s": 0.00043008290231227875,
+   "fetch_bytes": 444955267,
+   "node_total_s": 135.12647629203275
+  },
+  {
+   "node": "n3",
+   "host": null,
+   "workers": 1,
+   "contigs": [
+    "chr4",
+    "chr5",
+    "chr9",
+    "chr13",
+    "chr20",
+    "chr22"
+   ],
+   "stage": {
+    "input": {
+     "bytes": 39106058,
+     "seconds": 0.00507516716606915,
+     "files": 12
+    },
+    "cache": {
+     "bytes": 8525059642,
+     "seconds": 0.026603084057569504,
+     "files": 49
+    },
+    "fasta": {
+     "bytes": 3151432257,
+     "seconds": 0.0006731669418513775,
+     "files": 2
+    }
+   },
+   "annotate_wall_s": 119.81771400012076,
+   "per_contig": [
+    {
+     "contig": "chr4",
+     "annotation_seconds": 32.55711254081689,
+     "user_s": 52.623049,
+     "sys_s": 2.723815,
+     "records": 307295,
+     "body_sha256": "63ea687627523ab5e5ccf7d97915f993dd4f3d8ed5437e4119ab6f7d51a11d34"
+    },
+    {
+     "contig": "chr5",
+     "annotation_seconds": 25.899768749950454,
+     "user_s": 42.106151,
+     "sys_s": 2.2037619999999998,
+     "records": 264411,
+     "body_sha256": "2432203732fa03fbf8252733f1ba4b2cf02d1c37248c0e94324e6abdfde595d1"
+    },
+    {
+     "contig": "chr9",
+     "annotation_seconds": 21.10426133289002,
+     "user_s": 28.303292,
+     "sys_s": 1.59164,
+     "records": 176111,
+     "body_sha256": "1289c2bbecd6561c77bd2a762a89deb423d232a61aaca0d079cf1e76786ab870"
+    },
+    {
+     "contig": "chr13",
+     "annotation_seconds": 13.22148891701363,
+     "user_s": 20.413656000000003,
+     "sys_s": 1.0479469999999997,
+     "records": 161419,
+     "body_sha256": "97fe377e481378659c73b58c4e635415b4de1ede273509a6103b0e94894fd486"
+    },
+    {
+     "contig": "chr20",
+     "annotation_seconds": 9.001285208156332,
+     "user_s": 12.16699700000001,
+     "sys_s": 0.7533439999999993,
+     "records": 86904,
+     "body_sha256": "7925bbbd5c41bf94bbac333530a0c1169808eef99206bf3e7a84f4c72146e596"
+    },
+    {
+     "contig": "chr22",
+     "annotation_seconds": 7.7473777499981225,
+     "user_s": 9.247436000000022,
+     "sys_s": 0.6298490000000001,
+     "records": 50861,
+     "body_sha256": "19efe3c74723b8582d0ee9a74cc50342384d85c46c723d3ac52791de7b07843a"
+    }
+   ],
+   "max_rss_gib": 2.89605712890625,
+   "vepyr": "0.7.0",
+   "fetch_s": 0.00298687512986362,
+   "fetch_bytes": 398849500,
+   "node_total_s": 119.86010441719554
+  },
+  {
+   "node": "n4",
+   "host": null,
+   "workers": 1,
+   "contigs": [
+    "chr3",
+    "chr6",
+    "chr12",
+    "chr14",
+    "chr17"
+   ],
+   "stage": {
+    "input": {
+     "bytes": 36773084,
+     "seconds": 0.0035266249906271696,
+     "files": 10
+    },
+    "cache": {
+     "bytes": 8536580825,
+     "seconds": 0.022798791993409395,
+     "files": 42
+    },
+    "fasta": {
+     "bytes": 3151432257,
+     "seconds": 0.001400624867528677,
+     "files": 2
+    }
+   },
+   "annotate_wall_s": 135.62693649996072,
+   "per_contig": [
+    {
+     "contig": "chr3",
+     "annotation_seconds": 40.47872174996883,
+     "user_s": 59.064808,
+     "sys_s": 3.074683,
+     "records": 288531,
+     "body_sha256": "9c72ec93334fbd83b26316dcaafbb4f23feec59a5649bed68e53d01580b179f1"
+    },
+    {
+     "contig": "chr6",
+     "annotation_seconds": 30.02081812499091,
+     "user_s": 41.903495,
+     "sys_s": 2.5248830000000004,
+     "records": 271966,
+     "body_sha256": "f76cc333a66b00a58193eaf67257e726f3123c9c6e6997fa6fc1332c78e374d2"
+    },
+    {
+     "contig": "chr12",
+     "annotation_seconds": 24.37562095792964,
+     "user_s": 32.57691100000001,
+     "sys_s": 1.8966499999999993,
+     "records": 197815,
+     "body_sha256": "f2d21d284d4862f711fe14fb0c05f52c9dc63f2ac07ae832bfafa9ea047ff6df"
+    },
+    {
+     "contig": "chr14",
+     "annotation_seconds": 15.787422165973112,
+     "user_s": 21.083315,
+     "sys_s": 1.2466620000000006,
+     "records": 133199,
+     "body_sha256": "970338693f88875d97825d64583b7429eb8241b196240edfbb6a64343d4728bf"
+    },
+    {
+     "contig": "chr17",
+     "annotation_seconds": 14.35735904192552,
+     "user_s": 17.480323,
+     "sys_s": 1.214001999999999,
+     "records": 108376,
+     "body_sha256": "38d0e2c6c38f604a0b012bac41188e2b0826b71381f3fc26a0bf7f72c91066d9"
+    }
+   ],
+   "max_rss_gib": 3.08294677734375,
+   "vepyr": "0.7.0",
+   "fetch_s": 0.0003665839321911335,
+   "fetch_bytes": 450792573,
+   "node_total_s": 135.6631272919476
+  }
+ ],
+ "part_headers_identical": false,
+ "part_header_differences": [
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/in/chr10.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/out/chr10.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/in/chr16.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/out/chr16.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/in/chr19.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/out/chr19.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/in/chr2.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/out/chr2.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/in/chr21.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/out/chr21.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/in/chr8.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/out/chr8.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n1/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/in/chr1.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/out/chr1.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/in/chr11.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/out/chr11.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/in/chr15.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/out/chr15.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/in/chr18.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/out/chr18.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/in/chr7.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/out/chr7.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n2/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/in/chr13.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/out/chr13.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/in/chr20.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/out/chr20.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/in/chr22.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/out/chr22.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/in/chr4.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/out/chr4.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/in/chr5.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/out/chr5.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/in/chr9.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/out/chr9.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n3/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n4/in/chr12.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n4/out/chr12.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n4/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n4/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n4/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n4/in/chr14.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n4/out/chr14.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n4/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n4/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n4/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'",
+  "##datafusion-bio-function-vep-command-line='{\"engine\":\"datafusion-bio-function-vep\",\"compression\":\"bgzf\",\"input\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n4/in/chr17.vcf.gz\",\"output\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n4/out/chr17.vcf.gz\",\"cache\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n4/cache\",\"reference_fasta\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n4/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"plugin_cache_root\":null,\"options\":{\"partitioned\":true,\"everything\":true,\"extended_probes\":true,\"reference_fasta_path\":\"/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/a1_local_20261031/nodes/n4/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\",\"hgvs\":true,\"buffer_size\":5000,\"target_partitions\":1,\"workers\":1,\"cache_format\":\"parquet\"}}'"
+ ],
+ "merged_records": 4096123,
+ "records_match_parts": true,
+ "merged_body_sha256": "5fee6224bf135d80075712141cc06194e0730fa253ff8b131a9d25d661647ee9",
+ "finished_utc": "2026-10-31T05:03:25Z"
+}
