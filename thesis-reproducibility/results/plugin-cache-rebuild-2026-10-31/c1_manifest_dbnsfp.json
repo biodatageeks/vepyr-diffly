@@ -1,0 +1,173 @@
+{
+  "plugin_name": "dbnsfp",
+  "source_manifest": "dbnsfp.source.toml",
+  "key_columns": [
+    "chrom",
+    "start",
+    "end",
+    "allele_string"
+  ],
+  "match_columns": [
+    {
+      "column": "aa_change",
+      "template": "{ref_aa}/{alt_aa}"
+    }
+  ],
+  "value_columns": [
+    {
+      "column": "sift4g_score",
+      "csq_field": "SIFT4G_score",
+      "type": "Utf8",
+      "description": "SIFT4G_score from dbNSFP file"
+    },
+    {
+      "column": "sift4g_pred",
+      "csq_field": "SIFT4G_pred",
+      "type": "Utf8",
+      "description": "SIFT4G_pred from dbNSFP file"
+    },
+    {
+      "column": "polyphen2_hdiv_score",
+      "csq_field": "Polyphen2_HDIV_score",
+      "type": "Utf8",
+      "description": "Polyphen2_HDIV_score from dbNSFP file"
+    },
+    {
+      "column": "polyphen2_hvar_score",
+      "csq_field": "Polyphen2_HVAR_score",
+      "type": "Utf8",
+      "description": "Polyphen2_HVAR_score from dbNSFP file"
+    },
+    {
+      "column": "mutationtaster_score",
+      "csq_field": "MutationTaster_score",
+      "type": "Utf8",
+      "description": "MutationTaster_score from dbNSFP file"
+    },
+    {
+      "column": "mutationtaster_pred",
+      "csq_field": "MutationTaster_pred",
+      "type": "Utf8",
+      "description": "MutationTaster_pred from dbNSFP file"
+    },
+    {
+      "column": "provean_score",
+      "csq_field": "PROVEAN_score",
+      "type": "Utf8",
+      "description": "PROVEAN_score from dbNSFP file"
+    },
+    {
+      "column": "provean_pred",
+      "csq_field": "PROVEAN_pred",
+      "type": "Utf8",
+      "description": "PROVEAN_pred from dbNSFP file"
+    },
+    {
+      "column": "vest4_score",
+      "csq_field": "VEST4_score",
+      "type": "Utf8",
+      "description": "VEST4_score from dbNSFP file"
+    },
+    {
+      "column": "metasvm_score",
+      "csq_field": "MetaSVM_score",
+      "type": "Utf8",
+      "description": "MetaSVM_score from dbNSFP file"
+    },
+    {
+      "column": "metasvm_pred",
+      "csq_field": "MetaSVM_pred",
+      "type": "Utf8",
+      "description": "MetaSVM_pred from dbNSFP file"
+    },
+    {
+      "column": "metalr_score",
+      "csq_field": "MetaLR_score",
+      "type": "Utf8",
+      "description": "MetaLR_score from dbNSFP file"
+    },
+    {
+      "column": "metalr_pred",
+      "csq_field": "MetaLR_pred",
+      "type": "Utf8",
+      "description": "MetaLR_pred from dbNSFP file"
+    },
+    {
+      "column": "revel_score",
+      "csq_field": "REVEL_score",
+      "type": "Utf8",
+      "description": "REVEL_score from dbNSFP file"
+    },
+    {
+      "column": "gerp_rs",
+      "csq_field": "GERP++_RS",
+      "type": "Utf8",
+      "description": "GERP++_RS from dbNSFP file"
+    },
+    {
+      "column": "phylop100way_vertebrate",
+      "csq_field": "phyloP100way_vertebrate",
+      "type": "Utf8",
+      "description": "phyloP100way_vertebrate from dbNSFP file"
+    },
+    {
+      "column": "phastcons100way_vertebrate",
+      "csq_field": "phastCons100way_vertebrate",
+      "type": "Utf8",
+      "description": "phastCons100way_vertebrate from dbNSFP file"
+    },
+    {
+      "column": "cadd_raw",
+      "csq_field": "CADD_raw",
+      "type": "Utf8",
+      "description": "CADD_raw from dbNSFP file"
+    },
+    {
+      "column": "cadd_phred",
+      "csq_field": "CADD_phred",
+      "type": "Utf8",
+      "description": "CADD_phred from dbNSFP file"
+    }
+  ],
+  "chroms": [
+    {
+      "chrom": "chr1",
+      "file": "chr1.parquet",
+      "rows": 8788707,
+      "warm": 11095,
+      "cold": 8777612
+    },
+    {
+      "chrom": "chr22",
+      "file": "chr22.parquet",
+      "rows": 1799075,
+      "warm": 2457,
+      "cold": 1796618
+    }
+  ],
+  "sources": [
+    {
+      "file": "dbNSFP5.3.1a_grch38.gz",
+      "url": "https://www.dbnsfp.org/download",
+      "md5": "afff632f13325c687477d64ca0c63b1a",
+      "verified_md5": "afff632f13325c687477d64ca0c63b1a",
+      "size": 50271494764,
+      "mtime_ns": 1783884905584000000,
+      "ino": 2766628,
+      "ctime_ns": 1790203882693535473,
+      "index": {
+        "file": "dbNSFP5.3.1a_grch38.gz.tbi",
+        "verified_md5": "5eb8a892bab3117d7ac9c6c42f62dfc6",
+        "size": 870924,
+        "mtime_ns": 1783883268543000000,
+        "ino": 2766621,
+        "ctime_ns": 1790182253480555662
+      }
+    }
+  ],
+  "cache_source_version": "v0.2.0@7736bbead98eb57e13f88e5074fa2b7d2e844121",
+  "allele_match": "exact",
+  "field_order": "alphabetical",
+  "assume_unique": false,
+  "lookup": "point"
+}

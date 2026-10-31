@@ -1,0 +1,113 @@
+{
+  "plugin_name": "spliceai",
+  "source_manifest": "spliceai.source.toml",
+  "key_columns": [
+    "chrom",
+    "start",
+    "end",
+    "allele_string"
+  ],
+  "match_columns": [
+    {
+      "column": "symbol",
+      "template": "{SYMBOL}"
+    }
+  ],
+  "value_columns": [
+    {
+      "column": "symbol_out",
+      "csq_field": "SpliceAI_pred_SYMBOL",
+      "type": "Utf8",
+      "description": "SpliceAI (v1.3.1) gene symbol"
+    },
+    {
+      "column": "ds_ag",
+      "csq_field": "SpliceAI_pred_DS_AG",
+      "type": "Utf8",
+      "description": "SpliceAI (v1.3.1) delta score (0–1) for acceptor gain: max inc. in predicted acceptor probability within ±50 bp. Guide cutoffs: <0.01 none; ≥0.2 high-recall; ≥0.5 recommended; ≥0.8 high-precision."
+    },
+    {
+      "column": "ds_al",
+      "csq_field": "SpliceAI_pred_DS_AL",
+      "type": "Utf8",
+      "description": "SpliceAI (v1.3.1) delta score (0–1) for acceptor loss: max dec. in predicted acceptor probability within ±50 bp. Guide cutoffs: <0.01 none; ≥0.2 high-recall; ≥0.5 recommended; ≥0.8 high-precision."
+    },
+    {
+      "column": "ds_dg",
+      "csq_field": "SpliceAI_pred_DS_DG",
+      "type": "Utf8",
+      "description": "SpliceAI (v1.3.1) delta score (0–1) for donor gain: max inc. in predicted donor probability within ±50 bp. Guide cutoffs: <0.01 none; ≥0.2 high-recall; ≥0.5 recommended; ≥0.8 high-precision."
+    },
+    {
+      "column": "ds_dl",
+      "csq_field": "SpliceAI_pred_DS_DL",
+      "type": "Utf8",
+      "description": "SpliceAI (v1.3.1) delta score (0–1) for donor loss: max dec. in predicted donor probability within ±50 bp. Guide cutoffs: <0.01 none; ≥0.2 high-recall; ≥0.5 recommended; ≥0.8 high-precision."
+    },
+    {
+      "column": "dp_ag",
+      "csq_field": "SpliceAI_pred_DP_AG",
+      "type": "Int32",
+      "description": "SpliceAI (v1.3.1) delta position (bp) for acceptor gain: position (relative to variant) of max AG change (+ downstream, − upstream)."
+    },
+    {
+      "column": "dp_al",
+      "csq_field": "SpliceAI_pred_DP_AL",
+      "type": "Int32",
+      "description": "SpliceAI (v1.3.1) delta position (bp) for acceptor loss: position (relative to variant) of max AL change (+ downstream, − upstream)."
+    },
+    {
+      "column": "dp_dg",
+      "csq_field": "SpliceAI_pred_DP_DG",
+      "type": "Int32",
+      "description": "SpliceAI (v1.3.1) delta position (bp) for donor gain: position (relative to variant) of max DG change (+ downstream, − upstream)."
+    },
+    {
+      "column": "dp_dl",
+      "csq_field": "SpliceAI_pred_DP_DL",
+      "type": "Int32",
+      "description": "SpliceAI (v1.3.1) delta position (bp) for donor loss: position (relative to variant) of max DL change (+ downstream, − upstream)."
+    }
+  ],
+  "chroms": [
+    {
+      "chrom": "chr1",
+      "file": "chr1.parquet",
+      "rows": 300634726,
+      "warm": 689526,
+      "cold": 299945200
+    },
+    {
+      "chrom": "chr22",
+      "file": "chr22.parquet",
+      "rows": 52715028,
+      "warm": 140590,
+      "cold": 52574438
+    }
+  ],
+  "sources": [
+    {
+      "file": "spliceai_scores.masked.snv.ensembl_mane.grch38.110.vcf.gz",
+      "url": "https://ftp.ensembl.org/pub/data_files/homo_sapiens/GRCh38/variation_plugins/spliceai_scores.masked.snv.ensembl_mane.grch38.110.vcf.gz",
+      "md5": "66d9183dcaadd7a35c186dee61983773",
+      "verified_md5": "66d9183dcaadd7a35c186dee61983773",
+      "size": 28512375517,
+      "mtime_ns": 1783806958875000000,
+      "ino": 2766640,
+      "ctime_ns": 1790198714457343822,
+      "index": {
+        "file": "spliceai_scores.masked.snv.ensembl_mane.grch38.110.vcf.gz.tbi",
+        "verified_md5": "6852ba0036f5bb276e34df39cc87c60e",
+        "size": 1249874,
+        "mtime_ns": 1783808617192000000,
+        "ino": 2756135,
+        "ctime_ns": 1790180737540262035
+      }
+    }
+  ],
+  "cache_source_version": "v0.2.0@7736bbead98eb57e13f88e5074fa2b7d2e844121",
+  "allele_match": "exact",
+  "field_order": "alphabetical",
+  "assume_unique": true,
+  "lookup": "point"
+}

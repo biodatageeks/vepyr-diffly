@@ -1,0 +1,71 @@
+{
+  "plugin_name": "alphamissense",
+  "source_manifest": "alphamissense.source.toml",
+  "key_columns": [
+    "chrom",
+    "start",
+    "end",
+    "allele_string"
+  ],
+  "match_columns": [
+    {
+      "column": "protein_variant",
+      "template": "{ref_aa}{Protein_position}{alt_aa}"
+    }
+  ],
+  "value_columns": [
+    {
+      "column": "am_class",
+      "csq_field": "am_class",
+      "type": "Utf8",
+      "description": "The AlphaMissense thresholds are: 'Likely benign' if score < 0.34, 'Likely pathogenic' if score > 0.564, 'ambiguous' otherwise -- see doi.org/10.1126/science.adg7492 for details"
+    },
+    {
+      "column": "am_pathogenicity",
+      "csq_field": "am_pathogenicity",
+      "type": "Float32",
+      "description": "Continuous AlphaMissense score between 0 and 1 which can be interpreted as the predicted probability of the variant being pathogenic"
+    }
+  ],
+  "chroms": [
+    {
+      "chrom": "chr1",
+      "file": "chr1.parquet",
+      "rows": 7151767,
+      "warm": 9026,
+      "cold": 7142741
+    },
+    {
+      "chrom": "chr22",
+      "file": "chr22.parquet",
+      "rows": 1466988,
+      "warm": 2086,
+      "cold": 1464902
+    }
+  ],
+  "sources": [
+    {
+      "file": "AlphaMissense_hg38.bgz.tsv.gz",
+      "url": "https://storage.googleapis.com/dm_alphamissense/AlphaMissense_hg38.tsv.gz",
+      "md5": "9fd167735f16a1b87da6eb3e4c25fcb5",
+      "verified_md5": "46d0028375cf95088bd014ff6855cffd",
+      "size": 628407716,
+      "mtime_ns": 1783322828158000000,
+      "ino": 2766317,
+      "ctime_ns": 1790182258176738916,
+      "index": {
+        "file": "AlphaMissense_hg38.bgz.tsv.gz.tbi",
+        "verified_md5": "7e925b94f5afd9ef184bde4de8aedeb5",
+        "size": 684511,
+        "mtime_ns": 1783322837454000000,
+        "ino": 2766314,
+        "ctime_ns": 1790181831840388624
+      }
+    }
+  ],
+  "cache_source_version": "v0.2.0@7736bbead98eb57e13f88e5074fa2b7d2e844121",
+  "allele_match": "minimised",
+  "field_order": "alphabetical",
+  "assume_unique": false,
+  "lookup": "point"
+}

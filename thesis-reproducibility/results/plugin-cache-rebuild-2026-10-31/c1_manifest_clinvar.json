@@ -1,0 +1,84 @@
+{
+  "plugin_name": "clinvar",
+  "source_manifest": "clinvar.source.toml",
+  "key_columns": [
+    "chrom",
+    "start",
+    "end",
+    "allele_string"
+  ],
+  "match_columns": [],
+  "value_columns": [
+    {
+      "column": "id",
+      "csq_field": "ClinVar",
+      "type": "Utf8"
+    },
+    {
+      "column": "clnsig",
+      "csq_field": "ClinVar_CLNSIG",
+      "type": "Utf8"
+    },
+    {
+      "column": "clnrevstat",
+      "csq_field": "ClinVar_CLNREVSTAT",
+      "type": "Utf8"
+    },
+    {
+      "column": "clndn",
+      "csq_field": "ClinVar_CLNDN",
+      "type": "Utf8"
+    },
+    {
+      "column": "clnvc",
+      "csq_field": "ClinVar_CLNVC",
+      "type": "Utf8"
+    },
+    {
+      "column": "clnvi",
+      "csq_field": "ClinVar_CLNVI",
+      "type": "Utf8"
+    }
+  ],
+  "chroms": [
+    {
+      "chrom": "chr1",
+      "file": "chr1.parquet",
+      "rows": 401099,
+      "warm": 10445,
+      "cold": 390654
+    },
+    {
+      "chrom": "chr22",
+      "file": "chr22.parquet",
+      "rows": 96223,
+      "warm": 2701,
+      "cold": 93522
+    }
+  ],
+  "sources": [
+    {
+      "file": "clinvar.vcf.gz",
+      "url": "https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/archive_2.0/2026/clinvar_20260706.vcf.gz",
+      "md5": "f78d25d49e17a070957a127e409f87b9",
+      "verified_md5": "f78d25d49e17a070957a127e409f87b9",
+      "size": 192290992,
+      "mtime_ns": 1783770183303000000,
+      "ino": 2766318,
+      "ctime_ns": 1790182217409684442,
+      "index": {
+        "file": "clinvar.vcf.gz.tbi",
+        "verified_md5": "ca9837f2f17f3daf48466b780480734a",
+        "size": 609919,
+        "mtime_ns": 1783770184446000000,
+        "ino": 2766316,
+        "ctime_ns": 1790181831626424241
+      }
+    }
+  ],
+  "cache_source_version": "v0.2.0@7736bbead98eb57e13f88e5074fa2b7d2e844121",
+  "allele_match": "minimised",
+  "field_order": "declared",
+  "assume_unique": false,
+  "lookup": "point"
+}

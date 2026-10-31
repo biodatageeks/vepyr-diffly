@@ -1,0 +1,564 @@
+{
+ "version": "v0.2.0",
+ "repo_commit": "7736bbead98eb57e13f88e5074fa2b7d2e844121",
+ "builds": {
+  "clinvar": {
+   "seconds": 4.967594667105004,
+   "max_rss_gib": 5.3954010009765625,
+   "user_s": 36.709511,
+   "sys_s": 1.299596,
+   "chroms": [
+    [
+     "chr1",
+     401099,
+     10445,
+     390654
+    ],
+    [
+     "chr22",
+     96223,
+     2701,
+     93522
+    ]
+   ],
+   "process_wall_s": 5.1075590420514345
+  },
+  "alphamissense": {
+   "seconds": 6.670926250051707,
+   "max_rss_gib": 5.5615692138671875,
+   "user_s": 15.482124,
+   "sys_s": 1.7915159999999999,
+   "chroms": [
+    [
+     "chr1",
+     7151767,
+     9026,
+     7142741
+    ],
+    [
+     "chr22",
+     1466988,
+     2086,
+     1464902
+    ]
+   ],
+   "process_wall_s": 6.821552291046828
+  },
+  "spliceai": {
+   "seconds": 1020.4270053328946,
+   "max_rss_gib": 12.887420654296875,
+   "user_s": 5231.612183,
+   "sys_s": 238.911807,
+   "chroms": [
+    [
+     "chr1",
+     300634726,
+     689526,
+     299945200
+    ],
+    [
+     "chr22",
+     52715028,
+     140590,
+     52574438
+    ]
+   ],
+   "process_wall_s": 1020.9117487499025
+  },
+  "dbnsfp": {
+   "seconds": 332.5865801658947,
+   "max_rss_gib": 10.783950805664062,
+   "user_s": 307.69537,
+   "sys_s": 106.512256,
+   "chroms": [
+    [
+     "chr1",
+     8788707,
+     11095,
+     8777612
+    ],
+    [
+     "chr22",
+     1799075,
+     2457,
+     1796618
+    ]
+   ],
+   "process_wall_s": 333.0338131249882
+  },
+  "cadd": {
+   "seconds": 535.7213733750395,
+   "max_rss_gib": 24.269256591796875,
+   "user_s": 1062.530891,
+   "sys_s": 228.527571,
+   "chroms": [
+    [
+     "chr1",
+     699768898,
+     1929017,
+     697839881
+    ],
+    [
+     "chr22",
+     119170699,
+     426653,
+     118744046
+    ]
+   ],
+   "process_wall_s": 536.2618316248991
+  }
+ },
+ "digests": {
+  "clinvar:chr1": {
+   "old": {
+    "rows": 401099,
+    "s32": 860986297409014,
+    "x64": 9674590057356305872,
+    "columns": [
+     "allele_string",
+     "chrom",
+     "clndn",
+     "clnrevstat",
+     "clnsig",
+     "clnvc",
+     "clnvi",
+     "end",
+     "id",
+     "start",
+     "tier"
+    ]
+   },
+   "new": {
+    "rows": 401099,
+    "s32": 860986297409014,
+    "x64": 9674590057356305872,
+    "columns": [
+     "allele_string",
+     "chrom",
+     "clndn",
+     "clnrevstat",
+     "clnsig",
+     "clnvc",
+     "clnvi",
+     "end",
+     "id",
+     "start",
+     "tier"
+    ]
+   },
+   "identical_rows": true
+  },
+  "clinvar:chr22": {
+   "old": {
+    "rows": 96223,
+    "s32": 207014372478301,
+    "x64": 4761146004961861657,
+    "columns": [
+     "allele_string",
+     "chrom",
+     "clndn",
+     "clnrevstat",
+     "clnsig",
+     "clnvc",
+     "clnvi",
+     "end",
+     "id",
+     "start",
+     "tier"
+    ]
+   },
+   "new": {
+    "rows": 96223,
+    "s32": 207014372478301,
+    "x64": 4761146004961861657,
+    "columns": [
+     "allele_string",
+     "chrom",
+     "clndn",
+     "clnrevstat",
+     "clnsig",
+     "clnvc",
+     "clnvi",
+     "end",
+     "id",
+     "start",
+     "tier"
+    ]
+   },
+   "identical_rows": true
+  },
+  "alphamissense:chr1": {
+   "old": {
+    "rows": 7151767,
+    "s32": 15362091667641564,
+    "x64": 12521947430488027542,
+    "columns": [
+     "allele_string",
+     "am_class",
+     "am_pathogenicity",
+     "chrom",
+     "end",
+     "protein_variant",
+     "start",
+     "tier"
+    ]
+   },
+   "new": {
+    "rows": 7151767,
+    "s32": 15362091667641564,
+    "x64": 12521947430488027542,
+    "columns": [
+     "allele_string",
+     "am_class",
+     "am_pathogenicity",
+     "chrom",
+     "end",
+     "protein_variant",
+     "start",
+     "tier"
+    ]
+   },
+   "identical_rows": true
+  },
+  "alphamissense:chr22": {
+   "old": {
+    "rows": 1466988,
+    "s32": 3150204700848490,
+    "x64": 8241224047471487168,
+    "columns": [
+     "allele_string",
+     "am_class",
+     "am_pathogenicity",
+     "chrom",
+     "end",
+     "protein_variant",
+     "start",
+     "tier"
+    ]
+   },
+   "new": {
+    "rows": 1466988,
+    "s32": 3150204700848490,
+    "x64": 8241224047471487168,
+    "columns": [
+     "allele_string",
+     "am_class",
+     "am_pathogenicity",
+     "chrom",
+     "end",
+     "protein_variant",
+     "start",
+     "tier"
+    ]
+   },
+   "identical_rows": true
+  },
+  "spliceai:chr1": {
+   "old": {
+    "rows": 300634726,
+    "s32": 645611093434361893,
+    "x64": 1766979727786276661,
+    "columns": [
+     "allele_string",
+     "chrom",
+     "dp_ag",
+     "dp_al",
+     "dp_dg",
+     "dp_dl",
+     "ds_ag",
+     "ds_al",
+     "ds_dg",
+     "ds_dl",
+     "end",
+     "start",
+     "symbol",
+     "symbol_out",
+     "tier"
+    ]
+   },
+   "new": {
+    "rows": 300634726,
+    "s32": 645611093434361893,
+    "x64": 1766979727786276661,
+    "columns": [
+     "allele_string",
+     "chrom",
+     "dp_ag",
+     "dp_al",
+     "dp_dg",
+     "dp_dl",
+     "ds_ag",
+     "ds_al",
+     "ds_dg",
+     "ds_dl",
+     "end",
+     "start",
+     "symbol",
+     "symbol_out",
+     "tier"
+    ]
+   },
+   "identical_rows": true
+  },
+  "spliceai:chr22": {
+   "old": {
+    "rows": 52715028,
+    "s32": 113217146118990100,
+    "x64": 4540028194555946504,
+    "columns": [
+     "allele_string",
+     "chrom",
+     "dp_ag",
+     "dp_al",
+     "dp_dg",
+     "dp_dl",
+     "ds_ag",
+     "ds_al",
+     "ds_dg",
+     "ds_dl",
+     "end",
+     "start",
+     "symbol",
+     "symbol_out",
+     "tier"
+    ]
+   },
+   "new": {
+    "rows": 52715028,
+    "s32": 113217146118990100,
+    "x64": 4540028194555946504,
+    "columns": [
+     "allele_string",
+     "chrom",
+     "dp_ag",
+     "dp_al",
+     "dp_dg",
+     "dp_dl",
+     "ds_ag",
+     "ds_al",
+     "ds_dg",
+     "ds_dl",
+     "end",
+     "start",
+     "symbol",
+     "symbol_out",
+     "tier"
+    ]
+   },
+   "identical_rows": true
+  },
+  "dbnsfp:chr1": {
+   "old": {
+    "rows": 8788707,
+    "s32": 18869553780594658,
+    "x64": 3474243225345377956,
+    "columns": [
+     "aa_change",
+     "allele_string",
+     "cadd_phred",
+     "cadd_raw",
+     "chrom",
+     "end",
+     "gerp_rs",
+     "metalr_pred",
+     "metalr_score",
+     "metasvm_pred",
+     "metasvm_score",
+     "mutationtaster_pred",
+     "mutationtaster_score",
+     "phastcons100way_vertebrate",
+     "phylop100way_vertebrate",
+     "polyphen2_hdiv_score",
+     "polyphen2_hvar_score",
+     "provean_pred",
+     "provean_score",
+     "revel_score",
+     "sift4g_pred",
+     "sift4g_score",
+     "start",
+     "tier",
+     "vest4_score"
+    ]
+   },
+   "new": {
+    "rows": 8788707,
+    "s32": 18869553780594658,
+    "x64": 3474243225345377956,
+    "columns": [
+     "aa_change",
+     "allele_string",
+     "cadd_phred",
+     "cadd_raw",
+     "chrom",
+     "end",
+     "gerp_rs",
+     "metalr_pred",
+     "metalr_score",
+     "metasvm_pred",
+     "metasvm_score",
+     "mutationtaster_pred",
+     "mutationtaster_score",
+     "phastcons100way_vertebrate",
+     "phylop100way_vertebrate",
+     "polyphen2_hdiv_score",
+     "polyphen2_hvar_score",
+     "provean_pred",
+     "provean_score",
+     "revel_score",
+     "sift4g_pred",
+     "sift4g_score",
+     "start",
+     "tier",
+     "vest4_score"
+    ]
+   },
+   "identical_rows": true
+  },
+  "dbnsfp:chr22": {
+   "old": {
+    "rows": 1799075,
+    "s32": 3863002980843153,
+    "x64": 7120522178892128661,
+    "columns": [
+     "aa_change",
+     "allele_string",
+     "cadd_phred",
+     "cadd_raw",
+     "chrom",
+     "end",
+     "gerp_rs",
+     "metalr_pred",
+     "metalr_score",
+     "metasvm_pred",
+     "metasvm_score",
+     "mutationtaster_pred",
+     "mutationtaster_score",
+     "phastcons100way_vertebrate",
+     "phylop100way_vertebrate",
+     "polyphen2_hdiv_score",
+     "polyphen2_hvar_score",
+     "provean_pred",
+     "provean_score",
+     "revel_score",
+     "sift4g_pred",
+     "sift4g_score",
+     "start",
+     "tier",
+     "vest4_score"
+    ]
+   },
+   "new": {
+    "rows": 1799075,
+    "s32": 3863002980843153,
+    "x64": 7120522178892128661,
+    "columns": [
+     "aa_change",
+     "allele_string",
+     "cadd_phred",
+     "cadd_raw",
+     "chrom",
+     "end",
+     "gerp_rs",
+     "metalr_pred",
+     "metalr_score",
+     "metasvm_pred",
+     "metasvm_score",
+     "mutationtaster_pred",
+     "mutationtaster_score",
+     "phastcons100way_vertebrate",
+     "phylop100way_vertebrate",
+     "polyphen2_hdiv_score",
+     "polyphen2_hvar_score",
+     "provean_pred",
+     "provean_score",
+     "revel_score",
+     "sift4g_pred",
+     "sift4g_score",
+     "start",
+     "tier",
+     "vest4_score"
+    ]
+   },
+   "identical_rows": true
+  },
+  "cadd:chr1": {
+   "old": {
+    "rows": 699768898,
+    "s32": 1502745972390653379,
+    "x64": 55504362192374767,
+    "columns": [
+     "allele_string",
+     "cadd_phred",
+     "cadd_raw",
+     "chrom",
+     "end",
+     "start",
+     "tier"
+    ]
+   },
+   "new": {
+    "rows": 699768898,
+    "s32": 1502745972390653379,
+    "x64": 55504362192374767,
+    "columns": [
+     "allele_string",
+     "cadd_phred",
+     "cadd_raw",
+     "chrom",
+     "end",
+     "start",
+     "tier"
+    ]
+   },
+   "identical_rows": true
+  },
+  "cadd:chr22": {
+   "old": {
+    "rows": 119170699,
+    "s32": 255923724307681459,
+    "x64": 6091146951944357905,
+    "columns": [
+     "allele_string",
+     "cadd_phred",
+     "cadd_raw",
+     "chrom",
+     "end",
+     "start",
+     "tier"
+    ]
+   },
+   "new": {
+    "rows": 119170699,
+    "s32": 255923724307681459,
+    "x64": 6091146951944357905,
+    "columns": [
+     "allele_string",
+     "cadd_phred",
+     "cadd_raw",
+     "chrom",
+     "end",
+     "start",
+     "tier"
+    ]
+   },
+   "identical_rows": true
+  }
+ },
+ "annotation": {
+  "chr22": {
+   "annotation_seconds": 7.2542417091317475,
+   "body_sha256": "d0bafc91afeb8677349d0b12b8e26adbce8c6bc3b48bd6880a2ae030fd677608",
+   "records": 50861,
+   "vep_reference_body_sha256": "4d8ff253436c68b350eff49cdb8d6db2f373fa0129d77b981d72b4930d38b5b8",
+   "equal_vep_reference": false
+  },
+  "chr1": {
+   "annotation_seconds": 41.57729829195887,
+   "body_sha256": "ce615dc8da782f65345f037391617038a54069d638138566853e36a6fd66c31d",
+   "records": 323430,
+   "vep_reference_body_sha256": "2e272263dabb9cf4d00f95eabde1a0f442fc4b326031be42e68b5ef51c2e0d82",
+   "equal_vep_reference": false
+  }
+ },
+ "vepyr": "0.7.0"
+}

@@ -1,0 +1,86 @@
+{
+  "plugin_name": "cadd",
+  "source_manifest": "cadd.source.toml",
+  "key_columns": [
+    "chrom",
+    "start",
+    "end",
+    "allele_string"
+  ],
+  "match_columns": [],
+  "value_columns": [
+    {
+      "column": "cadd_raw",
+      "csq_field": "CADD_RAW",
+      "type": "Utf8",
+      "description": "Raw CADD score. CADD is only available here for non-commercial use. See CADD website for more information."
+    },
+    {
+      "column": "cadd_phred",
+      "csq_field": "CADD_PHRED",
+      "type": "Utf8",
+      "description": "PHRED-like scaled CADD score. CADD is only available here for non-commercial use. See CADD website for more information."
+    }
+  ],
+  "chroms": [
+    {
+      "chrom": "chr1",
+      "file": "chr1.parquet",
+      "rows": 699768898,
+      "warm": 1929017,
+      "cold": 697839881
+    },
+    {
+      "chrom": "chr22",
+      "file": "chr22.parquet",
+      "rows": 119170699,
+      "warm": 426653,
+      "cold": 118744046
+    }
+  ],
+  "sources": [
+    {
+      "part": "snv",
+      "file": "whole_genome_SNVs.tsv.gz",
+      "url": "https://krishna.gs.washington.edu/download/CADD/v1.7/GRCh38/whole_genome_SNVs.tsv.gz",
+      "md5": "88577a55f1cd519d44e0f415ba248eb9",
+      "verified_md5": "88577a55f1cd519d44e0f415ba248eb9",
+      "size": 87473403655,
+      "mtime_ns": 1783990287898000000,
+      "ino": 2766548,
+      "ctime_ns": 1790210372442411816,
+      "index": {
+        "file": "whole_genome_SNVs.tsv.gz.tbi",
+        "verified_md5": "347df8fac17ea374c4598f4f44c7ce8b",
+        "size": 2761840,
+        "mtime_ns": 1783990291011000000,
+        "ino": 2766547,
+        "ctime_ns": 1790182189215917589
+      }
+    },
+    {
+      "part": "indel",
+      "file": "gnomad.genomes.r4.0.indel.tsv.gz",
+      "url": "https://krishna.gs.washington.edu/download/CADD/v1.7/GRCh38/gnomad.genomes.r4.0.indel.tsv.gz",
+      "md5": "4b9c685c96d396af4d001c2f7dd9d8f9",
+      "verified_md5": "4b9c685c96d396af4d001c2f7dd9d8f9",
+      "size": 1257151321,
+      "mtime_ns": 1783990495630000000,
+      "ino": 2766426,
+      "ctime_ns": 1790183186222408854,
+      "index": {
+        "file": "gnomad.genomes.r4.0.indel.tsv.gz.tbi",
+        "verified_md5": "85f3d2daa9202c5915c0ce0f1c749a66",
+        "size": 1899705,
+        "mtime_ns": 1783990497603000000,
+        "ino": 2766455,
+        "ctime_ns": 1790182135289050624
+      }
+    }
+  ],
+  "cache_source_version": "v0.2.0@7736bbead98eb57e13f88e5074fa2b7d2e844121",
+  "allele_match": "minimised",
+  "field_order": "alphabetical",
+  "assume_unique": true,
+  "lookup": "point"
+}

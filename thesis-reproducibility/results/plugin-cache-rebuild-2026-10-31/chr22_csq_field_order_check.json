@@ -1,0 +1,13 @@
+{
+ "a": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/c1_plugin_cache_20261031/chr22_all_plugins_old_cache.vcf",
+ "b": "/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr22_5plugins_vep116_caddfix.vcf.gz",
+ "records_compared": 50861,
+ "records_differing_after_name_mapping": 0,
+ "first_difference": null,
+ "fields_a": 124,
+ "fields_b": 124,
+ "same_field_set": true,
+ "same_field_order": false,
+ "only_a": [],
+ "only_b": []
+}

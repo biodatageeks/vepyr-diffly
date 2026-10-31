@@ -10,14 +10,20 @@ manifests of vepyr-plugins v0.1.1/v0.2.0, with no code version or source digests
       re-compressed AlphaMissense file, as its manifest documents). The cache manifests then
       record version@commit and the verified digests. Checks: row digests of every
       plugin-chromosome file against the 2026-08-27 copy (compare_cache_content.digest), and
-      chr22/chr1 annotation with all five plugins on the new cache, whose body SHA-256 must
-      equal the VEP 116 reference (results/references-2026-10-25).
+      chr22/chr1 annotation with all five plugins on the new cache (body SHA-256, records; the
+      body SHA-256 of the VEP 116 reference is recorded next to it, but the two are not expected
+      to be equal: with plugins the E2E comparison is field by field, not byte by byte).
+  c1-old  The same annotation on the 2026-08-27 copy, which passed the E2E comparison against
+      the VEP reference on 2026-10-25: equal bodies mean the new cache gives the same output.
+      Also the body SHA-256 of the VEP reference files in output/116/plugins against the
+      package's references-2026-10-25 record. chr22 outputs (old cache, VEP) are kept for diffing.
   c2  Build cost of the plugin-chromosome units (5 plugins x chr1, chr22): every unit in its
       own process and its own cache root (no shared manifest), sources not re-hashed
       (verify_source=False), first P=1 (sequential), then P in PARALLEL concurrent units,
       longest first by the P=1 times. Per unit: wall time, peak RSS, CPU; per pass: makespan.
 
 Usage: plugin_cache_rebuild.py c1 OUT_DIR
+       plugin_cache_rebuild.py c1-old OUT_DIR   (after c1)
        plugin_cache_rebuild.py c2 OUT_DIR [PARALLEL, default 5]
 Run with the .venv-native interpreter (vepyr 0.7.0 @ 479d8f4, polars).
 """
@@ -128,6 +134,25 @@ def c1(out: Path) -> dict:
     return res
 
 
+def c1_old(out: Path) -> dict:
+    new = json.loads((out / "c1_summary.json").read_text())["annotation"]
+    res = {"annotation": {}, "vep_reference": {}}
+    for chrom in ("chr22", "chr1"):
+        vcf = out / f"{chrom}_all_plugins_old_cache.vcf"
+        r = child(ANNOTATE, str(INPUT[chrom]), str(vcf), str(CORE), str(FASTA), str(OLD))
+        if chrom != "chr22":
+            vcf.unlink(missing_ok=True)
+        r.update(new_cache_body_sha256=new[chrom]["body_sha256"], equal_new_cache=r["body_sha256"] == new[chrom]["body_sha256"])
+        res["annotation"][chrom] = r
+        ref = D / f"output/116/plugins/HG002_{chrom}_5plugins_vep116_caddfix.vcf.gz"
+        p = subprocess.run(f"bgzip -dc {ref} | grep -v '^#' | shasum -a 256", shell=True, capture_output=True, text=True, check=True)
+        recorded = (PKG / f"results/references-2026-10-25/{chrom}_reference_body.sha256").read_text().split()[0]
+        res["vep_reference"][chrom] = {"path": str(ref), "body_sha256": p.stdout.split()[0],
+                                       "equal_recorded": p.stdout.split()[0] == recorded}
+        print(chrom, json.dumps(res["annotation"][chrom]), json.dumps(res["vep_reference"][chrom]), flush=True)
+    return res
+
+
 def c2(out: Path, parallel: int) -> dict:
     units = [(p, c) for p in SOURCES for c in CHROMS]
     res = {"units": [f"{p}:{c}" for p, c in units], "passes": {}}
@@ -159,6 +184,8 @@ def main() -> int:
     import vepyr
     if mode == "c1":
         res = c1(out)
+    elif mode == "c1-old":
+        res = c1_old(out)
     elif mode == "c2":
         res = c2(out, int(sys.argv[3]) if len(sys.argv) > 3 else 5)
     else:
