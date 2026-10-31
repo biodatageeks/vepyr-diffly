@@ -5,11 +5,12 @@ with /usr/bin/time -p as in the September series) and VEPYR (workers=1, timed wi
 time.perf_counter around vepyr.annotate as in measure_once.py), REPEATS times, so
 both tools see the same machine state and the same core cache build. CPU time (D6): for VEP
 the container's cgroup cpu.stat read after vep exits (all VEP processes; the command runs
-under `sh -c` for that), for VEPYR getrusage(RUSAGE_SELF) around vepyr.annotate.
+under `sh -c` for that), for VEPYR getrusage(RUSAGE_SELF) around vepyr.annotate. The body SHA-256
+(lines not starting with #) of every output is recorded after the timing, as a sanity check.
 
 Usage: interleaved_vep_vepyr.py OUT_DIR CHROM [REPEATS]
 """
-import json, subprocess, sys, time
+import hashlib, json, subprocess, sys, time
 from pathlib import Path
 
 D = Path("/Users/lukaszjezapkowicz/workspace/data_vepyr")
@@ -31,6 +32,15 @@ print(json.dumps({"annotation_seconds": dt, "user_s": u1.ru_utime - u0.ru_utime,
 WRAP = 'vep "$@"; rc=$?; echo CPUSTAT; cat /sys/fs/cgroup/cpu.stat; exit $rc'
 
 
+def body_sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for line in f:
+            if not line.startswith(b"#"):
+                h.update(line)
+    return h.hexdigest()
+
+
 def vep(chrom, out):
     inp = INPUT[chrom]
     t = out / "vep.time.txt"
@@ -42,20 +52,22 @@ def vep(chrom, out):
            "--no_stats", "--everything", "--hgvs", "--fasta", "/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa"]
     p = subprocess.run(cmd, capture_output=True, text=True)
     real = float(next(l.split()[1] for l in t.read_text().splitlines() if l.startswith("real")))
+    body = body_sha256(out / "vep.vcf") if p.returncode == 0 else None
     (out / "vep.vcf").unlink(missing_ok=True)
     stat = dict(l.split() for l in p.stdout.split("CPUSTAT\n", 1)[-1].splitlines() if len(l.split()) == 2)
     cpu = {k: int(stat[f"{k}_usec"]) / 1e6 for k in ("usage", "user", "system") if f"{k}_usec" in stat}
-    return {"tool": "vep", "returncode": p.returncode, "seconds": real, "cgroup_cpu_s": cpu}
+    return {"tool": "vep", "returncode": p.returncode, "seconds": real, "cgroup_cpu_s": cpu, "body_sha256": body}
 
 
 def vepyr(chrom, out):
     p = subprocess.run([str(PYN), "-c", CHILD, str(INPUT[chrom]), str(D / "cache/116_GRCh38_merged"),
                         str(D / "input/Homo_sapiens.GRCh38.dna.primary_assembly.fa"), str(out / "vepyr.vcf")],
                        capture_output=True, text=True)
+    body = body_sha256(out / "vepyr.vcf") if p.returncode == 0 else None
     (out / "vepyr.vcf").unlink(missing_ok=True)
     r = json.loads(p.stdout.strip().splitlines()[-1]) if p.returncode == 0 else {}
     return {"tool": "vepyr", "returncode": p.returncode, "seconds": r.get("annotation_seconds"),
-            "user_s": r.get("user_s"), "sys_s": r.get("sys_s")}
+            "user_s": r.get("user_s"), "sys_s": r.get("sys_s"), "body_sha256": body}
 
 
 def main():
