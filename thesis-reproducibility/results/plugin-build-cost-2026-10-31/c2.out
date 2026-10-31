@@ -1,0 +1,2 @@
+seq {"workers": 1, "makespan_s": 1416.5668290411122, "sum_unit_s": 1413.9886759568471, "max_unit_rss_gib": 17.717559814453125}
+par1 {"workers": 1, "makespan_s": 1379.9440135830082, "sum_unit_s": 1377.2935211649165, "max_unit_rss_gib": 17.774276733398438}
