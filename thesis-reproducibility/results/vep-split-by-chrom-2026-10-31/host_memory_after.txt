@@ -1,0 +1,43 @@
+# host memory after D10 (2026-11-01T07:30:49Z)
+hw.memsize: 34359738368
+vm.swapusage: total = 9216.00M  used = 8381.94M  free = 834.06M  (encrypted)
+Mach Virtual Memory Statistics: (page size of 16384 bytes)
+Pages free:                                     8195.
+Pages active:                                 425314.
+Pages inactive:                               422603.
+Pages speculative:                              2200.
+Pages throttled:                                   0.
+Pages wired down:                             187833.
+Pages purgeable:                                   2.
+"Translation faults":                    48379764567.
+Pages copy-on-write:                       453043402.
+Pages zero filled:                        6764787993.
+Pages reactivated:                        6724420530.
+Pages purged:                              321949500.
+File-backed pages:                            460320.
+Anonymous pages:                              389797.
+Pages stored in compressor:                  1341844.
+Pages occupied by compressor:                 997958.
+Decompressions:                          22464175158.
+Compressions:                            23982837323.
+Pageins:                                   903442359.
+Pageouts:                                    1555301.
+Swapins:                                   904623070.
+Swapouts:                                 1024038698.
+Pages tagged:                                 167660.
+Pages tagged resident:                         95941.
+Pages tagged compressed:                       71719.
+Pages tag-storage:                             65536.
+Pages tag-storage holding tags:                 6041.
+Pages tag-storage free:                           85.
+Pages tag-storage non-tag pageable:            59324.
+Pages tag-storage non-tag wired:                  76.
+Bytes of compressed tags:                   10536256.
+Tagged compressions:                       150030723.
+Tagged decompressions:                     147910972.
+# colima VM
+PROFILE    STATUS     ARCH       CPUS    MEMORY    DISK      RUNTIME    ADDRESS
+default    Running    aarch64    10      28GiB     150GiB    docker     
+               total        used        free      shared  buff/cache   available
+Mem:           28006         643       15029           0       12679       27363
+Swap:              0           0           0
