@@ -1,0 +1,126 @@
+{
+ "apiVersion": "batch/v1",
+ "kind": "Job",
+ "metadata": {
+  "name": "vepyr-annotate-n2"
+ },
+ "spec": {
+  "completionMode": "Indexed",
+  "completions": 2,
+  "parallelism": 2,
+  "backoffLimit": 0,
+  "template": {
+   "spec": {
+    "restartPolicy": "Never",
+    "securityContext": {
+     "runAsUser": 501,
+     "runAsGroup": 20
+    },
+    "volumes": [
+     {
+      "name": "store",
+      "hostPath": {
+       "path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/k8s_20261101/n2",
+       "type": "Directory"
+      }
+     },
+     {
+      "name": "cache-src",
+      "hostPath": {
+       "path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/cache/116_GRCh38_merged",
+       "type": "Directory"
+      }
+     },
+     {
+      "name": "ref-src",
+      "hostPath": {
+       "path": "/Users/lukaszjezapkowicz/workspace/data_vepyr/input",
+       "type": "Directory"
+      }
+     },
+     {
+      "name": "work",
+      "hostPath": {
+       "path": "/var/lib/rancher/vepyr-work",
+       "type": "Directory"
+      }
+     }
+    ],
+    "initContainers": [
+     {
+      "name": "stage",
+      "image": "vepyr-vm:479d8f4",
+      "imagePullPolicy": "Never",
+      "command": [
+       "python",
+       "-c",
+       "\nimport json, os, shutil, sys, time\ni = int(os.environ[\"JOB_COMPLETION_INDEX\"]); p = json.load(open(\"/store/plan.json\")); cs = p[\"nodes\"][i][\"contigs\"]\nW = f\"/work/{i}\"; t0 = time.time(); res = {}\ndef cp(src, dst):\n    os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copyfile(src, dst); return os.path.getsize(dst)\nfor part, pairs in (\n    (\"input\", [(f\"/store/shards/{c}.vcf.gz{s}\", f\"{W}/in/{c}.vcf.gz{s}\") for c in cs for s in (\"\", \".tbi\")]),\n    (\"cache\", [(f\"/cache-src/{e}/{n}\", f\"{W}/cache/{e}/{n}\") for e in sorted(os.listdir(\"/cache-src\")) if os.path.isdir(f\"/cache-src/{e}\")\n               for n in [\"chrom_manifest.json\"] + [f\"{c}.parquet\" for c in cs] if os.path.exists(f\"/cache-src/{e}/{n}\")]),\n    (\"fasta\", [(f\"/ref-src/{f}\", f\"{W}/ref/{f}\") for f in (\"Homo_sapiens.GRCh38.dna.primary_assembly.fa\", \"Homo_sapiens.GRCh38.dna.primary_assembly.fa.fai\")])):\n    t = time.time(); b = sum(cp(s, d) for s, d in pairs)\n    res[part] = {\"bytes\": b, \"seconds\": time.time() - t, \"files\": len(pairs)}\nos.makedirs(f\"{W}/out\", exist_ok=True)\njson.dump({\"index\": i, \"contigs\": cs, \"stage\": res, \"stage_s\": time.time() - t0, \"start_unix\": t0, \"end_unix\": time.time()},\n          open(f\"/store/pods/{i}.stage.json\", \"w\"), indent=1)\n"
+      ],
+      "volumeMounts": [
+       {
+        "name": "store",
+        "mountPath": "/store",
+        "readOnly": false
+       },
+       {
+        "name": "cache-src",
+        "mountPath": "/cache-src",
+        "readOnly": true
+       },
+       {
+        "name": "ref-src",
+        "mountPath": "/ref-src",
+        "readOnly": true
+       },
+       {
+        "name": "work",
+        "mountPath": "/work",
+        "readOnly": false
+       }
+      ]
+     }
+    ],
+    "containers": [
+     {
+      "name": "annotate",
+      "image": "vepyr-vm:479d8f4",
+      "imagePullPolicy": "Never",
+      "command": [
+       "python",
+       "-c",
+       "\nimport gzip, hashlib, json, os, resource, shutil, time, vepyr\ni = int(os.environ[\"JOB_COMPLETION_INDEX\"]); p = json.load(open(\"/store/plan.json\")); cs = p[\"nodes\"][i][\"contigs\"]\nw = int(os.environ[\"WORKERS\"]); W = f\"/work/{i}\"; t00 = time.time(); rows = []\nfor c in cs:\n    out = f\"{W}/out/{c}.vcf.gz\"; u0 = resource.getrusage(resource.RUSAGE_SELF); t0 = time.perf_counter()\n    vepyr.annotate(vcf=f\"{W}/in/{c}.vcf.gz\", cache_dir=f\"{W}/cache\", everything=True, hgvs=True,\n                   reference_fasta=f\"{W}/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa\", workers=w, output_vcf=out, show_progress=False)\n    dt = time.perf_counter() - t0; u1 = resource.getrusage(resource.RUSAGE_SELF)\n    h = hashlib.sha256(); n = 0\n    with gzip.open(out, \"rb\") as f:\n        for line in f:\n            if not line.startswith(b\"#\"):\n                h.update(line); n += 1\n    rows.append({\"contig\": c, \"annotation_seconds\": dt, \"user_s\": u1.ru_utime - u0.ru_utime, \"sys_s\": u1.ru_stime - u0.ru_stime,\n                 \"records\": n, \"body_sha256\": h.hexdigest()})\nt1 = time.time()\nfor c in cs:\n    shutil.copyfile(f\"{W}/out/{c}.vcf.gz\", f\"/store/parts/{c}.vcf.gz\")\nu = resource.getrusage(resource.RUSAGE_SELF)\njson.dump({\"index\": i, \"contigs\": rows, \"annotate_s\": t1 - t00, \"fetch_s\": time.time() - t1, \"max_rss_gib\": u.ru_maxrss / 1024**2,\n           \"start_unix\": t00, \"end_unix\": time.time(), \"vepyr\": vepyr.__version__}, open(f\"/store/pods/{i}.json\", \"w\"), indent=1)\n"
+      ],
+      "env": [
+       {
+        "name": "WORKERS",
+        "value": "1"
+       }
+      ],
+      "volumeMounts": [
+       {
+        "name": "store",
+        "mountPath": "/store",
+        "readOnly": false
+       },
+       {
+        "name": "cache-src",
+        "mountPath": "/cache-src",
+        "readOnly": true
+       },
+       {
+        "name": "ref-src",
+        "mountPath": "/ref-src",
+        "readOnly": true
+       },
+       {
+        "name": "work",
+        "mountPath": "/work",
+        "readOnly": false
+       }
+      ]
+     }
+    ]
+   }
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "index": 3,
+ "contigs": [
+  {
+   "contig": "chr3",
+   "annotation_seconds": 75.91639565300011,
+   "user_s": 81.95393899999999,
+   "sys_s": 24.844744000000002,
+   "records": 288531,
+   "body_sha256": "9c72ec93334fbd83b26316dcaafbb4f23feec59a5649bed68e53d01580b179f1"
+  },
+  {
+   "contig": "chr6",
+   "annotation_seconds": 50.52655115899984,
+   "user_s": 57.694974,
+   "sys_s": 15.056353000000001,
+   "records": 271966,
+   "body_sha256": "f76cc333a66b00a58193eaf67257e726f3123c9c6e6997fa6fc1332c78e374d2"
+  },
+  {
+   "contig": "chr12",
+   "annotation_seconds": 45.57412152100005,
+   "user_s": 47.678461,
+   "sys_s": 14.758581999999997,
+   "records": 197815,
+   "body_sha256": "f2d21d284d4862f711fe14fb0c05f52c9dc63f2ac07ae832bfafa9ea047ff6df"
+  },
+  {
+   "contig": "chr14",
+   "annotation_seconds": 30.597252750000052,
+   "user_s": 30.5685,
+   "sys_s": 10.792405000000002,
+   "records": 133199,
+   "body_sha256": "970338693f88875d97825d64583b7429eb8241b196240edfbb6a64343d4728bf"
+  },
+  {
+   "contig": "chr17",
+   "annotation_seconds": 27.333661354000014,
+   "user_s": 25.09527700000001,
+   "sys_s": 8.53376999999999,
+   "records": 108376,
+   "body_sha256": "38d0e2c6c38f604a0b012bac41188e2b0826b71381f3fc26a0bf7f72c91066d9"
+  }
+ ],
+ "annotate_s": 249.36050295829773,
+ "fetch_s": 3.1463406085968018,
+ "max_rss_gib": 2.832813262939453,
+ "start_unix": 1793519921.5841367,
+ "end_unix": 1793520174.0909898,
+ "vepyr": "0.7.0"
+}

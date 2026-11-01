@@ -1,0 +1,1 @@
+[{"name": "pod0", "host": null, "workdir": "", "python": [], "workers": 1, "speed": 1.0}, {"name": "pod1", "host": null, "workdir": "", "python": [], "workers": 1, "speed": 1.0}]

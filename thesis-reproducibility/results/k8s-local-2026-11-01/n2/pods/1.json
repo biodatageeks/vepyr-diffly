@@ -1,0 +1,99 @@
+{
+ "index": 1,
+ "contigs": [
+  {
+   "contig": "chr1",
+   "annotation_seconds": 45.76793568300002,
+   "user_s": 47.218655000000005,
+   "sys_s": 16.502950000000002,
+   "records": 323430,
+   "body_sha256": "e9703e5e71f9e85438575d0382a6ea797b668b09db799a9e7825e602c1f81ffa"
+  },
+  {
+   "contig": "chr4",
+   "annotation_seconds": 29.413691728999993,
+   "user_s": 37.462669999999996,
+   "sys_s": 9.708876,
+   "records": 307295,
+   "body_sha256": "63ea687627523ab5e5ccf7d97915f993dd4f3d8ed5437e4119ab6f7d51a11d34"
+  },
+  {
+   "contig": "chr5",
+   "annotation_seconds": 23.68413206699995,
+   "user_s": 30.650091000000003,
+   "sys_s": 7.025600999999998,
+   "records": 264411,
+   "body_sha256": "2432203732fa03fbf8252733f1ba4b2cf02d1c37248c0e94324e6abdfde595d1"
+  },
+  {
+   "contig": "chr8",
+   "annotation_seconds": 23.13760860100001,
+   "user_s": 26.634538000000006,
+   "sys_s": 6.514122999999998,
+   "records": 225240,
+   "body_sha256": "00c3692a98acc7bf04e43ae3685ff35b83befe24ca42d8081ab215ce1184f24c"
+  },
+  {
+   "contig": "chr9",
+   "annotation_seconds": 21.435730377000027,
+   "user_s": 22.594915999999984,
+   "sys_s": 6.5865849999999995,
+   "records": 176111,
+   "body_sha256": "1289c2bbecd6561c77bd2a762a89deb423d232a61aaca0d079cf1e76786ab870"
+  },
+  {
+   "contig": "chr10",
+   "annotation_seconds": 23.979539666999926,
+   "user_s": 26.06294299999999,
+   "sys_s": 7.269736999999999,
+   "records": 213466,
+   "body_sha256": "b546293e75cb3720568b91e6cc07b0436381bf68e35603fdd2581562526efefd"
+  },
+  {
+   "contig": "chr13",
+   "annotation_seconds": 13.75749202499992,
+   "user_s": 16.367227999999983,
+   "sys_s": 6.063085000000001,
+   "records": 161419,
+   "body_sha256": "97fe377e481378659c73b58c4e635415b4de1ede273509a6103b0e94894fd486"
+  },
+  {
+   "contig": "chr16",
+   "annotation_seconds": 16.072957235000104,
+   "user_s": 15.687034000000011,
+   "sys_s": 5.331473000000003,
+   "records": 123358,
+   "body_sha256": "27edaa71f5bdb7bcd136d74cc04487525c8c1a4077c607898524a9689eb61a58"
+  },
+  {
+   "contig": "chr17",
+   "annotation_seconds": 18.715584992999993,
+   "user_s": 16.734477,
+   "sys_s": 6.2742410000000035,
+   "records": 108376,
+   "body_sha256": "38d0e2c6c38f604a0b012bac41188e2b0826b71381f3fc26a0bf7f72c91066d9"
+  },
+  {
+   "contig": "chr19",
+   "annotation_seconds": 16.637746268,
+   "user_s": 14.09951000000001,
+   "sys_s": 5.011808000000002,
+   "records": 90699,
+   "body_sha256": "fe3025440c5ede5d27293ad2b3dcfdb704fc85d6982a8947a1ac44138576f09f"
+  },
+  {
+   "contig": "chr21",
+   "annotation_seconds": 5.00894988999994,
+   "user_s": 5.613986999999952,
+   "sys_s": 1.161131999999995,
+   "records": 55812,
+   "body_sha256": "3ceb3dd9d19784157b87ae8655d290d753e3dad2753ad11fa877669492772b18"
+  }
+ ],
+ "annotate_s": 259.63052010536194,
+ "fetch_s": 6.55699896812439,
+ "max_rss_gib": 3.051525115966797,
+ "start_unix": 1793519502.0093317,
+ "end_unix": 1793519768.1995609,
+ "vepyr": "0.7.0"
+}

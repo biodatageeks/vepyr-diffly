@@ -1,0 +1,47 @@
+{
+ "index": 0,
+ "contigs": [
+  "chr1",
+  "chr2",
+  "chr3",
+  "chr4",
+  "chr5",
+  "chr6",
+  "chr7",
+  "chr8",
+  "chr9",
+  "chr10",
+  "chr11",
+  "chr12",
+  "chr13",
+  "chr14",
+  "chr15",
+  "chr16",
+  "chr17",
+  "chr18",
+  "chr19",
+  "chr20",
+  "chr21",
+  "chr22"
+ ],
+ "stage": {
+  "input": {
+   "bytes": 152723692,
+   "seconds": 0.13435029983520508,
+   "files": 44
+  },
+  "cache": {
+   "bytes": 34668389275,
+   "seconds": 196.7838203907013,
+   "files": 161
+  },
+  "fasta": {
+   "bytes": 3151432257,
+   "seconds": 21.849959135055542,
+   "files": 2
+  }
+ },
+ "stage_s": 218.7834403514862,
+ "start_unix": 1793518713.9489853,
+ "end_unix": 1793518932.7324328
+}

@@ -1,0 +1,6 @@
+{"pod0": [["chr2", "chr8", "chr10", "chr16", "chr19", "chr21"], 1039899], "pod1": [["chr1", "chr7", "chr11", "chr15", "chr18"], 1009336], "pod2": [["chr4", "chr5", "chr9", "chr13", "chr20", "chr22"], 1047001], "pod3": [["chr3", "chr6", "chr12", "chr14", "chr17"], 999887]} LB 1024031
+{"n": 4, "workers": 1, "split_s": 12.702562458114699, "job_s": 371.23558995802887, "merge_s": 2.03420712496154, "makespan_s": 399.8915495420806, "merged_records": 4096123, "records_match_parts": true, "merged_body_sha256": "5fee6224bf135d80075712141cc06194e0730fa253ff8b131a9d25d661647ee9", "finished_utc": "2026-11-01T08:03:15Z"}
+0 ['chr2', 'chr8', 'chr10', 'chr16', 'chr19', 'chr21'] stage 109.1 {'input': (39025803, 0.1), 'cache': (9021362678, 93.0), 'fasta': (3151432257, 15.9)} annotate 253.1 fetch 2.8 rss 2.84
+1 ['chr1', 'chr7', 'chr11', 'chr15', 'chr18'] stage 107.6 {'input': (37818747, 0.1), 'cache': (8587396541, 91.1), 'fasta': (3151432257, 16.4)} annotate 242.7 fetch 2.9 rss 3.04
+2 ['chr4', 'chr5', 'chr9', 'chr13', 'chr20', 'chr22'] stage 107.6 {'input': (39106058, 0.1), 'cache': (8525059642, 90.1), 'fasta': (3151432257, 17.4)} annotate 215.7 fetch 3.5 rss 2.44
+3 ['chr3', 'chr6', 'chr12', 'chr14', 'chr17'] stage 107.6 {'input': (36773084, 0.1), 'cache': (8536580825, 89.2), 'fasta': (3151432257, 18.3)} annotate 249.4 fetch 3.1 rss 2.83
