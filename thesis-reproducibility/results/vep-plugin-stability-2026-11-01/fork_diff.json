@@ -1,0 +1,64 @@
+{
+ "records": 50861,
+ "differing_records": 93,
+ "differing_entries": 93,
+ "fields": {
+  "HGNC_ID": 93
+ },
+ "features": {
+  "XM_017028774.2": 52,
+  "NM_001386866.1": 21,
+  "NM_001393612.1": 8,
+  "XR_007067993.1": 12
+ },
+ "genes": {
+  "RSPH14": 52,
+  "C22orf31": 21,
+  "RFPL1": 8,
+  "LARGE1": 12
+ },
+ "examples": [
+  {
+   "HGNC_ID": [
+    "HGNC:13437",
+    ""
+   ],
+   "Feature": [
+    "XM_017028774.2",
+    "XM_017028774.2"
+   ],
+   "SYMBOL": [
+    "RSPH14",
+    "RSPH14"
+   ]
+  },
+  {
+   "HGNC_ID": [
+    "HGNC:13437",
+    ""
+   ],
+   "Feature": [
+    "XM_017028774.2",
+    "XM_017028774.2"
+   ],
+   "SYMBOL": [
+    "RSPH14",
+    "RSPH14"
+   ]
+  },
+  {
+   "HGNC_ID": [
+    "HGNC:13437",
+    ""
+   ],
+   "Feature": [
+    "XM_017028774.2",
+    "XM_017028774.2"
+   ],
+   "SYMBOL": [
+    "RSPH14",
+    "RSPH14"
+   ]
+  }
+ ]
+}

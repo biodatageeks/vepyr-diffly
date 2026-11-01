@@ -1,0 +1,12 @@
+{
+ "reference_body_sha256_recorded": "4d8ff253436c68b350eff49cdb8d6db2f373fa0129d77b981d72b4930d38b5b8",
+ "reference_body_sha256_now": "4d8ff253436c68b350eff49cdb8d6db2f373fa0129d77b981d72b4930d38b5b8",
+ "run2_body_sha256": "4d8ff253436c68b350eff49cdb8d6db2f373fa0129d77b981d72b4930d38b5b8",
+ "fork10_body_sha256": "25bb1fca75560dc847e626bdff2cfa9aaab5cf151388ffac4a29009d36132b80",
+ "run2_records": 50861,
+ "fork10_records": 50861,
+ "run2_identical": true,
+ "fork10_identical": false,
+ "run2_seconds_incl_slicing": 1039.94,
+ "fork10_seconds": 192.82
+}
