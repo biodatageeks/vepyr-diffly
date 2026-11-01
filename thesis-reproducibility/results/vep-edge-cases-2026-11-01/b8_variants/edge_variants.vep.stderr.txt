@@ -1,0 +1,2 @@
+2026-11-01 20:27:12 - INFO: BAM-edited cache detected, enabling --use_transcript_ref; use --use_given_ref to override this
+WARNING: line 3 skipped (chr22 16591605 . G A,<NON_REF> . PASS .): A/NON_REF is not a supported structural variant type

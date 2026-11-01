@@ -1,0 +1,474 @@
+{
+ "header_fields_vep": 86,
+ "header_fields_vepyr": 86,
+ "cases": 17,
+ "equal": 9,
+ "rows": [
+  {
+   "case": "multiallelic_snv",
+   "key": "chr22:16591593:A:C,G",
+   "vep_written": true,
+   "vepyr_written": true,
+   "vep_entries": 18,
+   "vepyr_entries": 9,
+   "vep_fields": [
+    86
+   ],
+   "vepyr_fields": [
+    87
+   ],
+   "equal": false,
+   "differing_entries": 19,
+   "differences": {
+    "ENST00000359963|C": {
+     "vep": [
+      "missense_variant",
+      "ENST00000359963.4:c.958T>G"
+     ],
+     "vepyr": null
+    },
+    "ENST00000359963|G": {
+     "vep": [
+      "missense_variant",
+      "ENST00000359963.4:c.958T>C"
+     ],
+     "vepyr": null
+    },
+    "ENST00000430910|C": {
+     "vep": [
+      "downstream_gene_variant",
+      ""
+     ],
+     "vepyr": null
+    },
+    "ENST00000430910|G": {
+     "vep": [
+      "downstream_gene_variant",
+      ""
+     ],
+     "vepyr": null
+    }
+   }
+  },
+  {
+   "case": "spanning_deletion_star",
+   "key": "chr22:16591600:A:C,*",
+   "vep_written": true,
+   "vepyr_written": true,
+   "vep_entries": 9,
+   "vepyr_entries": 9,
+   "vep_fields": [
+    86
+   ],
+   "vepyr_fields": [
+    87
+   ],
+   "equal": false,
+   "differing_entries": 10,
+   "differences": {
+    "ENST00000359963|C": {
+     "vep": [
+      "synonymous_variant",
+      "ENST00000359963.4:c.951T>G"
+     ],
+     "vepyr": null
+    },
+    "ENST00000430910|C": {
+     "vep": [
+      "downstream_gene_variant",
+      ""
+     ],
+     "vepyr": null
+    },
+    "ENST00000472972|C": {
+     "vep": [
+      "intron_variant&non_coding_transcript_variant",
+      "ENST00000472972.2:n.287-6906T>G"
+     ],
+     "vepyr": null
+    },
+    "ENST00000656324|C": {
+     "vep": [
+      "upstream_gene_variant",
+      ""
+     ],
+     "vepyr": null
+    }
+   }
+  },
+  {
+   "case": "gvcf_non_ref",
+   "key": "chr22:16591605:G:A,<NON_REF>",
+   "vep_written": false,
+   "vepyr_written": true,
+   "equal": false
+  },
+  {
+   "case": "mnv_2bp",
+   "key": "chr22:16591610:AC:CA",
+   "vep_written": true,
+   "vepyr_written": true,
+   "vep_entries": 9,
+   "vepyr_entries": 9,
+   "vep_fields": [
+    86
+   ],
+   "vepyr_fields": [
+    86
+   ],
+   "equal": true,
+   "differing_entries": 0,
+   "differences": {}
+  },
+  {
+   "case": "complex_delins",
+   "key": "chr22:16591620:CAT:G",
+   "vep_written": true,
+   "vepyr_written": true,
+   "vep_entries": 9,
+   "vepyr_entries": 9,
+   "vep_fields": [
+    86
+   ],
+   "vepyr_fields": [
+    86
+   ],
+   "equal": true,
+   "differing_entries": 0,
+   "differences": {}
+  },
+  {
+   "case": "ref_mismatch",
+   "key": "chr22:16591630:A:C",
+   "vep_written": true,
+   "vepyr_written": true,
+   "vep_entries": 9,
+   "vepyr_entries": 9,
+   "vep_fields": [
+    86
+   ],
+   "vepyr_fields": [
+    86
+   ],
+   "equal": false,
+   "differing_entries": 6,
+   "differences": {
+    "ENST00000359963|C": {
+     "vep": [
+      "synonymous_variant",
+      ""
+     ],
+     "vepyr": [
+      "coding_sequence_variant",
+      "ENST00000359963.4:c.921T>G"
+     ]
+    },
+    "ENST00000472972|C": {
+     "vep": [
+      "intron_variant&non_coding_transcript_variant",
+      ""
+     ],
+     "vepyr": [
+      "intron_variant&non_coding_transcript_variant",
+      "ENST00000472972.2:n.287-6936T>G"
+     ]
+    },
+    "ENST00000725389|C": {
+     "vep": [
+      "intron_variant&non_coding_transcript_variant",
+      ""
+     ],
+     "vepyr": [
+      "intron_variant&non_coding_transcript_variant",
+      "ENST00000725389.1:n.112-6936T>G"
+     ]
+    },
+    "ENST00000725390|C": {
+     "vep": [
+      "intron_variant&non_coding_transcript_variant",
+      ""
+     ],
+     "vepyr": [
+      "intron_variant&non_coding_transcript_variant",
+      "ENST00000725390.1:n.114-8925T>G"
+     ]
+    }
+   }
+  },
+  {
+   "case": "no_alt_dot",
+   "key": "chr22:16591640:A:.",
+   "vep_written": false,
+   "vepyr_written": false,
+   "equal": true
+  },
+  {
+   "case": "duplicate_record",
+   "key": "chr22:16591650:C:A",
+   "vep_written": true,
+   "vepyr_written": true,
+   "vep_entries": 9,
+   "vepyr_entries": 9,
+   "vep_fields": [
+    86
+   ],
+   "vepyr_fields": [
+    86
+   ],
+   "equal": true,
+   "differing_entries": 0,
+   "differences": {}
+  },
+  {
+   "case": "duplicate_record",
+   "key": "chr22:16591650:C:A",
+   "vep_written": true,
+   "vepyr_written": true,
+   "vep_entries": 9,
+   "vepyr_entries": 9,
+   "vep_fields": [
+    86
+   ],
+   "vepyr_fields": [
+    86
+   ],
+   "equal": true,
+   "differing_entries": 0,
+   "differences": {}
+  },
+  {
+   "case": "del_left_aligned",
+   "key": "chr22:19029750:CG:C",
+   "vep_written": true,
+   "vepyr_written": true,
+   "vep_entries": 9,
+   "vepyr_entries": 9,
+   "vep_fields": [
+    86
+   ],
+   "vepyr_fields": [
+    86
+   ],
+   "equal": true,
+   "differing_entries": 0,
+   "differences": {}
+  },
+  {
+   "case": "ins_left_aligned",
+   "key": "chr22:19029750:C:CG",
+   "vep_written": true,
+   "vepyr_written": true,
+   "vep_entries": 9,
+   "vepyr_entries": 9,
+   "vep_fields": [
+    86
+   ],
+   "vepyr_fields": [
+    86
+   ],
+   "equal": true,
+   "differing_entries": 0,
+   "differences": {}
+  },
+  {
+   "case": "del_right_shifted",
+   "key": "chr22:19029754:GG:G",
+   "vep_written": true,
+   "vepyr_written": true,
+   "vep_entries": 9,
+   "vepyr_entries": 9,
+   "vep_fields": [
+    86
+   ],
+   "vepyr_fields": [
+    86
+   ],
+   "equal": true,
+   "differing_entries": 0,
+   "differences": {}
+  },
+  {
+   "case": "ins_right_shifted",
+   "key": "chr22:19029755:G:GG",
+   "vep_written": true,
+   "vepyr_written": true,
+   "vep_entries": 9,
+   "vepyr_entries": 9,
+   "vep_fields": [
+    86
+   ],
+   "vepyr_fields": [
+    86
+   ],
+   "equal": true,
+   "differing_entries": 0,
+   "differences": {}
+  },
+  {
+   "case": "long_deletion_60bp",
+   "key": "chr22:19029760:GGCGGCCGGGCGCGGGCGAGAGGACCGGCGCGCACAGCCGCGGGCTCCGTGTGCTCGGTA:G",
+   "vep_written": true,
+   "vepyr_written": true,
+   "vep_entries": 9,
+   "vepyr_entries": 9,
+   "vep_fields": [
+    86
+   ],
+   "vepyr_fields": [
+    86
+   ],
+   "equal": false,
+   "differing_entries": 1,
+   "differences": {
+    "NM_001396027.1|-": {
+     "vep": [
+      "inframe_deletion",
+      "NM_001396027.1:c.238_294del"
+     ],
+     "vepyr": [
+      "frameshift_variant",
+      "NM_001396027.1:c.238_294del"
+     ]
+    }
+   }
+  },
+  {
+   "case": "symbolic_del",
+   "key": "chr22:19029830:C:<DEL>",
+   "vep_written": true,
+   "vepyr_written": true,
+   "vep_entries": 9,
+   "vepyr_entries": 9,
+   "vep_fields": [
+    86
+   ],
+   "vepyr_fields": [
+    86
+   ],
+   "equal": false,
+   "differing_entries": 18,
+   "differences": {
+    "ENST00000481698|<DEL>": {
+     "vep": null,
+     "vepyr": [
+      "downstream_gene_variant",
+      ""
+     ]
+    },
+    "ENST00000481698|deletion": {
+     "vep": [
+      "downstream_gene_variant",
+      ""
+     ],
+     "vepyr": null
+    },
+    "ENST00000652053|<DEL>": {
+     "vep": null,
+     "vepyr": [
+      "frameshift_variant",
+      "ENST00000652053.1:c.307delins<DEL>"
+     ]
+    },
+    "ENST00000652053|deletion": {
+     "vep": [
+      "frameshift_variant&stop_lost&feature_truncation&3_prime_UTR_variant",
+      ""
+     ],
+     "vepyr": null
+    }
+   }
+  },
+  {
+   "case": "symbolic_dup",
+   "key": "chr22:19029840:G:<DUP>",
+   "vep_written": true,
+   "vepyr_written": true,
+   "vep_entries": 9,
+   "vepyr_entries": 9,
+   "vep_fields": [
+    86
+   ],
+   "vepyr_fields": [
+    86
+   ],
+   "equal": false,
+   "differing_entries": 18,
+   "differences": {
+    "ENST00000481698|<DUP>": {
+     "vep": null,
+     "vepyr": [
+      "downstream_gene_variant",
+      ""
+     ]
+    },
+    "ENST00000481698|duplication": {
+     "vep": [
+      "downstream_gene_variant",
+      ""
+     ],
+     "vepyr": null
+    },
+    "ENST00000652053|<DUP>": {
+     "vep": null,
+     "vepyr": [
+      "frameshift_variant",
+      "ENST00000652053.1:c.317delins<DUP>"
+     ]
+    },
+    "ENST00000652053|duplication": {
+     "vep": [
+      "feature_elongation&coding_sequence_variant",
+      ""
+     ],
+     "vepyr": null
+    }
+   }
+  },
+  {
+   "case": "symbolic_ins",
+   "key": "chr22:19029850:C:<INS>",
+   "vep_written": true,
+   "vepyr_written": true,
+   "vep_entries": 9,
+   "vepyr_entries": 9,
+   "vep_fields": [
+    86
+   ],
+   "vepyr_fields": [
+    86
+   ],
+   "equal": false,
+   "differing_entries": 18,
+   "differences": {
+    "ENST00000481698|<INS>": {
+     "vep": null,
+     "vepyr": [
+      "downstream_gene_variant",
+      ""
+     ]
+    },
+    "ENST00000481698|insertion": {
+     "vep": [
+      "downstream_gene_variant",
+      ""
+     ],
+     "vepyr": null
+    },
+    "ENST00000652053|<INS>": {
+     "vep": null,
+     "vepyr": [
+      "frameshift_variant",
+      "ENST00000652053.1:c.327delins<INS>"
+     ]
+    },
+    "ENST00000652053|insertion": {
+     "vep": [
+      "feature_elongation&coding_sequence_variant",
+      ""
+     ],
+     "vepyr": null
+    }
+   }
+  }
+ ]
+}

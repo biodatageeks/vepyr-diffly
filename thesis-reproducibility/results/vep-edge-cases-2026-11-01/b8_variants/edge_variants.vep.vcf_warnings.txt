@@ -1,0 +1,1 @@
+WARNING: line 3 skipped (chr22 16591605 . G A,<NON_REF> . PASS .): A/NON_REF is not a supported structural variant type

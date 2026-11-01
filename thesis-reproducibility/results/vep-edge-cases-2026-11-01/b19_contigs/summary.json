@@ -1,0 +1,60 @@
+{
+ "edge": {
+  "returncode": 0,
+  "records_in": 5,
+  "records_out": 4,
+  "records": {
+   "chr22:17951272:C:G": {
+    "csq_entries": 12,
+    "consequences": [
+     "NMD_transcript_variant",
+     "intron_variant",
+     "regulatory_region_variant"
+    ]
+   },
+   "chrX:153866000:A:G": {
+    "csq_entries": 19,
+    "consequences": [
+     "downstream_gene_variant",
+     "intron_variant",
+     "upstream_gene_variant"
+    ]
+   },
+   "chrM:3243:A:G": {
+    "csq_entries": 38,
+    "consequences": [
+     "downstream_gene_variant",
+     "non_coding_transcript_exon_variant",
+     "upstream_gene_variant"
+    ]
+   },
+   "chrUn_KI270742v1:10000:A:G": {
+    "csq_entries": 193,
+    "consequences": [
+     "intron_variant",
+     "non_coding_transcript_variant",
+     "upstream_gene_variant"
+    ]
+   }
+  },
+  "warnings": [
+   "WARNING: line 5 skipped (chrFAKE 100 . A G . PASS .): Chromosome chrFAKE not found in annotation sources or synonyms; chromosome chrFAKE does not overlap any features"
+  ]
+ },
+ "mt": {
+  "returncode": 0,
+  "records_in": 1,
+  "records_out": 1,
+  "records": {
+   "MT:3243:A:G": {
+    "csq_entries": 38,
+    "consequences": [
+     "downstream_gene_variant",
+     "non_coding_transcript_exon_variant",
+     "upstream_gene_variant"
+    ]
+   }
+  },
+  "warnings": []
+ }
+}

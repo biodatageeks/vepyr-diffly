@@ -1,0 +1,1 @@
+WARNING: line 5 skipped (chrFAKE 100 . A G . PASS .): Chromosome chrFAKE not found in annotation sources or synonyms; chromosome chrFAKE does not overlap any features

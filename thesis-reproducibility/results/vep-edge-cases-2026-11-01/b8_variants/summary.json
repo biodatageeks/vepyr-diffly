@@ -1,0 +1,387 @@
+{
+ "returncode": 0,
+ "records_vep": 14,
+ "records_vepyr": 15,
+ "cases": [
+  {
+   "case": "multiallelic_snv",
+   "key": "chr22:16591593:A:C,G",
+   "vep": {
+    "csq_entries": 18,
+    "consequences": [
+     "downstream_gene_variant",
+     "intron_variant",
+     "missense_variant",
+     "non_coding_transcript_variant",
+     "upstream_gene_variant"
+    ]
+   },
+   "vepyr": {
+    "csq_entries": 9,
+    "consequences": [
+     "G"
+    ]
+   }
+  },
+  {
+   "case": "spanning_deletion_star",
+   "key": "chr22:16591600:A:C,*",
+   "vep": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "intron_variant",
+     "non_coding_transcript_variant",
+     "synonymous_variant",
+     "upstream_gene_variant"
+    ]
+   },
+   "vepyr": {
+    "csq_entries": 9,
+    "consequences": [
+     "*"
+    ]
+   }
+  },
+  {
+   "case": "gvcf_non_ref",
+   "key": "chr22:16591605:G:A,<NON_REF>",
+   "vep": "missing from output",
+   "vepyr": {
+    "csq_entries": 9,
+    "consequences": [
+     "<NON_REF>"
+    ]
+   }
+  },
+  {
+   "case": "mnv_2bp",
+   "key": "chr22:16591610:AC:CA",
+   "vep": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "intron_variant",
+     "missense_variant",
+     "non_coding_transcript_variant",
+     "upstream_gene_variant"
+    ]
+   },
+   "vepyr": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "intron_variant",
+     "missense_variant",
+     "non_coding_transcript_variant",
+     "upstream_gene_variant"
+    ]
+   }
+  },
+  {
+   "case": "complex_delins",
+   "key": "chr22:16591620:CAT:G",
+   "vep": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "frameshift_variant",
+     "intron_variant",
+     "non_coding_transcript_variant",
+     "upstream_gene_variant"
+    ]
+   },
+   "vepyr": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "frameshift_variant",
+     "intron_variant",
+     "non_coding_transcript_variant",
+     "upstream_gene_variant"
+    ]
+   }
+  },
+  {
+   "case": "ref_mismatch",
+   "key": "chr22:16591630:A:C",
+   "vep": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "intron_variant",
+     "non_coding_transcript_variant",
+     "synonymous_variant",
+     "upstream_gene_variant"
+    ]
+   },
+   "vepyr": {
+    "csq_entries": 9,
+    "consequences": [
+     "coding_sequence_variant",
+     "downstream_gene_variant",
+     "intron_variant",
+     "non_coding_transcript_variant",
+     "synonymous_variant",
+     "upstream_gene_variant"
+    ]
+   }
+  },
+  {
+   "case": "no_alt_dot",
+   "key": "chr22:16591640:A:.",
+   "vep": "missing from output",
+   "vepyr": "missing from output"
+  },
+  {
+   "case": "duplicate_record",
+   "key": "chr22:16591650:C:A",
+   "vep": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "intron_variant",
+     "non_coding_transcript_variant",
+     "stop_gained",
+     "upstream_gene_variant"
+    ]
+   },
+   "vepyr": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "intron_variant",
+     "non_coding_transcript_variant",
+     "stop_gained",
+     "upstream_gene_variant"
+    ]
+   }
+  },
+  {
+   "case": "duplicate_record",
+   "key": "chr22:16591650:C:A",
+   "vep": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "intron_variant",
+     "non_coding_transcript_variant",
+     "stop_gained",
+     "upstream_gene_variant"
+    ]
+   },
+   "vepyr": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "intron_variant",
+     "non_coding_transcript_variant",
+     "stop_gained",
+     "upstream_gene_variant"
+    ]
+   }
+  },
+  {
+   "case": "del_left_aligned",
+   "key": "chr22:19029750:CG:C",
+   "vep": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "frameshift_variant",
+     "intron_variant",
+     "non_coding_transcript_exon_variant",
+     "non_coding_transcript_variant"
+    ]
+   },
+   "vepyr": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "frameshift_variant",
+     "intron_variant",
+     "non_coding_transcript_exon_variant",
+     "non_coding_transcript_variant"
+    ]
+   }
+  },
+  {
+   "case": "ins_left_aligned",
+   "key": "chr22:19029750:C:CG",
+   "vep": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "frameshift_variant",
+     "intron_variant",
+     "non_coding_transcript_exon_variant",
+     "non_coding_transcript_variant"
+    ]
+   },
+   "vepyr": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "frameshift_variant",
+     "intron_variant",
+     "non_coding_transcript_exon_variant",
+     "non_coding_transcript_variant"
+    ]
+   }
+  },
+  {
+   "case": "del_right_shifted",
+   "key": "chr22:19029754:GG:G",
+   "vep": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "frameshift_variant",
+     "intron_variant",
+     "non_coding_transcript_exon_variant",
+     "non_coding_transcript_variant"
+    ]
+   },
+   "vepyr": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "frameshift_variant",
+     "intron_variant",
+     "non_coding_transcript_exon_variant",
+     "non_coding_transcript_variant"
+    ]
+   }
+  },
+  {
+   "case": "ins_right_shifted",
+   "key": "chr22:19029755:G:GG",
+   "vep": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "frameshift_variant",
+     "intron_variant",
+     "non_coding_transcript_exon_variant",
+     "non_coding_transcript_variant"
+    ]
+   },
+   "vepyr": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "frameshift_variant",
+     "intron_variant",
+     "non_coding_transcript_exon_variant",
+     "non_coding_transcript_variant"
+    ]
+   }
+  },
+  {
+   "case": "long_deletion_60bp",
+   "key": "chr22:19029760:GGCGGCCGGGCGCGGGCGAGAGGACCGGCGCGCACAGCCGCGGGCTCCGTGTGCTCGGTA:G",
+   "vep": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "frameshift_variant",
+     "inframe_deletion",
+     "intron_variant",
+     "non_coding_transcript_exon_variant",
+     "non_coding_transcript_variant"
+    ]
+   },
+   "vepyr": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "frameshift_variant",
+     "intron_variant",
+     "non_coding_transcript_exon_variant",
+     "non_coding_transcript_variant"
+    ]
+   }
+  },
+  {
+   "case": "symbolic_del",
+   "key": "chr22:19029830:C:<DEL>",
+   "vep": {
+    "csq_entries": 9,
+    "consequences": [
+     "3_prime_UTR_variant",
+     "coding_sequence_variant",
+     "downstream_gene_variant",
+     "feature_truncation",
+     "frameshift_variant",
+     "intron_variant",
+     "non_coding_transcript_exon_variant",
+     "non_coding_transcript_variant",
+     "stop_lost"
+    ]
+   },
+   "vepyr": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "frameshift_variant",
+     "intron_variant",
+     "non_coding_transcript_exon_variant",
+     "non_coding_transcript_variant"
+    ]
+   }
+  },
+  {
+   "case": "symbolic_dup",
+   "key": "chr22:19029840:G:<DUP>",
+   "vep": {
+    "csq_entries": 9,
+    "consequences": [
+     "coding_sequence_variant",
+     "downstream_gene_variant",
+     "feature_elongation",
+     "intron_variant",
+     "non_coding_transcript_exon_variant",
+     "non_coding_transcript_variant"
+    ]
+   },
+   "vepyr": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "frameshift_variant",
+     "intron_variant",
+     "non_coding_transcript_exon_variant",
+     "non_coding_transcript_variant"
+    ]
+   }
+  },
+  {
+   "case": "symbolic_ins",
+   "key": "chr22:19029850:C:<INS>",
+   "vep": {
+    "csq_entries": 9,
+    "consequences": [
+     "coding_sequence_variant",
+     "downstream_gene_variant",
+     "feature_elongation",
+     "intron_variant",
+     "non_coding_transcript_exon_variant",
+     "non_coding_transcript_variant"
+    ]
+   },
+   "vepyr": {
+    "csq_entries": 9,
+    "consequences": [
+     "downstream_gene_variant",
+     "frameshift_variant",
+     "intron_variant",
+     "non_coding_transcript_exon_variant",
+     "non_coding_transcript_variant"
+    ]
+   }
+  }
+ ],
+ "warnings": [
+  "WARNING: line 3 skipped (chr22 16591605 . G A,<NON_REF> . PASS .): A/NON_REF is not a supported structural variant type"
+ ]
+}
