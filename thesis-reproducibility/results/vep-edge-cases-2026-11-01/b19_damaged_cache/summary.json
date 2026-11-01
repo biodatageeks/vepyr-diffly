@@ -1,0 +1,84 @@
+[
+ {
+  "case": "intact",
+  "change": "none",
+  "returncode": 0,
+  "stderr_tail": [],
+  "records": 50861,
+  "body_sha256": "19efe3c74723b8582d0ee9a74cc50342384d85c46c723d3ac52791de7b07843a",
+  "body_equal_baseline": true
+ },
+ {
+  "case": "transcript_truncated",
+  "change": "4360648 -> 2180324 bytes",
+  "returncode": 1,
+  "stderr_tail": [
+   "    ...<5 lines>...",
+   "        callback,",
+   "        ^^^^^^^^^",
+   "    )",
+   "    ^",
+   "RuntimeError: VCF annotation failed: Execution error: annotate_vep(): failed to read Parquet cache shard footer '/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/b19_damaged_cache_20261101/cache_transcript_truncated/transcript/chr22.parquet': Parquet error: Invalid Parquet file. Corrupt footer"
+  ],
+  "records": 0,
+  "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "body_equal_baseline": false
+ },
+ {
+  "case": "exon_missing",
+  "change": "removed exon/chr22.parquet",
+  "returncode": 1,
+  "stderr_tail": [
+   "    ...<5 lines>...",
+   "        callback,",
+   "        ^^^^^^^^^",
+   "    )",
+   "    ^",
+   "RuntimeError: VCF annotation failed: Execution error: annotate_vep(): failed to open Parquet cache shard footer '/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/b19_damaged_cache_20261101/cache_exon_missing/exon/chr22.parquet': No such file or directory (os error 2)"
+  ],
+  "records": 0,
+  "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "body_equal_baseline": false
+ },
+ {
+  "case": "variation_bytes",
+  "change": "4096 zero bytes at offset 194378049 of 388756098",
+  "returncode": 0,
+  "stderr_tail": [],
+  "records": 50861,
+  "body_sha256": "19efe3c74723b8582d0ee9a74cc50342384d85c46c723d3ac52791de7b07843a",
+  "body_equal_baseline": true
+ },
+ {
+  "case": "transcript_bytes",
+  "change": "4096 zero bytes at offset 2180324 of 4360648",
+  "returncode": 1,
+  "stderr_tail": [
+   "    ...<5 lines>...",
+   "        callback,",
+   "        ^^^^^^^^^",
+   "    )",
+   "    ^",
+   "RuntimeError: VCF annotation failed: Execution error: read context batch: Arrow: Parquet argument error: External: Data corruption detected"
+  ],
+  "records": 0,
+  "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "body_equal_baseline": false
+ },
+ {
+  "case": "translation_missing",
+  "change": "removed translation_core/chr22.parquet",
+  "returncode": 1,
+  "stderr_tail": [
+   "    ...<5 lines>...",
+   "        callback,",
+   "        ^^^^^^^^^",
+   "    )",
+   "    ^",
+   "RuntimeError: VCF annotation failed: Execution error: annotate_vep(): failed to open Parquet cache shard footer '/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/b19_damaged_cache_20261101/cache_translation_missing/translation_core/chr22.parquet': No such file or directory (os error 2)"
+  ],
+  "records": 0,
+  "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "body_equal_baseline": false
+ }
+]
