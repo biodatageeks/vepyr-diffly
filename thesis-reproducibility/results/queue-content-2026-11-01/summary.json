@@ -1,0 +1,119 @@
+{
+ "item": "B15",
+ "date": "2026-11-01",
+ "queue_run": "E5 queue, 20 groups, PARALLEL_PROCESSES=2; 100 five-entity tasks done, 2 translation tasks stopped by the swap guard",
+ "queue_vepyr": "wheel 0.4.0 from tools/vepyr-lpt 9d44bb9 (thesis/cache-build-parallel)",
+ "reference": "cache/116_GRCh38_merged (VEPYR 0.7.0 @ 479d8f4, single process, S2)",
+ "entities": {
+  "variation": {
+   "files_both": 463,
+   "identical_common_columns": 463,
+   "rows_both": 1487415922,
+   "row_counts_equal": true,
+   "queue_only_columns": [],
+   "reference_only_columns": [],
+   "files_only_queue": 1441,
+   "rows_files_only_queue": 0,
+   "files_only_reference": []
+  },
+  "transcript": {
+   "files_both": 1866,
+   "identical_common_columns": 1866,
+   "rows_both": 903413,
+   "row_counts_equal": true,
+   "queue_only_columns": [
+    "object_hash",
+    "raw_object_json"
+   ],
+   "reference_only_columns": [],
+   "files_only_queue": 0,
+   "rows_files_only_queue": 0,
+   "files_only_reference": [
+    [
+     "HG2155_PATCH.parquet",
+     3
+    ],
+    [
+     "KI270708.1.parquet",
+     1
+    ],
+    [
+     "KI270754.1.parquet",
+     4
+    ]
+   ]
+  },
+  "exon": {
+   "files_both": 1866,
+   "identical_common_columns": 1812,
+   "rows_both": 7921762,
+   "row_counts_equal": true,
+   "queue_only_columns": [
+    "_rn",
+    "object_hash",
+    "raw_object_json"
+   ],
+   "reference_only_columns": [],
+   "files_only_queue": 0,
+   "rows_files_only_queue": 0,
+   "files_only_reference": [
+    [
+     "HG2155_PATCH.parquet",
+     9
+    ],
+    [
+     "KI270708.1.parquet",
+     4
+    ],
+    [
+     "KI270754.1.parquet",
+     12
+    ]
+   ]
+  },
+  "regulatory": {
+   "files_both": 24,
+   "identical_common_columns": 24,
+   "rows_both": 380956,
+   "row_counts_equal": true,
+   "queue_only_columns": [
+    "object_hash",
+    "raw_object_json"
+   ],
+   "reference_only_columns": [],
+   "files_only_queue": 0,
+   "rows_files_only_queue": 0,
+   "files_only_reference": []
+  },
+  "motif": {
+   "files_both": 24,
+   "identical_common_columns": 24,
+   "rows_both": 999828,
+   "row_counts_equal": true,
+   "queue_only_columns": [
+    "object_hash",
+    "raw_object_json"
+   ],
+   "reference_only_columns": [],
+   "files_only_queue": 0,
+   "rows_files_only_queue": 0,
+   "files_only_reference": []
+  }
+ },
+ "files_both_total": 4243,
+ "identical_common_columns_total": 4189,
+ "exon_without_source_file": {
+  "files": 54,
+  "identical_without_source_file": 54,
+  "rows": 7721814,
+  "source_file_sorted_positions_differing": 1103743
+ },
+ "chr1_annotation": {
+  "annotation_seconds": 20.421059625000453,
+  "body_sha256": "e9703e5e71f9e85438575d0382a6ea797b668b09db799a9e7825e602c1f81ffa",
+  "records": 323430,
+  "cache": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/b15_queue_content_20261101/e5/assembled/116_GRCh38_merged"
+ },
+ "chr1_expected_body_sha256": "e9703e5e71f9e85438575d0382a6ea797b668b09db799a9e7825e602c1f81ffa",
+ "chr1_body_equal": true
+}

@@ -1,0 +1,14 @@
+{
+ "seconds": 1.17677279200052,
+ "hardlinked_parquet_files": 5684,
+ "parquet_bytes": 30859468293,
+ "manifest_entries": {
+  "variation": 463,
+  "transcript": 1866,
+  "exon": 1866,
+  "regulatory": 24,
+  "motif": 24,
+  "translation_core": 0,
+  "translation_sift": 0
+ }
+}

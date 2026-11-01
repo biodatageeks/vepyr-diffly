@@ -1,0 +1,11 @@
+started_utc: 2026-11-01T15:58:37Z
+vepyr-e5: 728602ea652b2c0c0a8057ed5487c7001145210a thesis/cache-build-full-queue 0 local changes
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import vepyr; print("queue vepyr", vepyr.__version__, vepyr.__file__)
+                                       ^^^^^^^^^^^^^^^^^
+AttributeError: module 'vepyr' has no attribute '__version__'
+native vepyr 0.7.0
+/dev/disk3s5   926Gi   818Gi    55Gi    94%    2.8M  574M    0%   /System/Volumes/Data
+queue vepyr wheel: {"url":"file:///Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr-lpt/target/wheels/vepyr-0.4.0-cp310-abi3-macosx_11_0_arm64.whl","archive_info":{}}
+vepyr-lpt checkout: 9d44bb9a430aa5b5acf8a68f7de03abbceb7ca46 thesis/cache-build-parallel 0 local changes

@@ -1,0 +1,24 @@
+{
+ "done": {
+  "variation": 20,
+  "transcript": 20,
+  "exon": 20,
+  "regulatory": 20,
+  "motif": 20
+ },
+ "stopped": [
+  {
+   "task": 100,
+   "group": 0,
+   "entity": "translation",
+   "contigs": 1
+  },
+  {
+   "task": 101,
+   "group": 1,
+   "entity": "translation",
+   "contigs": 1
+  }
+ ],
+ "task_seconds_sum": 5345.884264707565
+}

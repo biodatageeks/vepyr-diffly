@@ -16,7 +16,12 @@
 # disk; the host ran out of memory and swap and rebooted (watchdog panic). Run with the VM stopped.
 # A guard samples swap and memory every 10 s into host.log and stops the build (whole process tree)
 # when used swap exceeds SWAP_LIMIT_MB (default 8192).
-# Usage: [SWAP_LIMIT_MB=8192] b15_queue_content.sh OUT_DIR VEPYR_E5_CHECKOUT
+# The second attempt (16:27 UTC, VM stopped, 10 processes) was stopped by the guard after 3.7 min
+# (swap 8.5 GB and rising ~150 MB/s); the content check was then run with PARALLEL_PROCESSES=4
+# (same tasks and code; only fewer of them run at once). With 4 processes the guard stopped the build
+# after 16 min (the host also slept 17:36-17:46 CET; swap 8.2 GB); the check ran with 2 processes,
+# the guard limiting swap growth since the start of the build and caffeinate preventing idle sleep.
+# Usage: [SWAP_LIMIT_MB=8192] [PARALLEL_PROCESSES=10] b15_queue_content.sh OUT_DIR VEPYR_E5_CHECKOUT
 set -uo pipefail
 D=/Users/lukaszjezapkowicz/workspace/data_vepyr
 OUT=$1; E5=$2; LIMIT=${SWAP_LIMIT_MB:-8192}
@@ -25,12 +30,13 @@ mkdir -p "$OUT"
 log() { echo "$(date -u +%FT%TZ) $* $(pmset -g batt | sed -n 1p)" | tee -a "$OUT/run.log"; }
 swap_mb() { sysctl -n vm.swapusage | awk '{print $6}' | tr -d M | cut -d. -f1; }
 tree() { local p; for p in $(pgrep -P "$1"); do tree "$p"; done; echo "$1"; }
-guard() {  # $1 = pid to watch
+guard() {  # $1 = pid to watch; limit applies to swap growth since the start of the build
+  local base; base=$(swap_mb)
   while kill -0 "$1" 2>/dev/null; do
     s=$(swap_mb)
-    echo "$(date -u +%FT%TZ) swap_used_mb=$s $(memory_pressure -Q 2>/dev/null | tail -1 | tr -d '\n')" >> "$OUT/host.log"
-    if [ "$s" -gt "$LIMIT" ]; then
-      log "GUARD: swap ${s} MB > ${LIMIT} MB, stopping pid $1 and its children"
+    echo "$(date -u +%FT%TZ) swap_used_mb=$s base_mb=$base $(memory_pressure -Q 2>/dev/null | tail -1 | tr -d '\n')" >> "$OUT/host.log"
+    if [ $((s - base)) -gt "$LIMIT" ]; then
+      log "GUARD: swap ${s} MB (start ${base} MB) grew by more than ${LIMIT} MB, stopping pid $1 and its children"
       kill -TERM $(tree "$1") 2>/dev/null; sleep 5; kill -KILL $(tree "$1") 2>/dev/null
       return
     fi
@@ -43,12 +49,14 @@ guard() {  # $1 = pid to watch
   echo "queue vepyr wheel: $(cat "$D"/.venv-lpt/lib/python3.14/site-packages/vepyr-*.dist-info/direct_url.json)"
   echo "vepyr-lpt checkout: $(git -C "$D/tools/vepyr-lpt" rev-parse HEAD) $(git -C "$D/tools/vepyr-lpt" branch --show-current)"
   "$D/.venv-native/bin/python3" -c 'import vepyr; print("native vepyr", vepyr.__version__)'
+  echo "PARALLEL_PROCESSES=${PARALLEL_PROCESSES:-10 (default)} PARALLEL_GROUPS=${PARALLEL_GROUPS:-20 (default)}"
   echo "colima: $(colima status 2>&1 | tail -1)"
   sysctl hw.memsize vm.swapusage
   df -h "$D" | tail -1
 } > "$OUT/environment.txt" 2>&1
 
-log "E5 queue build: start (swap limit ${LIMIT} MB)"
+caffeinate -ims -w $$ &  # no idle sleep while the driver runs
+log "E5 queue build: start (swap growth limit ${LIMIT} MB)"
 "$D/.venv-lpt/bin/python" "$E5/scripts/thesis/cache-build-parallel/full_queue_e5.py" "$OUT/e5" > "$OUT/e5.out" 2>&1 &
 E5PID=$!
 guard $E5PID &

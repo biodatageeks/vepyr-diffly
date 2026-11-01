@@ -1,0 +1,4 @@
+panic(cpu 0 caller 0xfffffe003f9892b0): watchdog timeout: no checkins from watchdogd in 92 seconds (24163 total checkins since monitoring last enabled)
+OS version: 26A434
+Compressor Info: 45% of compressed pages limit (OK) and 100% of segments limit (BAD) with 59 swapfiles and LOW swap space
+Panicked task 0xf7fffe27260baa60: 0 pages, 689 threads: pid 0: kernel_task

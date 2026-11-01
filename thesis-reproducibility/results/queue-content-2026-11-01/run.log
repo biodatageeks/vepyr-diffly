@@ -1,0 +1,14 @@
+2026-11-01T16:48:58Z E5 queue build: start (swap growth limit 8192 MB) Now drawing from 'AC Power'
+2026-11-01T17:34:14Z GUARD: swap 14400 MB (start 1129 MB) grew by more than 8192 MB, stopping pid 14687 and its children Now drawing from 'AC Power'
+2026-11-01T17:34:14Z E5 queue build: exit 143 Now drawing from 'AC Power'
+2026-11-01T17:34:14Z stop: build failed Now drawing from 'AC Power'
+2026-11-01T17:35:32Z tasks: {"done":{"variation":20,"transcript":20,"exon":20,"regulatory":20,"motif":20},"stopped":[{"task":100,"group":0,"entity":"translation","contigs":1},{"task":101,"group":1,"entity":"translation","contigs Now drawing from 'AC Power'
+2026-11-01T17:35:32Z content comparison (five entities): start Now drawing from 'AC Power'
+2026-11-01T17:43:32Z content comparison: exit 0 Now drawing from 'AC Power'
+2026-11-01T17:43:34Z assemble five entities: exit 0 Now drawing from 'AC Power'
+2026-11-01T17:43:39Z translation entities linked from the reference cache: 1744 + 1697 files Now drawing from 'AC Power'
+2026-11-01T17:43:39Z chr1 annotation on the queue cache: start Now drawing from 'AC Power'
+2026-11-01T17:44:00Z chr1 annotation: exit 0 {"annotation_seconds": 20.421059625000453, "body_sha256": "e9703e5e71f9e85438575d0382a6ea797b668b09db799a9e7825e602c1f81ffa", "records": 323430, "cache": "/Users/lukaszjezapkowicz/workspace/data_vepyr/runs/b15_queue_content_20261101/e5/assembled/116_GRCh38_merged"} Now drawing from 'AC Power'
+2026-11-01T17:44:00Z done Now drawing from 'AC Power'
+2026-11-01T17:44:56Z content comparison on common columns: start
+2026-11-01T17:53:04Z content comparison on common columns: exit 0

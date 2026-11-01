@@ -1,0 +1,10 @@
+started_utc: 2026-11-01T16:48:58Z
+vepyr-e5: 728602ea652b2c0c0a8057ed5487c7001145210a thesis/cache-build-full-queue 0 local changes
+queue vepyr wheel: {"url":"file:///Users/lukaszjezapkowicz/workspace/data_vepyr/tools/vepyr-lpt/target/wheels/vepyr-0.4.0-cp310-abi3-macosx_11_0_arm64.whl","archive_info":{}}
+vepyr-lpt checkout: 9d44bb9a430aa5b5acf8a68f7de03abbceb7ca46 thesis/cache-build-parallel
+native vepyr 0.7.0
+PARALLEL_PROCESSES=2 PARALLEL_GROUPS=20 (default)
+colima: time="2026-11-01T17:48:58+01:00" level=fatal msg="colima is not running"
+hw.memsize: 34359738368
+vm.swapusage: total = 2048.00M  used = 1129.19M  free = 918.81M  (encrypted)
+/dev/disk3s5   926Gi   648Gi   250Gi    73%    2.8M  2.6G    0%   /System/Volumes/Data

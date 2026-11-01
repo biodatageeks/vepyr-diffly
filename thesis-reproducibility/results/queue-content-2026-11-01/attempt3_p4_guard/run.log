@@ -1,0 +1,4 @@
+2026-11-01T16:31:53Z E5 queue build: start (swap limit 8192 MB) Now drawing from 'AC Power'
+2026-11-01T16:48:14Z GUARD: swap 8233 MB > 8192 MB, stopping pid 10934 and its children Now drawing from 'AC Power'
+2026-11-01T16:48:14Z E5 queue build: exit 143 Now drawing from 'AC Power'
+2026-11-01T16:48:14Z stop: build failed Now drawing from 'AC Power'
