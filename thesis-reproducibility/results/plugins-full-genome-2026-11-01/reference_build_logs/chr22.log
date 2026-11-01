@@ -1,0 +1,9 @@
+Slicing http://127.0.0.1:18080/clinvar/clinvar.vcf.gz region 22
+Slicing http://127.0.0.1:18080/spliceai/spliceai_scores.masked.snv.ensembl_mane.grch38.110.vcf.gz region 22
+Slicing http://127.0.0.1:18080/alphamissense/AlphaMissense_hg38.bgz.tsv.gz region chr22
+Slicing http://127.0.0.1:18080/dbnsfp/dbNSFP5.3.1a_grch38.gz region 22
+Slicing http://127.0.0.1:18080/cadd/whole_genome_SNVs.tsv.gz region 22
+Slicing http://127.0.0.1:18080/cadd/gnomad.genomes.r4.0.indel.tsv.gz region 22
+2026-10-25 11:17:00 - INFO: BAM-edited cache detected, enabling --use_transcript_ref; use --use_given_ref to override this
+OK: chr22 — 50861 records, 38 plugin CSQ fields
+     /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr22_5plugins_vep116_caddfix.vcf.gz

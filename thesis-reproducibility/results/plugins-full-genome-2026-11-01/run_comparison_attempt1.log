@@ -1,0 +1,1 @@
+Error: profile 'merged_plugins' uses per-contig references (HG002_chrN_5plugins_vep116_caddfix.vcf.gz under output/116/plugins/). Request a single contig with --chroms, or pass --vep explicitly.

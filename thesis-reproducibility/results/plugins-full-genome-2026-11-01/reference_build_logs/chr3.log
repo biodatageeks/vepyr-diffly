@@ -1,0 +1,19 @@
+Slicing http://127.0.0.1:18080/clinvar/clinvar.vcf.gz region 3
+Slicing http://127.0.0.1:18080/spliceai/spliceai_scores.masked.snv.ensembl_mane.grch38.110.vcf.gz region 3
+Slicing http://127.0.0.1:18080/alphamissense/AlphaMissense_hg38.bgz.tsv.gz region chr3
+Slicing http://127.0.0.1:18080/dbnsfp/dbNSFP5.3.1a_grch38.gz region 3
+Slicing http://127.0.0.1:18080/cadd/whole_genome_SNVs.tsv.gz region 3
+Slicing http://127.0.0.1:18080/cadd/gnomad.genomes.r4.0.indel.tsv.gz region 3
+2026-11-01 08:18:28 - INFO: BAM-edited cache detected, enabling --use_transcript_ref; use --use_given_ref to override this
+WARNING: Transcript-assembly mismatch in chr3_4725578_T/C
+WARNING: Transcript-assembly mismatch in chr3_4775373_T/C
+WARNING: Transcript-assembly mismatch in chr3_4814496_T/C
+WARNING: Transcript-assembly mismatch in chr3_38698083_T/C
+WARNING: Transcript-assembly mismatch in chr3_38722372_G/C
+WARNING: Transcript-assembly mismatch in chr3_38726809_T/C
+WARNING: Transcript-assembly mismatch in chr3_114139503_C/T
+WARNING: Transcript-assembly mismatch in chr3_114171968_C/T
+WARNING: Transcript-assembly mismatch in chr3_184319745_A/G
+WARNING: Transcript-assembly mismatch in chr3_184321878_A/G
+OK: chr3 — 288531 records, 38 plugin CSQ fields
+     /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr3_5plugins_vep116_caddfix.vcf.gz

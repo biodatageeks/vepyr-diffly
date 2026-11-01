@@ -1,0 +1,7 @@
+2026-11-01T08:06:03Z references chr1-22 (existing ones skipped): start, jobs=4 Now drawing from 'AC Power'
+2026-11-01T14:53:16Z references: exit 0 Now drawing from 'AC Power'
+2026-11-01T14:54:29Z E2E merged_plugins chr1-22: start Now drawing from 'AC Power'
+2026-11-01T14:54:29Z E2E: exit 2 Now drawing from 'AC Power'
+2026-11-01T14:54:29Z parity gate merged_plugins chr1-22: exit 1 Now drawing from 'AC Power'
+2026-11-01T14:54:29Z done Now drawing from 'AC Power'
+b12 rc=0

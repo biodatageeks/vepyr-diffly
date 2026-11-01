@@ -1,0 +1,12 @@
+Slicing http://127.0.0.1:18080/clinvar/clinvar.vcf.gz region 11
+Slicing http://127.0.0.1:18080/spliceai/spliceai_scores.masked.snv.ensembl_mane.grch38.110.vcf.gz region 11
+Slicing http://127.0.0.1:18080/alphamissense/AlphaMissense_hg38.bgz.tsv.gz region chr11
+Slicing http://127.0.0.1:18080/dbnsfp/dbNSFP5.3.1a_grch38.gz region 11
+Slicing http://127.0.0.1:18080/cadd/whole_genome_SNVs.tsv.gz region 11
+Slicing http://127.0.0.1:18080/cadd/gnomad.genomes.r4.0.indel.tsv.gz region 11
+2026-11-01 11:34:52 - INFO: BAM-edited cache detected, enabling --use_transcript_ref; use --use_given_ref to override this
+WARNING: Transcript-assembly mismatch in chr11_64243969_T/C
+WARNING: Transcript-assembly mismatch in chr11_89400281_C/T
+WARNING: Transcript-assembly mismatch in chr11_89490933_G/T
+OK: chr11 — 206822 records, 38 plugin CSQ fields
+     /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr11_5plugins_vep116_caddfix.vcf.gz

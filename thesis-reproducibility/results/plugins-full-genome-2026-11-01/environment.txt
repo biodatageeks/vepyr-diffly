@@ -1,0 +1,26 @@
+started_utc: 2026-11-01T08:06:00Z
+ProductName:		macOS
+ProductVersion:		27.0.1
+BuildVersion:		26A434
+cpu: 10
+disk: 150
+memory: 28
+vmType: vz
+mountType: virtiofs
+vepyr: 479d8f46eee2101e1ececc902ad911ed65fc5c5c 0 local changes
+vepyr python package 0.7.0
+sha256:f354dd8d09073e4d943acbbd02f5eb234a9d9e9d444371c1c349910f2123de11
+/dev/disk3s5   926Gi   689Gi   207Gi    77%    2.9M  2.2G    0%   /System/Volumes/Data
+started_utc: 2026-11-01T14:55:33Z
+ProductName:		macOS
+ProductVersion:		27.0.1
+BuildVersion:		26A434
+cpu: 10
+disk: 150
+memory: 28
+vmType: vz
+mountType: virtiofs
+vepyr: 479d8f46eee2101e1ececc902ad911ed65fc5c5c 0 local changes
+vepyr python package 0.7.0
+sha256:f354dd8d09073e4d943acbbd02f5eb234a9d9e9d444371c1c349910f2123de11
+/dev/disk3s5   926Gi   848Gi    41Gi    96%    2.9M  434M    1%   /System/Volumes/Data

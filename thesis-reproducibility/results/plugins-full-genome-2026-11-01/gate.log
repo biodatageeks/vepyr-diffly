@@ -1,0 +1,1 @@
+PARITY GATE FAILED: profile 'merged_plugins' attaches plugins (spliceai, cadd, alphamissense, dbnsfp, clinvar); this gate pins the Ensembl core CSQ contract only. Plugin profiles are comparison scenarios, not release gates, until their field contract is pinned here.

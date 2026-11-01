@@ -1,0 +1,43 @@
+START chr2: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr2.GQpkTO log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr2.log
+START chr3: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr3.4DvfNY log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr3.log
+START chr4: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr4.OHd6DD log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr4.log
+SKIP chr1: validated output already exists
+DONE chr4: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr4_5plugins_vep116_caddfix.vcf.gz
+DONE chr3: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr3_5plugins_vep116_caddfix.vcf.gz
+DONE chr2: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr2_5plugins_vep116_caddfix.vcf.gz
+START chr6: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr6.OECh9h log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr6.log
+START chr8: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr8.cGk4sR log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr8.log
+START chr5: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr5.cNsPIa log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr5.log
+START chr7: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr7.95lcuA log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr7.log
+DONE chr8: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr8_5plugins_vep116_caddfix.vcf.gz
+DONE chr7: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr7_5plugins_vep116_caddfix.vcf.gz
+DONE chr5: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr5_5plugins_vep116_caddfix.vcf.gz
+DONE chr6: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr6_5plugins_vep116_caddfix.vcf.gz
+START chr9: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr9.QcHrXy log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr9.log
+START chr10: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr10.KNZMoC log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr10.log
+START chr11: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr11.mnjgw3 log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr11.log
+START chr12: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr12.dINcRu log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr12.log
+DONE chr9: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr9_5plugins_vep116_caddfix.vcf.gz
+DONE chr12: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr12_5plugins_vep116_caddfix.vcf.gz
+DONE chr11: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr11_5plugins_vep116_caddfix.vcf.gz
+DONE chr10: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr10_5plugins_vep116_caddfix.vcf.gz
+START chr13: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr13.gZDvBP log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr13.log
+START chr15: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr15.wPTzw1 log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr15.log
+START chr14: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr14.zyPo9b log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr14.log
+START chr16: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr16.vPyLwg log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr16.log
+DONE chr13: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr13_5plugins_vep116_caddfix.vcf.gz
+DONE chr16: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr16_5plugins_vep116_caddfix.vcf.gz
+DONE chr14: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr14_5plugins_vep116_caddfix.vcf.gz
+DONE chr15: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr15_5plugins_vep116_caddfix.vcf.gz
+START chr19: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr19.oTUGLr log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr19.log
+START chr17: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr17.VmMHZc log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr17.log
+START chr18: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr18.fKT4Vv log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr18.log
+START chr20: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr20.JDPbzv log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr20.log
+DONE chr20: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr20_5plugins_vep116_caddfix.vcf.gz
+DONE chr19: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr19_5plugins_vep116_caddfix.vcf.gz
+DONE chr18: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr18_5plugins_vep116_caddfix.vcf.gz
+DONE chr17: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr17_5plugins_vep116_caddfix.vcf.gz
+START chr21: work=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/.work/chr21.9ln6MV log=/Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/logs/chr21.log
+SKIP chr22: validated output already exists
+DONE chr21: /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins/HG002_chr21_5plugins_vep116_caddfix.vcf.gz
+All requested references are complete under /Users/lukaszjezapkowicz/workspace/data_vepyr/output/116/plugins
