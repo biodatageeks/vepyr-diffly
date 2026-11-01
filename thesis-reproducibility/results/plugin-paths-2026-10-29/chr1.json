@@ -1,0 +1,18 @@
+{
+ "variants": 323430,
+ "indel": 51690,
+ "indel_with_cadd": 49008,
+ "snv": 271740,
+ "snv_with_cadd": 271738,
+ "indel_without_cadd": 2682,
+ "variants_with_spliceai": 103929,
+ "indel_with_spliceai": 0,
+ "variants_with_am": 907,
+ "variants_am_multi_transcript": 889,
+ "am_entries": 9809,
+ "am_entries_non_mane": 8137,
+ "variants_with_dbnsfp": 1134,
+ "variants_dbnsfp_list_values": 811,
+ "variants_with_clinvar": 3464,
+ "variants_spliceai_multi_gene": 402
+}
