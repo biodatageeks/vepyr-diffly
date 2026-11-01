@@ -1,0 +1,14 @@
+{
+ "fork1": {
+  "returncode": 0,
+  "samples": 875,
+  "max_vep_processes": 3,
+  "max_vep_children": 2
+ },
+ "fork4": {
+  "returncode": 0,
+  "samples": 465,
+  "max_vep_processes": 7,
+  "max_vep_children": 6
+ }
+}
