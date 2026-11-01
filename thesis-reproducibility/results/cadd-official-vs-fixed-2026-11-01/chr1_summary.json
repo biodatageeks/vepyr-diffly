@@ -1,0 +1,260 @@
+{
+ "chrom": "chr1",
+ "records": 323430,
+ "official_cadd_pm_sha256": "7efd461944a0b773e05d3245adb2bd5254aa2d68165f65d51ce4964495e5da00",
+ "entries": {
+  "only_fixed": {
+   "snv": 0,
+   "indel": 39
+  },
+  "only_official": {
+   "snv": 0,
+   "indel": 0
+  },
+  "equal": {
+   "snv": 4703014,
+   "indel": 985814
+  },
+  "different": {
+   "snv": 0,
+   "indel": 0
+  }
+ },
+ "variants": {
+  "variants_any_missed": {
+   "snv": 0,
+   "indel": 5
+  },
+  "variants_with_cadd_fixed": {
+   "snv": 271738,
+   "indel": 49008
+  }
+ },
+ "examples": [
+  {
+   "variant": "chr1:13779899:A:ACTC",
+   "allele_feature": [
+    "CTC",
+    "XM_047429995.1"
+   ],
+   "fixed": [
+    "1.946572",
+    "16.50"
+   ],
+   "official": [
+    "",
+    ""
+   ]
+  },
+  {
+   "variant": "chr1:13779899:A:ACTC",
+   "allele_feature": [
+    "CTC",
+    "ENST00000235372"
+   ],
+   "fixed": [
+    "1.946572",
+    "16.50"
+   ],
+   "official": [
+    "",
+    ""
+   ]
+  },
+  {
+   "variant": "chr1:13779899:A:ACTC",
+   "allele_feature": [
+    "CTC",
+    "XM_047429996.1"
+   ],
+   "fixed": [
+    "1.946572",
+    "16.50"
+   ],
+   "official": [
+    "",
+    ""
+   ]
+  },
+  {
+   "variant": "chr1:13779899:A:ACTC",
+   "allele_feature": [
+    "CTC",
+    "NM_001007257.3"
+   ],
+   "fixed": [
+    "1.946572",
+    "16.50"
+   ],
+   "official": [
+    "",
+    ""
+   ]
+  },
+  {
+   "variant": "chr1:13779899:A:ACTC",
+   "allele_feature": [
+    "CTC",
+    "NM_015866.6"
+   ],
+   "fixed": [
+    "1.946572",
+    "16.50"
+   ],
+   "official": [
+    "",
+    ""
+   ]
+  },
+  {
+   "variant": "chr1:13779899:A:ACTC",
+   "allele_feature": [
+    "CTC",
+    "XM_017002260.3"
+   ],
+   "fixed": [
+    "1.946572",
+    "16.50"
+   ],
+   "official": [
+    "",
+    ""
+   ]
+  },
+  {
+   "variant": "chr1:13779899:A:ACTC",
+   "allele_feature": [
+    "CTC",
+    "XM_017002261.3"
+   ],
+   "fixed": [
+    "1.946572",
+    "16.50"
+   ],
+   "official": [
+    "",
+    ""
+   ]
+  },
+  {
+   "variant": "chr1:13779899:A:ACTC",
+   "allele_feature": [
+    "CTC",
+    "ENST00001144941"
+   ],
+   "fixed": [
+    "1.946572",
+    "16.50"
+   ],
+   "official": [
+    "",
+    ""
+   ]
+  },
+  {
+   "variant": "chr1:13779899:A:ACTC",
+   "allele_feature": [
+    "CTC",
+    "NM_001393986.1"
+   ],
+   "fixed": [
+    "1.946572",
+    "16.50"
+   ],
+   "official": [
+    "",
+    ""
+   ]
+  },
+  {
+   "variant": "chr1:13779899:A:ACTC",
+   "allele_feature": [
+    "CTC",
+    "ENST00000413440"
+   ],
+   "fixed": [
+    "1.946572",
+    "16.50"
+   ],
+   "official": [
+    "",
+    ""
+   ]
+  },
+  {
+   "variant": "chr1:13779899:A:ACTC",
+   "allele_feature": [
+    "CTC",
+    "XM_047429998.1"
+   ],
+   "fixed": [
+    "1.946572",
+    "16.50"
+   ],
+   "official": [
+    "",
+    ""
+   ]
+  },
+  {
+   "variant": "chr1:13779899:A:ACTC",
+   "allele_feature": [
+    "CTC",
+    "NM_012231.5"
+   ],
+   "fixed": [
+    "1.946572",
+    "16.50"
+   ],
+   "official": [
+    "",
+    ""
+   ]
+  },
+  {
+   "variant": "chr1:13779899:A:ACTC",
+   "allele_feature": [
+    "CTC",
+    "ENST00000343137"
+   ],
+   "fixed": [
+    "1.946572",
+    "16.50"
+   ],
+   "official": [
+    "",
+    ""
+   ]
+  },
+  {
+   "variant": "chr1:13779899:A:ACTC",
+   "allele_feature": [
+    "CTC",
+    "XM_047429994.1"
+   ],
+   "fixed": [
+    "1.946572",
+    "16.50"
+   ],
+   "official": [
+    "",
+    ""
+   ]
+  },
+  {
+   "variant": "chr1:13779899:A:ACTC",
+   "allele_feature": [
+    "CTC",
+    "NM_001393987.1"
+   ],
+   "fixed": [
+    "1.946572",
+    "16.50"
+   ],
+   "official": [
+    "",
+    ""
+   ]
+  }
+ ]
+}

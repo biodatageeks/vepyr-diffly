@@ -1,0 +1,80 @@
+{
+ "chrom": "chr22",
+ "records": 50861,
+ "official_cadd_pm_sha256": "7efd461944a0b773e05d3245adb2bd5254aa2d68165f65d51ce4964495e5da00",
+ "entries": {
+  "only_fixed": {
+   "snv": 0,
+   "indel": 3
+  },
+  "only_official": {
+   "snv": 0,
+   "indel": 0
+  },
+  "equal": {
+   "snv": 1036947,
+   "indel": 205878
+  },
+  "different": {
+   "snv": 0,
+   "indel": 0
+  }
+ },
+ "variants": {
+  "variants_any_missed": {
+   "snv": 0,
+   "indel": 1
+  },
+  "variants_with_cadd_fixed": {
+   "snv": 42845,
+   "indel": 7616
+  }
+ },
+ "examples": [
+  {
+   "variant": "chr22:29489578:A:AAAGTCCCCTGAGAAGGCC",
+   "allele_feature": [
+    "AAGTCCCCTGAGAAGGCC",
+    "NM_021076.4"
+   ],
+   "fixed": [
+    "0.544636",
+    "5.915"
+   ],
+   "official": [
+    "",
+    ""
+   ]
+  },
+  {
+   "variant": "chr22:29489578:A:AAAGTCCCCTGAGAAGGCC",
+   "allele_feature": [
+    "AAGTCCCCTGAGAAGGCC",
+    "ENST00000310624"
+   ],
+   "fixed": [
+    "0.544636",
+    "5.915"
+   ],
+   "official": [
+    "",
+    ""
+   ]
+  },
+  {
+   "variant": "chr22:29489578:A:AAAGTCCCCTGAGAAGGCC",
+   "allele_feature": [
+    "AAGTCCCCTGAGAAGGCC",
+    "ENST00001132514"
+   ],
+   "fixed": [
+    "0.544636",
+    "5.915"
+   ],
+   "official": [
+    "",
+    ""
+   ]
+  }
+ ]
+}
