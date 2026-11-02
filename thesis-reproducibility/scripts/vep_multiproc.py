@@ -5,8 +5,8 @@ As step S6 of m5_completion_batch.py did for VEPYR (tab:multiproc-read): n indep
 annotations of the same HG002 chr22 baseline started together, here n `docker run`
 commands of VEP 116 without --fork (options of the timing series), all in the Colima VM
 and reading the same cache. Group time = from starting the first command to the end of
-the last (perf_counter, container start included), for n = 1, 2, 4, 8 and five repeats in
-the order of S6 (n ascending within a repeat). Reported per n: mean group time, T_n/T_1
+the last (perf_counter, container start included), for n = 1, 2, 4, 8 and REPEATS repeats (default 5; 3 in the
+2026-11-01 run) in the order of S6 (n ascending within a repeat). Reported per n: mean group time, T_n/T_1
 and the throughput n / (T_n/T_1); per container the /usr/bin/time real time.
 
 Usage: vep_multiproc.py OUT_DIR [REPEATS]   (Colima running)
