@@ -25,6 +25,7 @@ from __future__ import annotations
 import hashlib
 import json
 import random
+import shutil
 import subprocess
 import sys
 import time
@@ -113,9 +114,12 @@ def body_sha(path: Path) -> tuple[str, int]:
 
 
 def run(cfg: dict, out: Path, b17: Path) -> dict:
-    work = out / "work"
-    work.mkdir(exist_ok=True)
-    (work / "out.vcf").unlink(missing_ok=True)
+    # A fresh directory per run: a file written in the VM and deleted on the host cannot be created again
+    # under the same name through virtiofs (open fails with ENOENT), which made VEP stop with "Could not write
+    # to output file" after a VEPYR run in the first attempt.
+    work = out / "work" / "{tool}_{chrom}_{p}_{x}_r{repeat}".format(
+        p="plugins" if cfg["plugins"] else "base", x=cfg["fork"] or cfg["workers"] or "nofork", **cfg)
+    work.mkdir(parents=True)
     if cfg["tool"] == "VEP":
         cmd = vep_cmd(cfg["chrom"], work, cfg["fork"], b17 if cfg["plugins"] else None)
     else:
@@ -139,7 +143,7 @@ def run(cfg: dict, out: Path, b17: Path) -> dict:
         row["body_sha256"], row["records"] = body_sha(work / "out.vcf")
     else:
         row["log_tail"] = (logs.stdout + logs.stderr)[-1500:] + s_err[-500:]
-    (work / "out.vcf").unlink(missing_ok=True)
+    shutil.rmtree(work)
     return row
 
 
