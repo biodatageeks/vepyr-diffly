@@ -1,0 +1,16 @@
+{
+ "chr22": {
+  "runs": 20,
+  "distinct_bodies": [
+   "d0bafc91afeb8677349d0b12b8e26adbce8c6bc3b48bd6880a2ae030fd677608"
+  ],
+  "all_equal_recorded_vepyr": true
+ },
+ "chr1": {
+  "runs": 20,
+  "distinct_bodies": [
+   "ce615dc8da782f65345f037391617038a54069d638138566853e36a6fd66c31d"
+  ],
+  "all_equal_recorded_vepyr": true
+ }
+}

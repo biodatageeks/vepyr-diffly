@@ -4,9 +4,11 @@
 The thesis shows one body checksum for workers 1-10 in the baseline scenario (chr1 and
 chr1-22). Here the HG002 chr22 and chr1 slices are annotated with all five plugins
 (plugin cache of the plugin series, everything, hgvs, FASTA) for workers 1-10, REPEATS
-times in shuffled order; every body SHA-256 must equal the VEP 116 five-plugin reference
-(results/references-2026-10-25). The Linux side of B16 comes from vepyr_in_vm.py (body
-equal to the native output).
+times in shuffled order; every body SHA-256 must equal the VEPYR body recorded with the same
+plugin cache on 2026-10-31 (results/plugin-cache-rebuild-2026-10-31/c1-old_summary.json, workers=1).
+The VEP five-plugin reference is not a byte-level target: VEPYR writes the plugin fields
+differently and the equality with VEP is checked semantically by vepyr-diffly (thesis tables).
+The Linux side of B16 comes from vepyr_in_vm.py (body equal to the native output).
 
 Usage: determinism_plugins.py OUT_DIR [REPEATS, default 2]
 Run with the .venv-native interpreter.
@@ -43,7 +45,8 @@ def main() -> int:
     out = Path(sys.argv[1]).resolve()
     reps = int(sys.argv[2]) if len(sys.argv) > 2 else 2
     out.mkdir(parents=True, exist_ok=True)
-    ref = {c: (PKG / f"results/references-2026-10-25/{c}_reference_body.sha256").read_text().split()[0] for c in INPUT}
+    c1 = json.loads((PKG / "results/plugin-cache-rebuild-2026-10-31/c1-old_summary.json").read_text())
+    ref = {c: c1["annotation"][c]["body_sha256"] for c in INPUT}
     rng = random.Random(20261030)
     cells = [(c, w, r) for r in range(1, reps + 1) for c in INPUT for w in range(1, 11)]
     for r in range(1, reps + 1):
@@ -59,7 +62,7 @@ def main() -> int:
                    "utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
             if p.returncode == 0:
                 row.update(json.loads(p.stdout.strip().splitlines()[-1]))
-                row["equal_vep_reference"] = row["body_sha256"] == ref[chrom]
+                row["equal_recorded_vepyr"] = row["body_sha256"] == ref[chrom]
             else:
                 row["stderr_tail"] = p.stderr[-1000:]
             with (out / "runs.jsonl").open("a") as f:
@@ -68,7 +71,7 @@ def main() -> int:
     rows = [json.loads(l) for l in (out / "runs.jsonl").read_text().splitlines()]
     summ = {c: {"runs": sum(r["chrom"] == c for r in rows),
                 "distinct_bodies": sorted({r.get("body_sha256") for r in rows if r["chrom"] == c}),
-                "all_equal_vep_reference": all(r.get("equal_vep_reference") for r in rows if r["chrom"] == c)}
+                "all_equal_recorded_vepyr": all(r.get("equal_recorded_vepyr") for r in rows if r["chrom"] == c)}
             for c in INPUT}
     (out / "summary.json").write_text(json.dumps(summ, indent=1) + "\n")
     print(json.dumps(summ, indent=1))
