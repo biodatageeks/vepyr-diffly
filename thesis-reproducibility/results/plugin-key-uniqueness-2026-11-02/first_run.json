@@ -1,0 +1,296 @@
+{
+ "root": "/Users/lukaszjezapkowicz/workspace/data_vepyr/plugin_cache",
+ "cadd": {
+  "keys": [
+   "start",
+   "end",
+   "allele_string"
+  ],
+  "files": {
+   "chr1": {
+    "rows": 699768898,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 699768898
+   },
+   "chr10": {
+    "rows": 404822969,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 404822969
+   },
+   "chr11": {
+    "rows": 408325541,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 408325541
+   },
+   "chr12": {
+    "rows": 404368819,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 404368819
+   },
+   "chr13": {
+    "rows": 297441793,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 297441793
+   },
+   "chr14": {
+    "rows": 275028940,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 275028940
+   },
+   "chr15": {
+    "rows": 257095864,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 257095864
+   },
+   "chr16": {
+    "rows": 248751997,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 248751997
+   },
+   "chr17": {
+    "rows": 252195553,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 252195553
+   },
+   "chr18": {
+    "rows": 242961589,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 242961589
+   },
+   "chr19": {
+    "rows": 178184616,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 178184616
+   },
+   "chr2": {
+    "rows": 730240535,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 730240535
+   },
+   "chr20": {
+    "rows": 194224005,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 194224005
+   },
+   "chr21": {
+    "rows": 121809062,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 121809062
+   },
+   "chr22": {
+    "rows": 119170699,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 119170699
+   },
+   "chr3": {
+    "rows": 601224745,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 601224745
+   },
+   "chr4": {
+    "rows": 576075029,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 576075029
+   },
+   "chr5": {
+    "rows": 550046500,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 550046500
+   },
+   "chr6": {
+    "rows": 516368761,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 516368761
+   },
+   "chr7": {
+    "rows": 482912262,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 482912262
+   },
+   "chr8": {
+    "rows": 439438809,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 439438809
+   },
+   "chr9": {
+    "rows": 369818351,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 369818351
+   }
+  },
+  "seconds": 385.1492438316345,
+  "rows": 8370275337,
+  "duplicate_rows": 0,
+  "order_violations": 22,
+  "rows_match_manifest": true
+ },
+ "spliceai": {
+  "keys": [
+   "start",
+   "end",
+   "allele_string",
+   "symbol"
+  ],
+  "files": {
+   "chr1": {
+    "rows": 300634726,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 300634726
+   },
+   "chr10": {
+    "rows": 170831107,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 170831107
+   },
+   "chr11": {
+    "rows": 170342881,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 170342881
+   },
+   "chr12": {
+    "rows": 168273116,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 168273116
+   },
+   "chr13": {
+    "rows": 87549059,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 87549059
+   },
+   "chr14": {
+    "rows": 103964964,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 103964964
+   },
+   "chr15": {
+    "rows": 113571747,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 113571747
+   },
+   "chr16": {
+    "rows": 97811562,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 97811562
+   },
+   "chr17": {
+    "rows": 121393500,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 121393500
+   },
+   "chr18": {
+    "rows": 80740085,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 80740085
+   },
+   "chr19": {
+    "rows": 83348379,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 83348379
+   },
+   "chr2": {
+    "rows": 282792329,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 282792329
+   },
+   "chr20": {
+    "rows": 78568878,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 78568878
+   },
+   "chr21": {
+    "rows": 31683675,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 31683675
+   },
+   "chr22": {
+    "rows": 52715028,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 52715028
+   },
+   "chr3": {
+    "rows": 249753459,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 249753459
+   },
+   "chr4": {
+    "rows": 187041586,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 187041586
+   },
+   "chr5": {
+    "rows": 193324333,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 193324333
+   },
+   "chr6": {
+    "rows": 189736389,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 189736389
+   },
+   "chr7": {
+    "rows": 201474868,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 201474868
+   },
+   "chr8": {
+    "rows": 153725275,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 153725275
+   },
+   "chr9": {
+    "rows": 134811523,
+    "duplicate_rows": 0,
+    "order_violations": 1,
+    "manifest_rows": 134811523
+   }
+  },
+  "seconds": 173.68137121200562,
+  "rows": 3254088469,
+  "duplicate_rows": 0,
+  "order_violations": 22,
+  "rows_match_manifest": true
+ }
+}
